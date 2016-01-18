@@ -3,6 +3,7 @@ package com.nata.strategy;
 import com.nata.action.Action;
 import com.nata.action.TapAction;
 import com.nata.cmd.AdbDevice;
+import com.nata.element.Element;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ public class RandomMonkeyStrategy extends Strategy {
     }
 
     public Action getNextAction() {
-        Action action = new TapAction();
+        Element element = new Element();
+        Action action = new TapAction(element);
         return action;
     }
 
