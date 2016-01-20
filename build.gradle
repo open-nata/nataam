@@ -23,12 +23,7 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
  dependencies {
-    compile 'log4j:log4j:1.2.16'
-    compile 'dom4j:dom4j:1.6.1'
-    testCompile 'junit:junit:4.12'
+
 }
 
-task copyJars(type: Copy) {
-    from configurations.runtime
-    into 'libs' // 目标位置
-}
+

@@ -10,15 +10,9 @@ import java.util.ArrayList;
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-01-13 16:20
  */
-public abstract class Strategy {
+public interface Strategy {
 
-    private AdbDevice device;
+    Action getNextAction();
 
-
-    public Strategy(AdbDevice device) {
-        this.device = device;
-    }
-
-    public abstract Action getNextAction();
-    public abstract boolean hasNextAction();
+    boolean hasNextAction();
 }

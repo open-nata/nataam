@@ -4,6 +4,7 @@ import com.nata.AndroidKeyCode;
 import com.nata.utils.ReUtil;
 import com.nata.utils.ShellUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,9 @@ import java.util.regex.Pattern;
  */
 public class AdbDevice {
 
-    public AdbDevice(){
+    private static final String DUMP_FILE_LOCATION = "/storage/sdcard0/window_dump.xml";
+
+    public AdbDevice() {
         ShellUtil.adb("wait-for-adb");
     }
 
@@ -69,20 +72,31 @@ public class AdbDevice {
         Process ps = ShellUtil.adbshell("dumpsys display | grep PhysicalDisplayInfo");
         ArrayList<Integer> out = ReUtil.matchInteger(pattern, ShellUtil.getShellOut(ps));
 
-        int[] resolution = new int[] { out.get(0), out.get(1) };
+        int[] resolution = new int[]{out.get(0), out.get(1)};
 
         return resolution;
     }
 
+    /**
+     * Run uiautomator dump and pull the uidump.xml to temp file
+     */
+    public File dumpUI() {
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String tempDumpfile = tempDir + "dumpfile/dumpfile.xml";
 
-    public static void main(String[] args) {
-        AdbDevice device = new AdbDevice();
-        System.out.println(device.getFocusedPackageAndActivity());
+        String output = ShellUtil.getShellOut(ShellUtil.adbshell("uiautomator dump"));
+        if (!output.equals("")) {
+            ShellUtil.adb("pull " + DUMP_FILE_LOCATION + " " + tempDumpfile);
+            sleep(500);
+        }
+        ShellUtil.adbshell("rm " + DUMP_FILE_LOCATION);
+        System.out.println(tempDumpfile);
+        return new File(tempDumpfile);
     }
+
 
     /**
      * 退出当前应用
-     *
      */
     public void quitCurrentApp() {
         ShellUtil.adbshell("am force-stop " + getCurrentPackageName());
@@ -90,7 +104,6 @@ public class AdbDevice {
 
     /**
      * 重置当前应用，清除当前应用的数据且重启该应用
-     *
      */
     public void resetApp() {
         String component = getFocusedPackageAndActivity();
@@ -111,8 +124,7 @@ public class AdbDevice {
     /**
      * 使用拨号器拨打号码
      *
-     * @param number
-     *            电话号码
+     * @param number 电话号码
      */
     public void callPhone(int number) {
         ShellUtil.adbshell("am start -a android.intent.action.CALL -d tel:" + number);
@@ -121,8 +133,7 @@ public class AdbDevice {
     /**
      * 发送一个按键事件
      *
-     * @param keycode
-     *            键值
+     * @param keycode 键值
      */
     public void sendKeyEvent(int keycode) {
         ShellUtil.adbshell("input keyevent " + keycode);
@@ -132,8 +143,7 @@ public class AdbDevice {
     /**
      * 清除文本
      *
-     * @param text
-     *            清除文本框中的text
+     * @param text 清除文本框中的text
      */
     public void clearText(String text) {
         int length = text.length();
@@ -153,10 +163,8 @@ public class AdbDevice {
     /**
      * 发送一个点击事件
      *
-     * @param x
-     *            x坐标
-     * @param y
-     *            y坐标
+     * @param x x坐标
+     * @param y y坐标
      */
     public void tap(int x, int y) {
         ShellUtil.adbshell("input tap " + x + " " + y);
@@ -166,10 +174,8 @@ public class AdbDevice {
     /**
      * 发送一个点击事件
      *
-     * @param x
-     *            x小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
-     * @param y
-     *            y小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
+     * @param x x小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
+     * @param y y小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
      */
     public void tap(double x, double y) {
         double[] coords = ratio(x, y);
@@ -241,16 +247,11 @@ public class AdbDevice {
     /**
      * 发送一个滑动事件
      *
-     * @param startX
-     *            起始x坐标
-     * @param startY
-     *            起始y坐标
-     * @param endX
-     *            结束x坐标
-     * @param endY
-     *            结束y坐标
-     * @param ms
-     *            持续时间
+     * @param startX 起始x坐标
+     * @param startY 起始y坐标
+     * @param endX   结束x坐标
+     * @param endY   结束y坐标
+     * @param ms     持续时间
      */
     public void swipe(double startX, double startY, double endX, double endY, long ms) {
 
@@ -295,10 +296,8 @@ public class AdbDevice {
     /**
      * 发送一个长按事件
      *
-     * @param x
-     *            x坐标
-     * @param y
-     *            y坐标
+     * @param x x坐标
+     * @param y y坐标
      */
     public void longPress(double x, double y) {
         swipe(x, y, x, y, 1500);
@@ -307,8 +306,7 @@ public class AdbDevice {
     /**
      * 发送一段文本，只支持英文，多个空格视为一个空格
      *
-     * @param text
-     *            英文文本
+     * @param text 英文文本
      */
     public void sendText(String text) {
         String[] str = text.split(" ");
@@ -332,8 +330,7 @@ public class AdbDevice {
     /**
      * 清除应用的用户数据
      *
-     * @param packageName
-     *            应用的包名
+     * @param packageName 应用的包名
      * @return 清楚成功返回true, 否则返回false
      */
     public boolean clearAppDate(String packageName) {
@@ -342,6 +339,13 @@ public class AdbDevice {
             return true;
         }
         return false;
+    }
+
+
+    public static void main(String[] args) {
+        AdbDevice device = new AdbDevice();
+//        System.out.println(device.getFocusedPackageAndActivity());
+        device.dumpUI();
     }
 
 }

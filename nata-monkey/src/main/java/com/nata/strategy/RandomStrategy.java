@@ -13,14 +13,14 @@ import java.util.ArrayList;
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-01-13 16:31
  */
-public class RandomMonkeyStrategy extends Strategy {
+public class RandomStrategy implements Strategy {
 
     private ArrayList<Action> actionlist = null;
 
-    public RandomMonkeyStrategy(AdbDevice device){
-        super(device);
+    public RandomStrategy(){
         actionlist = new ArrayList<Action>();
     }
+
 
     public Action getNextAction() {
         Element element = new Element();
