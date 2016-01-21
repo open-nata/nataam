@@ -6,3 +6,7 @@
 ### v0.0.2(2016/1/18)
 - Add Gradle support
 - Add Log4j & Dom4j
+
+### v0.0.3(2016/1/20)
+- Add sub-module nata-monkey to hold the main logic
+- Add sub-module nata-kit to hold the common tools

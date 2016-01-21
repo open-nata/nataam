@@ -7,23 +7,28 @@
  * user guide available at https://docs.gradle.org/2.10/userguide/tutorial_java_projects.html
  */
 
-apply plugin: 'idea'
-apply plugin: 'java'
-
-task createJavaProject << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs()}
+allprojects {
+    //这部分描述对所有项目（父项目和子项目）都生效，类似于全局的配置
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+    group = 'com.nata'
+    version = '0.0.1'
 }
 
-repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+subprojects {
+    /*
+    **这部分描述仅对所有的子项目生效.
+    **因为多模块的项目里父项目一般只是用来描述项目的版本信息，
+    **所以会把编译相关、资源库之类的配置放在subprojects中
+    */
+    apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        mavenCentral()
+    }
 }
-
-// In this section you declare the dependencies for your production and test code
- dependencies {
-
-}
-
 
