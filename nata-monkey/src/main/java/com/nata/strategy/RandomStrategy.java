@@ -13,22 +13,19 @@ import java.util.ArrayList;
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-01-13 16:31
  */
-public class RandomStrategy implements Strategy {
-
-    private ArrayList<Action> actionlist = null;
-
-    public RandomStrategy(){
-        actionlist = new ArrayList<Action>();
-    }
-
-
-    public Action getNextAction() {
-        Element element = new Element();
-        Action action = new TapAction(element);
-        return action;
-    }
-
-    public boolean hasNextAction() {
-        return false;
-    }
-}
+//public class RandomStrategy implements Strategy {
+//
+//    private ArrayList<Action> actionlist = null;
+//
+//    public RandomStrategy(){
+//        actionlist = new ArrayList<Action>();
+//    }
+//
+//
+////    public Action getNextAction() {
+////    }
+//
+//    public boolean hasNextAction() {
+//        return false;
+//    }
+//}

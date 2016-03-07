@@ -2,7 +2,7 @@ package com.nata.monkeys;
 
 import com.nata.action.Action;
 import com.nata.cmd.AdbDevice;
-import com.nata.strategy.RandomStrategy;
+import com.nata.element.Element;
 import com.nata.strategy.Strategy;
 
 /**
@@ -11,21 +11,24 @@ import com.nata.strategy.Strategy;
  * Update: 2016-01-18 18:49
  */
 public class RandomMonkey extends AbstractMonkey {
-    // try to use strategy design mode
-    private Strategy strategy = null;
+    volatile private boolean isRunning = true;
 
-    public RandomMonkey(String pkg, String act, AdbDevice device, Strategy strategy){
+    public RandomMonkey(String pkg, String act, AdbDevice device){
         super("randomMonkey",pkg,act,device);
-        this.strategy = strategy;
     }
-
-
 
     @Override
     public void play() {
         System.out.println("start playing...");
-        //Start target apk
         startApp();
+        while(isRunning){
+            Element nextElement = getNextElement();
+            if(nextElement!=  null){
+                Tap(nextElement);
+            }
+            System.out.println("tap...");
+        }
+
 
 //        while(strategy.hasNextAction()){
 //            Action action = strategy.getNextAction();
@@ -35,7 +38,7 @@ public class RandomMonkey extends AbstractMonkey {
 
     @Override
     public void stop() {
-
+        this.isRunning = false;
     }
 
     @Override
@@ -45,13 +48,15 @@ public class RandomMonkey extends AbstractMonkey {
 
     public static void main(String[] args) {
         String pkg = "com.zhihu.android";
-        String act = "com.zhihu.android.ui.activity.GuideActivity";
+//        String act = "com.zhihu.android.ui.activity.GuideActivity";
+        String act = ".app.ui.activity.MainActivity";
 
         AdbDevice device = new AdbDevice();
-        RandomStrategy randomStrategy = new RandomStrategy();
-        RandomMonkey randomMonkey = new RandomMonkey(pkg,act,device,randomStrategy);
+        RandomMonkey randomMonkey = new RandomMonkey(pkg,act,device);
 
         randomMonkey.startApp();
-        randomMonkey.GrabCurrentUi();
+        randomMonkey.play();
+//        randomMonkey.GrabCurrentUi();
+
     }
 }

@@ -9,14 +9,13 @@ import java.io.File;
  * Update: 2016-01-13 14:15
  */
 public class AdbDevice {
-
     private static final String DUMP_FILE_LOCATION = "/storage/sdcard0/window_dump.xml";
 
     public AdbDevice() {
         ShellKit.adb("wait-for-adb");
     }
 
-    private void sleep(long millis) {
+    public void sleep(long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
@@ -29,14 +28,16 @@ public class AdbDevice {
      */
     public File dumpUI() {
         String tempDir = System.getProperty("java.io.tmpdir");
-        String tempDumpfile = tempDir + "dumpfile/dumpfile.xml";
+        String tempDumpfile = tempDir + "dumps/dumpfile.xml";
+        System.out.println(tempDumpfile);
 
-        String output = ShellKit.adbShell("uiautomator", "dump");
+        String output = ShellKit.adbShell("su","-c","uiautomator", "dump","--compressed");
+        System.out.println("get 1");
 
         if (!output.equals("")) {
             ShellKit.adb("pull",DUMP_FILE_LOCATION ,tempDumpfile);
         }
-
+        System.out.println("get dump file");
         ShellKit.adbShell("rm" , DUMP_FILE_LOCATION);
         return new File(tempDumpfile);
     }
@@ -52,6 +53,8 @@ public class AdbDevice {
 
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
+
+        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
 
 //        device.dumpUI();
     }
@@ -169,17 +172,17 @@ public class AdbDevice {
 //    }
 //
 
-//
-//    /**
-//     * 发送一个点击事件
-//     *
-//     * @param x x坐标
-//     * @param y y坐标
-//     */
-//    public void tap(int x, int y) {
-//        ShellKit.adbShell("input tap " + x + " " + y);
-//        sleep(500);
-//    }
+
+    /**
+     * 发送一个点击事件
+     *
+     * @param x x坐标
+     * @param y y坐标
+     */
+    public void tap(int x, int y) {
+        ShellKit.adbShell("input tap " + x + " " + y);
+        sleep(500);
+    }
 //
 //    /**
 //     * 发送一个点击事件

@@ -2,7 +2,6 @@ package com.nata;
 
 import com.nata.cmd.AdbDevice;
 import com.nata.monkeys.RandomMonkey;
-import com.nata.strategy.RandomStrategy;
 
 /**
  * Author: Calvin Meng
@@ -17,8 +16,7 @@ public class AMRunner {
 
         //Set Monkey settings
         AdbDevice device = new AdbDevice();
-        RandomStrategy randomStrategy = new RandomStrategy();
-        RandomMonkey randomMonkey = new RandomMonkey(pkg,act,device,randomStrategy);
+        RandomMonkey randomMonkey = new RandomMonkey(pkg,act,device);
 
         //Start run monkey
         randomMonkey.play();

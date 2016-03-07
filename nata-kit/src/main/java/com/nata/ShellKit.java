@@ -16,19 +16,31 @@ public class ShellKit {
     /**
      * Run shell command starting with 'adb'
      *
-     * @param cmd command to execute
-     * @return running Any Output
+     * @param cmd command list to execute
+     * @return  Any Output
      */
     public static String adb(List<String> cmd) {
         cmd.add(0, "adb");
         return command(cmd);
     }
 
+    /**
+     * Run shell command starting with 'adb'
+     *
+     * @param cmd command to execute ,tokenize with whitespace
+     * @return  Any Output
+     */
     public static String adb(String cmd) {
         String[] splits = cmd.split(" ");
         return adb(splits);
     }
 
+    /**
+     * Run shell command starting with 'adb'
+     *
+     * @param cmd command string array to execute
+     * @return  Any Output
+     */
     public static String adb(String... cmd) {
         ArrayList<String> cmds = new ArrayList<>();
         cmds.add("adb");
@@ -42,7 +54,7 @@ public class ShellKit {
     /**
      * Run shell command starting with 'adb shell'
      *
-     * @param cmd command to execute
+     * @param cmd command list to execute
      * @return running Any Output
      */
     public static String adbShell(List<String> cmd) {
@@ -51,11 +63,24 @@ public class ShellKit {
         return command(cmd);
     }
 
+    /**
+     * Run shell command starting with 'adb shell'
+     *
+     * @param cmd command to execute ,tokenize with whitespace
+     * @return  Any Output
+     */
+
     public static String adbShell(String cmd) {
         String[] splits = cmd.split(" ");
         return adbShell(splits);
     }
 
+    /**
+     * Run shell command starting with 'adb shell'
+     *
+     * @param cmd command string array to execute
+     * @return  Any Output
+     */
     public static String adbShell(String... cmd) {
         ArrayList<String> cmds = new ArrayList<>();
         cmds.add("adb");
@@ -102,7 +127,7 @@ public class ShellKit {
     }
 
     /**
-     * Thread to read the output of cmd running
+     * Thread to drain the output of cmd running
      */
     private static class IOThreadHandler extends Thread {
         private InputStream inputStream;

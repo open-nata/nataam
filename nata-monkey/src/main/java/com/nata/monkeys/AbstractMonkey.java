@@ -1,8 +1,14 @@
 package com.nata.monkeys;
 
 import com.nata.cmd.AdbDevice;
+import com.nata.element.DumpService;
+import com.nata.element.Element;
+import com.nata.element.UINode;
+import org.dom4j.DocumentException;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: Calvin Meng
@@ -34,17 +40,48 @@ public abstract class AbstractMonkey {
         device.startActivity(pkgAct);
     }
 
-    public void GrabCurrentUi(){
-        File dumpFile = device.dumpUI();
-        // try with resources
-        try (BufferedReader reader = new BufferedReader(new FileReader(dumpFile))){
-            String line;
-            while((line = reader.readLine()) != null){
-                System.out.println(line);
+    public Element getNextElement(){
+        List<UINode> list = GrabCurrentUi();
+        System.out.println("get list");
+        List<UINode> clickablelist  = new ArrayList<>();
+        if(list != null){
+            for (UINode node:
+                 list) {
+                if(node.getClickable().equals("true")){
+                    clickablelist.add(node);
+                }
             }
-        } catch ( IOException e) {
+            int randomIndex = (int)(Math.random() * clickablelist.size());
+            String bounds  = clickablelist.get(randomIndex).getBounds();
+            return  new Element(bounds);
+        }
+        return null;
+    }
+
+    private List<UINode>  GrabCurrentUi(){
+        //Get dump file
+        File dumpFile = device.dumpUI();
+        System.out.println("get dump file");
+        try {
+            List<UINode> list = DumpService.getNodes(dumpFile);
+            for (UINode node: list) {
+               System.out.println(node);
+            }
+            return list;
+
+        } catch (DocumentException e) {
             e.printStackTrace();
         }
+
+        return null;
+    }
+
+    public void Tap(Element element){
+        device.tap(element.getX(),element.getY());
+    }
+
+    public void SleepShort(){
+        device.sleep(500);
     }
 
     public String getName() {
