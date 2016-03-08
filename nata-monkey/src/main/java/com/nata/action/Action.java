@@ -11,22 +11,21 @@ import java.util.Objects;
  */
 public abstract class Action {
     private String name = null;
-    private Element element = null;
 
-    public Action(Element e) {
+
+    public Action() {
         this.name = ActionType.UNKNOWN;
-        this.element = e;
     }
 
     protected void setName(String name){
        this.name = name;
     }
 
-    abstract public boolean fire();
+    abstract public void fire();
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, element);
+        return Objects.hash(name);
     }
 
     @Override
@@ -44,11 +43,11 @@ public abstract class Action {
         }
 
         Action other = (Action) otherObject;
-        return Objects.equals(name, other.name) && Objects.equals(element, other.element);
+        return Objects.equals(name, other.name) ;
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + "[name=" + name + ",element=" + element + "]";
+        return getClass().getName() + "[name=" + name + "]";
     }
 }

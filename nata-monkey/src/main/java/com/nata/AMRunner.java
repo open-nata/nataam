@@ -12,7 +12,7 @@ public class AMRunner {
     public static void main(String[] args) {
         //Info about the apk to test
         String pkg = "com.zhihu.android";
-        String act = "com.zhihu.android.ui.activity.GuideActivity";
+        String act = ".app.ui.activity.MainActivity";
 
         //Set Monkey settings
         AdbDevice device = new AdbDevice();

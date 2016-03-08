@@ -38,6 +38,14 @@ public class Element {
         this.Y = centerCoordsY;
     }
 
+    @Override
+    public String toString() {
+        return "Element{" +
+                "X=" + X +
+                ", Y=" + Y +
+                '}';
+    }
+
     public int getX() {
         return X;
     }

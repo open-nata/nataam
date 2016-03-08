@@ -1,9 +1,13 @@
 package com.nata.monkeys;
 
 import com.nata.action.Action;
+import com.nata.action.BackAction;
+import com.nata.action.TapAction;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Element;
-import com.nata.strategy.Strategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: Calvin Meng
@@ -12,6 +16,7 @@ import com.nata.strategy.Strategy;
  */
 public class RandomMonkey extends AbstractMonkey {
     volatile private boolean isRunning = true;
+    private List<Action> actionList = new ArrayList<>();
 
     public RandomMonkey(String pkg, String act, AdbDevice device){
         super("randomMonkey",pkg,act,device);
@@ -23,17 +28,17 @@ public class RandomMonkey extends AbstractMonkey {
         startApp();
         while(isRunning){
             Element nextElement = getNextElement();
+            Action nextAction = null;
             if(nextElement!=  null){
-                Tap(nextElement);
+                nextAction = new TapAction(nextElement,getDevice());
+            }else {
+                nextAction = new BackAction(getDevice());
             }
-            System.out.println("tap...");
+            actionList.add(nextAction);
+            nextAction.fire();
+            System.out.println(nextAction);
         }
-
-
-//        while(strategy.hasNextAction()){
-//            Action action = strategy.getNextAction();
-//            action.fire();
-//        }
+        report();
     }
 
     @Override
@@ -48,7 +53,6 @@ public class RandomMonkey extends AbstractMonkey {
 
     public static void main(String[] args) {
         String pkg = "com.zhihu.android";
-//        String act = "com.zhihu.android.ui.activity.GuideActivity";
         String act = ".app.ui.activity.MainActivity";
 
         AdbDevice device = new AdbDevice();
@@ -56,7 +60,6 @@ public class RandomMonkey extends AbstractMonkey {
 
         randomMonkey.startApp();
         randomMonkey.play();
-//        randomMonkey.GrabCurrentUi();
 
     }
 }

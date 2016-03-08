@@ -1,5 +1,6 @@
 package com.nata.action;
 
+import com.nata.cmd.AdbDevice;
 import com.nata.element.Element;
 
 /**
@@ -8,14 +9,16 @@ import com.nata.element.Element;
  * Update: 2016-01-13 21:04
  */
 public class SwipeAction extends Action{
-
-    public SwipeAction(Element element){
-        super(element);
-        super.setName(ActionType.TAP);
+    private AdbDevice device;
+    private Element element = null;
+    public SwipeAction(Element element, AdbDevice device){
+        super.setName(ActionType.SWIPE);
+        this.device = device;
+        this.element = element;
     }
 
     @Override
-    public boolean fire() {
-        return false;
+    public void fire() {
+
     }
 }

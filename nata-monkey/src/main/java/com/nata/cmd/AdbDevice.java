@@ -29,15 +29,12 @@ public class AdbDevice {
     public File dumpUI() {
         String tempDir = System.getProperty("java.io.tmpdir");
         String tempDumpfile = tempDir + "dumps/dumpfile.xml";
-        System.out.println(tempDumpfile);
 
-        String output = ShellKit.adbShell("su","-c","uiautomator", "dump","--compressed");
-        System.out.println("get 1");
+        String output = ShellKit.adbShell("su","-c","uiautomator", "dump");
 
         if (!output.equals("")) {
             ShellKit.adb("pull",DUMP_FILE_LOCATION ,tempDumpfile);
         }
-        System.out.println("get dump file");
         ShellKit.adbShell("rm" , DUMP_FILE_LOCATION);
         return new File(tempDumpfile);
     }
@@ -49,6 +46,15 @@ public class AdbDevice {
      */
     public void startActivity(String component) {
         ShellKit.adbShell("am start -n " + component);
+    }
+
+    /**
+     * 发送一个按键事件
+     *
+     * @param keycode 键值
+     */
+    public void sendKeyEvent(int keycode) {
+        ShellKit.adbShell("input keyevent " + keycode);
     }
 
     public static void main(String[] args) {
@@ -149,15 +155,7 @@ public class AdbDevice {
 //        ShellKit.adbShell("am start -a android.intent.action.CALL -d tel:" + number);
 //    }
 //
-//    /**
-//     * 发送一个按键事件
-//     *
-//     * @param keycode 键值
-//     */
-//    public void sendKeyEvent(int keycode) {
-//        ShellKit.adbShell("input keyevent " + keycode);
-//        sleep(500);
-//    }
+
 //
 //    /**
 //     * 清除文本

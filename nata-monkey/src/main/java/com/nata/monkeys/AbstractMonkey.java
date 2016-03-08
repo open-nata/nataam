@@ -21,13 +21,7 @@ public abstract class AbstractMonkey {
     private final String act ;
     private final AdbDevice device;
 
-    /**
-     *
-     * @param name
-     * @param pkg
-     * @param act
-     * @param device
-     */
+
     public AbstractMonkey(String name,String pkg,String act,AdbDevice device){
         this.name = name;
         this.pkg = pkg;
@@ -40,20 +34,27 @@ public abstract class AbstractMonkey {
         device.startActivity(pkgAct);
     }
 
+    protected AdbDevice getDevice(){
+        return device;
+    }
+
     public Element getNextElement(){
         List<UINode> list = GrabCurrentUi();
-        System.out.println("get list");
-        List<UINode> clickablelist  = new ArrayList<>();
+        List<UINode> clickableList  = new ArrayList<>();
         if(list != null){
-            for (UINode node:
-                 list) {
+            for (UINode node: list) {
                 if(node.getClickable().equals("true")){
-                    clickablelist.add(node);
+                    clickableList.add(node);
                 }
             }
-            int randomIndex = (int)(Math.random() * clickablelist.size());
-            String bounds  = clickablelist.get(randomIndex).getBounds();
-            return  new Element(bounds);
+            if(clickableList.size() > 0){
+                int randomIndex = (int)(Math.random() * clickableList.size());
+                String bounds  = clickableList.get(randomIndex).getBounds();
+                return  new Element(bounds);
+            }else {
+                return null;
+            }
+
         }
         return null;
     }
@@ -61,12 +62,11 @@ public abstract class AbstractMonkey {
     private List<UINode>  GrabCurrentUi(){
         //Get dump file
         File dumpFile = device.dumpUI();
-        System.out.println("get dump file");
         try {
             List<UINode> list = DumpService.getNodes(dumpFile);
-            for (UINode node: list) {
-               System.out.println(node);
-            }
+//            for (UINode node: list) {
+//               System.out.println(node);
+//            }
             return list;
 
         } catch (DocumentException e) {
