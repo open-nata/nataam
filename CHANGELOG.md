@@ -15,4 +15,6 @@
 - Make the normal monkey tests run with click clickable widgets randomly
 
 ### v0.0.5(2016/3/8)
-- Add BackAction and make it running
+- Add BackAction 
+- Add MenuAction
+- Add TextInputAction

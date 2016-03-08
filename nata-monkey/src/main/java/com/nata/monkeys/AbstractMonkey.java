@@ -29,6 +29,8 @@ public abstract class AbstractMonkey {
         this.device = device;
     }
 
+
+
     public void startApp(){
         String pkgAct = this.getPkg()+"/"+ this.getAct();
         device.startActivity(pkgAct);
@@ -38,35 +40,16 @@ public abstract class AbstractMonkey {
         return device;
     }
 
-    public Element getNextElement(){
-        List<UINode> list = GrabCurrentUi();
-        List<UINode> clickableList  = new ArrayList<>();
-        if(list != null){
-            for (UINode node: list) {
-                if(node.getClickable().equals("true")){
-                    clickableList.add(node);
-                }
-            }
-            if(clickableList.size() > 0){
-                int randomIndex = (int)(Math.random() * clickableList.size());
-                String bounds  = clickableList.get(randomIndex).getBounds();
-                return  new Element(bounds);
-            }else {
-                return null;
-            }
 
-        }
-        return null;
-    }
 
-    private List<UINode>  GrabCurrentUi(){
+    protected List<UINode>  GrabCurrentUi(){
         //Get dump file
         File dumpFile = device.dumpUI();
         try {
             List<UINode> list = DumpService.getNodes(dumpFile);
-//            for (UINode node: list) {
-//               System.out.println(node);
-//            }
+            for (UINode node: list) {
+               System.out.println(node);
+            }
             return list;
 
         } catch (DocumentException e) {

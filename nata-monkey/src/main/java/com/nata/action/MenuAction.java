@@ -6,21 +6,21 @@ import com.nata.cmd.AdbDevice;
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
- * Update: 2016-03-08 22:34
+ * Update: 2016-03-08 23:26
  */
-public class BackAction extends Action{
+public class MenuAction extends Action{
     private AdbDevice device = null;
-    public BackAction(AdbDevice device){
+    public MenuAction(AdbDevice device){
         super.setName(ActionType.TAP);
         this.device = device;
     }
     @Override
     public void fire() {
-        device.sendKeyEvent(AndroidKeyCode.BACK);
+        device.sendKeyEvent(AndroidKeyCode.MENU);
     }
 
     @Override
     public String toString() {
-        return "BackAction";
+        return "MenuAction";
     }
 }

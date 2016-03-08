@@ -9,4 +9,5 @@ public class ActionType {
     public static final String UNKNOWN= "unknown";
     public static final String TAP = "tap";
     public static final String SWIPE= "swipe";
+    public static final String INPUT= "input";
 }

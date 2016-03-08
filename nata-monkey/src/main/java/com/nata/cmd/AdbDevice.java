@@ -1,7 +1,9 @@
 package com.nata.cmd;
 
+import com.nata.AndroidKeyCode;
 import com.nata.ShellKit;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Author: Calvin Meng
@@ -57,6 +59,28 @@ public class AdbDevice {
         ShellKit.adbShell("input keyevent " + keycode);
     }
 
+    /**
+     * 发送一段文本，只支持英文，多个空格视为一个空格
+     *
+     * @param text 英文文本
+     */
+    public void sendText(String text) {
+        String[] str = text.split(" ");
+        ArrayList<String> out = new ArrayList<String>();
+        for (String string : str) {
+            if (!string.equals("")) {
+                out.add(string);
+            }
+        }
+
+        int length = out.size();
+        for (int i = 0; i < length; i++) {
+            ShellKit.adbShell("input text " + out.get(i));
+            if (i != length - 1) {
+                sendKeyEvent(AndroidKeyCode.SPACE);
+            }
+        }
+    }
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
 
@@ -314,29 +338,7 @@ public class AdbDevice {
 //        swipe(x, y, x, y, 1500);
 //    }
 //
-//    /**
-//     * 发送一段文本，只支持英文，多个空格视为一个空格
-//     *
-//     * @param text 英文文本
-//     */
-//    public void sendText(String text) {
-//        String[] str = text.split(" ");
-//        ArrayList<String> out = new ArrayList<String>();
-//        for (String string : str) {
-//            if (!string.equals("")) {
-//                out.add(string);
-//            }
-//        }
-//
-//        int length = out.size();
-//        for (int i = 0; i < length; i++) {
-//            ShellKit.adbShell("input text " + out.get(i));
-//            sleep(100);
-//            if (i != length - 1) {
-//                sendKeyEvent(AndroidKeyCode.SPACE);
-//            }
-//        }
-//    }
+
 //
 //    /**
 //     * 清除应用的用户数据
