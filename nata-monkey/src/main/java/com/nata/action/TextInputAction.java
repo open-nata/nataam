@@ -1,6 +1,7 @@
 package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
+import com.nata.dictionary.TextValueDictionary;
 import com.nata.element.Element;
 
 /**
@@ -17,10 +18,14 @@ public class TextInputAction extends Action{
         this.element = element;
     }
 
+
+
+
+
     @Override
     public void fire() {
         device.tap(element.getX(),element.getY());
-        device.sendText("random text");
+        device.sendText(TextValueDictionary.getRandomValidValue());
     }
 
 

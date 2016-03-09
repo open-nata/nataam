@@ -29,8 +29,6 @@ public abstract class AbstractMonkey {
         this.device = device;
     }
 
-
-
     public void startApp(){
         String pkgAct = this.getPkg()+"/"+ this.getAct();
         device.startActivity(pkgAct);

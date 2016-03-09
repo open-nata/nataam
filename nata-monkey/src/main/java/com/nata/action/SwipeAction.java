@@ -1,7 +1,6 @@
 package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
-import com.nata.element.Element;
 
 /**
  * Author: Calvin Meng
