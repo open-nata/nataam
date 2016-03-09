@@ -43,9 +43,15 @@ public class RandomMonkey extends AbstractMonkey {
         System.out.println("start playing...");
         startApp();
         while(isRunning){
-            Action nextAction = getNextUIAction();
-            if(nextAction==  null){
-                nextAction = new BackAction(getDevice());
+//            Action nextAction = getNextUIAction();
+//            if(nextAction==  null){
+//                nextAction = new BackAction(getDevice());
+//            }
+            Action nextAction ;
+            if(Math.random() > 0.5){
+                nextAction = new SwipeAction(SwipeDirection.RIGHT,getDevice());
+            }else{
+                nextAction = new SwipeAction(SwipeDirection.LEFT,getDevice());
             }
             actionList.add(nextAction);
             nextAction.fire();

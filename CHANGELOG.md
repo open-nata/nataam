@@ -18,3 +18,7 @@
 - Add BackAction 
 - Add MenuAction
 - Add TextInputAction
+
+### v0.0.6(2016/3/8)
+- Add Swipe Action(UP,DOWN,LEFT,RIGHT)
+- Can get Device Resolution

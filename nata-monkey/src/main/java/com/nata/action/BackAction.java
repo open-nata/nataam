@@ -11,7 +11,7 @@ import com.nata.cmd.AdbDevice;
 public class BackAction extends Action{
     private AdbDevice device = null;
     public BackAction(AdbDevice device){
-        super.setName(ActionType.TAP);
+        super.setName(ActionType.BACK);
         this.device = device;
     }
     @Override

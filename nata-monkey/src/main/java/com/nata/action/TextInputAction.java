@@ -12,7 +12,7 @@ public class TextInputAction extends Action{
     private AdbDevice device = null;
     private Element element = null;
     public TextInputAction(Element element,AdbDevice device){
-        super.setName(ActionType.TAP);
+        super.setName(ActionType.INPUT);
         this.device = device;
         this.element = element;
     }

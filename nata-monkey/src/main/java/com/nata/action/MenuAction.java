@@ -11,7 +11,7 @@ import com.nata.cmd.AdbDevice;
 public class MenuAction extends Action{
     private AdbDevice device = null;
     public MenuAction(AdbDevice device){
-        super.setName(ActionType.TAP);
+        super.setName(ActionType.MENU);
         this.device = device;
     }
     @Override

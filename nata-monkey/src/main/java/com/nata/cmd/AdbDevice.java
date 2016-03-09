@@ -2,8 +2,12 @@ package com.nata.cmd;
 
 import com.nata.AndroidKeyCode;
 import com.nata.ShellKit;
+import com.nata.utils.ReUtil;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Author: Calvin Meng
@@ -16,6 +20,17 @@ public class AdbDevice {
     public AdbDevice() {
         ShellKit.adb("wait-for-adb");
     }
+
+
+    public static void main(String[] args) {
+        AdbDevice device = new AdbDevice();
+
+//        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
+        System.out.println(Arrays.toString(device.getScreenResolution()));
+
+//        device.dumpUI();
+    }
+
 
     public void sleep(long millis) {
         try {
@@ -32,12 +47,12 @@ public class AdbDevice {
         String tempDir = System.getProperty("java.io.tmpdir");
         String tempDumpfile = tempDir + "dumps/dumpfile.xml";
 
-        String output = ShellKit.adbShell("su","-c","uiautomator", "dump");
+        String output = ShellKit.adbShell("su", "-c", "uiautomator", "dump");
 
         if (!output.equals("")) {
-            ShellKit.adb("pull",DUMP_FILE_LOCATION ,tempDumpfile);
+            ShellKit.adb("pull", DUMP_FILE_LOCATION, tempDumpfile);
         }
-        ShellKit.adbShell("rm" , DUMP_FILE_LOCATION);
+        ShellKit.adbShell("rm", DUMP_FILE_LOCATION);
         return new File(tempDumpfile);
     }
 
@@ -81,15 +96,66 @@ public class AdbDevice {
             }
         }
     }
-    public static void main(String[] args) {
-        AdbDevice device = new AdbDevice();
 
-        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
 
-//        device.dumpUI();
+    /**
+     * 发送一个滑动事件
+     *
+     * @param startX 起始x坐标
+     * @param startY 起始y坐标
+     * @param endX   结束x坐标
+     * @param endY   结束y坐标
+     * @param ms     持续时间
+     */
+    public void swipe(double startX, double startY, double endX, double endY, long ms) {
+
+        double[] coords = ratio(startX, startY, endX, endY);
+        if (getSdkVersion() < 19) {
+            ShellKit.adbShell("input swipe " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3]);
+        } else {
+            ShellKit.adbShell("input swipe " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3] + " " + ms);
+        }
+
+        sleep(500);
     }
 
+    /**
+     * 左滑屏幕
+     */
+    public void swipeToLeft() {
+        swipe(0.8, 0.5, 0.2, 0.5, 100);
+    }
 
+    /**
+     * 右滑屏幕
+     */
+    public void swipeToRight() {
+        swipe(0.2, 0.5, 0.8, 0.5, 100);
+    }
+
+    /**
+     * 上滑屏幕
+     */
+    public void swipeToUp() {
+        swipe(0.5, 0.7, 0.5, 0.3, 100);
+    }
+
+    /**
+     * 下滑屏幕
+     */
+    public void swipeToDown() {
+        swipe(0.5, 0.3, 0.5, 0.7, 100);
+    }
+
+    /**
+     * 发送一个长按事件
+     *
+     * @param x x坐标
+     * @param y y坐标
+     */
+    public void longPress(double x, double y) {
+        swipe(x, y, x, y, 1500);
+    }
 
 
 //    /**
@@ -133,21 +199,22 @@ public class AdbDevice {
 //        return getFocusedPackageAndActivity().split("/")[1];
 //    }
 //
-//    /**
-//     * 获取设备屏幕的分辨率
-//     *
-//     * @return 返回分辨率数组
-//     */
-//    public int[] getScreenResolution() {
-//        Pattern pattern = Pattern.compile("([0-9]+)");
-//        Process ps = ShellKit.adbShell("dumpsys display | grep PhysicalDisplayInfo");
-//        ArrayList<Integer> out = ReUtil.matchInteger(pattern, ShellKit.getShellOut(ps));
-//
-//        int[] resolution = new int[]{out.get(0), out.get(1)};
-//
-//        return resolution;
-//    }
-//
+
+    /**
+     * 获取设备屏幕的分辨率
+     *
+     * @return 返回分辨率数组
+     */
+    public int[] getScreenResolution() {
+        Pattern pattern = Pattern.compile("([0-9]+)");
+        String output = ShellKit.adbShell("dumpsys display | grep PhysicalDisplayInfo");
+        ArrayList<Integer> out = ReUtil.matchInteger(pattern, output);
+
+        int[] resolution = new int[]{out.get(0), out.get(1)};
+
+        return resolution;
+    }
+
 //
 //
 //
@@ -167,7 +234,6 @@ public class AdbDevice {
 //        startActivity(component);
 //
 //    }
-
 
 
 //    /**
@@ -203,141 +269,81 @@ public class AdbDevice {
      */
     public void tap(int x, int y) {
         ShellKit.adbShell("input tap " + x + " " + y);
-        sleep(500);
+//        sleep(500);
     }
-//
-//    /**
-//     * 发送一个点击事件
-//     *
-//     * @param x x小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
-//     * @param y y小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
-//     */
-//    public void tap(double x, double y) {
-//        double[] coords = ratio(x, y);
-//        ShellKit.adbShell("input tap " + coords[0] + " " + coords[1]);
+
+    /**
+     * 发送一个点击事件
+     *
+     * @param x x小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
+     * @param y y小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
+     */
+    public void tap(double x, double y) {
+        double[] coords = ratio(x, y);
+        ShellKit.adbShell("input tap " + coords[0] + " " + coords[1]);
 //        sleep(500);
-//    }
-//
-//    private double[] ratio(double x, double y) {
-//        int[] display = getScreenResolution();
-//        double[] coords = new double[2];
-//
-//        if (x < 1) {
-//            coords[0] = display[0] * x;
-//        } else {
-//            coords[0] = x;
-//        }
-//
-//        if (y < 1) {
-//            coords[1] = display[1] * y;
-//        } else {
-//            coords[1] = y;
-//        }
-//
-//        return coords;
-//    }
-//
-//    private double[] ratio(double startX, double startY, double endX, double endY) {
-//        int[] display = getScreenResolution();
-//        double[] coords = new double[4];
-//
-//        if (startX < 1) {
-//            coords[0] = display[0] * startX;
-//        } else {
-//            coords[0] = startX;
-//        }
-//
-//        if (startY < 1) {
-//            coords[1] = display[1] * startY;
-//        } else {
-//            coords[1] = startY;
-//        }
-//
-//        if (endX < 1) {
-//            coords[2] = display[0] * endX;
-//        } else {
-//            coords[2] = endX;
-//        }
-//
-//        if (endY < 1) {
-//            coords[3] = display[1] * endY;
-//        } else {
-//            coords[3] = endY;
-//        }
-//
-//        return coords;
-//    }
-//
-//    /**
-//     * 获取设备中SDK的版本号
-//     *
-//     * @return 返回SDK版本号
-//     */
-//    public int getSdkVersion() {
-//        Process ps = ShellKit.adbShell("getprop ro.build.version.sdk");
-//        String sdkVersion = ShellKit.getShellOut(ps);
-//        return new Integer(sdkVersion);
-//    }
-//
-//    /**
-//     * 发送一个滑动事件
-//     *
-//     * @param startX 起始x坐标
-//     * @param startY 起始y坐标
-//     * @param endX   结束x坐标
-//     * @param endY   结束y坐标
-//     * @param ms     持续时间
-//     */
-//    public void swipe(double startX, double startY, double endX, double endY, long ms) {
-//
-//        double[] coords = ratio(startX, startY, endX, endY);
-//        if (getSdkVersion() < 19) {
-//            ShellKit.adbShell("input swipe " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3]);
-//        } else {
-//            ShellKit.adbShell("input swipe " + coords[0] + " " + coords[1] + " " + coords[2] + " " + coords[3] + " " + ms);
-//        }
-//
-//        sleep(500);
-//    }
-//
-//    /**
-//     * 左滑屏幕
-//     */
-//    public void swipeToLeft() {
-//        swipe(0.8, 0.5, 0.2, 0.5, 500);
-//    }
-//
-//    /**
-//     * 右滑屏幕
-//     */
-//    public void swipeToRight() {
-//        swipe(0.2, 0.5, 0.8, 0.5, 500);
-//    }
-//
-//    /**
-//     * 上滑屏幕
-//     */
-//    public void swipeToUp() {
-//        swipe(0.5, 0.7, 0.5, 0.3, 500);
-//    }
-//
-//    /**
-//     * 下滑屏幕
-//     */
-//    public void swipeToDown() {
-//        swipe(0.5, 0.3, 0.5, 0.7, 500);
-//    }
-//
-//    /**
-//     * 发送一个长按事件
-//     *
-//     * @param x x坐标
-//     * @param y y坐标
-//     */
-//    public void longPress(double x, double y) {
-//        swipe(x, y, x, y, 1500);
-//    }
-//
+    }
+
+    private double[] ratio(double x, double y) {
+        int[] display = getScreenResolution();
+        double[] coords = new double[2];
+
+        if (x < 1) {
+            coords[0] = display[0] * x;
+        } else {
+            coords[0] = x;
+        }
+
+        if (y < 1) {
+            coords[1] = display[1] * y;
+        } else {
+            coords[1] = y;
+        }
+
+        return coords;
+    }
+
+    private double[] ratio(double startX, double startY, double endX, double endY) {
+        int[] display = getScreenResolution();
+        double[] coords = new double[4];
+
+        if (startX < 1) {
+            coords[0] = display[0] * startX;
+        } else {
+            coords[0] = startX;
+        }
+
+        if (startY < 1) {
+            coords[1] = display[1] * startY;
+        } else {
+            coords[1] = startY;
+        }
+
+        if (endX < 1) {
+            coords[2] = display[0] * endX;
+        } else {
+            coords[2] = endX;
+        }
+
+        if (endY < 1) {
+            coords[3] = display[1] * endY;
+        } else {
+            coords[3] = endY;
+        }
+
+        return coords;
+    }
+
+    /**
+     * 获取设备中SDK的版本号
+     *
+     * @return 返回SDK版本号
+     */
+    public int getSdkVersion() {
+        String sdkVersion = ShellKit.adbShell("getprop ro.build.version.sdk");
+        return new Integer(sdkVersion.trim());
+    }
+
 
 //
 //    /**
@@ -353,8 +359,6 @@ public class AdbDevice {
 //        }
 //        return false;
 //    }
-
-
 
 
 }
