@@ -18,10 +18,6 @@ public class TextInputAction extends Action{
         this.element = element;
     }
 
-
-
-
-
     @Override
     public void fire() {
         device.tap(element.getX(),element.getY());

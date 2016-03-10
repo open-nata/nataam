@@ -57,6 +57,11 @@ public abstract class AbstractMonkey {
         return null;
     }
 
+    //TODO: detect errors,how?
+    public boolean isCrashed(){
+        return false;
+    }
+
     public void Tap(Element element){
         device.tap(element.getX(),element.getY());
     }

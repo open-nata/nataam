@@ -15,11 +15,13 @@
 - Make the normal monkey tests run with click clickable widgets randomly
 
 ### v0.0.5(2016/3/8)
-- Add BackAction 
+- Add BackAction
 - Add MenuAction
 - Add TextInputAction
 
-### v0.0.6(2016/3/8)
+### v0.0.6(2016/3/9)
 - Add Swipe Action(UP,DOWN,LEFT,RIGHT)
 - Can get Device Resolution
 - Add Input Dictionary including valid and invalid inputs
+
+
