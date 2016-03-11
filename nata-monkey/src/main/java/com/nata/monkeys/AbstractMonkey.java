@@ -45,8 +45,9 @@ public abstract class AbstractMonkey {
         File dumpFile = device.dumpUI();
         try {
             List<UINode> list = DumpService.getNodes(dumpFile);
+
             for (UINode node: list) {
-               System.out.println(node);
+                System.out.println(node);
             }
             return list;
 

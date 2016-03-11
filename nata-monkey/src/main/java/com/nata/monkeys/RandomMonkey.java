@@ -7,6 +7,7 @@ import com.nata.element.UINode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Author: Calvin Meng
@@ -17,6 +18,9 @@ public class RandomMonkey extends AbstractMonkey {
     volatile private boolean isRunning = true;
     private List<Action> actionList = new ArrayList<>();
     private final int ACTION_LIMIT = 20;
+    private final double P_ENTITY = 0.2;
+    private final double P_SWIPE = 0.2;
+    private final Random random  = new Random();
 
     public RandomMonkey(String pkg, String act, AdbDevice device) {
         super("randomMonkey", pkg, act, device);
@@ -47,6 +51,9 @@ public class RandomMonkey extends AbstractMonkey {
         startApp();
         while (isRunning) {
             Action nextAction = getNextAction();
+            if(nextAction == null){
+                continue;
+            }
             actionList.add(nextAction);
             nextAction.fire();
             System.out.println(nextAction);
@@ -65,15 +72,26 @@ public class RandomMonkey extends AbstractMonkey {
 
     public Action getNextAction() {
         //First Gamble : Whether to Take Functional Actions: Back & Menu
-
-        //Second Gamble : Take which UI Action
+        double randomValue = Math.random();
+        if(randomValue < P_ENTITY){
+             double gamble = Math.random();
+            if(gamble > 0.5){
+                return new BackAction(getDevice());
+            }else{
+                return new MenuAction(getDevice());
+            }
+            //Second Gamble : Take Swipe Actions
+        }else if ( (randomValue - P_ENTITY) <= P_SWIPE){
+            int gamble  = random.nextInt(4);
+            switch (gamble){
+                case 0: return new SwipeAction(SwipeDirection.RIGHT,getDevice());
+                case 1: return new SwipeAction(SwipeDirection.LEFT,getDevice());
+                case 2: return new SwipeAction(SwipeDirection.UP,getDevice());
+                case 3: return new SwipeAction(SwipeDirection.DOWN,getDevice());
+            }
+        }
 
         //Action nextAction;
-//            if(Math.random() > 0.5){
-//                nextAction = new SwipeAction(SwipeDirection.RIGHT,getDevice());
-//            }else{
-//                nextAction = new SwipeAction(SwipeDirection.LEFT,getDevice());
-//            }
 
         List<UINode> list = GrabCurrentUi();
         List<UINodeAction> actionList = new ArrayList<>();
