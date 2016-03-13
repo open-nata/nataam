@@ -29,15 +29,18 @@ public abstract class AbstractMonkey {
         this.device = device;
     }
 
-    public void startApp(){
+    public String getPkgAct(){
         String pkgAct = this.getPkg()+"/"+ this.getAct();
-        device.startActivity(pkgAct);
+        return pkgAct;
+    }
+
+    public boolean isInCurrentPkg(){
+        return device.getCurrentPackageName().equals(pkg);
     }
 
     protected AdbDevice getDevice(){
         return device;
     }
-
 
 
     protected List<UINode>  GrabCurrentUi(){

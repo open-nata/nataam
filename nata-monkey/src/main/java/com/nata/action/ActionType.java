@@ -12,6 +12,7 @@ public class ActionType {
     public static final String INPUT= "input";
     public static final String BACK= "back";
     public static final String MENU= "menu";
+    public static final String STARTAPP= "start app";
 
 
 }

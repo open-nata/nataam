@@ -21,9 +21,16 @@ public class RandomMonkey extends AbstractMonkey {
     private final double P_ENTITY = 0.2;
     private final double P_SWIPE = 0.2;
     private final Random random  = new Random();
+    private Action restartAction = null;
+    private Action backAction = null;
+    private Action menuAction = null;
+    private Action lastAction = null;
 
     public RandomMonkey(String pkg, String act, AdbDevice device) {
         super("randomMonkey", pkg, act, device);
+        restartAction = new StartAppAction(getDevice(),getPkgAct());
+        backAction = new BackAction(getDevice());
+        menuAction = new MenuAction(getDevice());
     }
 
 
@@ -48,22 +55,41 @@ public class RandomMonkey extends AbstractMonkey {
     @Override
     public void play() {
         System.out.println("start playing...");
-        startApp();
+        restartAction.fire();
+        actionList.add(restartAction);
         while (isRunning) {
-            Action nextAction = getNextAction();
+            Action nextAction;
+            // if not in current pkg
+            if(!isInCurrentPkg()){
+                // if monkey get out of pkg because of back action
+                if(lastAction instanceof BackAction){
+                    nextAction = restartAction;
+                }else {
+                    nextAction = backAction;
+                }
+            }else{
+                nextAction= getNextAction();
+            }
+
             if(nextAction == null){
                 continue;
             }
+
+
             actionList.add(nextAction);
             nextAction.fire();
+            lastAction = nextAction;
+
             System.out.println(nextAction);
             if(isCrashed()){
                 System.out.println("The App Crashed");
                 break;
             }
+
             if (actionList.size() >= ACTION_LIMIT) {
                 actionList.clear();
-                startApp();
+                restartAction.fire();
+                actionList.add(restartAction);
             }
         }
         report();
@@ -76,9 +102,9 @@ public class RandomMonkey extends AbstractMonkey {
         if(randomValue < P_ENTITY){
              double gamble = Math.random();
             if(gamble > 0.5){
-                return new BackAction(getDevice());
+                return backAction;
             }else{
-                return new MenuAction(getDevice());
+                return menuAction;
             }
             //Second Gamble : Take Swipe Actions
         }else if ( (randomValue - P_ENTITY) <= P_SWIPE){
@@ -145,7 +171,6 @@ public class RandomMonkey extends AbstractMonkey {
         AdbDevice device = new AdbDevice();
         RandomMonkey randomMonkey = new RandomMonkey(pkg, act, device);
 
-        randomMonkey.startApp();
         randomMonkey.play();
 
     }

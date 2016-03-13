@@ -25,8 +25,9 @@ public class AdbDevice {
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
 
-//        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
-        System.out.println(Arrays.toString(device.getScreenResolution()));
+//      device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
+//      System.out.println(Arrays.toString(device.getScreenResolution()));
+        System.out.println(device.getFocusedPackageAndActivity());
 
 //        device.dumpUI();
     }
@@ -158,47 +159,48 @@ public class AdbDevice {
     }
 
 
-//    /**
-//     * 获取设备上当前界面的package和activity
-//     *
-//     * @return 返回package/activity
-//     */
-//    public String getFocusedPackageAndActivity() {
-//        Pattern pattern = Pattern.compile("([a-zA-Z0-9.]+/.[a-zA-Z0-9.]+)");
-//        Process ps = ShellKit.adbShell("dumpsys input | grep FocusedApplication");
+    /**
+     * 获取设备上当前界面的package和activity
+     *
+     * @return 返回package/activity
+     */
+    public String getFocusedPackageAndActivity() {
+        Pattern pattern = Pattern.compile("([a-zA-Z0-9.]+/.[a-zA-Z0-9.]+)");
+        String output = ShellKit.adbShell("dumpsys input | grep FocusedApplication");
+
+        ArrayList<String> component = ReUtil.matchString(pattern, output);
+
+        // 会有FocusedApplication: <null>情况发生
+        if (component.isEmpty()) {
+            return ReUtil
+                    .matchString(pattern,
+                            ShellKit.adbShell("dumpsys window w | grep \\/ | grep name="))
+                    .get(0);
+        }
+
+        return component.get(0);
+    }
+
 //
-//        ArrayList<String> component = ReUtil.matchString(pattern, ShellKit.getShellOut(ps));
-//
-//        // 会有FocusedApplication: <null>情况发生
-//        if (component.isEmpty()) {
-//            return ReUtil
-//                    .matchString(pattern,
-//                            ShellKit.getShellOut(ShellKit.adbShell("dumpsys window w | grep \\/ | grep name=")))
-//                    .get(0);
-//        }
-//
-//        return component.get(0);
-//    }
-//
-//
-//    /**
-//     * 获取设备上当前界面的包名
-//     *
-//     * @return 返回包名
-//     */
-//    public String getCurrentPackageName() {
-//        return getFocusedPackageAndActivity().split("/")[0];
-//    }
-//
-//    /**
-//     * 获取设备上当前界面的activity
-//     *
-//     * @return 返回activity名
-//     */
-//    public String getCurrentActivity() {
-//        return getFocusedPackageAndActivity().split("/")[1];
-//    }
-//
+
+    /**
+     * 获取设备上当前界面的包名
+     *
+     * @return 返回包名
+     */
+    public String getCurrentPackageName() {
+        return getFocusedPackageAndActivity().split("/")[0];
+    }
+
+    /**
+     * 获取设备上当前界面的activity
+     *
+     * @return 返回activity名
+     */
+    public String getCurrentActivity() {
+        return getFocusedPackageAndActivity().split("/")[1];
+    }
+
 
     /**
      * 获取设备屏幕的分辨率
