@@ -12,7 +12,7 @@ import com.nata.element.Element;
 public class TextInputAction extends Action{
     private AdbDevice device = null;
     private Element element = null;
-    public TextInputAction(Element element,AdbDevice device){
+    public TextInputAction(AdbDevice device,Element element){
         super.setName(ActionType.INPUT);
         this.device = device;
         this.element = element;

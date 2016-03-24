@@ -5,8 +5,9 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.xml.sax.SAXException;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,11 @@ import java.util.List;
  * Update: 2016-01-13 17:28
  */
 public class DumpService {
-    public static List<UINode> getNodes(File file) throws DocumentException {
+    public static List<UINode> getNodes(File file) throws DocumentException, SAXException, FileNotFoundException, UnsupportedEncodingException {
+        InputStream ifile = new FileInputStream(file.getAbsolutePath());
+        InputStreamReader ir = new InputStreamReader(ifile, "UTF-8");
         SAXReader reader = new SAXReader();
-        Document document = reader.read(file);
+        Document document = reader.read(ir);
         List<UINode> uiNodeList = new ArrayList<>();
         treeWalk(document, uiNodeList);
         return uiNodeList;

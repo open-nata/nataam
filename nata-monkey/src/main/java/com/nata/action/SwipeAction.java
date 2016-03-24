@@ -11,7 +11,7 @@ public class SwipeAction extends Action {
     private AdbDevice device;
     private SwipeDirection direction;
 
-    public SwipeAction(SwipeDirection direction,AdbDevice device) {
+    public SwipeAction(AdbDevice device,SwipeDirection direction) {
         super.setName(ActionType.SWIPE);
         this.device = device;
         this.direction = direction;

@@ -28,3 +28,10 @@
 ### (2016/3/13)
 - Add StartAppAction , make every action recorded
 - get back to the app when pkg changes
+
+### (2016/3/24)
+- fix bug : can't read chinese from dumpfile.xml
+- Add ActionFactory to manage the action creations
+- Add State Class to record States
+- Add LongClick Action
+- Add QLearningMonkey Class

@@ -18,5 +18,6 @@ public class StartAppAction extends Action{
     @Override
     public void fire() {
         device.startActivity(pkgAct);
+        device.sleep(2000);
     }
 }

@@ -25,12 +25,14 @@ public class RandomMonkey extends AbstractMonkey {
     private Action backAction = null;
     private Action menuAction = null;
     private Action lastAction = null;
+    private ActionFactory actionFactory = null;
 
     public RandomMonkey(String pkg, String act, AdbDevice device) {
         super("randomMonkey", pkg, act, device);
-        restartAction = new StartAppAction(getDevice(),getPkgAct());
-        backAction = new BackAction(getDevice());
-        menuAction = new MenuAction(getDevice());
+        actionFactory = new ActionFactory(device);
+        restartAction = actionFactory.CreateRestartAction(getPkgAct());
+        backAction = actionFactory.getBackAction();
+        menuAction = actionFactory.getMenuAction();
     }
 
 
@@ -54,9 +56,10 @@ public class RandomMonkey extends AbstractMonkey {
 
     @Override
     public void play() {
-        System.out.println("start playing...");
+        System.out.println("Random Monkey start playing...");
         restartAction.fire();
         actionList.add(restartAction);
+
         while (isRunning) {
             Action nextAction;
             // if not in current pkg
@@ -100,7 +103,7 @@ public class RandomMonkey extends AbstractMonkey {
         //First Gamble : Whether to Take Functional Actions: Back & Menu
         double randomValue = Math.random();
         if(randomValue < P_ENTITY){
-             double gamble = Math.random();
+            double gamble = Math.random();
             if(gamble > 0.5){
                 return backAction;
             }else{
@@ -110,10 +113,10 @@ public class RandomMonkey extends AbstractMonkey {
         }else if ( (randomValue - P_ENTITY) <= P_SWIPE){
             int gamble  = random.nextInt(4);
             switch (gamble){
-                case 0: return new SwipeAction(SwipeDirection.RIGHT,getDevice());
-                case 1: return new SwipeAction(SwipeDirection.LEFT,getDevice());
-                case 2: return new SwipeAction(SwipeDirection.UP,getDevice());
-                case 3: return new SwipeAction(SwipeDirection.DOWN,getDevice());
+                case 0: actionFactory.CreateSwipeAction(SwipeDirection.LEFT);break;
+                case 1: actionFactory.CreateSwipeAction(SwipeDirection.RIGHT);break;
+                case 2: actionFactory.CreateSwipeAction(SwipeDirection.UP);break;
+                case 3: actionFactory.CreateSwipeAction(SwipeDirection.DOWN);break;
             }
         }
 
@@ -136,10 +139,10 @@ public class RandomMonkey extends AbstractMonkey {
                 Action action = null;
                 switch (nodeAction.getAction()) {
                     case ActionType.INPUT:
-                        action = new TextInputAction(new Element(nodeAction.getNode().getBounds()), getDevice());
+                        action = new TextInputAction(getDevice(),new Element(nodeAction.getNode().getBounds()));
                         break;
                     case ActionType.TAP:
-                        action = new TapAction(new Element(nodeAction.getNode().getBounds()), getDevice());
+                        action = new TapAction( getDevice(),new Element(nodeAction.getNode().getBounds()));
                         break;
                 }
                 return action;
@@ -163,11 +166,11 @@ public class RandomMonkey extends AbstractMonkey {
     }
 
     public static void main(String[] args) {
-//        String pkg = "com.zhihu.android";
-//        String act = ".app.ui.activity.MainActivity";
+        String pkg = "com.zhihu.android";
+        String act = ".app.ui.activity.MainActivity";
 
-        String pkg = "random";
-        String act = "random";
+//        String pkg = "random";
+//        String act = "random";
         AdbDevice device = new AdbDevice();
         RandomMonkey randomMonkey = new RandomMonkey(pkg, act, device);
 
