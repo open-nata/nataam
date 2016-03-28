@@ -25,11 +25,11 @@ public class AdbDevice {
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
 
-//      device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
+//        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
 //      System.out.println(Arrays.toString(device.getScreenResolution()));
-        System.out.println(device.getFocusedPackageAndActivity());
+//        System.out.println(device.getFocusedPackageAndActivity());
 
-//        device.dumpUI();
+        device.dumpUI();
     }
 
 
@@ -48,13 +48,13 @@ public class AdbDevice {
         String tempDir = System.getProperty("user.dir");
         String tempDumpfile = tempDir + "/dumps/dumpfile.xml";
 //        System.out.println(tempDumpfile);
-
-        String output = ShellKit.adbShell("su", "-c", "uiautomator", "dump", DUMP_FILE_LOCATION);
+//        "su", "-c",
+        String output = ShellKit.adbShell( "uiautomator", "dump", DUMP_FILE_LOCATION);
 
         if (!output.equals("")) {
             ShellKit.adb("pull", DUMP_FILE_LOCATION, tempDumpfile);
         }
-        ShellKit.adbShell("rm", DUMP_FILE_LOCATION);
+//        ShellKit.adbShell("rm", DUMP_FILE_LOCATION);
         return new File(tempDumpfile);
     }
 
@@ -82,21 +82,15 @@ public class AdbDevice {
      * @param text 英文文本
      */
     public void sendText(String text) {
-        String[] str = text.split(" ");
-        ArrayList<String> out = new ArrayList<String>();
-        for (String string : str) {
-            if (!string.equals("")) {
-                out.add(string);
-            }
-        }
+        ShellKit.adbShell("input","text",text);
+    }
 
-        int length = out.size();
-        for (int i = 0; i < length; i++) {
-            ShellKit.adbShell("input text " + out.get(i));
-            if (i != length - 1) {
-                sendKeyEvent(AndroidKeyCode.SPACE);
-            }
-        }
+    public void clearText(){
+        ShellKit.adbShell("input","keyevent",AndroidKeyCode.CLEAR+"");
+    }
+
+    public void hideSoftKeyBoard(){
+        ShellKit.adbShell("input","keyevent",AndroidKeyCode.HIDE_KEYBOARD+"");
     }
 
 
@@ -348,20 +342,18 @@ public class AdbDevice {
     }
 
 
-//
-//    /**
-//     * 清除应用的用户数据
-//     *
-//     * @param packageName 应用的包名
-//     * @return 清楚成功返回true, 否则返回false
-//     */
-//    public boolean clearAppDate(String packageName) {
-//        Process ps = ShellKit.adbShell("pm clear " + packageName);
-//        if (ShellKit.getShellOut(ps).equals("Success")) {
-//            return true;
-//        }
-//        return false;
-//    }
 
+    /**
+     * 清除应用的用户数据
+     *
+     * @param packageName 应用的包名
+     * @return 清楚成功返回true, 否则返回false
+     */
+    public boolean clearAppData(String packageName) {
+        if (ShellKit.adbShell("pm clear " + packageName).equals("Success")) {
+            return true;
+        }
+        return false;
+    }
 
 }

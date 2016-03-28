@@ -54,7 +54,7 @@ public class ActionFactory {
         Map<Action,Double> actionTable = new HashMap<>();
         //add the actions which all states share;
         actionTable.put(createBackAction(),Action.RINIT);
-        actionTable.put(createMenuAction(),Action.RINIT);
+//        actionTable.put(createMenuAction(),Action.RINIT);
         Set<UINode> uiList = state.getUIList();
         for(UINode node : uiList){
             //if not enabled, discard
@@ -72,20 +72,22 @@ public class ActionFactory {
 
             //click button actions
             if( node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true") ){
-                Element element = new Element(node.getBounds());
+                Element element = new Element(node);
                 actionTable.put(CreateTapAction(element),Action.RINIT);
             }
 
             //long click actions
             if(node.getLong_clickable().equals("true")){
-                Element element = new Element(node.getBounds());
+                Element element = new Element(node);
                 actionTable.put(CreateLongClickAction(element),Action.RINIT);
             }
 
             //text input actions, can't get password from the text attribute
             if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
-                Element element = new Element(node.getBounds());
-                actionTable.put(CreateTextInputAction(element),Action.RINIT);
+                if(node.getText().equals("")){
+                    Element element = new Element(node);
+                    actionTable.put(CreateTextInputAction(element),Action.RINIT);
+                }
             }
         }
         return actionTable;

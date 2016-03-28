@@ -58,6 +58,6 @@ public abstract class Action {
 
     @Override
     public String toString() {
-        return getClass().getName() + "[name=" + name + "]";
+        return "[Action] ";
     }
 }

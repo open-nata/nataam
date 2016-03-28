@@ -31,9 +31,15 @@ public abstract class AbstractMonkey {
     }
 
     public String getPkgAct() {
-        String pkgAct = this.getPkg() + "/" + this.getAct();
+        String pkgAct = this.pkg + "/" + this.act;
         return pkgAct;
     }
+
+    public void clearAppData(){
+       device.clearAppData(pkg);
+    }
+
+
 
 
     public State getCurrentState() {
@@ -98,13 +104,9 @@ public abstract class AbstractMonkey {
         return false;
     }
 
-    public void Tap(Element element) {
-        device.tap(element.getX(), element.getY());
-    }
-
-    public void SleepShort() {
-        device.sleep(500);
-    }
+//    public void SleepShort() {
+//        device.sleep(500);
+//    }
 
     public String getName() {
         return name;

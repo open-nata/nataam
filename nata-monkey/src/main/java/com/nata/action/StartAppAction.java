@@ -18,13 +18,44 @@ public class StartAppAction extends Action{
     @Override
     public void fire() {
         device.startActivity(pkgAct);
+        device.sleep(2000);
         count++;
     }
 
     @Override
     public String toString() {
-        return "StartAppAction{" +
+        return super.toString()+"StartAppAction{" +
                 "pkgAct='" + pkgAct + '\'' +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + pkgAct.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+
+        if (otherObject == null) {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass()) {
+            return false;
+        }
+
+        StartAppAction other = (StartAppAction) otherObject;
+
+        if(!pkgAct.equals(other.pkgAct)){
+            return false;
+        }
+
+        return true;
     }
 }

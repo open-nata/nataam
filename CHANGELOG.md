@@ -40,3 +40,5 @@
 - Applying QLearning Algorithm to Monkey
 - Add QLMRunner to run QLearningMonkey
 - Make every action to record its own executing times and give its own reward
+- Add hashCode function and equals function to every action and element ,UINode
+- clear app data when start the app

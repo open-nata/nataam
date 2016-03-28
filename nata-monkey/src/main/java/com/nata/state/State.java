@@ -81,10 +81,9 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
+        return "[State]@" +hashCode() +"{" +
                 "appPackage='" + appPackage + '\'' +
-                ", activity='" + activity + '\'' +
-                ", uiList=" + uiList +
+                ", activity='" + activity +
                 '}';
     }
 }

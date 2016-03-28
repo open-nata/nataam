@@ -3,6 +3,7 @@ package com.nata.monkeys;
 import com.nata.action.Action;
 import com.nata.action.ActionFactory;
 import com.nata.action.BackAction;
+import com.nata.action.SwipeAction;
 import com.nata.cmd.AdbDevice;
 import com.nata.state.State;
 
@@ -29,7 +30,9 @@ public class QLearningMonkey extends AbstractMonkey {
     //final variables
     private final int ACTION_COUNTS = 1000;
     private final double GAMA= 0.7;
-    private final double REWARD_OUT_PACKAGE = -10;
+    private final double REWARD_OUT_PACKAGE = -10.0;
+    private final double REWARD_SWIPE_NOTWORK= - 0.1;
+
 
     public QLearningMonkey(String pkg, String act, AdbDevice device) {
         super("randomMonkey", pkg, act, device);
@@ -53,10 +56,17 @@ public class QLearningMonkey extends AbstractMonkey {
 
     private double getRewardFromExperience(State curState,Action action, State nextState){
         double reward = 0.0;
-        // not encourage to run out of package
+        // punish to run out of package
         if(!nextState.getAppPackage().equals(getPkg())){
              reward += REWARD_OUT_PACKAGE;
         }
+
+        // if the swipe action makes the state not change then give punish
+        if(action instanceof SwipeAction && curState.equals(nextState)){
+             reward += REWARD_SWIPE_NOTWORK;
+        }
+
+        // the action reward
         reward += action.getReward();
         return reward;
     }
@@ -84,7 +94,10 @@ public class QLearningMonkey extends AbstractMonkey {
     @Override
     public void play() {
         System.out.println("QLearning Monkey start playing...");
+        clearAppData();
+        System.out.println("cleaning app data...");
         restartAction.fire();
+        System.out.println("starting app success...");
 
         // initial state
         State curState = getCurrentState();
@@ -109,27 +122,32 @@ public class QLearningMonkey extends AbstractMonkey {
                 }
             }else{
                 Map<Action, Double> actionTable = QMap.get(curState);
+                System.out.println("[ActionList] " +actionTable);
                 action = chooseActionFromTable(actionTable);
             }
 
             //execute
             System.out.println(action);
             action.fire();
+            lastAction = action;
 
             //update
             State nextState = getCurrentState();
             System.out.println(nextState);
 
+            //add to activitySet
             if(isInCurrentPkg()){
                 activitySet.add(nextState.getActivity());
             }
 
             if (QMap.get(nextState) == null) {
                 Map<Action, Double> table = actionFactory.getActionsFromState(nextState);
-                QMap.put(curState, table);
+                QMap.put(nextState, table);
             }
             updateValue(curState,action,nextState);
             curState = nextState;
+
+            System.out.println("---------------------------[Experience]---------------------------");
         }
     }
 

@@ -29,9 +29,40 @@ public class SwipeAction extends Action {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + direction.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+
+        if (otherObject == null) {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass()) {
+            return false;
+        }
+
+        SwipeAction other = (SwipeAction) otherObject;
+
+        if(!direction.equals(other.direction)){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "SwipeAction{" +
+        return super.toString()+"SwipeAction{" +
                 "direction=" + direction +
                 '}';
     }
+
+
 }

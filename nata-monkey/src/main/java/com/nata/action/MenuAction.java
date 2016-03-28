@@ -22,6 +22,6 @@ public class MenuAction extends Action{
 
     @Override
     public String toString() {
-        return "MenuAction";
+        return super.toString()+"MenuAction";
     }
 }

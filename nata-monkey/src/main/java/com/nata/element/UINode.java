@@ -175,4 +175,37 @@ public class UINode {
                 ", selected='" + selected + '\'' +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + packageName.hashCode();
+        hash = 31 * hash + resourceId.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+
+        if (otherObject == null) {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass()) {
+            return false;
+        }
+
+        UINode other = (UINode) otherObject;
+        if(!packageName.equals(other.packageName)){
+            return false;
+        }
+        if(!resourceId.equals(other.resourceId)){
+            return false;
+        }
+
+        return true;
+    }
 }

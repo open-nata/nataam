@@ -138,10 +138,10 @@ public class RandomMonkey extends AbstractMonkey {
                 Action action = null;
                 switch (nodeAction.getAction()) {
                     case ActionType.INPUT:
-                        action = new TextInputAction(getDevice(),new Element(nodeAction.getNode().getBounds()));
+                        action = new TextInputAction(getDevice(),new Element(nodeAction.getNode()));
                         break;
                     case ActionType.TAP:
-                        action = new TapAction( getDevice(),new Element(nodeAction.getNode().getBounds()));
+                        action = new TapAction( getDevice(),new Element(nodeAction.getNode()));
                         break;
                 }
                 return action;

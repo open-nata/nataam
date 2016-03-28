@@ -26,8 +26,38 @@ public class TapAction extends Action{
 
     @Override
     public String toString() {
-        return "TapAction{" +
+        return super.toString()+"TapAction{" +
                 "element=" + element +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + element.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+
+        if (otherObject == null) {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass()) {
+            return false;
+        }
+
+        TapAction other = (TapAction) otherObject;
+
+        if(!element.equals(other.element)){
+            return false;
+        }
+
+        return true;
     }
 }

@@ -17,4 +17,7 @@ public class AndroidKeyCode {
     public static int ENTER = 66;
     public static  int MOVE_HOME = 122;
     public static int MOVE_END = 123;
+    public static int CLEAR = 28;
+    public static int HIDE_KEYBOARD = 111;
+
 }

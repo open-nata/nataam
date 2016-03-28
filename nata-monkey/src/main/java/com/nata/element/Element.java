@@ -13,13 +13,11 @@ public class Element {
 //    private Activity activity;
     private int X;
     private int Y;
+    private String description = "Element";
 
-    public Element(int x,int y){
-        this.X = x;
-        this.Y = y;
-    }
-
-    public Element(String bounds){
+    public Element(UINode node){
+        description = node.getClassName()+" " +" " +node.getResourceId()+" " + node.getText();
+        String bounds = node.getBounds();
         Pattern pattern = Pattern.compile("([0-9]+)");
         Matcher mat = pattern.matcher(bounds);
         ArrayList<Integer> coords = new ArrayList<Integer>();
@@ -43,22 +41,52 @@ public class Element {
         return "Element{" +
                 "X=" + X +
                 ", Y=" + Y +
+                ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + X;
+        hash = 31 * hash + Y;
+        hash = 31 * hash + description.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+
+        if (otherObject == null) {
+            return false;
+        }
+
+        if (getClass() != otherObject.getClass()) {
+            return false;
+        }
+
+        Element other = (Element) otherObject;
+        if(X!= other.X){
+            return false;
+        }
+        if(Y!= other.Y){
+            return false;
+        }
+        if(!description.equals(other.description)){
+            return false;
+        }
+
+        return true;
     }
 
     public int getX() {
         return X;
     }
 
-    public void setX(int x) {
-        X = x;
-    }
-
     public int getY() {
         return Y;
-    }
-
-    public void setY(int y) {
-        Y = y;
     }
 }
