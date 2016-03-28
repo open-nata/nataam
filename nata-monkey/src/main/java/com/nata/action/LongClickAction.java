@@ -21,6 +21,7 @@ public class LongClickAction extends Action{
     @Override
     public void fire() {
         device.longPress(element.getX(),element.getY());
+        count++;
     }
 
 

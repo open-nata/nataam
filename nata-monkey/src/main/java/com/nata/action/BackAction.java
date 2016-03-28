@@ -17,6 +17,7 @@ public class BackAction extends Action{
     @Override
     public void fire() {
         device.sendKeyEvent(AndroidKeyCode.BACK);
+        count++;
     }
 
     @Override

@@ -45,9 +45,9 @@ public class AdbDevice {
      * Run uiautomator dump and pull the uidump.xml to temp file
      */
     public File dumpUI() {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        String tempDumpfile = tempDir + "dumps/dumpfile.xml";
-        System.out.println(tempDumpfile);
+        String tempDir = System.getProperty("user.dir");
+        String tempDumpfile = tempDir + "/dumps/dumpfile.xml";
+//        System.out.println(tempDumpfile);
 
         String output = ShellKit.adbShell("su", "-c", "uiautomator", "dump", DUMP_FILE_LOCATION);
 

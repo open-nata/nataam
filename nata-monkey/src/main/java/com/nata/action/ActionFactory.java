@@ -16,22 +16,17 @@ import java.util.Set;
  */
 public class ActionFactory {
     private AdbDevice device = null;
-    private Action backAction = null;
-    private Action menuAction = null;
-    private final double RINIT= 2.0;
 
     public ActionFactory(AdbDevice device) {
         this.device = device;
-        backAction = new BackAction(device);
-        menuAction = new MenuAction(device);
     }
 
-    public Action getBackAction(){
-        return backAction;
+    public Action createBackAction(){
+        return new BackAction(device);
     }
 
-    public Action getMenuAction(){
-        return menuAction;
+    public Action createMenuAction(){
+        return  new MenuAction(device);
     }
 
     public Action CreateRestartAction(String pkgAct){
@@ -58,8 +53,8 @@ public class ActionFactory {
     public Map<Action,Double> getActionsFromState(State state){
         Map<Action,Double> actionTable = new HashMap<>();
         //add the actions which all states share;
-        actionTable.put(backAction,RINIT);
-        actionTable.put(menuAction,RINIT);
+        actionTable.put(createBackAction(),Action.RINIT);
+        actionTable.put(createMenuAction(),Action.RINIT);
         Set<UINode> uiList = state.getUIList();
         for(UINode node : uiList){
             //if not enabled, discard
@@ -69,28 +64,28 @@ public class ActionFactory {
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(node.getScrollable().equals("true")){
-                actionTable.put(CreateSwipeAction(SwipeDirection.RIGHT),RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.LEFT),RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.DOWN),RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.UP),RINIT);
+                actionTable.put(CreateSwipeAction(SwipeDirection.RIGHT),Action.RINIT);
+                actionTable.put(CreateSwipeAction(SwipeDirection.LEFT),Action.RINIT);
+                actionTable.put(CreateSwipeAction(SwipeDirection.DOWN),Action.RINIT);
+                actionTable.put(CreateSwipeAction(SwipeDirection.UP),Action.RINIT);
             }
 
             //click button actions
             if( node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true") ){
                 Element element = new Element(node.getBounds());
-                actionTable.put(CreateTapAction(element),RINIT);
+                actionTable.put(CreateTapAction(element),Action.RINIT);
             }
 
             //long click actions
             if(node.getLong_clickable().equals("true")){
                 Element element = new Element(node.getBounds());
-                actionTable.put(CreateLongClickAction(element),RINIT);
+                actionTable.put(CreateLongClickAction(element),Action.RINIT);
             }
 
             //text input actions, can't get password from the text attribute
             if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
                 Element element = new Element(node.getBounds());
-                actionTable.put(CreateTextInputAction(element),RINIT);
+                actionTable.put(CreateTextInputAction(element),Action.RINIT);
             }
         }
         return actionTable;

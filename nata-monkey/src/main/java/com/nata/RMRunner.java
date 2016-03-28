@@ -8,7 +8,7 @@ import com.nata.monkeys.RandomMonkey;
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-01-19 16:15
  */
-public class AMRunner {
+public class RMRunner {
     public static void main(String[] args) {
         //Info about the apk to test
         String pkg = "com.zhihu.android";

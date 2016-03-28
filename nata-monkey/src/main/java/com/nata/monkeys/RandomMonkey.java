@@ -31,8 +31,7 @@ public class RandomMonkey extends AbstractMonkey {
         super("randomMonkey", pkg, act, device);
         actionFactory = new ActionFactory(device);
         restartAction = actionFactory.CreateRestartAction(getPkgAct());
-        backAction = actionFactory.getBackAction();
-        menuAction = actionFactory.getMenuAction();
+        backAction = actionFactory.createBackAction();
     }
 
 

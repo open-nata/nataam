@@ -20,6 +20,7 @@ public class TapAction extends Action{
     @Override
     public void fire() {
         device.tap(element.getX(),element.getY());
+        count++;
     }
 
 

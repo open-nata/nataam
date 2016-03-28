@@ -22,6 +22,7 @@ public class TextInputAction extends Action{
     public void fire() {
         device.tap(element.getX(),element.getY());
         device.sendText(TextValueDictionary.getRandomValidValue());
+        count++;
     }
 
 

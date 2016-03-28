@@ -11,10 +11,20 @@ import java.util.Objects;
  */
 public abstract class Action {
     private String name = null;
+    protected int count = 0;
+    public static final double RINIT= 2.0;
 
 
     public Action() {
         this.name = ActionType.UNKNOWN;
+    }
+
+    public double getReward(){
+        if(count == 0){
+            return RINIT;
+        }else{
+            return 1.0/count;
+        }
     }
 
     protected void setName(String name){

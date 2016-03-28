@@ -25,5 +25,13 @@ public class SwipeAction extends Action {
             case LEFT:device.swipeToLeft();break;
             case RIGHT:device.swipeToRight();break;
         }
+        count++;
+    }
+
+    @Override
+    public String toString() {
+        return "SwipeAction{" +
+                "direction=" + direction +
+                '}';
     }
 }

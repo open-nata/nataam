@@ -38,7 +38,8 @@ public abstract class AbstractMonkey {
 
     public State getCurrentState() {
         String curActivity = getCurrentActivity();
-        State state = new State(curActivity);
+        String appPackage  = getCurrentPackage();
+        State state = new State(appPackage,curActivity);
         List<UINode> uiNodes = GrabCurrentUi();
 
 
@@ -50,6 +51,10 @@ public abstract class AbstractMonkey {
         }
 
         return state;
+    }
+
+    public String getCurrentPackage(){
+        return device.getCurrentPackageName();
     }
 
     public String getCurrentActivity(){
@@ -71,9 +76,9 @@ public abstract class AbstractMonkey {
         File dumpFile = device.dumpUI();
         try {
             List<UINode> list = DumpService.getNodes(dumpFile);
-            for (UINode node : list) {
-                System.out.println(node);
-            }
+//            for (UINode node : list) {
+//                System.out.println(node);
+//            }
             return list;
         } catch (DocumentException e) {
             e.printStackTrace();

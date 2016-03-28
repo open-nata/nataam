@@ -18,6 +18,13 @@ public class StartAppAction extends Action{
     @Override
     public void fire() {
         device.startActivity(pkgAct);
-        device.sleep(2000);
+        count++;
+    }
+
+    @Override
+    public String toString() {
+        return "StartAppAction{" +
+                "pkgAct='" + pkgAct + '\'' +
+                '}';
     }
 }

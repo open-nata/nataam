@@ -10,11 +10,21 @@ import java.util.*;
  * Update: 2016-03-24 15:17
  */
 public class State {
+    private String appPackage = null;
     private String activity = null;
     private Set<UINode> uiList = new HashSet<>();
 
-    public State(String activity) {
+    public State(String appPackage,String activity) {
+        this.appPackage = appPackage;
         this.activity = activity;
+    }
+
+    public String getAppPackage(){
+        return  appPackage;
+    }
+
+    public String getActivity(){
+        return activity;
     }
 
     public void addUINode(UINode node) {
@@ -28,6 +38,7 @@ public class State {
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + appPackage.hashCode();
         hash = 31 * hash + activity.hashCode();
         for (UINode node : uiList) {
             hash = 31 * hash + node.hashCode();
@@ -50,6 +61,9 @@ public class State {
         }
 
         State other = (State) otherObject;
+        if(!appPackage.equals(other.appPackage)){
+            return false;
+        }
         if(!activity.equals(other.activity)){
            return false;
         }
@@ -65,4 +79,12 @@ public class State {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "State{" +
+                "appPackage='" + appPackage + '\'' +
+                ", activity='" + activity + '\'' +
+                ", uiList=" + uiList +
+                '}';
+    }
 }

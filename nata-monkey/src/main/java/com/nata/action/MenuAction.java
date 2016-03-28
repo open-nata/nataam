@@ -17,6 +17,7 @@ public class MenuAction extends Action{
     @Override
     public void fire() {
         device.sendKeyEvent(AndroidKeyCode.MENU);
+        count++;
     }
 
     @Override

@@ -35,3 +35,8 @@
 - Add State Class to record States
 - Add LongClick Action
 - Add QLearningMonkey Class
+
+### (2016/3/28)
+- Applying QLearning Algorithm to Monkey
+- Add QLMRunner to run QLearningMonkey
+- Make every action to record its own executing times and give its own reward
