@@ -20,6 +20,14 @@ public class TextInputAction extends Action{
         this.text = TextValueDictionary.getRandomValidValue();
     }
 
+    public Element getElement(){
+        return element;
+    }
+
+    public void setText(String text){
+        this.text = text;
+    }
+
     @Override
     public void fire() {
         device.tap(element.getX(),element.getY());

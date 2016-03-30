@@ -5,12 +5,10 @@ import com.nata.action.ActionFactory;
 import com.nata.action.BackAction;
 import com.nata.action.SwipeAction;
 import com.nata.cmd.AdbDevice;
+import com.nata.element.UINode;
 import com.nata.state.State;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Author: Calvin Meng
@@ -24,18 +22,19 @@ public class QLearningMonkey extends AbstractMonkey {
     // <state,action,value>
     private Map<State, Map<Action, Double>> QMap = new HashMap<>();
     private Set<String> activitySet =  new HashSet<>();
+    private List<Action> actionList = new ArrayList<>();
     private Action lastAction = null;
     private Action backAction = null;
 
     //final variables
-    private final int ACTION_COUNTS = 1000;
+    private final int ACTION_COUNTS = 50;
     private final double GAMA= 0.7;
-    private final double REWARD_OUT_PACKAGE = -10.0;
-    private final double REWARD_SWIPE_NOTWORK= - 0.1;
+    private final double PUNISH_OUT_PACKAGE = -10.0;
+    private final double PUNISH_SWIPE_NOTWORK= - 0.5;
 
 
     public QLearningMonkey(String pkg, String act, AdbDevice device) {
-        super("randomMonkey", pkg, act, device);
+        super("QLearningMonkey", pkg, act, device);
         actionFactory = new ActionFactory(device);
         restartAction = actionFactory.CreateRestartAction(getPkgAct());
         backAction = actionFactory.createBackAction();
@@ -58,12 +57,12 @@ public class QLearningMonkey extends AbstractMonkey {
         double reward = 0.0;
         // punish to run out of package
         if(!nextState.getAppPackage().equals(getPkg())){
-             reward += REWARD_OUT_PACKAGE;
+             reward += PUNISH_OUT_PACKAGE;
         }
 
         // if the swipe action makes the state not change then give punish
         if(action instanceof SwipeAction && curState.equals(nextState)){
-             reward += REWARD_SWIPE_NOTWORK;
+             reward += PUNISH_SWIPE_NOTWORK;
         }
 
         // the action reward
@@ -97,6 +96,7 @@ public class QLearningMonkey extends AbstractMonkey {
         clearAppData();
         System.out.println("cleaning app data...");
         restartAction.fire();
+        actionList.add(restartAction);
         System.out.println("starting app success...");
 
         // initial state
@@ -126,9 +126,13 @@ public class QLearningMonkey extends AbstractMonkey {
                 action = chooseActionFromTable(actionTable);
             }
 
+            //check if monkey can use his knowledge and change the action
+            brainStorm(action);
+
             //execute
             System.out.println(action);
             action.fire();
+            actionList.add(action);
             lastAction = action;
 
             //update
@@ -159,9 +163,24 @@ public class QLearningMonkey extends AbstractMonkey {
     @Override
     public void report() {
         //report the activities reached
-        System.out.println("activities reached: ");
+        System.out.println("--------------------[Activities report]--------------------");
         for (String activity: activitySet) {
            System.out.println(activity);
+        }
+
+        System.out.println("--------------------[Action report]--------------------");
+        int actionCount = actionList.size();
+        System.out.println("Actions count: "+actionCount);
+        for (Action action: actionList) {
+            System.out.println(action);
+        }
+
+        System.out.println("--------------------[Widget report]--------------------");
+        Set<UINode> widgetSet = getWidgetSet();
+        int widgetCount= widgetSet.size();
+        System.out.println("Widget count: "+widgetCount);
+        for (UINode node: widgetSet) {
+            System.out.println(node);
         }
     }
 }

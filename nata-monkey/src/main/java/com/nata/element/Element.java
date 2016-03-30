@@ -13,10 +13,15 @@ public class Element {
 //    private Activity activity;
     private int X;
     private int Y;
-    private String description = "Element";
+    private String className;
+    private String resourceId;
+    private String text;
 
     public Element(UINode node){
-        description = node.getClassName()+" " +" " +node.getResourceId()+" " + node.getText();
+        this.className = node.getClassName();
+        this.resourceId = node.getResourceId();
+        this.text = node.getText();
+
         String bounds = node.getBounds();
         Pattern pattern = Pattern.compile("([0-9]+)");
         Matcher mat = pattern.matcher(bounds);
@@ -38,6 +43,7 @@ public class Element {
 
     @Override
     public String toString() {
+        String description = className + " " + resourceId +" " + text;
         return "Element{" +
                 "X=" + X +
                 ", Y=" + Y +
@@ -50,7 +56,10 @@ public class Element {
         int hash = 17;
         hash = 31 * hash + X;
         hash = 31 * hash + Y;
-        hash = 31 * hash + description.hashCode();
+        hash = 31 * hash + className.hashCode();
+        hash = 31 * hash + resourceId.hashCode();
+        hash = 31 * hash + text.hashCode();
+
         return hash;
     }
 
@@ -75,11 +84,29 @@ public class Element {
         if(Y!= other.Y){
             return false;
         }
-        if(!description.equals(other.description)){
+        if(!resourceId.equals(other.resourceId)){
+            return false;
+        }
+        if(!className.equals(other.className)){
+            return false;
+        }
+        if(!text.equals(other.text)){
             return false;
         }
 
         return true;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public int getX() {

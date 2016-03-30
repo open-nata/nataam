@@ -181,6 +181,7 @@ public class UINode {
         int hash = 17;
         hash = 31 * hash + packageName.hashCode();
         hash = 31 * hash + resourceId.hashCode();
+        hash = 31 * hash + className.hashCode();
         return hash;
     }
 
@@ -203,6 +204,9 @@ public class UINode {
             return false;
         }
         if(!resourceId.equals(other.resourceId)){
+            return false;
+        }
+        if(!className.equals(other.className)){
             return false;
         }
 

@@ -42,3 +42,8 @@
 - Make every action to record its own executing times and give its own reward
 - Add hashCode function and equals function to every action and element ,UINode
 - clear app data when start the app
+
+### (2016/3/30)
+- Add JSONparser using fastjson
+- Add resource Rule
+- Add knowledge to monkey so that it can learn from rules and check knowledge after choose action and change the action behavior

@@ -1,0 +1,7 @@
+{
+  "type": "resource",
+  "rules": [
+    {"resouceId":"com.zhihu.android:id/password","value": "mcl896345253"},
+    {"resouceId":"com.zhihu.android:id/username","value": "15996270647"},
+  ]
+}

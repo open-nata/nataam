@@ -52,8 +52,8 @@ public class ActionFactory {
 
     public Map<Action,Double> getActionsFromState(State state){
         Map<Action,Double> actionTable = new HashMap<>();
-        //add the actions which all states share;
         actionTable.put(createBackAction(),Action.RINIT);
+
 //        actionTable.put(createMenuAction(),Action.RINIT);
         Set<UINode> uiList = state.getUIList();
         for(UINode node : uiList){
@@ -82,7 +82,8 @@ public class ActionFactory {
                 actionTable.put(CreateLongClickAction(element),Action.RINIT);
             }
 
-            //text input actions, can't get password from the text attribute
+            //text input actions
+            //TODO: can't get password from the text attribute
             if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
                 if(node.getText().equals("")){
                     Element element = new Element(node);
