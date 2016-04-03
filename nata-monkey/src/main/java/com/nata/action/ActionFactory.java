@@ -52,7 +52,8 @@ public class ActionFactory {
 
     public Map<Action,Double> getActionsFromState(State state){
         Map<Action,Double> actionTable = new HashMap<>();
-        actionTable.put(createBackAction(),Action.RINIT);
+        Action backAction= createBackAction();
+        actionTable.put(backAction,backAction.getReward());
 
 //        actionTable.put(createMenuAction(),Action.RINIT);
         Set<UINode> uiList = state.getUIList();
@@ -64,22 +65,31 @@ public class ActionFactory {
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(node.getScrollable().equals("true")){
-                actionTable.put(CreateSwipeAction(SwipeDirection.RIGHT),Action.RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.LEFT),Action.RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.DOWN),Action.RINIT);
-                actionTable.put(CreateSwipeAction(SwipeDirection.UP),Action.RINIT);
+                Action swipeAction = CreateSwipeAction(SwipeDirection.RIGHT);
+                actionTable.put(swipeAction,swipeAction.getReward());
+
+                swipeAction = CreateSwipeAction(SwipeDirection.LEFT);
+                actionTable.put(swipeAction,swipeAction.getReward());
+
+                swipeAction = CreateSwipeAction(SwipeDirection.DOWN);
+                actionTable.put(swipeAction,swipeAction.getReward());
+
+                swipeAction = CreateSwipeAction(SwipeDirection.UP);
+                actionTable.put(swipeAction,swipeAction.getReward());
             }
 
             //click button actions
             if( node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true") ){
                 Element element = new Element(node);
-                actionTable.put(CreateTapAction(element),Action.RINIT);
+                Action tapAction  = CreateTapAction(element);
+                actionTable.put(tapAction,tapAction.getReward());
             }
 
             //long click actions
             if(node.getLong_clickable().equals("true")){
                 Element element = new Element(node);
-                actionTable.put(CreateLongClickAction(element),Action.RINIT);
+                Action longClickAction = CreateLongClickAction(element);
+                actionTable.put(longClickAction,longClickAction.getReward());
             }
 
             //text input actions
@@ -87,7 +97,8 @@ public class ActionFactory {
             if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
                 if(node.getText().equals("")){
                     Element element = new Element(node);
-                    actionTable.put(CreateTextInputAction(element),Action.RINIT);
+                    Action textInputAction = CreateTextInputAction(element);
+                    actionTable.put(textInputAction,textInputAction.getReward());
                 }
             }
         }

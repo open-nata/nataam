@@ -1,7 +1,5 @@
 package com.nata.action;
 
-import com.nata.element.Element;
-
 import java.util.Objects;
 
 /**
@@ -12,7 +10,7 @@ import java.util.Objects;
 public abstract class Action {
     private String name = null;
     protected int count = 0;
-    public static final double RINIT= 2.0;
+    private final double RINIT= 2.0;
 
 
     public Action() {

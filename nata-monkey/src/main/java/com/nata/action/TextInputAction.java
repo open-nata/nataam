@@ -30,7 +30,7 @@ public class TextInputAction extends Action{
 
     @Override
     public void fire() {
-        device.tap(element.getX(),element.getY());
+        device.longPress(element.getX(),element.getY());
         device.sendText(text);
         device.hideSoftKeyBoard();
         count++;

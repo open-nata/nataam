@@ -10,10 +10,23 @@ import com.nata.cmd.AdbDevice;
  */
 public class BackAction extends Action{
     private AdbDevice device = null;
+    private final double BackActionReward = 1.0;
     public BackAction(AdbDevice device){
         super.setName(ActionType.BACK);
         this.device = device;
     }
+
+    // set backAction's reward to be less than normal actions;
+    @Override
+    public double getReward(){
+        if(count == 0){
+            return BackActionReward;
+        }else{
+            return 1.0/count;
+        }
+    }
+
+
     @Override
     public void fire() {
         device.sendKeyEvent(AndroidKeyCode.BACK);

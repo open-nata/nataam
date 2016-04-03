@@ -182,5 +182,12 @@ public class QLearningMonkey extends AbstractMonkey {
         for (UINode node: widgetSet) {
             System.out.println(node);
         }
+
+        System.out.println("--------------------[State report]--------------------");
+        int stateCount = QMap.size();
+        System.out.println("State count: "+stateCount);
+        for (State state: QMap.keySet()) {
+            System.out.println(state);
+        }
     }
 }

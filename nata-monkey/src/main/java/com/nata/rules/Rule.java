@@ -8,6 +8,15 @@ package com.nata.rules;
 public class Rule {
     private String resouceId;
     private String value;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getResouceId() {
         return resouceId;

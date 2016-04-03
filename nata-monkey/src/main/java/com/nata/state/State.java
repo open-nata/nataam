@@ -83,7 +83,8 @@ public class State {
     public String toString() {
         return "[State]@" +hashCode() +"{" +
                 "appPackage='" + appPackage + '\'' +
-                ", activity='" + activity +
+                ", activity='" + activity + '\'' +
+                ",uiList='" + uiList +
                 '}';
     }
 }

@@ -47,3 +47,5 @@
 - Add JSONparser using fastjson
 - Add resource Rule
 - Add knowledge to monkey so that it can learn from rules and check knowledge after choose action and change the action behavior
+- Remove useless Strategy class
+- change backAction Reward to be small

@@ -19,6 +19,9 @@ public class QLMRunner {
         AdbDevice device = new AdbDevice();
         AbstractMonkey qLearningMonkey= new QLearningMonkey(pkg,act,device);
 
+        // learn rules
+        qLearningMonkey.learn("rules/zhihu.json");
+
         //Start run monkey
         qLearningMonkey.play();
 
