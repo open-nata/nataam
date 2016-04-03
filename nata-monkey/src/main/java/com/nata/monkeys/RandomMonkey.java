@@ -2,7 +2,7 @@ package com.nata.monkeys;
 
 import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
-import com.nata.element.Element;
+import com.nata.element.Widget;
 import com.nata.element.UINode;
 
 import java.util.ArrayList;
@@ -138,10 +138,10 @@ public class RandomMonkey extends AbstractMonkey {
                 Action action = null;
                 switch (nodeAction.getAction()) {
                     case ActionType.INPUT:
-                        action = new TextInputAction(getDevice(),new Element(nodeAction.getNode()));
+                        action = new TextInputAction(getDevice(),new Widget(nodeAction.getNode()));
                         break;
                     case ActionType.TAP:
-                        action = new TapAction( getDevice(),new Element(nodeAction.getNode()));
+                        action = new TapAction( getDevice(),new Widget(nodeAction.getNode()));
                         break;
                 }
                 return action;

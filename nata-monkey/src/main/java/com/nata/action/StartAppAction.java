@@ -10,16 +10,23 @@ import com.nata.cmd.AdbDevice;
 public class StartAppAction extends Action{
     private AdbDevice device = null;
     private String pkgAct = null;
+
     public StartAppAction(AdbDevice device, String pkgAct){
-        super.setName(ActionType.STARTAPP);
+        super(ActionType.START_APP);
         this.device = device;
         this.pkgAct = pkgAct;
     }
+
     @Override
     public void fire() {
         device.startActivity(pkgAct);
         device.sleep(2000);
         count++;
+    }
+
+    @Override
+    public double getReward() {
+        return 0;
     }
 
     @Override

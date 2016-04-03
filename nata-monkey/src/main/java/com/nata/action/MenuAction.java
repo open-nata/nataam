@@ -10,14 +10,26 @@ import com.nata.cmd.AdbDevice;
  */
 public class MenuAction extends Action{
     private AdbDevice device = null;
+    private final double MENU_REWARD = BASE - 0.1;
+
+
     public MenuAction(AdbDevice device){
-        super.setName(ActionType.MENU);
+        super(ActionType.MENU);
         this.device = device;
     }
     @Override
     public void fire() {
         device.sendKeyEvent(AndroidKeyCode.MENU);
         count++;
+    }
+
+    @Override
+    public double getReward() {
+        if(count == 0){
+            return MENU_REWARD;
+        }else{
+            return 1.0/count;
+        }
     }
 
     @Override

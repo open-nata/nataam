@@ -2,7 +2,7 @@ package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
 import com.nata.dictionary.TextValueDictionary;
-import com.nata.element.Element;
+import com.nata.element.Widget;
 
 /**
  * Author: Calvin Meng
@@ -11,17 +11,19 @@ import com.nata.element.Element;
  */
 public class TextInputAction extends Action{
     private AdbDevice device = null;
-    private Element element = null;
+    private Widget widget = null;
     private String text = null;
-    public TextInputAction(AdbDevice device,Element element){
-        super.setName(ActionType.INPUT);
+    private final double TEXT_INPUT_REWARD = BASE + 0.5;
+
+    public TextInputAction(AdbDevice device,Widget widget){
+        super(ActionType.INPUT);
         this.device = device;
-        this.element = element;
+        this.widget = widget;
         this.text = TextValueDictionary.getRandomValidValue();
     }
 
-    public Element getElement(){
-        return element;
+    public Widget getWidget(){
+        return widget;
     }
 
     public void setText(String text){
@@ -30,24 +32,30 @@ public class TextInputAction extends Action{
 
     @Override
     public void fire() {
-        device.longPress(element.getX(),element.getY());
+        device.longPress(widget.getX(), widget.getY());
         device.sendText(text);
         device.hideSoftKeyBoard();
         count++;
     }
 
     @Override
+    public double getReward() {
+        if(count == 0){
+            return TEXT_INPUT_REWARD;
+        }else{
+            return 1.0/count;
+        }
+    }
+
+    @Override
     public String toString() {
-        return "TextInputAction{" +
-                "element=" + element +
-                ", text='" + text + '\'' +
-                '}';
+        return super.toString()+" @"+widget + " :" + text;
     }
 
     @Override
     public int hashCode() {
         int hash = 17;
-        hash = 31 * hash + element.hashCode();
+        hash = 31 * hash + widget.hashCode();
         hash = 31 * hash + text.hashCode();
         return hash;
     }
@@ -68,7 +76,7 @@ public class TextInputAction extends Action{
 
         TextInputAction other = (TextInputAction) otherObject;
 
-        if(!element.equals(other.element)){
+        if(!widget.equals(other.widget)){
             return false;
         }
 

@@ -40,7 +40,7 @@
 - Applying QLearning Algorithm to Monkey
 - Add QLMRunner to run QLearningMonkey
 - Make every action to record its own executing times and give its own reward
-- Add hashCode function and equals function to every action and element ,UINode
+- Add hashCode function and equals function to every action and widget ,UINode
 - clear app data when start the app
 
 ### (2016/3/30)
@@ -49,3 +49,11 @@
 - Add knowledge to monkey so that it can learn from rules and check knowledge after choose action and change the action behavior
 - Remove useless Strategy class
 - change backAction Reward to be small
+
+### (2016/4/3)
+- Make action getReward function abstract, different actions should have different reward
+- Rewrite Action toString function 
+- Add Enum Rule 
+- Add KeyValue Rule
+- Add SetUpRule
+- Add subState

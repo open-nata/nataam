@@ -1,7 +1,7 @@
 package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
-import com.nata.element.Element;
+import com.nata.element.Widget;
 
 /**
  * Author: Calvin Meng
@@ -10,31 +10,39 @@ import com.nata.element.Element;
  */
 public class TapAction extends Action{
     private AdbDevice device = null;
-    private Element element = null;
-    public TapAction(AdbDevice device,Element element){
-        super.setName(ActionType.TAP);
+    private Widget widget = null;
+    private final double TAP_REWARD = BASE + 0.4;
+    public TapAction(AdbDevice device,Widget widget){
+        super(ActionType.TAP);
         this.device = device;
-        this.element = element;
+        this.widget = widget;
     }
 
     @Override
     public void fire() {
-        device.tap(element.getX(),element.getY());
+        device.tap(widget.getX(), widget.getY());
         count++;
+    }
+
+    @Override
+    public double getReward() {
+        if(count == 0){
+            return TAP_REWARD;
+        }else{
+            return 1.0/count;
+        }
     }
 
 
     @Override
     public String toString() {
-        return super.toString()+"TapAction{" +
-                "element=" + element +
-                '}';
+        return super.toString()+"@"+widget;
     }
 
     @Override
     public int hashCode() {
         int hash = 17;
-        hash = 31 * hash + element.hashCode();
+        hash = 31 * hash + widget.hashCode();
         return hash;
     }
 
@@ -54,7 +62,7 @@ public class TapAction extends Action{
 
         TapAction other = (TapAction) otherObject;
 
-        if(!element.equals(other.element)){
+        if(!widget.equals(other.widget)){
             return false;
         }
 

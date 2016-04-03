@@ -4,14 +4,12 @@ import com.nata.action.Action;
 import com.nata.action.TextInputAction;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.DumpService;
-import com.nata.element.Element;
 import com.nata.element.UINode;
 import com.nata.rules.Rule;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
 import com.nata.state.State;
 import org.dom4j.DocumentException;
-import org.dom4j.Text;
 import org.xml.sax.SAXException;
 
 import java.io.*;
@@ -83,13 +81,14 @@ public abstract class AbstractMonkey {
 
 
     protected List<UINode> GrabCurrentUi() {
-        //Get dump file
         File dumpFile = device.dumpUI();
         try {
             List<UINode> list = DumpService.getNodes(dumpFile);
             for (UINode node : list) {
-//                System.out.println(node);
-                widgetSet.add(node);
+                // only add the widgets in the app
+                if(node.getPackageName().equals(getPkg())){
+                    widgetSet.add(node);
+                }
             }
             return list;
         } catch (DocumentException e) {
@@ -130,7 +129,7 @@ public abstract class AbstractMonkey {
     public void brainStorm(Action action){
         if(action instanceof TextInputAction){
             TextInputAction textInputAction = (TextInputAction) action;
-            String resourceId = textInputAction.getElement().getResourceId();
+            String resourceId = textInputAction.getWidget().getResourceId();
             String value = knowledge.get(resourceId);
             if(value != null){
                 textInputAction.setText(value);

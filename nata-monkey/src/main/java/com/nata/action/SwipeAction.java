@@ -10,9 +10,10 @@ import com.nata.cmd.AdbDevice;
 public class SwipeAction extends Action {
     private AdbDevice device;
     private SwipeDirection direction;
+    private final double SWIPE_REWARD = BASE + 0.3;
 
     public SwipeAction(AdbDevice device,SwipeDirection direction) {
-        super.setName(ActionType.SWIPE);
+        super(ActionType.SWIPE);
         this.device = device;
         this.direction = direction;
     }
@@ -26,6 +27,15 @@ public class SwipeAction extends Action {
             case RIGHT:device.swipeToRight();break;
         }
         count++;
+    }
+
+    @Override
+    public double getReward() {
+        if(count == 0){
+            return SWIPE_REWARD;
+        }else{
+            return 1.0/count;
+        }
     }
 
     @Override
@@ -59,9 +69,7 @@ public class SwipeAction extends Action {
 
     @Override
     public String toString() {
-        return super.toString()+"SwipeAction{" +
-                "direction=" + direction +
-                '}';
+        return super.toString();
     }
 
 

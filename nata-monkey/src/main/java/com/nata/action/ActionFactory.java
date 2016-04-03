@@ -1,7 +1,7 @@
 package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
-import com.nata.element.Element;
+import com.nata.element.Widget;
 import com.nata.element.UINode;
 import com.nata.state.State;
 
@@ -37,16 +37,16 @@ public class ActionFactory {
         return new SwipeAction(device,direction);
     }
 
-    public Action CreateTapAction(Element element){
-        return new TapAction(device,element);
+    public Action CreateTapAction(Widget widget){
+        return new TapAction(device, widget);
     }
 
-    public Action CreateLongClickAction(Element element){
-        return new LongClickAction(device,element);
+    public Action CreateLongClickAction(Widget widget){
+        return new LongClickAction(device, widget);
     }
 
-    public Action CreateTextInputAction(Element element){
-        return new TextInputAction(device,element);
+    public Action CreateTextInputAction(Widget widget){
+        return new TextInputAction(device, widget);
     }
 
 
@@ -55,7 +55,9 @@ public class ActionFactory {
         Action backAction= createBackAction();
         actionTable.put(backAction,backAction.getReward());
 
-//        actionTable.put(createMenuAction(),Action.RINIT);
+        Action menuAction= createMenuAction();
+        actionTable.put(menuAction,menuAction.getReward());
+
         Set<UINode> uiList = state.getUIList();
         for(UINode node : uiList){
             //if not enabled, discard
@@ -80,15 +82,15 @@ public class ActionFactory {
 
             //click button actions
             if( node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true") ){
-                Element element = new Element(node);
-                Action tapAction  = CreateTapAction(element);
+                Widget widget = new Widget(node);
+                Action tapAction  = CreateTapAction(widget);
                 actionTable.put(tapAction,tapAction.getReward());
             }
 
             //long click actions
             if(node.getLong_clickable().equals("true")){
-                Element element = new Element(node);
-                Action longClickAction = CreateLongClickAction(element);
+                Widget widget = new Widget(node);
+                Action longClickAction = CreateLongClickAction(widget);
                 actionTable.put(longClickAction,longClickAction.getReward());
             }
 
@@ -96,8 +98,8 @@ public class ActionFactory {
             //TODO: can't get password from the text attribute
             if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
                 if(node.getText().equals("")){
-                    Element element = new Element(node);
-                    Action textInputAction = CreateTextInputAction(element);
+                    Widget widget = new Widget(node);
+                    Action textInputAction = CreateTextInputAction(widget);
                     actionTable.put(textInputAction,textInputAction.getReward());
                 }
             }
