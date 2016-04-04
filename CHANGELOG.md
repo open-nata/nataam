@@ -59,6 +59,8 @@
 - Add subState
 
 ### (2016/4/4)
-- move "fill Edittext" duty from AbstrctMonkey to TextInputDictionary
-- rewrite play() funciton to make it clear
-- remove UINode and keep widget too hold all the info(UINode and widget are confusing)
+- Move fill EditText duty from AbstractMonkey to TextInputDictionary
+- Rewrite play() Function to make it clear
+- Remove UINode and keep widget too hold all the info(UINode and widget are confusing)
+- Choose  max_value actions randomly
+- Make swipe action can be located to specific widget

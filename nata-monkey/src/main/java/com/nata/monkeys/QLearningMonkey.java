@@ -3,6 +3,7 @@ package com.nata.monkeys;
 import com.nata.action.Action;
 import com.nata.action.ActionFactory;
 import com.nata.action.BackAction;
+import com.nata.action.SwipeAction;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
 import com.nata.state.State;
@@ -30,9 +31,9 @@ public class QLearningMonkey extends AbstractMonkey {
     private final double ALPHA = 0.2;
     private final double GAMA = 0.2;
     private final double PUNISH_OUT_PACKAGE = -10.0;
-//    private final double PUNISH_SWIPE_NOTWORK= - 0.5;
+    private final double PUNISH_SWIPE_NOTWORK= - 2.0;
 
-    List<Action> chosenActions= new ArrayList<>();
+    List<Action> chosenActions = new ArrayList<>();
 
     public QLearningMonkey(String pkg, String act, AdbDevice device) {
         super("QLearningMonkey", pkg, act, device);
@@ -43,7 +44,7 @@ public class QLearningMonkey extends AbstractMonkey {
 
     private Action chooseActionFromState(State curState) {
         Map<Action, Double> actionTable = QMap.get(curState);
-        if(actionTable == null || actionTable.size() == 0){
+        if (actionTable == null || actionTable.size() == 0) {
             System.out.println("Error cannot get actionTable or no action can be choosed");
             return backAction;
         }
@@ -60,7 +61,7 @@ public class QLearningMonkey extends AbstractMonkey {
                 charming_max = value;
                 chosenActions.clear();
                 chosenActions.add(chosenAction);
-            }else if(Math.abs(value - charming_max) < 0.0001){ //almost equal
+            } else if (Math.abs(value - charming_max) < 0.0001) { //almost equal
                 chosenAction = entry.getKey();
                 chosenActions.add(chosenAction);
             }
@@ -77,10 +78,15 @@ public class QLearningMonkey extends AbstractMonkey {
             reward += PUNISH_OUT_PACKAGE;
         }
 
-//        // if the swipe action makes the widget not change then give punish
-//        if(action instanceof SwipeAction && curState.equals(nextState)){
-//             reward += PUNISH_SWIPE_NOTWORK;
-//        }
+        // if the swipe action makes the widget not change then give punish
+        if (action instanceof SwipeAction) {
+            SwipeAction swipeAction = (SwipeAction) action;
+            Widget widget = swipeAction.getWidget();
+            Widget widget1 = nextState.getWidgetByResourceId(widget.getResourceId());
+            if(widget.equals(widget1) && widget.getText().equals(widget1.getText())){
+                reward += PUNISH_SWIPE_NOTWORK;
+            }
+        }
 
         // the action reward
         reward += action.getReward();
@@ -120,9 +126,10 @@ public class QLearningMonkey extends AbstractMonkey {
 
     /**
      * Add the state to the value map of Q and add the new activity to activitySet
+     *
      * @param state
      */
-    private void addStateToQMap(State state){
+    private void addStateToQMap(State state) {
         //add to activitySet
         if (isInCurrentPkg()) {
             activitySet.add(state.getActivity());
@@ -137,10 +144,11 @@ public class QLearningMonkey extends AbstractMonkey {
 
     /**
      * help the monkey to get back to app
+     *
      * @return the current state
      */
     private State getBackToApp() {
-        while(!isInCurrentPkg()){
+        while (!isInCurrentPkg()) {
             // if monkey get out of pkg because of back action
             if (lastAction instanceof BackAction) {
                 restartAction.fire();
@@ -148,7 +156,7 @@ public class QLearningMonkey extends AbstractMonkey {
             } else {
                 backAction.fire();
                 actionList.add(backAction);
-                if(!isInCurrentPkg()){
+                if (!isInCurrentPkg()) {
                     backAction.fire();
                     actionList.add(backAction);
                 }
@@ -162,21 +170,19 @@ public class QLearningMonkey extends AbstractMonkey {
     }
 
 
-
-
     @Override
     public void play() {
         startApp();
 
         // initial state
-        State curState= getCurrentState();
+        State curState = getCurrentState();
         addStateToQMap(curState);
 
         // repeat select -> execute -> update
         int cnt = 0;
         while ((++cnt) < ACTION_COUNTS) {
             // if not in pkg, get it back
-            if(!isInCurrentPkg()) {
+            if (!isInCurrentPkg()) {
                 curState = getBackToApp();
                 continue;
             }

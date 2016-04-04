@@ -129,6 +129,50 @@ public class AdbDevice {
     }
 
     /**
+     * 左滑控件
+     */
+    public void swipeToLeft(int X1,int Y1,int X2,int Y2) {
+        double startX = X1 + 0.8*(X2-X1);
+        double startY = Y1 + 0.5*(Y2-Y1);
+        double endX = X1 + 0.2*(X2-X1);
+        double endY = Y1 + 0.5*(Y2-Y1);
+        swipe(startX, startY, endX, endY, 100);
+    }
+
+    /**
+     * 右滑控件
+     */
+    public void swipeToRight(int X1,int Y1,int X2,int Y2) {
+        double startX = X1 + 0.2*(X2-X1);
+        double startY = Y1 + 0.5*(Y2-Y1);
+        double endX = X1 + 0.8*(X2-X1);
+        double endY = Y1 + 0.5*(Y2-Y1);
+        swipe(startX, startY, endX, endY, 100);
+    }
+
+    /**
+     * 上滑控件
+     */
+    public void swipeToUp(int X1,int Y1,int X2,int Y2) {
+        double startX = X1 + 0.5*(X2-X1);
+        double startY = Y1 + 0.7*(Y2-Y1);
+        double endX = X1 + 0.5*(X2-X1);
+        double endY = Y1 + 0.3*(Y2-Y1);
+        swipe(startX, startY, endX, endY, 100);
+    }
+
+    /**
+     * 下滑控件
+     */
+    public void swipeToDown(int X1,int Y1,int X2,int Y2) {
+        double startX = X1 + 0.5*(X2-X1);
+        double startY = Y1 + 0.3*(Y2-Y1);
+        double endX = X1 + 0.5*(X2-X1);
+        double endY = Y1 + 0.7*(Y2-Y1);
+        swipe(startX, startY, endX, endY, 100);
+    }
+
+    /**
      * 左滑屏幕
      */
     public void swipeToLeft() {

@@ -32,8 +32,8 @@ public class ActionFactory {
         return new StartAppAction(device,pkgAct);
     }
 
-    public Action CreateSwipeAction(SwipeDirection direction){
-        return new SwipeAction(device,direction);
+    public Action CreateSwipeAction(Widget widget,SwipeDirection direction){
+        return new SwipeAction(device,widget,direction);
     }
 
     public Action CreateTapAction(Widget widget){
@@ -66,16 +66,16 @@ public class ActionFactory {
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(widget.getScrollable().equals("true")){
-                Action swipeAction = CreateSwipeAction(SwipeDirection.RIGHT);
+                Action swipeAction = CreateSwipeAction(widget,SwipeDirection.RIGHT);
                 actionTable.put(swipeAction,swipeAction.getReward());
 
-                swipeAction = CreateSwipeAction(SwipeDirection.LEFT);
+                swipeAction = CreateSwipeAction(widget,SwipeDirection.LEFT);
                 actionTable.put(swipeAction,swipeAction.getReward());
 
-                swipeAction = CreateSwipeAction(SwipeDirection.DOWN);
+                swipeAction = CreateSwipeAction(widget,SwipeDirection.DOWN);
                 actionTable.put(swipeAction,swipeAction.getReward());
 
-                swipeAction = CreateSwipeAction(SwipeDirection.UP);
+                swipeAction = CreateSwipeAction(widget,SwipeDirection.UP);
                 actionTable.put(swipeAction,swipeAction.getReward());
             }
 

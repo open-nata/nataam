@@ -108,15 +108,16 @@ public class RandomMonkey extends AbstractMonkey {
                 return menuAction;
             }
             //Second Gamble : Take Swipe Actions
-        }else if ( (randomValue - P_ENTITY) <= P_SWIPE){
-            int gamble  = random.nextInt(4);
-            switch (gamble){
-                case 0: actionFactory.CreateSwipeAction(SwipeDirection.LEFT);break;
-                case 1: actionFactory.CreateSwipeAction(SwipeDirection.RIGHT);break;
-                case 2: actionFactory.CreateSwipeAction(SwipeDirection.UP);break;
-                case 3: actionFactory.CreateSwipeAction(SwipeDirection.DOWN);break;
-            }
         }
+//        else if ( (randomValue - P_ENTITY) <= P_SWIPE){
+//            int gamble  = random.nextInt(4);
+//            switch (gamble){
+//                case 0: actionFactory.CreateSwipeAction(SwipeDirection.LEFT);break;
+//                case 1: actionFactory.CreateSwipeAction(SwipeDirection.RIGHT);break;
+//                case 2: actionFactory.CreateSwipeAction(SwipeDirection.UP);break;
+//                case 3: actionFactory.CreateSwipeAction(SwipeDirection.DOWN);break;
+//            }
+//        }
 
         //Action nextAction;
 

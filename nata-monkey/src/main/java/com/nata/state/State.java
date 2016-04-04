@@ -31,6 +31,17 @@ public class State {
         widgetSet.add(node);
     }
 
+    public Widget getWidgetByResourceId(String resourceId){
+       Iterator iterator = widgetSet.iterator();
+        while(iterator.hasNext()){
+            Widget widget = (Widget)iterator.next();
+            if(widget.getResourceId().equals(resourceId)){
+                return widget;
+            }
+        }
+        return null;
+    }
+
     public Set<Widget> getWidgetSet(){
         return widgetSet;
     }
@@ -70,11 +81,14 @@ public class State {
         if (widgetSet.size() != other.widgetSet.size()) {
             return false;
         }
-        for (Widget node : widgetSet) {
-            if (!other.widgetSet.contains(node)) {
-                return false;
-            }
+        if(!other.widgetSet.containsAll(widgetSet)){
+            return false;
         }
+//        for (Widget node : widgetSet) {
+//            if (!other.widgetSet.contains(node)) {
+//                return false;
+//            }
+//        }
 
         return true;
     }

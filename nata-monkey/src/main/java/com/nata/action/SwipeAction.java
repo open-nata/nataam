@@ -1,6 +1,7 @@
 package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
+import com.nata.element.Widget;
 
 /**
  * Author: Calvin Meng
@@ -10,21 +11,27 @@ import com.nata.cmd.AdbDevice;
 public class SwipeAction extends Action {
     private AdbDevice device;
     private SwipeDirection direction;
+    private Widget widget;
     private final double SWIPE_REWARD = BASE + 0.3;
 
-    public SwipeAction(AdbDevice device,SwipeDirection direction) {
+    public SwipeAction(AdbDevice device, Widget widget,SwipeDirection direction) {
         super(ActionType.SWIPE);
         this.device = device;
+        this.widget = widget;
         this.direction = direction;
     }
 
     @Override
     public void fire() {
+        int startX = widget.getStartX();
+        int startY = widget.getStartY();
+        int endX = widget.getEndX();
+        int endY = widget.getEndY();
         switch (direction){
-            case DOWN: device.swipeToDown();break;
-            case UP: device.swipeToUp();break;
-            case LEFT:device.swipeToLeft();break;
-            case RIGHT:device.swipeToRight();break;
+            case DOWN: device.swipeToDown(startX,startY,endX,endY);break;
+            case UP: device.swipeToUp(startX,startY,endX,endY);break;
+            case LEFT:device.swipeToLeft(startX,startY,endX,endY);break;
+            case RIGHT:device.swipeToRight(startX,startY,endX,endY);break;
         }
         count++;
     }
@@ -36,6 +43,10 @@ public class SwipeAction extends Action {
         }else{
             return 1.0/count;
         }
+    }
+
+    public Widget getWidget(){
+        return widget;
     }
 
     @Override
