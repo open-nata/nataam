@@ -19,22 +19,22 @@ public class TextInputAction extends Action{
         super(ActionType.INPUT);
         this.device = device;
         this.widget = widget;
-        this.text = TextValueDictionary.getRandomValidValue();
+        this.text = TextValueDictionary.getInstance().getInput(widget);
     }
 
     public Widget getWidget(){
         return widget;
     }
 
-    public void setText(String text){
-        this.text = text;
-    }
 
     @Override
     public void fire() {
         device.longPress(widget.getX(), widget.getY());
         device.sendText(text);
-        device.hideSoftKeyBoard();
+        //if the widget is password then you don't need to hide the soft key board
+//        if(!widget.getPassword().equals(true)){
+            device.hideSoftKeyBoard();
+//        }
         count++;
     }
 
@@ -55,8 +55,10 @@ public class TextInputAction extends Action{
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + type.hashCode();
         hash = 31 * hash + widget.hashCode();
         hash = 31 * hash + text.hashCode();
+
         return hash;
     }
 
@@ -75,6 +77,10 @@ public class TextInputAction extends Action{
         }
 
         TextInputAction other = (TextInputAction) otherObject;
+
+        if(!type.equals(other.type)){
+            return false;
+        }
 
         if(!widget.equals(other.widget)){
             return false;

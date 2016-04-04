@@ -17,22 +17,22 @@ import java.util.List;
  * Update: 2016-01-13 17:28
  */
 public class DumpService {
-    public static List<UINode> getNodes(File file) throws DocumentException, SAXException, FileNotFoundException, UnsupportedEncodingException {
+    public static List<Widget> getNodes(File file) throws DocumentException, SAXException, FileNotFoundException, UnsupportedEncodingException {
         InputStream ifile = new FileInputStream(file.getAbsolutePath());
         InputStreamReader ir = new InputStreamReader(ifile, "UTF-8");
         SAXReader reader = new SAXReader();
         Document document = reader.read(ir);
-        List<UINode> uiNodeList = new ArrayList<>();
-        treeWalk(document, uiNodeList);
-        return uiNodeList;
+        List<Widget> widgetList = new ArrayList<>();
+        treeWalk(document, widgetList);
+        return widgetList;
     }
 
 
-    private static void treeWalk(Document document, List<UINode> list) {
+    private static void treeWalk(Document document, List<Widget> list) {
         treeWalk(document.getRootElement(), list);
     }
 
-    private static void treeWalk(Element element, List<UINode> list) {
+    private static void treeWalk(Element element, List<Widget> list) {
         for (int i = 0, size = element.nodeCount(); i < size; i++) {
             Node node = element.node(i);
             if (node instanceof Element) {
@@ -46,24 +46,24 @@ public class DumpService {
                       clickable="false" enabled="true" focusable="false" focused="false" scrollable="false"
                      long-clickable="false" password="false" selected="false" bounds="[0,0][1080,1920]">
                      */
-                    UINode uiNode = new UINode();
-                    uiNode.setText(cur.attributeValue("text"));
-                    uiNode.setResourceId(cur.attributeValue("resource-id"));
-                    uiNode.setClassName(cur.attributeValue("class"));
-                    uiNode.setPackageName(cur.attributeValue("package"));
-                    uiNode.setContentDesc(cur.attributeValue("content-desc"));
-                    uiNode.setCheckable(cur.attributeValue("checkable"));
-                    uiNode.setChecked(cur.attributeValue("checked"));
-                    uiNode.setClickable(cur.attributeValue("clickable"));
-                    uiNode.setEnabled(cur.attributeValue("enabled"));
-                    uiNode.setFocusable(cur.attributeValue("focusable"));
-                    uiNode.setFocused(cur.attributeValue("focused"));
-                    uiNode.setScrollable(cur.attributeValue("scrollable"));
-                    uiNode.setLong_clickable(cur.attributeValue("long-clickable"));
-                    uiNode.setPassword(cur.attributeValue("password"));
-                    uiNode.setSelected(cur.attributeValue("selected"));
-                    uiNode.setBounds(cur.attributeValue("bounds"));
-                    list.add(uiNode);
+                    Widget widget = new Widget();
+                    widget.setText(cur.attributeValue("text"));
+                    widget.setResourceId(cur.attributeValue("resource-id"));
+                    widget.setClassName(cur.attributeValue("class"));
+                    widget.setPackageName(cur.attributeValue("package"));
+                    widget.setContentDesc(cur.attributeValue("content-desc"));
+                    widget.setCheckable(cur.attributeValue("checkable"));
+                    widget.setChecked(cur.attributeValue("checked"));
+                    widget.setClickable(cur.attributeValue("clickable"));
+                    widget.setEnabled(cur.attributeValue("enabled"));
+                    widget.setFocusable(cur.attributeValue("focusable"));
+                    widget.setFocused(cur.attributeValue("focused"));
+                    widget.setScrollable(cur.attributeValue("scrollable"));
+                    widget.setLong_clickable(cur.attributeValue("long-clickable"));
+                    widget.setPassword(cur.attributeValue("password"));
+                    widget.setSelected(cur.attributeValue("selected"));
+                    widget.setBounds(cur.attributeValue("bounds"));
+                    list.add(widget);
                 }
                 treeWalk(cur, list);
             }

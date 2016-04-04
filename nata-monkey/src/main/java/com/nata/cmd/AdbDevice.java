@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public class AdbDevice {
     private static final String DUMP_FILE_LOCATION = "/storage/sdcard0/window_dump.xml";
-
+    private String tempDir = System.getProperty("user.dir");
     public AdbDevice() {
         ShellKit.adb("wait-for-adb");
     }
@@ -28,8 +28,10 @@ public class AdbDevice {
 //        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
 //      System.out.println(Arrays.toString(device.getScreenResolution()));
 //        System.out.println(device.getFocusedPackageAndActivity());
+//        device.screenShot("temp");
 
-        device.dumpUI();
+        System.out.println(device.getCurrentPackageName());
+//        device.dumpUI();
     }
 
 
@@ -45,7 +47,6 @@ public class AdbDevice {
      * Run uiautomator dump and pull the uidump.xml to temp file
      */
     public File dumpUI() {
-        String tempDir = System.getProperty("user.dir");
         String tempDumpfile = tempDir + "/dumps/dumpfile.xml";
 //        System.out.println(tempDumpfile);
 //        "su", "-c",
@@ -57,6 +58,18 @@ public class AdbDevice {
 //        ShellKit.adbShell("rm", DUMP_FILE_LOCATION);
         return new File(tempDumpfile);
     }
+
+    /**
+     * 截取屏幕
+     */
+    public void screenShot(String filename) {
+        String filepath = "/storage/sdcard0/"+filename+".png";
+        ShellKit.adbShell("screencap","-p",filepath);
+        ShellKit.adb("pull",filepath, tempDir+"/screenshots/");
+        ShellKit.adbShell("rm",filepath);
+    }
+
+
 
     /**
      * Start a Activity ,can be used to start an app

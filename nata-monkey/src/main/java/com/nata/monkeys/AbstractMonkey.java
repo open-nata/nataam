@@ -3,8 +3,9 @@ package com.nata.monkeys;
 import com.nata.action.Action;
 import com.nata.action.TextInputAction;
 import com.nata.cmd.AdbDevice;
+import com.nata.dictionary.TextValueDictionary;
 import com.nata.element.DumpService;
-import com.nata.element.UINode;
+import com.nata.element.Widget;
 import com.nata.rules.Rule;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
@@ -25,8 +26,7 @@ public abstract class AbstractMonkey {
     private final String pkg;
     private final String act;
     private final AdbDevice device;
-    private Set<UINode> widgetSet = new HashSet<>();
-    private Map<String,String> knowledge = new HashMap<>();
+    private Set<Widget> widgetSet = new HashSet<>();
 
     public AbstractMonkey(String name, String pkg, String act, AdbDevice device) {
         this.name = name;
@@ -42,6 +42,7 @@ public abstract class AbstractMonkey {
 
     public void clearAppData() {
         device.clearAppData(pkg);
+        device.sleep(5000);
     }
 
 
@@ -49,13 +50,12 @@ public abstract class AbstractMonkey {
         String curActivity = getCurrentActivity();
         String appPackage = getCurrentPackage();
         State state = new State(appPackage, curActivity);
-        List<UINode> uiNodes = GrabCurrentUi();
+        List<Widget> widgets = GrabCurrentUi();
 
-
-        // Add the uinodes with resourceId;
-        for (UINode node : uiNodes) {
-            if (!node.getResourceId().equals("")) {
-                state.addUINode(node);
+        // Add the widgets with resourceId;
+        for (Widget widget : widgets) {
+            if (!widget.getResourceId().equals("")) {
+                state.addWidget(widget);
             }
         }
 
@@ -80,14 +80,14 @@ public abstract class AbstractMonkey {
     }
 
 
-    protected List<UINode> GrabCurrentUi() {
+    protected List<Widget> GrabCurrentUi() {
         File dumpFile = device.dumpUI();
         try {
-            List<UINode> list = DumpService.getNodes(dumpFile);
-            for (UINode node : list) {
+            List<Widget> list = DumpService.getNodes(dumpFile);
+            for (Widget widget: list) {
                 // only add the widgets in the app
-                if(node.getPackageName().equals(getPkg())){
-                    widgetSet.add(node);
+                if(widget.getPackageName().equals(getPkg())){
+                    widgetSet.add(widget);
                 }
             }
             return list;
@@ -104,7 +104,7 @@ public abstract class AbstractMonkey {
         return null;
     }
 
-    protected Set<UINode> getWidgetSet(){
+    protected Set<Widget> getWidgetSet(){
         return widgetSet;
     }
 
@@ -125,33 +125,12 @@ public abstract class AbstractMonkey {
         return pkg;
     }
 
-
-    public void brainStorm(Action action){
-        if(action instanceof TextInputAction){
-            TextInputAction textInputAction = (TextInputAction) action;
-            String resourceId = textInputAction.getWidget().getResourceId();
-            String value = knowledge.get(resourceId);
-            if(value != null){
-                textInputAction.setText(value);
-            }
-        }
-    }
     public void learn(String rulePath){
         File file = new File(rulePath);
         Rules rules = RuleParser.parse(file);
-        learn(rules);
+        TextValueDictionary.getInstance().learn(rules);
     }
 
-    public void learn(Rules rules){
-        List<Rule> ruleList = rules.getRules();
-        for (Rule rule:ruleList) {
-            knowledge.put(rule.getResouceId(),rule.getValue());
-        }
-    }
-
-    public void learn(Rule rule){
-        knowledge.put(rule.getResouceId(),rule.getValue());
-    }
     /**
      * The monkeys know how to play with the device
      */

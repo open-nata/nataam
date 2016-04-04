@@ -57,3 +57,8 @@
 - Add KeyValue Rule
 - Add SetUpRule
 - Add subState
+
+### (2016/4/4)
+- move "fill Edittext" duty from AbstrctMonkey to TextInputDictionary
+- rewrite play() funciton to make it clear
+- remove UINode and keep widget too hold all the info(UINode and widget are confusing)

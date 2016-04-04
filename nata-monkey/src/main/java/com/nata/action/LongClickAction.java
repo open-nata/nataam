@@ -12,7 +12,7 @@ public class LongClickAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
 
-    private final double LONG_CLICK_REWARD = BASE + 0.2;
+    private final double LONG_CLICK_REWARD = BASE ;
 
     public LongClickAction(AdbDevice device,Widget widget){
         super(ActionType.LONG_CLICK);
@@ -44,6 +44,7 @@ public class LongClickAction extends Action{
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + type.hashCode();
         hash = 31 * hash + widget.hashCode();
         return hash;
     }
@@ -63,6 +64,10 @@ public class LongClickAction extends Action{
         }
 
         LongClickAction other = (LongClickAction) otherObject;
+
+        if(!type.equals(other.type)){
+            return false;
+        }
 
         if(!widget.equals(other.widget)){
             return false;

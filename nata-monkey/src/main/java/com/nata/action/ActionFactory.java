@@ -2,7 +2,6 @@ package com.nata.action;
 
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
-import com.nata.element.UINode;
 import com.nata.state.State;
 
 import java.util.HashMap;
@@ -58,15 +57,15 @@ public class ActionFactory {
         Action menuAction= createMenuAction();
         actionTable.put(menuAction,menuAction.getReward());
 
-        Set<UINode> uiList = state.getUIList();
-        for(UINode node : uiList){
+        Set<Widget> widgetSet = state.getWidgetSet();
+        for(Widget widget: widgetSet){
             //if not enabled, discard
-            if(node.getEnabled().equals("false")){
+            if(widget.getEnabled().equals("false")){
                 continue;
             }
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
-            if(node.getScrollable().equals("true")){
+            if(widget.getScrollable().equals("true")){
                 Action swipeAction = CreateSwipeAction(SwipeDirection.RIGHT);
                 actionTable.put(swipeAction,swipeAction.getReward());
 
@@ -81,24 +80,21 @@ public class ActionFactory {
             }
 
             //click button actions
-            if( node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true") ){
-                Widget widget = new Widget(node);
+            if( (widget.getClassName().equals("android.widget.TextView") || widget.getClassName().equals("android.widget.Button")) && widget.getClickable().equals("true") ){
                 Action tapAction  = CreateTapAction(widget);
                 actionTable.put(tapAction,tapAction.getReward());
             }
 
             //long click actions
-            if(node.getLong_clickable().equals("true")){
-                Widget widget = new Widget(node);
+            if(widget.getLong_clickable().equals("true")){
                 Action longClickAction = CreateLongClickAction(widget);
                 actionTable.put(longClickAction,longClickAction.getReward());
             }
 
             //text input actions
             //TODO: can't get password from the text attribute
-            if(node.getClassName().equals("android.widget.EditText") && node.getClickable().equals("true")){
-                if(node.getText().equals("")){
-                    Widget widget = new Widget(node);
+            if(widget.getClassName().equals("android.widget.EditText") && widget.getClickable().equals("true")){
+                if(widget.getText().equals("")){
                     Action textInputAction = CreateTextInputAction(widget);
                     actionTable.put(textInputAction,textInputAction.getReward());
                 }

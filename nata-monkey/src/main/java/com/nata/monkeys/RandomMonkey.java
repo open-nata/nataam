@@ -3,7 +3,6 @@ package com.nata.monkeys;
 import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
-import com.nata.element.UINode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +35,15 @@ public class RandomMonkey extends AbstractMonkey {
 
 
     private class UINodeAction {
-        UINode node;
+        Widget node;
         String Action;
 
-        UINodeAction(UINode node, String Action) {
+        UINodeAction(Widget node, String Action) {
             this.node = node;
             this.Action = Action;
         }
 
-        public UINode getNode() {
+        public Widget getNode() {
             return node;
         }
 
@@ -121,10 +120,10 @@ public class RandomMonkey extends AbstractMonkey {
 
         //Action nextAction;
 
-        List<UINode> list = GrabCurrentUi();
+        List<Widget> list = GrabCurrentUi();
         List<UINodeAction> actionList = new ArrayList<>();
         if (list != null) {
-            for (UINode node : list) {
+            for (Widget node : list) {
                 if (node.getClassName().equals("android.widget.Button") && node.getClickable().equals("true")) {
                     actionList.add(new UINodeAction(node, ActionType.TAP));
                 }
@@ -138,10 +137,10 @@ public class RandomMonkey extends AbstractMonkey {
                 Action action = null;
                 switch (nodeAction.getAction()) {
                     case ActionType.INPUT:
-                        action = new TextInputAction(getDevice(),new Widget(nodeAction.getNode()));
+                        action = new TextInputAction(getDevice(),nodeAction.getNode());
                         break;
                     case ActionType.TAP:
-                        action = new TapAction( getDevice(),new Widget(nodeAction.getNode()));
+                        action = new TapAction( getDevice(),nodeAction.getNode());
                         break;
                 }
                 return action;

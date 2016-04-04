@@ -1,6 +1,6 @@
 package com.nata.state;
 
-import com.nata.element.UINode;
+import com.nata.element.Widget;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import java.util.*;
 public class State {
     private String appPackage = null;
     private String activity = null;
-    private Set<UINode> uiList = new HashSet<>();
+    private Set<Widget> widgetSet= new HashSet<>();
 
     public State(String appPackage,String activity) {
         this.appPackage = appPackage;
@@ -27,12 +27,12 @@ public class State {
         return activity;
     }
 
-    public void addUINode(UINode node) {
-        uiList.add(node);
+    public void addWidget(Widget node) {
+        widgetSet.add(node);
     }
 
-    public Set<UINode> getUIList(){
-        return uiList;
+    public Set<Widget> getWidgetSet(){
+        return widgetSet;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class State {
         int hash = 17;
         hash = 31 * hash + appPackage.hashCode();
         hash = 31 * hash + activity.hashCode();
-        for (UINode node : uiList) {
+        for (Widget node : widgetSet) {
             hash = 31 * hash + node.hashCode();
         }
         return hash;
@@ -67,11 +67,11 @@ public class State {
         if(!activity.equals(other.activity)){
            return false;
         }
-        if (uiList.size() != other.uiList.size()) {
+        if (widgetSet.size() != other.widgetSet.size()) {
             return false;
         }
-        for (UINode node : uiList) {
-            if (!other.uiList.contains(node)) {
+        for (Widget node : widgetSet) {
+            if (!other.widgetSet.contains(node)) {
                 return false;
             }
         }
@@ -84,7 +84,7 @@ public class State {
         return "[State]@" +hashCode() +"{" +
                 "appPackage='" + appPackage + '\'' +
                 ", activity='" + activity + '\'' +
-                ",uiList='" + uiList +
+                ",uiList='" + widgetSet +
                 '}';
     }
 }

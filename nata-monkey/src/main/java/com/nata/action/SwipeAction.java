@@ -41,6 +41,7 @@ public class SwipeAction extends Action {
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + type.hashCode();
         hash = 31 * hash + direction.hashCode();
         return hash;
     }
@@ -60,6 +61,9 @@ public class SwipeAction extends Action {
         }
 
         SwipeAction other = (SwipeAction) otherObject;
+        if(!type.equals(other.type)){
+            return false;
+        }
 
         if(!direction.equals(other.direction)){
             return false;
@@ -69,7 +73,7 @@ public class SwipeAction extends Action {
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString()+direction;
     }
 
 

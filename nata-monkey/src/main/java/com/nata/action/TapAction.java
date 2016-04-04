@@ -42,6 +42,7 @@ public class TapAction extends Action{
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + type.hashCode();
         hash = 31 * hash + widget.hashCode();
         return hash;
     }
@@ -62,6 +63,9 @@ public class TapAction extends Action{
 
         TapAction other = (TapAction) otherObject;
 
+        if(!type.equals(other.type)){
+            return false;
+        }
         if(!widget.equals(other.widget)){
             return false;
         }
