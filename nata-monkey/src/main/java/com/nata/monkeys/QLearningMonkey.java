@@ -1,9 +1,6 @@
 package com.nata.monkeys;
 
-import com.nata.action.Action;
-import com.nata.action.ActionFactory;
-import com.nata.action.BackAction;
-import com.nata.action.SwipeAction;
+import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
 import com.nata.state.State;
@@ -25,11 +22,12 @@ public class QLearningMonkey extends AbstractMonkey {
     private List<Action> actionList = new ArrayList<>();
     private Action lastAction = null;
     private Action backAction = null;
+    private Action homeAction = null;
 
     //final variables
-    private final int ACTION_COUNTS = 50;
+    private final int ACTION_COUNTS = 200;
     private final double ALPHA = 0.2;
-    private final double GAMA = 0.2;
+    private final double GAMA = 0.3;
     private final double PUNISH_OUT_PACKAGE = -10.0;
     private final double PUNISH_SWIPE_NOTWORK= - 2.0;
 
@@ -40,6 +38,7 @@ public class QLearningMonkey extends AbstractMonkey {
         actionFactory = new ActionFactory(device);
         restartAction = actionFactory.CreateRestartAction(getPkgAct());
         backAction = actionFactory.createBackAction();
+        homeAction = actionFactory.createHomeAction();
     }
 
     private Action chooseActionFromState(State curState) {
@@ -49,7 +48,7 @@ public class QLearningMonkey extends AbstractMonkey {
             return backAction;
         }
 
-        System.out.println("[ActionList] " + actionTable);
+//        System.out.println("[ActionList] " + actionTable);
 
         Action chosenAction = null;
         double charming_max = 0.0;
@@ -67,7 +66,7 @@ public class QLearningMonkey extends AbstractMonkey {
             }
         }
         Collections.shuffle(chosenActions);
-        System.out.println("charming_max:" + charming_max);
+//        System.out.println("charming_max:" + charming_max);
         return chosenActions.get(0);
     }
 
@@ -79,14 +78,14 @@ public class QLearningMonkey extends AbstractMonkey {
         }
 
         // if the swipe action makes the widget not change then give punish
-        if (action instanceof SwipeAction) {
-            SwipeAction swipeAction = (SwipeAction) action;
-            Widget widget = swipeAction.getWidget();
-            Widget widget1 = nextState.getWidgetByResourceId(widget.getResourceId());
-            if(widget.equals(widget1) && widget.getText().equals(widget1.getText())){
-                reward += PUNISH_SWIPE_NOTWORK;
-            }
-        }
+//        if (action instanceof SwipeAction) {
+//            SwipeAction swipeAction = (SwipeAction) action;
+//            Widget widget = swipeAction.getWidget();
+//            Widget widget1 = nextState.getWidgetByResourceId(widget.getResourceId());
+//            if(widget.equals(widget1) && widget.getText().equals(widget1.getText())){
+//                reward += PUNISH_SWIPE_NOTWORK;
+//            }
+//        }
 
         // the action reward
         reward += action.getReward();
@@ -117,11 +116,11 @@ public class QLearningMonkey extends AbstractMonkey {
     private void startApp() {
         System.out.println("QLearning Monkey start playing...");
         clearAppData();
-        System.out.println("cleaning app data...");
+//        System.out.println("cleaning app data...");
 
         restartAction.fire();
         actionList.add(restartAction);
-        System.out.println("starting app success...");
+//        System.out.println("starting app success...");
     }
 
     /**
@@ -148,11 +147,28 @@ public class QLearningMonkey extends AbstractMonkey {
      * @return the current state
      */
     private State getBackToApp() {
+        boolean forceQuit = false;
         while (!isInCurrentPkg()) {
-            // if monkey get out of pkg because of back action
-            if (lastAction instanceof BackAction) {
+            // if even the restart action cannot restart it ;
+            if(forceQuit){
+                clearAppData();
                 restartAction.fire();
                 actionList.add(restartAction);
+                lastAction = restartAction;
+            }
+            else if(lastAction instanceof StartAppAction){
+                homeAction.fire();
+                actionList.add(homeAction);
+                restartAction.fire();
+                actionList.add(restartAction);
+                lastAction = restartAction;
+                forceQuit = true;
+            }
+            // if monkey get out of pkg because of back action
+            else if (lastAction instanceof BackAction) {
+                restartAction.fire();
+                actionList.add(restartAction);
+                lastAction = restartAction;
             } else {
                 backAction.fire();
                 actionList.add(backAction);
@@ -191,19 +207,26 @@ public class QLearningMonkey extends AbstractMonkey {
             Action action = chooseActionFromState(curState);
 
             //execute
-            System.out.println(action);
+//            System.out.println(action);
             action.fire();
             actionList.add(action);
             lastAction = action;
 
             //update
             State nextState = getCurrentState();
-            System.out.println(nextState);
+
+//            Set<Widget> widgets = nextState.getWidgetSet();
+//            for (Widget widget: widgets
+//                    ) {
+//                System.out.println(widget);
+//            }
+
+//            System.out.println(nextState);
             addStateToQMap(nextState);
             updateValue(curState, action, nextState);
 
             curState = nextState;
-            System.out.println("---------------------------[Experience]---------------------------");
+//            System.out.println("---------------------------[Experience]---------------------------");
         }
     }
 
@@ -242,4 +265,5 @@ public class QLearningMonkey extends AbstractMonkey {
             System.out.println(state);
         }
     }
+
 }

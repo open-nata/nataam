@@ -215,43 +215,47 @@ public class Widget {
         this.clickable = clickable;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Widget{" +
-//                "text='" + text + '\'' +
-//                ", resourceId='" + resourceId + '\'' +
-//                ", className='" + className + '\'' +
-//                ", contentDesc='" + contentDesc + '\'' +
-//                ", checkable='" + checkable + '\'' +
-//                ", checked='" + checked + '\'' +
-//                ", clickable='" + clickable + '\'' +
-//                ", bounds='" + bounds + '\'' +
-//                ", packageName='" + packageName + '\'' +
-//                ", enabled='" + enabled + '\'' +
-//                ", focusable='" + focusable + '\'' +
-//                ", focused='" + focused + '\'' +
-//                ", scrollable='" + scrollable + '\'' +
-//                ", long_clickable='" + long_clickable + '\'' +
-//                ", password='" + password + '\'' +
-//                ", selected='" + selected + '\'' +
-//                '}';
-//    }
-
-
-
     @Override
     public String toString() {
-        String description = className + " " + resourceId +" " + text;
         return "Widget{" +
-                "X=" + getX() +
-                ", Y=" + getY() +
-                ", description='" + description + '\'' +
+                "text='" + text + '\'' +
+                ", resourceId='" + resourceId + '\'' +
+                ", className='" + className + '\'' +
+                ", contentDesc='" + contentDesc + '\'' +
+                ", checkable='" + checkable + '\'' +
+                ", checked='" + checked + '\'' +
+                ", clickable='" + clickable + '\'' +
+                ", bounds='" + bounds + '\'' +
+                ", packageName='" + packageName + '\'' +
+                ", enabled='" + enabled + '\'' +
+                ", focusable='" + focusable + '\'' +
+                ", focused='" + focused + '\'' +
+                ", scrollable='" + scrollable + '\'' +
+                ", long_clickable='" + long_clickable + '\'' +
+                ", password='" + password + '\'' +
+                ", selected='" + selected + '\'' +
                 '}';
     }
+
+
+
+//    @Override
+//    public String toString() {
+//        String description = className + " " + resourceId +" " + text;
+//        return "Widget{" +
+//                "X=" + getX() +
+//                ", Y=" + getY() +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
 
     @Override
     public int hashCode() {
         int hash = 17;
+        hash = 31 * hash + startX;
+        hash = 31 * hash + startY;
+        hash = 31 * hash + endX;
+        hash = 31 * hash + endY;
         hash = 31 * hash + packageName.hashCode();
         hash = 31 * hash + resourceId.hashCode();
         hash = 31 * hash + className.hashCode();
@@ -277,6 +281,10 @@ public class Widget {
         }
 
         Widget other = (Widget) otherObject;
+        if(startX!=other.startX || startY != other.startY || endX !=other.endX || endY != other.endY){
+            return false;
+        }
+
         if(!packageName.equals(other.packageName)){
             return false;
         }

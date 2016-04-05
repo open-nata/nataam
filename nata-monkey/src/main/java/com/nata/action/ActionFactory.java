@@ -5,6 +5,7 @@ import com.nata.element.Widget;
 import com.nata.state.State;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +23,10 @@ public class ActionFactory {
 
     public Action createBackAction(){
         return new BackAction(device);
+    }
+
+    public Action createHomeAction(){
+        return new HomeAction(device);
     }
 
     public Action createMenuAction(){
@@ -57,12 +62,21 @@ public class ActionFactory {
         Action menuAction= createMenuAction();
         actionTable.put(menuAction,menuAction.getReward());
 
-        Set<Widget> widgetSet = state.getWidgetSet();
-        for(Widget widget: widgetSet){
+        List<Widget> widgets = state.getWidgetSet();
+
+        for(Widget widget: widgets){
             //if not enabled, discard
             if(widget.getEnabled().equals("false")){
                 continue;
             }
+
+//            System.out.println("+++++++++++++++++++"+widget.getClassName() + " " + widget.getClickable());
+
+//            if(widget.getClassName().equals("android.widget.RelativeLayout")&& widget.getClickable().equals("true") ){
+//                System.out.println("!!!!!!!get android.widget.RelativeLayout");
+//            }
+
+
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(widget.getScrollable().equals("true")){
@@ -79,8 +93,19 @@ public class ActionFactory {
                 actionTable.put(swipeAction,swipeAction.getReward());
             }
 
-            //click button actions
-            if( (widget.getClassName().equals("android.widget.TextView") || widget.getClassName().equals("android.widget.Button")) && widget.getClickable().equals("true") ){
+
+
+            //clickable
+            if( (      widget.getClassName().equals("android.widget.TextView")
+                    || widget.getClassName().equals("android.widget.Button")
+                    || widget.getClassName().equals("android.widget.ImageView")
+                    || widget.getClassName().equals("android.widget.RelativeLayout")
+            )
+                    && widget.getClickable().equals("true") ){
+//                if(widget.getClassName().equals("android.widget.RelativeLayout")){
+//                    System.out.println("++++++++++++++++Add RelativeLayout to table");
+//                }
+
                 Action tapAction  = CreateTapAction(widget);
                 actionTable.put(tapAction,tapAction.getReward());
             }
@@ -94,11 +119,12 @@ public class ActionFactory {
             //text input actions
             //TODO: can't get password from the text attribute
             if(widget.getClassName().equals("android.widget.EditText") && widget.getClickable().equals("true")){
-                if(widget.getText().equals("")){
+//                if(widget.getText().equals("")){
                     Action textInputAction = CreateTextInputAction(widget);
                     actionTable.put(textInputAction,textInputAction.getReward());
-                }
+//                }
             }
+
         }
         return actionTable;
     }

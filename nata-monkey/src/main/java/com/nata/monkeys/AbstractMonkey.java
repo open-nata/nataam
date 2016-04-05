@@ -49,15 +49,16 @@ public abstract class AbstractMonkey {
     public State getCurrentState() {
         String curActivity = getCurrentActivity();
         String appPackage = getCurrentPackage();
-        State state = new State(appPackage, curActivity);
         List<Widget> widgets = GrabCurrentUi();
+        State state = new State(appPackage, curActivity,widgets);
 
-        // Add the widgets with resourceId;
-        for (Widget widget : widgets) {
-            if (!widget.getResourceId().equals("")) {
-                state.addWidget(widget);
-            }
-        }
+
+//        for (Widget widget : widgets) {
+////            if (!widget.getResourceId().equals("")) {
+//                state.addWidget(widget);
+////            }
+//        }
+
 
         return state;
     }
@@ -86,6 +87,7 @@ public abstract class AbstractMonkey {
             List<Widget> list = DumpService.getNodes(dumpFile);
             for (Widget widget: list) {
                 // only add the widgets in the app
+//                System.out.println(widget);
                 if(widget.getPackageName().equals(getPkg())){
                     widgetSet.add(widget);
                 }

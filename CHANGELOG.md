@@ -64,3 +64,9 @@
 - Remove UINode and keep widget too hold all the info(UINode and widget are confusing)
 - Choose  max_value actions randomly
 - Make swipe action can be located to specific widget
+- Add ImageView tap action and RelativeLayout tap action
+- Add some widgets without resourceId can be useful
+- Add Home Action to pressHome
+
+### (2016/4/5)
+- Rewrite RandomMonkey

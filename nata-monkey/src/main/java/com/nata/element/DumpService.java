@@ -70,4 +70,15 @@ public class DumpService {
         }
     }
 
+    public static void main(String[] args) throws SAXException, UnsupportedEncodingException, DocumentException, FileNotFoundException {
+        String tempDir = System.getProperty("user.dir");
+        String tempDumpfile = tempDir + "/dumps/dumpfile.xml";
+        File dumpFile = new File(tempDumpfile);
+        List<Widget> list = DumpService.getNodes(dumpFile);
+        for (Widget widget:list
+             ) {
+           System.out.println(widget);
+        }
+    }
+
 }

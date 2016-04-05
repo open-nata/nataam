@@ -12,11 +12,13 @@ import java.util.*;
 public class State {
     private String appPackage = null;
     private String activity = null;
-    private Set<Widget> widgetSet= new HashSet<>();
+//    private Set<Widget> widgetSet= new HashSet<>();
+    private List<Widget> widgetList = null;
 
-    public State(String appPackage,String activity) {
+    public State(String appPackage,String activity,List<Widget> widgetList) {
         this.appPackage = appPackage;
         this.activity = activity;
+        this.widgetList = widgetList;
     }
 
     public String getAppPackage(){
@@ -27,23 +29,23 @@ public class State {
         return activity;
     }
 
-    public void addWidget(Widget node) {
-        widgetSet.add(node);
-    }
+//    public void addWidget(Widget node) {
+//        widgetSet.add(node);
+//    }
 
-    public Widget getWidgetByResourceId(String resourceId){
-       Iterator iterator = widgetSet.iterator();
-        while(iterator.hasNext()){
-            Widget widget = (Widget)iterator.next();
-            if(widget.getResourceId().equals(resourceId)){
-                return widget;
-            }
-        }
-        return null;
-    }
+//    public Widget getWidgetByResourceId(String resourceId){
+//       Iterator iterator = widgetSet.iterator();
+//        while(iterator.hasNext()){
+//            Widget widget = (Widget)iterator.next();
+//            if(widget.getResourceId().equals(resourceId)){
+//                return widget;
+//            }
+//        }
+//        return null;
+//    }
 
-    public Set<Widget> getWidgetSet(){
-        return widgetSet;
+    public List<Widget> getWidgetSet(){
+        return widgetList;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class State {
         int hash = 17;
         hash = 31 * hash + appPackage.hashCode();
         hash = 31 * hash + activity.hashCode();
-        for (Widget node : widgetSet) {
+        for (Widget node : widgetList) {
             hash = 31 * hash + node.hashCode();
         }
         return hash;
@@ -78,10 +80,10 @@ public class State {
         if(!activity.equals(other.activity)){
            return false;
         }
-        if (widgetSet.size() != other.widgetSet.size()) {
+        if (widgetList.size() != other.widgetList.size()) {
             return false;
         }
-        if(!other.widgetSet.containsAll(widgetSet)){
+        if(!other.widgetList.containsAll(widgetList)){
             return false;
         }
 //        for (Widget node : widgetSet) {
@@ -98,7 +100,7 @@ public class State {
         return "[State]@" +hashCode() +"{" +
                 "appPackage='" + appPackage + '\'' +
                 ", activity='" + activity + '\'' +
-                ",uiList='" + widgetSet +
+                ",uiList='" + widgetList +
                 '}';
     }
 }

@@ -27,10 +27,13 @@ public class QLMRunner {
         // learn rules
 //        qLearningMonkey.learn("rules/zhihu.json");
 
-        //Start run monkey
-        qLearningMonkey.play();
+        for(int i = 0 ; i < 3 ; i++){
+            //Start run monkey
+            qLearningMonkey.play();
 
-        //Do report
-        qLearningMonkey.report();
+            //Do report
+            qLearningMonkey.report();
+        }
+
     }
 }
