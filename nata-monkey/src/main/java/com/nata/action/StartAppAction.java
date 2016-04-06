@@ -35,34 +35,34 @@ public class StartAppAction extends Action{
                 "pkgAct='" + pkgAct + '\'' +
                 '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + pkgAct.hashCode();
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        StartAppAction other = (StartAppAction) otherObject;
-
-        if(!pkgAct.equals(other.pkgAct)){
-            return false;
-        }
-
-        return true;
-    }
+//
+//    @Override
+//    public int hashCode() {
+//        int hash = 17;
+//        hash = 31 * hash + pkgAct.hashCode();
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        StartAppAction other = (StartAppAction) otherObject;
+//
+//        if(!pkgAct.equals(other.pkgAct)){
+//            return false;
+//        }
+//
+//        return true;
+//    }
 }

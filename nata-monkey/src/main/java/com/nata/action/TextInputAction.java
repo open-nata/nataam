@@ -19,7 +19,6 @@ public class TextInputAction extends Action{
         super(ActionType.INPUT);
         this.device = device;
         this.widget = widget;
-        this.text = TextValueDictionary.getInstance().getInput(widget);
     }
 
     public Widget getWidget(){
@@ -29,12 +28,10 @@ public class TextInputAction extends Action{
 
     @Override
     public void fire() {
+        this.text = TextValueDictionary.getInstance().getInput(widget);
         device.longPress(widget.getX(), widget.getY());
         device.sendText(text);
-        //if the widget is password then you don't need to hide the soft key board
-//        if(!widget.getPassword().equals(true)){
-            device.hideSoftKeyBoard();
-//        }
+        device.hideSoftKeyBoard();
         count++;
     }
 
@@ -52,45 +49,45 @@ public class TextInputAction extends Action{
         return super.toString()+" @"+widget + " :" + text;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + type.hashCode();
-        hash = 31 * hash + widget.hashCode();
-        hash = 31 * hash + text.hashCode();
-
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        TextInputAction other = (TextInputAction) otherObject;
-
-        if(!type.equals(other.type)){
-            return false;
-        }
-
-        if(!widget.equals(other.widget)){
-            return false;
-        }
-
-        if(!text.equals(other.text)){
-            return false;
-        }
-
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 17;
+//        hash = 31 * hash + type.hashCode();
+//        hash = 31 * hash + widget.hashCode();
+//        hash = 31 * hash + text.hashCode();
+//
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        TextInputAction other = (TextInputAction) otherObject;
+//
+//        if(!type.equals(other.type)){
+//            return false;
+//        }
+//
+//        if(!widget.equals(other.widget)){
+//            return false;
+//        }
+//
+//        if(!text.equals(other.text)){
+//            return false;
+//        }
+//
+//        return true;
+//    }
 
 }

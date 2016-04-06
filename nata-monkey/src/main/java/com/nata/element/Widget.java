@@ -149,22 +149,19 @@ public class Widget {
         return bounds;
     }
 
-    // if the widget don't has resource id we won't calculate its leftX,leftY,rightX,rightY
     public void setBounds(String bounds) {
         this.bounds = bounds;
-        if(!resourceId.equals("")){
-            Pattern pattern = Pattern.compile("([0-9]+)");
-            Matcher mat = pattern.matcher(bounds);
-            ArrayList<Integer> coords = new ArrayList<>();
-            while (mat.find()) {
-                coords.add(new Integer(mat.group()));
-            }
-
-            startX = coords.get(0);
-            startY = coords.get(1);
-            endX = coords.get(2);
-            endY = coords.get(3);
+        Pattern pattern = Pattern.compile("([0-9]+)");
+        Matcher mat = pattern.matcher(bounds);
+        ArrayList<Integer> coords = new ArrayList<>();
+        while (mat.find()) {
+            coords.add(new Integer(mat.group()));
         }
+
+        startX = coords.get(0);
+        startY = coords.get(1);
+        endX = coords.get(2);
+        endY = coords.get(3);
     }
 
     public String getText() {
@@ -215,39 +212,39 @@ public class Widget {
         this.clickable = clickable;
     }
 
-    @Override
-    public String toString() {
-        return "Widget{" +
-                "text='" + text + '\'' +
-                ", resourceId='" + resourceId + '\'' +
-                ", className='" + className + '\'' +
-                ", contentDesc='" + contentDesc + '\'' +
-                ", checkable='" + checkable + '\'' +
-                ", checked='" + checked + '\'' +
-                ", clickable='" + clickable + '\'' +
-                ", bounds='" + bounds + '\'' +
-                ", packageName='" + packageName + '\'' +
-                ", enabled='" + enabled + '\'' +
-                ", focusable='" + focusable + '\'' +
-                ", focused='" + focused + '\'' +
-                ", scrollable='" + scrollable + '\'' +
-                ", long_clickable='" + long_clickable + '\'' +
-                ", password='" + password + '\'' +
-                ", selected='" + selected + '\'' +
-                '}';
-    }
-
-
-
 //    @Override
 //    public String toString() {
-//        String description = className + " " + resourceId +" " + text;
 //        return "Widget{" +
-//                "X=" + getX() +
-//                ", Y=" + getY() +
-//                ", description='" + description + '\'' +
+//                "text='" + text + '\'' +
+//                ", resourceId='" + resourceId + '\'' +
+//                ", className='" + className + '\'' +
+//                ", contentDesc='" + contentDesc + '\'' +
+//                ", checkable='" + checkable + '\'' +
+//                ", checked='" + checked + '\'' +
+//                ", clickable='" + clickable + '\'' +
+//                ", bounds='" + bounds + '\'' +
+//                ", packageName='" + packageName + '\'' +
+//                ", enabled='" + enabled + '\'' +
+//                ", focusable='" + focusable + '\'' +
+//                ", focused='" + focused + '\'' +
+//                ", scrollable='" + scrollable + '\'' +
+//                ", long_clickable='" + long_clickable + '\'' +
+//                ", password='" + password + '\'' +
+//                ", selected='" + selected + '\'' +
 //                '}';
 //    }
+
+
+
+    @Override
+    public String toString() {
+        String description = className + " " + resourceId +" " + text;
+        return "Widget{" +
+                "X=" + getX() +
+                ", Y=" + getY() +
+                ", description='" + description + '\'' +
+                '}';
+    }
 
     @Override
     public int hashCode() {

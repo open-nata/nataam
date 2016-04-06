@@ -70,13 +70,6 @@ public class ActionFactory {
                 continue;
             }
 
-//            System.out.println("+++++++++++++++++++"+widget.getClassName() + " " + widget.getClickable());
-
-//            if(widget.getClassName().equals("android.widget.RelativeLayout")&& widget.getClickable().equals("true") ){
-//                System.out.println("!!!!!!!get android.widget.RelativeLayout");
-//            }
-
-
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(widget.getScrollable().equals("true")){
@@ -102,12 +95,15 @@ public class ActionFactory {
                     || widget.getClassName().equals("android.widget.RelativeLayout")
             )
                     && widget.getClickable().equals("true") ){
-//                if(widget.getClassName().equals("android.widget.RelativeLayout")){
-//                    System.out.println("++++++++++++++++Add RelativeLayout to table");
-//                }
+                if(widget.getClassName().equals("android.widget.RelativeLayout")){
+                    System.out.println("++++++++++++++++Add RelativeLayout to table : " + widget.hashCode());
+                }
 
                 Action tapAction  = CreateTapAction(widget);
-                actionTable.put(tapAction,tapAction.getReward());
+                Double value= actionTable.put(tapAction,tapAction.getReward());
+                if(value != null){
+                    System.out.println("Duplicated Action detected!!!!!!!!!!!!!!!");
+                }
             }
 
             //long click actions

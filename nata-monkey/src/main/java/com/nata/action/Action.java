@@ -26,29 +26,29 @@ public abstract class Action {
      * @return reward value
      */
     abstract public double getReward();
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type);
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        Action other = (Action) otherObject;
-        return Objects.equals(type, other.type) ;
-    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(type);
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        Action other = (Action) otherObject;
+//        return Objects.equals(type, other.type) ;
+//    }
 
 
     @Override

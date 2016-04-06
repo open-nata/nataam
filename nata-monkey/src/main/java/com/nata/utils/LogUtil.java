@@ -9,7 +9,21 @@ import org.apache.log4j.Logger;
  */
 public class LogUtil {
 
-    private static final Logger LOGGER = Logger.getLogger(LogUtil.class);
-//    LOGGER.info("Received message: " + message);
+    private static final Logger logger = Logger.getLogger(LogUtil.class);
 
+    public static void debug(String debug){
+        logger.debug(debug);
+    }
+
+    public static void info(String info){
+        logger.info(info);
+    }
+
+    public static void error(String error){
+        logger.info(error);
+    }
+
+    public static void warn(String warn){
+        logger.info(warn);
+    }
 }

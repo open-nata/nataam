@@ -4,6 +4,7 @@ import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
 import com.nata.state.State;
+import com.nata.utils.LogUtil;
 
 import java.util.*;
 
@@ -48,9 +49,7 @@ public class QLearningMonkey extends AbstractMonkey {
             return backAction;
         }
 
-//        System.out.println("[ActionList] " + actionTable);
-
-        Action chosenAction = null;
+        Action chosenAction;
         double charming_max = 0.0;
 
         for (Map.Entry<Action, Double> entry : actionTable.entrySet()) {
@@ -66,13 +65,12 @@ public class QLearningMonkey extends AbstractMonkey {
             }
         }
         Collections.shuffle(chosenActions);
-//        System.out.println("charming_max:" + charming_max);
         return chosenActions.get(0);
     }
 
     private double getRewardFromExperience(State curState, Action action, State nextState) {
         double reward = 0.0;
-        // punish to run out of package
+
         if (!nextState.getAppPackage().equals(getPkg())) {
             reward += PUNISH_OUT_PACKAGE;
         }
@@ -114,31 +112,34 @@ public class QLearningMonkey extends AbstractMonkey {
 
 
     private void startApp() {
-        System.out.println("QLearning Monkey start playing...");
+        LogUtil.info("QLearning Monkey start playing...");
         clearAppData();
-//        System.out.println("cleaning app data...");
-
+        LogUtil.info("App data cleaned!");
         restartAction.fire();
         actionList.add(restartAction);
-//        System.out.println("starting app success...");
+        LogUtil.info("Starting app success!");
     }
 
     /**
-     * Add the state to the value map of Q and add the new activity to activitySet
-     *
-     * @param state
+     * Add the current state to the value map of Q and add the new activity to activitySet
+     * @return current state
      */
-    private void addStateToQMap(State state) {
-        //add to activitySet
+    @Override
+    public State getCurrentState() {
+        State state  = super.getCurrentState();
+
         if (isInCurrentPkg()) {
             activitySet.add(state.getActivity());
         }
-        //add to QMap
+
         if (QMap.get(state) == null) {
             Map<Action, Double> table = actionFactory.getActionsFromState(state);
+            LogUtil.debug("ActionTable : " + table.toString());
             QMap.put(state, table);
             getDevice().screenShot(state.hashCode() + "");
         }
+
+        return state;
     }
 
     /**
@@ -152,88 +153,70 @@ public class QLearningMonkey extends AbstractMonkey {
             // if even the restart action cannot restart it ;
             if(forceQuit){
                 clearAppData();
-                restartAction.fire();
-                actionList.add(restartAction);
-                lastAction = restartAction;
+                executeAction(restartAction);
             }
             else if(lastAction instanceof StartAppAction){
-                homeAction.fire();
-                actionList.add(homeAction);
-                restartAction.fire();
-                actionList.add(restartAction);
-                lastAction = restartAction;
+                executeAction(homeAction);
+                executeAction(restartAction);
                 forceQuit = true;
             }
             // if monkey get out of pkg because of back action
             else if (lastAction instanceof BackAction) {
-                restartAction.fire();
-                actionList.add(restartAction);
-                lastAction = restartAction;
+                executeAction(restartAction);
             } else {
-                backAction.fire();
-                actionList.add(backAction);
+                executeAction(backAction);
                 if (!isInCurrentPkg()) {
-                    backAction.fire();
-                    actionList.add(backAction);
+                    executeAction(backAction);
                 }
-                lastAction = backAction;
             }
         }
-        // get current state
-        State state = getCurrentState();
-        addStateToQMap(state);
-        return state;
+
+        return getCurrentState();
     }
 
+    /**
+     * Fire the action and add the action to actionList
+     * @param action to be executed
+     */
+    private void executeAction(Action action){
+        action.fire();
+        actionList.add(action);
+        lastAction = action;
+    }
 
     @Override
     public void play() {
         startApp();
-
-        // initial state
         State curState = getCurrentState();
-        addStateToQMap(curState);
 
         // repeat select -> execute -> update
         int cnt = 0;
         while ((++cnt) < ACTION_COUNTS) {
-            // if not in pkg, get it back
             if (!isInCurrentPkg()) {
                 curState = getBackToApp();
                 continue;
             }
 
-            //select action
-            Action action = chooseActionFromState(curState);
+            // select
+            Action chosenAction = chooseActionFromState(curState);
+            LogUtil.debug(chosenAction.toString());
 
-            //execute
-//            System.out.println(action);
-            action.fire();
-            actionList.add(action);
-            lastAction = action;
+            // execute
+            executeAction(chosenAction);
 
-            //update
             State nextState = getCurrentState();
 
-//            Set<Widget> widgets = nextState.getWidgetSet();
-//            for (Widget widget: widgets
-//                    ) {
-//                System.out.println(widget);
-//            }
-
-//            System.out.println(nextState);
-            addStateToQMap(nextState);
-            updateValue(curState, action, nextState);
+            //update Value
+            updateValue(curState, chosenAction, nextState);
 
             curState = nextState;
-//            System.out.println("---------------------------[Experience]---------------------------");
         }
     }
 
     @Override
     public void stop() {
 
-    }
+   }
 
     @Override
     public void report() {

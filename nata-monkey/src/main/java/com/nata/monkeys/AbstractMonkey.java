@@ -10,6 +10,8 @@ import com.nata.rules.Rule;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
 import com.nata.state.State;
+import com.nata.utils.LogUtil;
+import org.apache.log4j.Logger;
 import org.dom4j.DocumentException;
 import org.xml.sax.SAXException;
 
@@ -50,17 +52,7 @@ public abstract class AbstractMonkey {
         String curActivity = getCurrentActivity();
         String appPackage = getCurrentPackage();
         List<Widget> widgets = GrabCurrentUi();
-        State state = new State(appPackage, curActivity,widgets);
-
-
-//        for (Widget widget : widgets) {
-////            if (!widget.getResourceId().equals("")) {
-//                state.addWidget(widget);
-////            }
-//        }
-
-
-        return state;
+        return  new State(appPackage, curActivity,widgets);
     }
 
     public String getCurrentPackage() {
@@ -85,13 +77,15 @@ public abstract class AbstractMonkey {
         File dumpFile = device.dumpUI();
         try {
             List<Widget> list = DumpService.getNodes(dumpFile);
+            String widgetsInfo = "CurrentUi: ";
             for (Widget widget: list) {
+                widgetsInfo += widget;
                 // only add the widgets in the app
-//                System.out.println(widget);
                 if(widget.getPackageName().equals(getPkg())){
                     widgetSet.add(widget);
                 }
             }
+            LogUtil.debug(widgetsInfo);
             return list;
         } catch (DocumentException e) {
             e.printStackTrace();

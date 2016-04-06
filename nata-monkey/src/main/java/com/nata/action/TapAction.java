@@ -20,7 +20,7 @@ public class TapAction extends Action{
 
     @Override
     public void fire() {
-        device.tap(widget.getX(), widget.getY());
+        device.tap(widget.getCenterX(), widget.getCenterY());
         count++;
     }
 
@@ -36,40 +36,41 @@ public class TapAction extends Action{
 
     @Override
     public String toString() {
-        return super.toString()+"@"+widget;
+        return super.toString()+"@"+ widget;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + type.hashCode();
-        hash = 31 * hash + widget.hashCode();
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        TapAction other = (TapAction) otherObject;
-
-        if(!type.equals(other.type)){
-            return false;
-        }
-        if(!widget.equals(other.widget)){
-            return false;
-        }
-
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 17;
+//        hash = 31 * hash + type.hashCode();
+//        hash = 31 * hash + widget.hashCode();
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        TapAction other = (TapAction) otherObject;
+//
+//        if(!type.equals(other.type)){
+//            return false;
+//        }
+//
+//        if(!widget.equals(other.widget)){
+//            return false;
+//        }
+//
+//        return true;
+//    }
 }

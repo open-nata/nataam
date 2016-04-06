@@ -12,28 +12,16 @@ import com.nata.monkeys.RandomMonkey;
  */
 public class QLMRunner {
     public static void main(String[] args) {
-//        String pkg = "com.zhihu.android";
-//        String act = ".app.ui.activity.MainActivity";
-
+//      String pkg = "com.zhihu.android";
+//      String act = ".app.ui.activity.MainActivity";
         String pkg = "com.cvicse.zhnt";
         String act = ".LoadingActivity";
 
-
-
-        //Set Monkey settings
         AdbDevice device = new AdbDevice();
-        AbstractMonkey qLearningMonkey= new QLearningMonkey(pkg,act,device);
-
-        // learn rules
-//        qLearningMonkey.learn("rules/zhihu.json");
-
-        for(int i = 0 ; i < 3 ; i++){
-            //Start run monkey
-            qLearningMonkey.play();
-
-            //Do report
-            qLearningMonkey.report();
-        }
+        AbstractMonkey qLearningMonkey = new QLearningMonkey(pkg, act, device);
+//      qLearningMonkey.learn("rules/zhihu.json");
+        qLearningMonkey.play();
+        qLearningMonkey.report();
 
     }
 }

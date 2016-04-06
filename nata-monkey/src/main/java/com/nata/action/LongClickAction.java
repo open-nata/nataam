@@ -41,38 +41,38 @@ public class LongClickAction extends Action{
         return super.toString()+"@"+widget;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + type.hashCode();
-        hash = 31 * hash + widget.hashCode();
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        LongClickAction other = (LongClickAction) otherObject;
-
-        if(!type.equals(other.type)){
-            return false;
-        }
-
-        if(!widget.equals(other.widget)){
-            return false;
-        }
-
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 17;
+//        hash = 31 * hash + type.hashCode();
+//        hash = 31 * hash + widget.hashCode();
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        LongClickAction other = (LongClickAction) otherObject;
+//
+//        if(!type.equals(other.type)){
+//            return false;
+//        }
+//
+//        if(!widget.equals(other.widget)){
+//            return false;
+//        }
+//
+//        return true;
+//    }
 }

@@ -66,7 +66,11 @@
 - Make swipe action can be located to specific widget
 - Add ImageView tap action and RelativeLayout tap action
 - Add some widgets without resourceId can be useful
-- Add Home Action to pressHome
+- Add Home Action to press Home
 
 ### (2016/4/5)
 - Rewrite RandomMonkey
+
+### (2016/4/6)
+- Start using log4j to print logs
+- Remove bugs and reconstruct code function

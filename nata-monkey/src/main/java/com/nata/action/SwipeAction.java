@@ -49,38 +49,38 @@ public class SwipeAction extends Action {
         return widget;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        hash = 31 * hash + type.hashCode();
-        hash = 31 * hash + direction.hashCode();
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object otherObject) {
-        if (this == otherObject) {
-            return true;
-        }
-
-        if (otherObject == null) {
-            return false;
-        }
-
-        if (getClass() != otherObject.getClass()) {
-            return false;
-        }
-
-        SwipeAction other = (SwipeAction) otherObject;
-        if(!type.equals(other.type)){
-            return false;
-        }
-
-        if(!direction.equals(other.direction)){
-            return false;
-        }
-        return true;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 17;
+//        hash = 31 * hash + type.hashCode();
+//        hash = 31 * hash + direction.hashCode();
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object otherObject) {
+//        if (this == otherObject) {
+//            return true;
+//        }
+//
+//        if (otherObject == null) {
+//            return false;
+//        }
+//
+//        if (getClass() != otherObject.getClass()) {
+//            return false;
+//        }
+//
+//        SwipeAction other = (SwipeAction) otherObject;
+//        if(!type.equals(other.type)){
+//            return false;
+//        }
+//
+//        if(!direction.equals(other.direction)){
+//            return false;
+//        }
+//        return true;
+//    }
 
     @Override
     public String toString() {

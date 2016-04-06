@@ -10,7 +10,7 @@ import com.nata.cmd.AdbDevice;
  */
 public class BackAction extends Action{
     private AdbDevice device = null;
-    private final double BACK__REWARD = BASE - 1.0;
+    private final double BACK__REWARD = BASE - 0.5;
     public BackAction(AdbDevice device){
         super(ActionType.BACK);
         this.device = device;
