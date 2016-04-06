@@ -101,10 +101,6 @@ public class RandomMonkey extends AbstractMonkey {
 
     @Override
     public void play() {
-//        System.out.println("Random Monkey start playing...");
-//        restartAction.fire();
-//        actionList.add(restartAction);
-
         startApp();
 
         State curState = getCurrentState();
@@ -131,7 +127,6 @@ public class RandomMonkey extends AbstractMonkey {
                 activitySet.add(curState.getActivity());
             }
         }
-//        report();
     }
 
 
@@ -157,12 +152,12 @@ public class RandomMonkey extends AbstractMonkey {
             System.out.println(node);
         }
 
-        System.out.println("--------------------[Action report]--------------------");
-        int actionCount = actionList.size();
-        System.out.println("Actions count: " + actionCount);
-        for (Action action : actionList) {
-            System.out.println(action);
-        }
+//        System.out.println("--------------------[Action report]--------------------");
+//        int actionCount = actionList.size();
+//        System.out.println("Actions count: " + actionCount);
+//        for (Action action : actionList) {
+//            System.out.println(action);
+//        }
     }
 
     public static void main(String[] args) {

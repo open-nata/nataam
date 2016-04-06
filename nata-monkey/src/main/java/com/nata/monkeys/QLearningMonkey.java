@@ -226,12 +226,12 @@ public class QLearningMonkey extends AbstractMonkey {
             System.out.println(activity);
         }
 
-        System.out.println("--------------------[Action report]--------------------");
-        int actionCount = actionList.size();
-        System.out.println("Actions count: " + actionCount);
-        for (Action action : actionList) {
-            System.out.println(action);
-        }
+//        System.out.println("--------------------[Action report]--------------------");
+//        int actionCount = actionList.size();
+//        System.out.println("Actions count: " + actionCount);
+//        for (Action action : actionList) {
+//            System.out.println(action);
+//        }
 
         System.out.println("--------------------[Widget report]--------------------");
         Set<Widget> widgetSet = getWidgetSet();
@@ -241,12 +241,12 @@ public class QLearningMonkey extends AbstractMonkey {
             System.out.println(node);
         }
 
-        System.out.println("--------------------[State report]--------------------");
-        int stateCount = QMap.size();
-        System.out.println("State count: " + stateCount);
-        for (State state : QMap.keySet()) {
-            System.out.println(state);
-        }
+//        System.out.println("--------------------[State report]--------------------");
+//        int stateCount = QMap.size();
+//        System.out.println("State count: " + stateCount);
+//        for (State state : QMap.keySet()) {
+//            System.out.println(state);
+//        }
     }
 
 }

@@ -74,3 +74,5 @@
 ### (2016/4/6)
 - Start using log4j to print logs
 - Remove bugs and reconstruct code function
+- Add Pure Random Monkey
+
