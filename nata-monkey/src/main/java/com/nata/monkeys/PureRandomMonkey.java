@@ -3,13 +3,8 @@ package com.nata.monkeys;
 import com.nata.AndroidKeyCode;
 import com.nata.cmd.AdbDevice;
 import com.nata.dictionary.TextValueDictionary;
-import com.nata.element.Widget;
-import com.nata.state.State;
 import com.nata.utils.LogUtil;
-
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Author: Calvin Meng
@@ -20,7 +15,6 @@ public class PureRandomMonkey extends AbstractMonkey{
     private final int ACTION_COUNTS = 200;
     private Random random = new Random();
     private String[] actions= {"TAP","SWIPE","BACK","HOME","MENU","LONG_CLICK","TEXT","RESTART"};
-    private Set<String> activitySet = new HashSet<>();
 
     private int screenX;
     private int screenY;
@@ -84,51 +78,6 @@ public class PureRandomMonkey extends AbstractMonkey{
         lastAction = "RESTART";
     }
 
-    private void startApp() {
-        LogUtil.info("Pure random Monkey start playing...");
-        clearAppData();
-        LogUtil.info("App data cleaned!");
-        restart();
-        LogUtil.info("Starting app success!");
-    }
-
-    private State getBackToApp() {
-        boolean forceQuit = false;
-        while (!isInCurrentPkg()) {
-            // if even the restart action cannot restart it ;
-            if(forceQuit){
-                clearAppData();
-                restart();
-            }
-            else if(lastAction.equals("RESTART") ){
-                home();
-                restart();
-                forceQuit = true;
-            }
-            // if monkey get out of pkg because of back action
-            else if (lastAction.equals("BACK")) {
-                restart();
-            } else {
-                back();
-                if (!isInCurrentPkg()) {
-                    back();
-                }
-            }
-        }
-
-        return getCurrentState();
-    }
-
-
-    public State getCurrentState() {
-        State state  = super.getCurrentState();
-
-        if (isInCurrentPkg()) {
-            activitySet.add(state.getActivity());
-        }
-        return state;
-    }
-
     @Override
     public void play() {
         startApp();
@@ -151,27 +100,6 @@ public class PureRandomMonkey extends AbstractMonkey{
             }
             LogUtil.debug("LastAction : " + lastAction);
             getCurrentState();
-        }
-    }
-
-    @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public void report() {
-        System.out.println("--------------------[Activities report]--------------------");
-        for (String activity : activitySet) {
-            System.out.println(activity);
-        }
-
-        System.out.println("--------------------[Widget report]--------------------");
-        Set<Widget> widgetSet = getWidgetSet();
-        int widgetCount = widgetSet.size();
-        System.out.println("Widget count: " + widgetCount);
-        for (Widget node : widgetSet) {
-            System.out.println(node);
         }
     }
 }

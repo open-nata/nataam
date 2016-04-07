@@ -1,17 +1,14 @@
 package com.nata.monkeys;
 
-import com.nata.action.Action;
-import com.nata.action.TextInputAction;
+import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
 import com.nata.dictionary.TextValueDictionary;
 import com.nata.element.DumpService;
 import com.nata.element.Widget;
-import com.nata.rules.Rule;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
 import com.nata.state.State;
 import com.nata.utils.LogUtil;
-import org.apache.log4j.Logger;
 import org.dom4j.DocumentException;
 import org.xml.sax.SAXException;
 
@@ -29,12 +26,34 @@ public abstract class AbstractMonkey {
     private final String act;
     private final AdbDevice device;
     private Set<Widget> widgetSet = new HashSet<>();
+    private Set<String> activitySet = new HashSet<>();
+    private List<Action> actionList = new ArrayList<>();
+
+    private Action backAction = null;
+    private Action homeAction = null;
+    private Action restartAction = null;
+    private Action lastAction = null;
+    private ActionFactory actionFactory = null;
+
 
     public AbstractMonkey(String name, String pkg, String act, AdbDevice device) {
         this.name = name;
         this.pkg = pkg;
         this.act = act;
         this.device = device;
+
+        actionFactory = new ActionFactory(device);
+        backAction = actionFactory.createBackAction();
+        homeAction = actionFactory.createHomeAction();
+        restartAction = getActionFactory().CreateRestartAction(getPkgAct());
+    }
+
+    public Action getBackAction() {
+        return backAction;
+    }
+
+    protected ActionFactory getActionFactory() {
+        return actionFactory;
     }
 
     public String getPkgAct() {
@@ -47,12 +66,36 @@ public abstract class AbstractMonkey {
         device.sleep(5000);
     }
 
+    public void startApp() {
+        LogUtil.info(name+ " start playing...");
+        clearAppData();
+        LogUtil.info("App data cleaned!");
+        restartAction.fire();
+        actionList.add(restartAction);
+        LogUtil.info("Starting app success!");
+    }
+
+    /**
+     * Fire the action and add the action to actionList
+     * @param action to be executed
+     */
+    public void executeAction(Action action){
+        action.fire();
+        actionList.add(action);
+        lastAction = action;
+    }
 
     public State getCurrentState() {
         String curActivity = getCurrentActivity();
         String appPackage = getCurrentPackage();
         List<Widget> widgets = GrabCurrentUi();
-        return  new State(appPackage, curActivity,widgets);
+        State state = new State(appPackage, curActivity,widgets);
+
+        if (isInCurrentPkg()) {
+            activitySet.add(state.getActivity());
+        }
+
+        return state;
     }
 
     public String getCurrentPackage() {
@@ -63,6 +106,9 @@ public abstract class AbstractMonkey {
         return device.getCurrentActivity();
     }
 
+    protected Set<String> getActivitySet() {
+        return activitySet;
+    }
 
     public boolean isInCurrentPkg() {
         return device.getCurrentPackageName().equals(pkg);
@@ -135,11 +181,61 @@ public abstract class AbstractMonkey {
     /**
      * They can stop whenever we ask them to
      */
-    public abstract void stop();
+    public void stop(){}
 
     /**
      * They can report the running status after they stop
      */
-    public abstract void report();
+    public void report(){
+        System.out.println("--------------------[Activities report]--------------------");
+        int activityCount = activitySet.size();
+        System.out.println("Activity count: " + activityCount);
+        for (String activity : activitySet) {
+            System.out.println(activity);
+        }
 
+        System.out.println("--------------------[Widget report]--------------------");
+        int widgetCount = widgetSet.size();
+        System.out.println("Widget count: " + widgetCount);
+        for (Widget node : widgetSet) {
+            System.out.println(node);
+        }
+
+        System.out.println("--------------------[Action report]--------------------");
+        int actionCount = actionList.size();
+        System.out.println("Actions count: " + actionCount);
+        for (Action action : actionList) {
+            System.out.println(action);
+        }
+    }
+
+    /**
+     * help the monkey to get back to app
+     *
+     * @return the current state
+     */
+    public void getBackToApp() {
+        boolean forceQuit = false;
+        while (!isInCurrentPkg()) {
+            // if even the restart action cannot restart it ;
+            if(forceQuit){
+                clearAppData();
+                executeAction(restartAction);
+            }
+            else if(lastAction instanceof StartAppAction){
+                executeAction(homeAction);
+                executeAction(restartAction);
+                forceQuit = true;
+            }
+            // if monkey get out of pkg because of back action
+            else if (lastAction instanceof BackAction) {
+                executeAction(restartAction);
+            } else {
+                executeAction(backAction);
+                if (!isInCurrentPkg()) {
+                    executeAction(backAction);
+                }
+            }
+        }
+    }
 }

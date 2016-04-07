@@ -76,3 +76,6 @@
 - Remove bugs and reconstruct code function
 - Add Pure Random Monkey
 
+### (2016/4/7)
+- Move common actions to abstract monkey and rewrite other monkeys
+
