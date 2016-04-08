@@ -95,15 +95,8 @@ public class ActionFactory {
                     || widget.getClassName().equals("android.widget.RelativeLayout")
             )
                     && widget.getClickable().equals("true") ){
-                if(widget.getClassName().equals("android.widget.RelativeLayout")){
-                    System.out.println("++++++++++++++++Add RelativeLayout to table : " + widget.hashCode());
-                }
-
                 Action tapAction  = CreateTapAction(widget);
                 Double value= actionTable.put(tapAction,tapAction.getReward());
-                if(value != null){
-                    System.out.println("Duplicated Action detected!!!!!!!!!!!!!!!");
-                }
             }
 
             //long click actions
@@ -115,10 +108,8 @@ public class ActionFactory {
             //text input actions
             //TODO: can't get password from the text attribute
             if(widget.getClassName().equals("android.widget.EditText") && widget.getClickable().equals("true")){
-//                if(widget.getText().equals("")){
                     Action textInputAction = CreateTextInputAction(widget);
                     actionTable.put(textInputAction,textInputAction.getReward());
-//                }
             }
 
         }

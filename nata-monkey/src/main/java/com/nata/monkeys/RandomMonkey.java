@@ -13,7 +13,8 @@ import java.util.*;
  * Update: 2016-01-18 18:49
  */
 public class RandomMonkey extends AbstractMonkey {
-    private final int ACTION_COUNTS = 200;
+    private final int ACTION_COUNTS = 500;
+    private final int Frequency = 100;
     private Set<String> activitySet = new HashSet<>();
 
     public RandomMonkey(String pkg, String act, AdbDevice device) {
@@ -57,6 +58,10 @@ public class RandomMonkey extends AbstractMonkey {
             action.fire();
 
             curState = getCurrentState();
+
+            if(cnt % Frequency== 0){
+                summary(cnt/Frequency);
+            }
         }
     }
 

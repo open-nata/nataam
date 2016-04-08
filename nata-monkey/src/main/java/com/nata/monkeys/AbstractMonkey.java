@@ -187,25 +187,25 @@ public abstract class AbstractMonkey {
      * They can report the running status after they stop
      */
     public void report(){
-        System.out.println("--------------------[Activities report]--------------------");
+        LogUtil.debug("--------------------[Activities report]--------------------");
         int activityCount = activitySet.size();
-        System.out.println("Activity count: " + activityCount);
+        LogUtil.debug("Activity count: " + activityCount);
         for (String activity : activitySet) {
-            System.out.println(activity);
+            LogUtil.debug(activity);
         }
 
-        System.out.println("--------------------[Widget report]--------------------");
+        LogUtil.debug("--------------------[Widget report]--------------------");
         int widgetCount = widgetSet.size();
-        System.out.println("Widget count: " + widgetCount);
+        LogUtil.debug("Widget count: " + widgetCount);
         for (Widget node : widgetSet) {
-            System.out.println(node);
+            LogUtil.debug(node.toString());
         }
 
-        System.out.println("--------------------[Action report]--------------------");
+        LogUtil.debug("--------------------[Action report]--------------------");
         int actionCount = actionList.size();
-        System.out.println("Actions count: " + actionCount);
+        LogUtil.debug("Actions count: " + actionCount);
         for (Action action : actionList) {
-            System.out.println(action);
+            LogUtil.debug(action.toString());
         }
     }
 
@@ -237,5 +237,11 @@ public abstract class AbstractMonkey {
                 }
             }
         }
+    }
+
+    public void summary(int tick){
+        String info = "Activity count " + getActivitySet().size() + " | ";
+        info += "Widget count " + getWidgetSet().size() + " | ";
+        LogUtil.info("Tick  "+ tick + " : " + info);
     }
 }

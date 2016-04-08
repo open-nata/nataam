@@ -3,7 +3,7 @@ NataAM is built for automating the process of UI Testing .
 
 
 # 图标
-![](images/logo.png)
+![](images/logo.jpg)
 
 # 思维导图
 ![](images/mind.png)

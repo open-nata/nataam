@@ -18,7 +18,8 @@ public class QLearningMonkey extends AbstractMonkey {
     private Map<State, Map<Action, Double>> QMap = new HashMap<>();
 
     //final variables
-    private final int ACTION_COUNTS = 200;
+    private final int ACTION_COUNTS = 1000;
+    private final int Frequency = 100;
     private final double ALPHA = 0.2;
     private final double GAMA = 0.3;
     private final double PUNISH_OUT_PACKAGE = -10.0;
@@ -116,9 +117,6 @@ public class QLearningMonkey extends AbstractMonkey {
         return state;
     }
 
-
-
-
     @Override
     public void play() {
         startApp();
@@ -146,6 +144,10 @@ public class QLearningMonkey extends AbstractMonkey {
             updateValue(curState, chosenAction, nextState);
 
             curState = nextState;
+
+            if(cnt % Frequency== 0){
+                summary(cnt/Frequency);
+            }
         }
     }
 
@@ -153,12 +155,20 @@ public class QLearningMonkey extends AbstractMonkey {
     public void report() {
         super.report();
 
-        System.out.println("--------------------[State report]--------------------");
+        LogUtil.debug("--------------------[State report]--------------------");
         int stateCount = QMap.size();
-        System.out.println("State count: " + stateCount);
+        LogUtil.debug("State count: " + stateCount);
         for (State state : QMap.keySet()) {
-            System.out.println(state);
+            LogUtil.debug(state.toString());
         }
+    }
+
+    @Override
+    public void summary(int tick){
+        String info ="States count " + QMap.size() + " | ";
+        info += "Activity count " + getActivitySet().size() + " | ";
+        info += "Widget count " + getWidgetSet().size() + " | ";
+        LogUtil.info("Tick  "+ tick + " : " + info);
     }
 
 }
