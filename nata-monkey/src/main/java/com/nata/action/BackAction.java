@@ -22,7 +22,7 @@ public class BackAction extends Action{
         if(count == 0){
             return BACK__REWARD;
         }else{
-            return 1.0/count;
+            return BACK__REWARD/10/count;
         }
     }
 

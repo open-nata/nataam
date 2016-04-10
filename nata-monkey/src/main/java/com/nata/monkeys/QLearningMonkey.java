@@ -53,7 +53,6 @@ public class QLearningMonkey extends AbstractMonkey {
             }
         }
         Collections.shuffle(chosenActions);
-        System.out.println("charming_max: " + charming_max);
         return chosenActions.get(0);
     }
 
@@ -122,7 +121,7 @@ public class QLearningMonkey extends AbstractMonkey {
 
         // repeat select -> execute -> update
         int cnt = 0;
-        while ((++cnt) < ACTION_COUNTS) {
+        while ((++cnt) <= ACTION_COUNTS) {
             if (!isInCurrentPkg()) {
                 getBackToApp();
                 curState =  getCurrentState();

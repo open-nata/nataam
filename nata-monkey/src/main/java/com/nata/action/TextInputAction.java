@@ -13,7 +13,7 @@ public class TextInputAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
     private String text = null;
-    private final double TEXT_INPUT_REWARD = BASE + 0.5;
+    private final double TEXT_INPUT_REWARD = BASE + 1.0;
 
     public TextInputAction(AdbDevice device,Widget widget){
         super(ActionType.INPUT);
@@ -40,7 +40,7 @@ public class TextInputAction extends Action{
         if(count == 0){
             return TEXT_INPUT_REWARD;
         }else{
-            return 1.0/count;
+            return TEXT_INPUT_REWARD/10/count;
         }
     }
 

@@ -12,7 +12,7 @@ public class LongClickAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
 
-    private final double LONG_CLICK_REWARD = BASE - 0.2;
+    private final double LONG_CLICK_REWARD = BASE - 1.0;
 
     public LongClickAction(AdbDevice device,Widget widget){
         super(ActionType.LONG_CLICK);
@@ -31,7 +31,7 @@ public class LongClickAction extends Action{
         if(count == 0){
             return LONG_CLICK_REWARD;
         }else{
-            return 1.0/count;
+            return LONG_CLICK_REWARD/10/count;
         }
     }
 

@@ -73,17 +73,19 @@ public class ActionFactory {
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
             if(widget.getScrollable().equals("true")){
-                Action swipeAction = CreateSwipeAction(widget,SwipeDirection.RIGHT);
-                actionTable.put(swipeAction,swipeAction.getReward());
+                if(widget.getClassName().equals("android.widget.ListView")){
+                    Action swipeAction = CreateSwipeAction(widget,SwipeDirection.DOWN);
+                    actionTable.put(swipeAction,swipeAction.getReward());
 
-                swipeAction = CreateSwipeAction(widget,SwipeDirection.LEFT);
-                actionTable.put(swipeAction,swipeAction.getReward());
+                    swipeAction = CreateSwipeAction(widget,SwipeDirection.UP);
+                    actionTable.put(swipeAction,swipeAction.getReward());
+                }else if(widget.getClassName().equals("android.support.v4.view.ViewPager")){
+                    Action swipeAction = CreateSwipeAction(widget,SwipeDirection.RIGHT);
+                    actionTable.put(swipeAction,swipeAction.getReward());
 
-                swipeAction = CreateSwipeAction(widget,SwipeDirection.DOWN);
-                actionTable.put(swipeAction,swipeAction.getReward());
-
-                swipeAction = CreateSwipeAction(widget,SwipeDirection.UP);
-                actionTable.put(swipeAction,swipeAction.getReward());
+                    swipeAction = CreateSwipeAction(widget,SwipeDirection.LEFT);
+                    actionTable.put(swipeAction,swipeAction.getReward());
+                }
             }
 
 
@@ -93,6 +95,9 @@ public class ActionFactory {
                     || widget.getClassName().equals("android.widget.Button")
                     || widget.getClassName().equals("android.widget.ImageView")
                     || widget.getClassName().equals("android.widget.RelativeLayout")
+                    || widget.getClassName().equals("android.widget.LinearLayout")
+                    || widget.getClassName().equals("android.widget.CheckedTextView")
+                    || widget.getClassName().equals("android.widget.CheckBox")
             )
                     && widget.getClickable().equals("true") ){
                 Action tapAction  = CreateTapAction(widget);

@@ -10,7 +10,7 @@ import com.nata.cmd.AdbDevice;
  */
 public class MenuAction extends Action{
     private AdbDevice device = null;
-    private final double MENU_REWARD = BASE - 0.1;
+    private final double MENU_REWARD = BASE - 0.3;
 
 
     public MenuAction(AdbDevice device){
@@ -28,7 +28,7 @@ public class MenuAction extends Action{
         if(count == 0){
             return MENU_REWARD;
         }else{
-            return 1.0/count;
+            return MENU_REWARD/10/count;
         }
     }
 

@@ -11,7 +11,7 @@ import com.nata.element.Widget;
 public class TapAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
-    private final double TAP_REWARD = BASE + 0.4;
+    private final double TAP_REWARD = BASE + 0.8;
     public TapAction(AdbDevice device,Widget widget){
         super(ActionType.TAP);
         this.device = device;
@@ -29,7 +29,7 @@ public class TapAction extends Action{
         if(count == 0){
             return TAP_REWARD;
         }else{
-            return 1.0/count;
+            return TAP_REWARD/10/count;
         }
     }
 

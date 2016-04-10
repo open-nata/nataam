@@ -86,4 +86,6 @@
 - Add ImageUtil to compare two pictures
 - Add Reward to State
 - Increase the initial Action Reward
-
+- Add (LinerLayout,checkBox,Radio)click Action
+- Adjust ListView and ViewPager in its own direction
+- Adjust Reward Strategy

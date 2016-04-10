@@ -12,7 +12,7 @@ public class SwipeAction extends Action {
     private AdbDevice device;
     private SwipeDirection direction;
     private Widget widget;
-    private final double SWIPE_REWARD = BASE + 0.3;
+    private final double SWIPE_REWARD = BASE + 0.6;
 
     public SwipeAction(AdbDevice device, Widget widget,SwipeDirection direction) {
         super(ActionType.SWIPE);
@@ -39,9 +39,12 @@ public class SwipeAction extends Action {
     @Override
     public double getReward() {
         if(count == 0){
-            return SWIPE_REWARD;
+            if(direction == SwipeDirection.LEFT || direction == SwipeDirection.DOWN)
+               return SWIPE_REWARD + 0.1;
+            else
+                return SWIPE_REWARD - 0.1;
         }else{
-            return 1.0/count;
+            return SWIPE_REWARD/10/count;
         }
     }
 
