@@ -27,6 +27,7 @@ public abstract class AbstractMonkey {
     private final AdbDevice device;
     private Set<Widget> widgetSet = new HashSet<>();
     private Set<String> activitySet = new HashSet<>();
+    private Set<State> stateSet = new HashSet<>();
     private List<Action> actionList = new ArrayList<>();
 
     private Action backAction = null;
@@ -91,10 +92,19 @@ public abstract class AbstractMonkey {
         List<Widget> widgets = GrabCurrentUi();
         State state = new State(appPackage, curActivity,widgets);
 
-        if (isInCurrentPkg()) {
-            activitySet.add(state.getActivity());
+        if(!stateSet.contains(state)){
+            stateSet.add(state);
+            if (isInCurrentPkg()) {
+                activitySet.add(state.getActivity());
+            }
+        }else {
+            for (State oldState : stateSet) {
+                if (oldState.equals(state)) {
+                    state = oldState;
+                    state.increaseVisit();
+                }
+            }
         }
-
         return state;
     }
 

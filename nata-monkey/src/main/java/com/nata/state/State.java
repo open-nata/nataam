@@ -12,13 +12,17 @@ import java.util.*;
 public class State {
     private String appPackage = null;
     private String activity = null;
-//    private Set<Widget> widgetSet= new HashSet<>();
     private List<Widget> widgetList = null;
+
+    // the times that enter int this state
+    private int visit;
+    private final double FirstReward = 2.0;
 
     public State(String appPackage,String activity,List<Widget> widgetList) {
         this.appPackage = appPackage;
         this.activity = activity;
         this.widgetList = widgetList;
+        this.visit = 1;
     }
 
     public String getAppPackage(){
@@ -27,6 +31,18 @@ public class State {
 
     public String getActivity(){
         return activity;
+    }
+
+    public double getReward(){
+        if(visit == 1){
+            return FirstReward;
+        }else{
+            return 0.01 * widgetList.size()/visit;
+        }
+    }
+
+    public void increaseVisit(){
+        visit++;
     }
 
 //    public void addWidget(Widget node) {
@@ -86,11 +102,6 @@ public class State {
         if(!other.widgetList.containsAll(widgetList)){
             return false;
         }
-//        for (Widget node : widgetSet) {
-//            if (!other.widgetSet.contains(node)) {
-//                return false;
-//            }
-//        }
 
         return true;
     }

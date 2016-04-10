@@ -12,7 +12,7 @@ import java.util.Random;
  * Update: 2016-04-06 18:08
  */
 public class PureRandomMonkey extends AbstractMonkey{
-    private final int ACTION_COUNTS = 500;
+    private final int ACTION_COUNTS = 1000;
     private final int Frequency = 100;
     private Random random = new Random();
     private String[] actions= {"TAP","SWIPE","BACK","HOME","MENU","LONG_CLICK","TEXT","RESTART"};

@@ -30,8 +30,9 @@ public class AdbDevice {
 //        System.out.println(device.getFocusedPackageAndActivity());
 //        device.screenShot("temp");
 
-        System.out.println(device.getCurrentPackageName());
+//        System.out.println(device.getCurrentPackageName());
 //        device.dumpUI();
+        device.clearAppData("com.cvicse.zhnt");
     }
 
 

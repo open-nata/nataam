@@ -82,3 +82,8 @@
 ### (2016/4/8)
 - Doing experiments
 
+### (2016/4/10)
+- Add ImageUtil to compare two pictures
+- Add Reward to State
+- Increase the initial Action Reward
+

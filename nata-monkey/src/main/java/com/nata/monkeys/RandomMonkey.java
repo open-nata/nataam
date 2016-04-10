@@ -13,7 +13,7 @@ import java.util.*;
  * Update: 2016-01-18 18:49
  */
 public class RandomMonkey extends AbstractMonkey {
-    private final int ACTION_COUNTS = 500;
+    private final int ACTION_COUNTS = 1000;
     private final int Frequency = 100;
     private Set<String> activitySet = new HashSet<>();
 

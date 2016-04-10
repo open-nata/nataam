@@ -10,7 +10,7 @@ import java.util.Objects;
 public abstract class Action {
     protected String type;
     protected int count = 0;
-    protected final double BASE = 2.0;
+    protected final double BASE = 10.0;
 
     public Action(String type) {
         this.type = type;

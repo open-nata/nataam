@@ -20,10 +20,8 @@ public class QLearningMonkey extends AbstractMonkey {
     //final variables
     private final int ACTION_COUNTS = 1000;
     private final int Frequency = 100;
-    private final double ALPHA = 0.2;
-    private final double GAMA = 0.3;
-    private final double PUNISH_OUT_PACKAGE = -10.0;
-    private final double PUNISH_SWIPE_NOTWORK= - 2.0;
+    private final double GAMA = 0.7;
+    private final double PUNISH_OUT_PACKAGE = -2.0;
 
     List<Action> chosenActions = new ArrayList<>();
 
@@ -33,6 +31,7 @@ public class QLearningMonkey extends AbstractMonkey {
 
     private Action chooseActionFromState(State curState) {
         Map<Action, Double> actionTable = QMap.get(curState);
+
         if (actionTable == null || actionTable.size() == 0) {
             System.out.println("Error cannot get actionTable or no action can be choosed");
             return getBackAction();
@@ -54,6 +53,7 @@ public class QLearningMonkey extends AbstractMonkey {
             }
         }
         Collections.shuffle(chosenActions);
+        System.out.println("charming_max: " + charming_max);
         return chosenActions.get(0);
     }
 
@@ -62,17 +62,15 @@ public class QLearningMonkey extends AbstractMonkey {
 
         if (!nextState.getAppPackage().equals(getPkg())) {
             reward += PUNISH_OUT_PACKAGE;
+        }else{
+            reward += nextState.getReward();
         }
 
-        // if the swipe action makes the widget not change then give punish
+//        // if the swipe action makes the widget not change then give reward
 //        if (action instanceof SwipeAction) {
-//            SwipeAction swipeAction = (SwipeAction) action;
-//            Widget widget = swipeAction.getWidget();
-//            Widget widget1 = nextState.getWidgetByResourceId(widget.getResourceId());
-//            if(widget.equals(widget1) && widget.getText().equals(widget1.getText())){
-//                reward += PUNISH_SWIPE_NOTWORK;
-//            }
+//
 //        }
+
 
         // the action reward
         reward += action.getReward();
@@ -111,7 +109,7 @@ public class QLearningMonkey extends AbstractMonkey {
             Map<Action, Double> table = getActionFactory().getActionsFromState(state);
             LogUtil.debug("ActionTable : " + table.toString());
             QMap.put(state, table);
-            getDevice().screenShot(state.hashCode() + "");
+//          getDevice().screenShot(state.hashCode() + "");
         }
 
         return state;
