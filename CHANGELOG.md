@@ -89,3 +89,6 @@
 - Add (LinerLayout,checkBox,Radio)click Action
 - Adjust ListView and ViewPager in its own direction
 - Adjust Reward Strategy
+
+### (2016/4/11)
+- Rewrite rules structure

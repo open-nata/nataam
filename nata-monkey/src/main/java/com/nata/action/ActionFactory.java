@@ -101,7 +101,7 @@ public class ActionFactory {
             )
                     && widget.getClickable().equals("true") ){
                 Action tapAction  = CreateTapAction(widget);
-                Double value= actionTable.put(tapAction,tapAction.getReward());
+                actionTable.put(tapAction,tapAction.getReward());
             }
 
             //long click actions

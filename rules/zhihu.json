@@ -1,15 +1,18 @@
 {
-  "type": "keyvalue",
-  "rules": [
+  "keyvalues": [
     {
-      "resouceId": "com.zhihu.android:id/password",
-      "value": "mcl896345253",
-      "type": "input"
+      "resourceId": "com.zhihu.android:id/password",
+      "value": "mcl896345253"
     },
     {
-      "resouceId": "com.zhihu.android:id/username",
-      "value": "15996270647",
-      "type": "input"
+      "resourceId": "com.zhihu.android:id/username",
+      "value": "15996270647"
+    }
+  ],
+  "enums" : [
+    {
+      "resourceId": "com.zhihu.android:id/fullname",
+      "enums": ["测试1","测试2","测试3"]
     }
   ]
 }

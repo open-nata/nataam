@@ -177,11 +177,11 @@ public abstract class AbstractMonkey {
         return pkg;
     }
 
-    public void learn(String rulePath){
-        File file = new File(rulePath);
-        Rules rules = RuleParser.parse(file);
-        TextValueDictionary.getInstance().learn(rules);
-    }
+//    public void learn(String rulePath){
+//        File file = new File(rulePath);
+//        Rules rules = RuleParser.parse(file);
+//        TextValueDictionary.getInstance().learn(rules);
+//    }
 
     /**
      * The monkeys know how to play with the device

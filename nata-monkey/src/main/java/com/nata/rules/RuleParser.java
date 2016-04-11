@@ -2,8 +2,10 @@ package com.nata.rules;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * Author: Calvin Meng
@@ -12,12 +14,8 @@ import java.io.*;
  */
 public class RuleParser {
 
-    public Rule parse(String jsonString) {
-        return  JSON.parseObject(jsonString,Rule.class);
-    }
-
     public static Rules parse(File jsonFile){
-        Rules rules = null;
+        Rules rules = new Rules();
         try {
             BufferedReader br = new BufferedReader(new FileReader(jsonFile));
             StringBuilder sb = new StringBuilder();
@@ -27,6 +25,7 @@ public class RuleParser {
             }
             br.close();
             rules = JSON.parseObject(sb.toString(),Rules.class);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,5 +36,7 @@ public class RuleParser {
         File file = new File("rules/zhihu.json");
         RuleParser parser = new RuleParser();
         Rules rules = parser.parse(file);
+        System.out.println(rules.getEnums());
+
     }
 }

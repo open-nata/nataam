@@ -25,6 +25,18 @@ public class State {
         this.visit = 1;
     }
 
+    private int getAvailableActionCount(){
+        int cnt = 0;
+        for (Widget widget:widgetList) {
+            if(widget.getEnabled().equals("true")){
+                if(widget.getClickable().equals("true") || widget.getScrollable().equals("true") || widget.getLong_clickable().equals("true")){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+
     public String getAppPackage(){
         return  appPackage;
     }
@@ -37,7 +49,8 @@ public class State {
         if(visit == 1){
             return FirstReward;
         }else{
-            return 0.01 * widgetList.size()/visit;
+            // make state with more available widgets more attractive
+            return (1.0 + 0.01 * getAvailableActionCount())/visit;
         }
     }
 

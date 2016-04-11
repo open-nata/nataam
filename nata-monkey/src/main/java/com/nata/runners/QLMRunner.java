@@ -19,9 +19,8 @@ public class QLMRunner {
 
         AdbDevice device = new AdbDevice();
         AbstractMonkey qLearningMonkey = new QLearningMonkey(pkg, act, device);
-//      qLearningMonkey.learn("rules/zhihu.json");
+        //      qLearningMonkey.learn("rules/zhihu.json");
         qLearningMonkey.play();
         qLearningMonkey.report();
-
     }
 }

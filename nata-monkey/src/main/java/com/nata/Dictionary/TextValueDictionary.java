@@ -1,9 +1,8 @@
 package com.nata.dictionary;
 
-import com.nata.action.Action;
-import com.nata.action.TextInputAction;
 import com.nata.element.Widget;
-import com.nata.rules.Rule;
+import com.nata.rules.EnumRule;
+import com.nata.rules.KeyValueRule;
 import com.nata.rules.Rules;
 
 import java.util.*;
@@ -36,7 +35,7 @@ public class TextValueDictionary {
     public static Random random = new Random();
 
     private static TextValueDictionary dictionary = null;
-    private Map<String,String> knowledge = new HashMap<>();
+    private Map<String,List<String>> knowledge = new HashMap<>();
 
 
 
@@ -50,12 +49,20 @@ public class TextValueDictionary {
         return dictionary;
     }
 
-    public void learn(Rules rules){
-        List<Rule> ruleList = rules.getRules();
-        for (Rule rule:ruleList) {
-            knowledge.put(rule.getResouceId(),rule.getValue());
-        }
-    }
+//    public void learn(Rules rules){
+//        List<Rule> ruleList = rules.getRules();
+//        for (Rule rule:ruleList) {
+//            if(rule instanceof KeyValueRule){
+//                KeyValueRule keyValueRule= (KeyValueRule)rule;
+//                List<String> list = new ArrayList<>();
+//                list.add(keyValueRule.getValue());
+//                knowledge.put(keyValueRule.getResourceId(),list);
+//            }else if(rule instanceof EnumRule){
+//
+//            }
+//
+//        }
+//    }
 
 //    public void learn(Rule rule){
 //        knowledge.put(rule.getResouceId(),rule.getValue());
@@ -63,9 +70,10 @@ public class TextValueDictionary {
 
     public String getInput(Widget widget){
         String resourceId = widget.getResourceId();
-        String value = knowledge.get(resourceId);
-        if(value != null){
-            return value;
+        List<String> valueList = knowledge.get(resourceId);
+        if(valueList != null){
+            Collections.shuffle(valueList);
+            return valueList.get(0);
         }else{
             return getRandomValidValue();
         }

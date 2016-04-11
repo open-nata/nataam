@@ -9,27 +9,30 @@ import java.util.List;
  * Update: 2016-03-30 21:01
  */
 public class Rules {
-    private String type;
-    private List<Rule> rules  = new ArrayList<>();
+    private List<KeyValueRule> keyvalues  = new ArrayList<>();
+    private List<EnumRule> enums = new ArrayList<>();
 
-    public String getType() {
-        return type;
+    public List<KeyValueRule> getKeyvalues() {
+        return keyvalues;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setKeyvalues(List<KeyValueRule> keyvalues) {
+        this.keyvalues = keyvalues;
     }
 
-    public List<Rule> getRules() {
-        return rules;
+    public void addKeyValue(KeyValueRule rule){
+        keyvalues.add(rule);
     }
 
-    public void setRules(List<Rule> rules) {
-        this.rules = rules;
+    public List<EnumRule> getEnums() {
+        return enums;
     }
 
-    public void addRule(Rule rule){
-        rules.add(rule);
+    public void setEnums(List<EnumRule> enums) {
+        this.enums = enums;
     }
 
+    public void addEnum(EnumRule rule){
+        enums.add(rule);
+    }
 }
