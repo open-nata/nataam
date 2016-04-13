@@ -65,12 +65,6 @@ public class QLearningMonkey extends AbstractMonkey {
             reward += nextState.getReward();
         }
 
-//        // if the swipe action makes the widget not change then give reward
-//        if (action instanceof SwipeAction) {
-//
-//        }
-
-
         // the action reward
         reward += action.getReward();
         return reward;

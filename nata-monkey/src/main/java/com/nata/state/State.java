@@ -18,12 +18,37 @@ public class State {
     private int visit;
     private final double FirstReward = 2.0;
 
+    private ArrayList<ActionEdge> fromEdges;
+    private ArrayList<ActionEdge> outEdges;
+
     public State(String appPackage,String activity,List<Widget> widgetList) {
         this.appPackage = appPackage;
         this.activity = activity;
         this.widgetList = widgetList;
         this.visit = 1;
+
+        fromEdges = new ArrayList<>();
+        outEdges = new ArrayList<>();
     }
+
+    public ArrayList<ActionEdge> getFromEdges() {
+        return fromEdges;
+    }
+
+    public ArrayList<ActionEdge> getOutEdges() {
+        return outEdges;
+    }
+
+    public void addFromEdge(ActionEdge edge){
+        fromEdges.add(edge);
+    }
+
+    public void addToEdge(ActionEdge edge){
+        outEdges.add(edge);
+    }
+
+
+
 
     private int getAvailableActionCount(){
         int cnt = 0;
@@ -57,21 +82,6 @@ public class State {
     public void increaseVisit(){
         visit++;
     }
-
-//    public void addWidget(Widget node) {
-//        widgetSet.add(node);
-//    }
-
-//    public Widget getWidgetByResourceId(String resourceId){
-//       Iterator iterator = widgetSet.iterator();
-//        while(iterator.hasNext()){
-//            Widget widget = (Widget)iterator.next();
-//            if(widget.getResourceId().equals(resourceId)){
-//                return widget;
-//            }
-//        }
-//        return null;
-//    }
 
     public List<Widget> getWidgetSet(){
         return widgetList;
