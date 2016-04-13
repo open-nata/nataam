@@ -18,8 +18,8 @@ public class State {
     private int visit;
     private final double FirstReward = 2.0;
 
-    private ArrayList<ActionEdge> fromEdges;
-    private ArrayList<ActionEdge> outEdges;
+//    private ArrayList<ActionEdge> fromEdges;
+//    private ArrayList<ActionEdge> outEdges;
 
     public State(String appPackage,String activity,List<Widget> widgetList) {
         this.appPackage = appPackage;
@@ -27,25 +27,25 @@ public class State {
         this.widgetList = widgetList;
         this.visit = 1;
 
-        fromEdges = new ArrayList<>();
-        outEdges = new ArrayList<>();
+//        fromEdges = new ArrayList<>();
+//        outEdges = new ArrayList<>();
     }
 
-    public ArrayList<ActionEdge> getFromEdges() {
-        return fromEdges;
-    }
-
-    public ArrayList<ActionEdge> getOutEdges() {
-        return outEdges;
-    }
-
-    public void addFromEdge(ActionEdge edge){
-        fromEdges.add(edge);
-    }
-
-    public void addToEdge(ActionEdge edge){
-        outEdges.add(edge);
-    }
+//    public ArrayList<ActionEdge> getFromEdges() {
+//        return fromEdges;
+//    }
+//
+//    public ArrayList<ActionEdge> getOutEdges() {
+//        return outEdges;
+//    }
+//
+//    public void addFromEdge(ActionEdge edge){
+//        fromEdges.add(edge);
+//    }
+//
+//    public void addToEdge(ActionEdge edge){
+//        outEdges.add(edge);
+//    }
 
 
 

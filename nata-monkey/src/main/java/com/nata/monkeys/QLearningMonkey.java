@@ -4,6 +4,7 @@ import com.nata.action.*;
 import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
 import com.nata.state.State;
+import com.nata.state.StateGraph;
 import com.nata.utils.LogUtil;
 
 import java.util.*;
@@ -15,18 +16,22 @@ import java.util.*;
  */
 public class QLearningMonkey extends AbstractMonkey {
     // <state,action,value>
-    private Map<State, Map<Action, Double>> QMap = new HashMap<>();
+    private Map<State, Map<Action, Double>> QMap;
 
     //final variables
-    private final int ACTION_COUNTS = 1000;
+    private final int ACTION_COUNTS = 10;
     private final int Frequency = 100;
     private final double GAMA = 0.7;
     private final double PUNISH_OUT_PACKAGE = -2.0;
 
-    List<Action> chosenActions = new ArrayList<>();
+    private List<Action> chosenActions ;
+    private StateGraph sg;
 
     public QLearningMonkey(String pkg, String act, AdbDevice device) {
         super("QLearningMonkey", pkg, act, device);
+        QMap = new HashMap<>();
+        chosenActions = new ArrayList<>();
+        sg = new StateGraph();
     }
 
     private Action chooseActionFromState(State curState) {
@@ -133,6 +138,7 @@ public class QLearningMonkey extends AbstractMonkey {
 
             //update Value
             updateValue(curState, chosenAction, nextState);
+            sg.addEdge(curState,nextState,chosenAction);
 
             curState = nextState;
 
@@ -152,6 +158,9 @@ public class QLearningMonkey extends AbstractMonkey {
         for (State state : QMap.keySet()) {
             LogUtil.debug(state.toString());
         }
+
+        LogUtil.debug("--------------------[Graph report]--------------------");
+        sg.makeGraph();
     }
 
     @Override

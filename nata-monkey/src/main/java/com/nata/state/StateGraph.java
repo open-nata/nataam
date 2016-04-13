@@ -1,6 +1,7 @@
 package com.nata.state;
 
 import com.nata.action.Action;
+import com.nata.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,33 @@ public class StateGraph {
     public void addEdge(State fromState, State toState, Action action ){
         ActionEdge edge = new ActionEdge(fromState,toState,action);
         edges.add(edge);
+    }
+
+    public void printActionEdge(){
+        for (ActionEdge edge: edges) {
+          LogUtil.debug(edge.getFromState().hashCode() +" ----" + edge.getFireAction() + "-------->"+ edge.getToState().hashCode());
+        }
+    }
+
+    public void makeGraph(){
+        for (ActionEdge edge: edges) {
+            State fromState = edge.getFromState();
+            State toState = edge.getToState();
+            if(!st.containsKey(fromState)){
+                st.put(fromState,st.size());
+            }
+            if(!st.containsKey(toState)){
+                st.put(toState,st.size());
+            }
+        }
+
+        keys = new State[st.size()];
+
+        for(State state : st.keySet()){
+            keys[st.get(state)] = state;
+        }
+
+        G = new Graph(st.size());
     }
 
 }

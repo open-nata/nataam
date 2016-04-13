@@ -97,3 +97,5 @@
 - Add DFS Monkey
 - Add StateGraph to manage the states and action relationships
 - Add ActionEdge to link two states
+- Add HttpClient package to help send http requests
+- Add HttpUtil

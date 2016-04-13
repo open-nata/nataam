@@ -17,8 +17,8 @@ public class ActionEdge {
         this.toState = toState;
         this.fireAction = action;
 
-        fromState.addToEdge(this);
-        toState.addFromEdge(this);
+//        fromState.addToEdge(this);
+//        toState.addFromEdge(this);
     }
 
     public State getFromState() {
