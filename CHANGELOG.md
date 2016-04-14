@@ -98,7 +98,10 @@
 - Add StateGraph to manage the states and action relationships
 - Add ActionEdge to link two states
 - Add HttpClient package to help send http requests
-- Add HttpUtil
+- Add HttpUtil to send post request
 
 ### (2016/4/14)
-- Add Module Server written in node.js
+- Add Module nata-server written in node.js
+- Send actions to sever with socket.io
+- Add mongoose model : TestUnit, Action, State, Widget
+- Add config and connect mongodb

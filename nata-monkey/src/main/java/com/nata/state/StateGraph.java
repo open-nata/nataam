@@ -29,7 +29,7 @@ public class StateGraph {
         ActionEdge edge = new ActionEdge(fromState,toState,action);
         edges.add(edge);
         try {
-            HttpUtil.post(fromState.toString() + "     " + action.toString());
+            HttpUtil.post(action.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,19 +3,23 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+      <style>
+          #messages { list-style-type: none; margin: 0; padding: 0; }
+          #messages li { padding: 5px 10px; }
+          #messages li:nth-child(odd) { background: #eee; }
+      </style>
+
   </head>
   <body>
     <h1><%= title %></h1>
-    <p id="message"><%= title %></p>
+    <ul id="messages"></ul>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
-      socket.on('news', function (data) {
-        $('#message').text(data.hello);
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
+      socket.on('message', function (message) {
+          $('#messages').append($('<li>').text(message));
       });
     </script>
   </body>
