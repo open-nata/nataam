@@ -39,3 +39,5 @@ logs/
 
 #dump file
 dumps/
+
+node_modules/

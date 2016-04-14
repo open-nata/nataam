@@ -1,8 +1,10 @@
 package com.nata.state;
 
 import com.nata.action.Action;
+import com.nata.utils.HttpUtil;
 import com.nata.utils.LogUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,6 +28,11 @@ public class StateGraph {
     public void addEdge(State fromState, State toState, Action action ){
         ActionEdge edge = new ActionEdge(fromState,toState,action);
         edges.add(edge);
+        try {
+            HttpUtil.post(fromState.toString() + "     " + action.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void printActionEdge(){

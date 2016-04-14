@@ -19,12 +19,12 @@ import java.util.List;
  */
 public class HttpUtil {
 
-    public static void post() throws IOException {
+    public static void post(String message) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost("http://localhost:3000/hello");
+        HttpPost httpPost = new HttpPost("http://localhost:3000/");
 
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("message", "hello"));
+        params.add(new BasicNameValuePair("message", message));
         httpPost.setEntity(new UrlEncodedFormEntity(params));
 
         CloseableHttpResponse response = client.execute(httpPost);

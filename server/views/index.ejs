@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p id="message"><%= title %></p>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      socket.on('news', function (data) {
+        $('#message').text(data.hello);
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+    </script>
+  </body>
+</html>
