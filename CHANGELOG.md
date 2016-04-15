@@ -108,3 +108,4 @@
 
 ### (2016/4/15)
 - Add TestResult to collect test information and interact with nata-server
+- Rewrite server views

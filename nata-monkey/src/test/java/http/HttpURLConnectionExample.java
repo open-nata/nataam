@@ -1,4 +1,4 @@
-package com.nata.http;
+package http;
 
 /**
  * Author: Calvin Meng

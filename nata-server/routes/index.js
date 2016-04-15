@@ -13,15 +13,20 @@ module.exports = function(io){
         res.render('index', { title: '实验记录' });
     });
 
-    router.post('/live',function(req,res,next){
+
+    router.post('/hello', function (req,res,next) {
+        console.log(req.body.message) ;
+        res.send("");
+    });
+
+    router.post('/activity',function(req,res,next){
         var message = req.body.message;
-        io.sockets.emit("message", message);
+        console.log(message);
+        io.sockets.emit("activity", message);
         res.send({});
     });
 
-    router.post('/test',function(req,res,next){
-        var 
-    });
+
 
     return router;
 };

@@ -41,7 +41,13 @@ public class TestResult {
     }
 
     public void addActivity(String activity){
-        activitySet.add(activity);
+        if(activitySet.add(activity)){
+            try {
+                HttpUtil.postActivity(activity);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public Set<State> getStateSet(){
@@ -99,11 +105,11 @@ public class TestResult {
 
         LogUtil.info("Tick  "+ summaryList.size()+ " : " + info);
 
-        try {
-            HttpUtil.postSummary(info);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            HttpUtil.postSummary(info);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

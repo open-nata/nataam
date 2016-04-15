@@ -1,26 +1,88 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-      <style>
-          #messages { list-style-type: none; margin: 0; padding: 0; }
-          #messages li { padding: 5px 10px; }
-          #messages li:nth-child(odd) { background: #eee; }
-      </style>
+<% include partials/header %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>
+                    运行情况
+                </h1>
+            </div>
+        </div>
+    </div>
 
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <ul id="messages"></ul>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      var socket = io();
-      socket.on('message', function (message) {
-          $('#messages').append($('<li>').text(message));
-      });
-    </script>
-  </body>
-</html>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Activities
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr >
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            内容
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="activities">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Widgets</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="docsPanel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Actions</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="docsPanel">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">States</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="docsPanel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    var activityCount = 0;
+    socket.on('activity', function (message) {
+        activityCount++;
+        var content = "<tr><td>" + activityCount + "</td><td>" + message + "</td>";
+        $('#activities').append(content);
+    });
+</script>
+
+<% include partials/footer %>

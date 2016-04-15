@@ -53,4 +53,10 @@ public class HttpUtil {
         post("http://localhost:3000/summary",messages);
     }
 
+    public static void postActivity(String activity) throws IOException {
+        ArrayList<String> messages = new ArrayList<>();
+        messages.add(activity);
+        post("http://localhost:3000/activity",messages);
+    }
+
 }
