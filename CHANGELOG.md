@@ -105,3 +105,6 @@
 - Send actions to sever with socket.io
 - Add mongoose model : TestUnit, Action, State, Widget
 - Add config and connect mongodb
+
+### (2016/4/15)
+- Add TestResult to collect test information and interact with nata-server

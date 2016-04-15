@@ -13,13 +13,16 @@ import java.util.*;
  * Update: 2016-01-18 18:49
  */
 public class RandomMonkey extends AbstractMonkey {
-    private final int ACTION_COUNTS = 1000;
-    private final int Frequency = 100;
     private Set<String> activitySet = new HashSet<>();
 
-    public RandomMonkey(String pkg, String act, AdbDevice device) {
-        super("randomMonkey", pkg, act, device);
+    public RandomMonkey(int actionCount,String pkg, String act, AdbDevice device) {
+        super("randomMonkey",actionCount, pkg, act, device);
     }
+
+    public RandomMonkey(String pkg, String act, AdbDevice device) {
+        this(1000,pkg,act,device);
+    }
+
 
     private Action chooseActionFromState(State curState) {
         Map<Action, Double> actionTable = getActionFactory().getActionsFromState(curState);
@@ -60,7 +63,7 @@ public class RandomMonkey extends AbstractMonkey {
             curState = getCurrentState();
 
             if(cnt % Frequency== 0){
-                summary(cnt/Frequency);
+                summary();
             }
         }
     }

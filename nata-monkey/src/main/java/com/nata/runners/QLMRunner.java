@@ -18,7 +18,7 @@ public class QLMRunner {
         String act = ".LoadingActivity";
 
         AdbDevice device = new AdbDevice();
-        AbstractMonkey qLearningMonkey = new QLearningMonkey(pkg, act, device);
+        AbstractMonkey qLearningMonkey = new QLearningMonkey(10,pkg, act, device);
         //      qLearningMonkey.learn("rules/zhihu.json");
         qLearningMonkey.play();
         qLearningMonkey.report();

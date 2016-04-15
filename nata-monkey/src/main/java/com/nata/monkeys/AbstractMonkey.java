@@ -21,14 +21,13 @@ import java.util.*;
  * Update: 2016-01-13 13:59
  */
 public abstract class AbstractMonkey {
+    protected final int ACTION_COUNTS;
+    protected final int Frequency = 100;
     private final String name;
     private final String pkg;
     private final String act;
     private final AdbDevice device;
-    private Set<Widget> widgetSet = new HashSet<>();
-    private Set<String> activitySet = new HashSet<>();
-    private Set<State> stateSet = new HashSet<>();
-    private List<Action> actionList = new ArrayList<>();
+    private TestResult testResult;
 
     private Action backAction = null;
     private Action homeAction = null;
@@ -37,16 +36,19 @@ public abstract class AbstractMonkey {
     private ActionFactory actionFactory = null;
 
 
-    public AbstractMonkey(String name, String pkg, String act, AdbDevice device) {
+    public AbstractMonkey(String name,int actionCount,String pkg, String act, AdbDevice device) {
         this.name = name;
         this.pkg = pkg;
         this.act = act;
         this.device = device;
+        this.ACTION_COUNTS = actionCount;
 
         actionFactory = new ActionFactory(device);
         backAction = actionFactory.createBackAction();
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
+
+        testResult = new TestResult(name,actionCount);
     }
 
     public Action getBackAction() {
@@ -72,7 +74,7 @@ public abstract class AbstractMonkey {
         clearAppData();
         LogUtil.info("App data cleaned!");
         restartAction.fire();
-        actionList.add(restartAction);
+        testResult.addAction(restartAction);
         LogUtil.info("Starting app success!");
     }
 
@@ -82,7 +84,7 @@ public abstract class AbstractMonkey {
      */
     public void executeAction(Action action){
         action.fire();
-        actionList.add(action);
+        testResult.addAction(action);
         lastAction = action;
     }
 
@@ -92,13 +94,13 @@ public abstract class AbstractMonkey {
         List<Widget> widgets = GrabCurrentUi();
         State state = new State(appPackage, curActivity,widgets);
 
-        if(!stateSet.contains(state)){
-            stateSet.add(state);
+        if(!testResult.containState(state)){
+            testResult.addState(state);
             if (isInCurrentPkg()) {
-                activitySet.add(state.getActivity());
+                testResult.addActivity(state.getActivity());
             }
         }else {
-            for (State oldState : stateSet) {
+            for (State oldState : testResult.getStateSet()) {
                 if (oldState.equals(state)) {
                     state = oldState;
                     state.increaseVisit();
@@ -116,9 +118,6 @@ public abstract class AbstractMonkey {
         return device.getCurrentActivity();
     }
 
-    protected Set<String> getActivitySet() {
-        return activitySet;
-    }
 
     public boolean isInCurrentPkg() {
         return device.getCurrentPackageName().equals(pkg);
@@ -138,7 +137,7 @@ public abstract class AbstractMonkey {
                 widgetsInfo += widget;
                 // only add the widgets in the app
                 if(widget.getPackageName().equals(getPkg())){
-                    widgetSet.add(widget);
+                    testResult.addWidget(widget);
                 }
             }
             LogUtil.debug(widgetsInfo);
@@ -156,21 +155,9 @@ public abstract class AbstractMonkey {
         return null;
     }
 
-    protected Set<Widget> getWidgetSet(){
-        return widgetSet;
-    }
-
     //TODO: detect errors,how?
     public boolean isCrashed() {
         return false;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAct() {
-        return act;
     }
 
     public String getPkg() {
@@ -197,26 +184,7 @@ public abstract class AbstractMonkey {
      * They can report the running status after they stop
      */
     public void report(){
-        LogUtil.debug("--------------------[Activities report]--------------------");
-        int activityCount = activitySet.size();
-        LogUtil.debug("Activity count: " + activityCount);
-        for (String activity : activitySet) {
-            LogUtil.debug(activity);
-        }
-
-        LogUtil.debug("--------------------[Widget report]--------------------");
-        int widgetCount = widgetSet.size();
-        LogUtil.debug("Widget count: " + widgetCount);
-        for (Widget node : widgetSet) {
-            LogUtil.debug(node.toString());
-        }
-
-        LogUtil.debug("--------------------[Action report]--------------------");
-        int actionCount = actionList.size();
-        LogUtil.debug("Actions count: " + actionCount);
-        for (Action action : actionList) {
-            LogUtil.debug(action.toString());
-        }
+        testResult.report();
     }
 
     /**
@@ -249,9 +217,7 @@ public abstract class AbstractMonkey {
         }
     }
 
-    public void summary(int tick){
-        String info = "Activity count " + getActivitySet().size() + " | ";
-        info += "Widget count " + getWidgetSet().size() + " | ";
-        LogUtil.info("Tick  "+ tick + " : " + info);
+    public void summary(){
+        testResult.summary();
     }
 }

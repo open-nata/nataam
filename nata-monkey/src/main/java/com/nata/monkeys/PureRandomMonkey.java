@@ -12,19 +12,23 @@ import java.util.Random;
  * Update: 2016-04-06 18:08
  */
 public class PureRandomMonkey extends AbstractMonkey{
-    private final int ACTION_COUNTS = 1000;
-    private final int Frequency = 100;
+
     private Random random = new Random();
     private String[] actions= {"TAP","SWIPE","BACK","HOME","MENU","LONG_CLICK","TEXT","RESTART"};
 
     private int screenX;
     private int screenY;
     private String lastAction;
-    public PureRandomMonkey(String pkg, String act, AdbDevice device) {
-        super("PureRandomMonkey", pkg, act, device);
+
+    public PureRandomMonkey(int actionCount,String pkg, String act, AdbDevice device) {
+        super("PureRandomMonkey",actionCount,pkg, act, device);
         int []resolutions = device.getScreenResolution();
         screenX = resolutions[0];
         screenY = resolutions[1];
+    }
+
+    public PureRandomMonkey(String pkg, String act, AdbDevice device){
+        this(1000,pkg,act,device);
     }
 
     public void tap(){
@@ -102,7 +106,7 @@ public class PureRandomMonkey extends AbstractMonkey{
             LogUtil.debug("LastAction : " + lastAction);
             getCurrentState();
             if(cnt % Frequency== 0){
-                summary(cnt/Frequency);
+                summary();
             }
         }
     }

@@ -19,19 +19,21 @@ public class QLearningMonkey extends AbstractMonkey {
     private Map<State, Map<Action, Double>> QMap;
 
     //final variables
-    private final int ACTION_COUNTS = 10;
-    private final int Frequency = 100;
     private final double GAMA = 0.7;
     private final double PUNISH_OUT_PACKAGE = -2.0;
 
     private List<Action> chosenActions ;
     private StateGraph sg;
 
-    public QLearningMonkey(String pkg, String act, AdbDevice device) {
-        super("QLearningMonkey", pkg, act, device);
+    public QLearningMonkey(int actionCount,String pkg, String act, AdbDevice device) {
+        super("QLearningMonkey",actionCount,pkg, act, device);
         QMap = new HashMap<>();
         chosenActions = new ArrayList<>();
         sg = new StateGraph();
+    }
+
+    public QLearningMonkey(String pkg, String act, AdbDevice device){
+        this(1000,pkg,act,device);
     }
 
     private Action chooseActionFromState(State curState) {
@@ -138,12 +140,12 @@ public class QLearningMonkey extends AbstractMonkey {
 
             //update Value
             updateValue(curState, chosenAction, nextState);
-            sg.addEdge(curState,nextState,chosenAction);
+//            sg.addEdge(curState,nextState,chosenAction);
 
             curState = nextState;
 
             if(cnt % Frequency== 0){
-                summary(cnt/Frequency);
+                summary();
             }
         }
     }
@@ -152,23 +154,9 @@ public class QLearningMonkey extends AbstractMonkey {
     public void report() {
         super.report();
 
-        LogUtil.debug("--------------------[State report]--------------------");
-        int stateCount = QMap.size();
-        LogUtil.debug("State count: " + stateCount);
-        for (State state : QMap.keySet()) {
-            LogUtil.debug(state.toString());
-        }
 
-        LogUtil.debug("--------------------[Graph report]--------------------");
-        sg.makeGraph();
+
+//        LogUtil.debug("--------------------[Graph report]--------------------");
+//        sg.makeGraph();
     }
-
-    @Override
-    public void summary(int tick){
-        String info ="States count " + QMap.size() + " | ";
-        info += "Activity count " + getActivitySet().size() + " | ";
-        info += "Widget count " + getWidgetSet().size() + " | ";
-        LogUtil.info("Tick  "+ tick + " : " + info);
-    }
-
 }

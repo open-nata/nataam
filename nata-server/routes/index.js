@@ -10,13 +10,17 @@ module.exports = function(io){
 
     /* GET home page. */
     router.get('/', function(req, res, next) {
-        res.render('index', { title: 'Express' });
+        res.render('index', { title: '实验记录' });
     });
 
-    router.post('/',function(req,res,next){
+    router.post('/live',function(req,res,next){
         var message = req.body.message;
         io.sockets.emit("message", message);
         res.send({});
+    });
+
+    router.post('/test',function(req,res,next){
+        var 
     });
 
     return router;

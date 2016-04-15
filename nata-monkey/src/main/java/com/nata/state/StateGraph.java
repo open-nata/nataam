@@ -28,11 +28,6 @@ public class StateGraph {
     public void addEdge(State fromState, State toState, Action action ){
         ActionEdge edge = new ActionEdge(fromState,toState,action);
         edges.add(edge);
-        try {
-            HttpUtil.post(action.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void printActionEdge(){
