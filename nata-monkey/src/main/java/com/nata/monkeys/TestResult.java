@@ -7,10 +7,7 @@ import com.nata.utils.HttpUtil;
 import com.nata.utils.LogUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Author: Calvin Meng
@@ -37,7 +34,13 @@ public class TestResult {
     }
 
     public void addWidget(Widget widget){
-        widgetSet.add(widget);
+        if(widgetSet.add(widget)){
+            try {
+                HttpUtil.postWidget(widget.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void addActivity(String activity){
@@ -55,7 +58,14 @@ public class TestResult {
     }
 
     public void addState(State state){
-        stateSet.add(state);
+        if(stateSet.add(state)){
+            try {
+                HttpUtil.postState(state.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public boolean containState(State state){
@@ -64,6 +74,11 @@ public class TestResult {
 
     public void addAction(Action action){
         actionList.add(action);
+        try {
+            HttpUtil.postAction(action.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void report(){
@@ -105,11 +120,16 @@ public class TestResult {
 
         LogUtil.info("Tick  "+ summaryList.size()+ " : " + info);
 
-//        try {
-//            HttpUtil.postSummary(info);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        HashMap<String,String> summary = new HashMap<>();
+        summary.put("action",actionList.size()+"");
+        summary.put("activity",activitySet.size()+"");
+        summary.put("widget",widgetSet.size()+"");
+        summary.put("state",stateSet.size()+"");
+        try {
+            HttpUtil.postSummary(summary);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

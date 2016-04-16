@@ -109,3 +109,7 @@
 ### (2016/4/15)
 - Add TestResult to collect test information and interact with nata-server
 - Rewrite server views
+
+### (2016/4/16)
+- add action ,state ,widget ,activity states show
+- Using Echarts to show the widgets and activity increases with actions 

@@ -22,7 +22,7 @@ import java.util.*;
  */
 public abstract class AbstractMonkey {
     protected final int ACTION_COUNTS;
-    protected final int Frequency = 100;
+    protected final int Frequency = 2;
     private final String name;
     private final String pkg;
     private final String act;
