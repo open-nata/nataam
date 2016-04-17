@@ -13,7 +13,6 @@ public class DfsMonkey extends AbstractMonkey{
 
     private State rootState;
     private State curState;
-    private StateGraph tree = new StateGraph();
 
     public DfsMonkey(int actionCount,String pkg, String act, AdbDevice device) {
         super("DfsMonkey",actionCount,pkg, act, device);
@@ -22,7 +21,6 @@ public class DfsMonkey extends AbstractMonkey{
     public DfsMonkey(String pkg, String act, AdbDevice device) {
         this(1000,pkg, act, device);
     }
-
 
     @Override
     public void play() {

@@ -54,15 +54,13 @@ public class ActionFactory {
     }
 
 
-    public Map<Action,Double> getActionsFromState(State state){
+    public Map<Action,Double> getActionsFromWidgets(List<Widget> widgets ){
         Map<Action,Double> actionTable = new HashMap<>();
         Action backAction= createBackAction();
         actionTable.put(backAction,backAction.getReward());
 
         Action menuAction= createMenuAction();
         actionTable.put(menuAction,menuAction.getReward());
-
-        List<Widget> widgets = state.getWidgetSet();
 
         for(Widget widget: widgets){
             //if not enabled, discard

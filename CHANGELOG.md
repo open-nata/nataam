@@ -111,5 +111,9 @@
 - Rewrite server views
 
 ### (2016/4/16)
-- add action ,state ,widget ,activity states show
+- Add action ,state ,widget ,activity states show
 - Using Echarts to show the widgets and activity increases with actions 
+
+### (2016/4/18)
+- Add DFSState to manage actions of DFS monkey
+- Add StateFactory to manage the creation of states

@@ -8,6 +8,7 @@ import com.nata.element.Widget;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
 import com.nata.state.State;
+import com.nata.state.StateFactory;
 import com.nata.utils.LogUtil;
 import org.dom4j.DocumentException;
 import org.xml.sax.SAXException;
@@ -34,6 +35,7 @@ public abstract class AbstractMonkey {
     private Action restartAction = null;
     private Action lastAction = null;
     private ActionFactory actionFactory = null;
+    private StateFactory stateFactory = null;
 
 
     public AbstractMonkey(String name,int actionCount,String pkg, String act, AdbDevice device) {
@@ -44,6 +46,8 @@ public abstract class AbstractMonkey {
         this.ACTION_COUNTS = actionCount;
 
         actionFactory = new ActionFactory(device);
+        stateFactory = new StateFactory(device,actionFactory);
+
         backAction = actionFactory.createBackAction();
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
@@ -89,13 +93,12 @@ public abstract class AbstractMonkey {
     }
 
     public State getCurrentState() {
-        String curActivity = getCurrentActivity();
-        String appPackage = getCurrentPackage();
-        List<Widget> widgets = GrabCurrentUi();
-        State state = new State(appPackage, curActivity,widgets);
+        State state = stateFactory.createState();
 
+        // add state
         if(!testResult.containState(state)){
             testResult.addState(state);
+            //add activity
             if (isInCurrentPkg()) {
                 testResult.addActivity(state.getActivity());
             }
@@ -107,15 +110,19 @@ public abstract class AbstractMonkey {
                 }
             }
         }
+
+        //add new widget
+        List<Widget>  widgets = state.getWidgets();
+        String widgetsInfo = "CurrentUi: ";
+        for (Widget widget: widgets) {
+            widgetsInfo += widget;
+            // only add the widgets in the app
+            if(widget.getPackageName().equals(pkg)){
+                testResult.addWidget(widget);
+            }
+        }
+        LogUtil.debug(widgetsInfo);
         return state;
-    }
-
-    public String getCurrentPackage() {
-        return device.getCurrentPackageName();
-    }
-
-    public String getCurrentActivity() {
-        return device.getCurrentActivity();
     }
 
 
@@ -125,34 +132,6 @@ public abstract class AbstractMonkey {
 
     protected AdbDevice getDevice() {
         return device;
-    }
-
-
-    protected List<Widget> GrabCurrentUi() {
-        File dumpFile = device.dumpUI();
-        try {
-            List<Widget> list = DumpService.getNodes(dumpFile);
-            String widgetsInfo = "CurrentUi: ";
-            for (Widget widget: list) {
-                widgetsInfo += widget;
-                // only add the widgets in the app
-                if(widget.getPackageName().equals(getPkg())){
-                    testResult.addWidget(widget);
-                }
-            }
-            LogUtil.debug(widgetsInfo);
-            return list;
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     //TODO: detect errors,how?

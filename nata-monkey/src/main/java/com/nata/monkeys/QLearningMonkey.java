@@ -106,7 +106,7 @@ public class QLearningMonkey extends AbstractMonkey {
         State state  = super.getCurrentState();
 
         if (QMap.get(state) == null) {
-            Map<Action, Double> table = getActionFactory().getActionsFromState(state);
+            Map<Action, Double> table =  state.getActions();
             LogUtil.debug("ActionTable : " + table.toString());
             QMap.put(state, table);
 //          getDevice().screenShot(state.hashCode() + "");

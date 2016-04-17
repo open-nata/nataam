@@ -1,5 +1,7 @@
 package com.nata.state;
 
+import com.nata.action.Action;
+import com.nata.action.ActionFactory;
 import com.nata.element.Widget;
 
 import java.util.*;
@@ -13,41 +15,45 @@ public class State {
     private String appPackage = null;
     private String activity = null;
     private List<Widget> widgetList = null;
+    Map<Action, Double> actions  = null;
 
     // the times that enter int this state
     private int visit;
     private final double FirstReward = 2.0;
 
-//    private ArrayList<ActionEdge> fromEdges;
-//    private ArrayList<ActionEdge> outEdges;
+    private ArrayList<ActionEdge> fromEdges;
+    private ArrayList<ActionEdge> outEdges;
 
-    public State(String appPackage,String activity,List<Widget> widgetList) {
+    public State(String appPackage,String activity,List<Widget> widgetList, Map<Action, Double> actions) {
         this.appPackage = appPackage;
         this.activity = activity;
         this.widgetList = widgetList;
+        this.actions = actions;
         this.visit = 1;
 
-//        fromEdges = new ArrayList<>();
-//        outEdges = new ArrayList<>();
+        fromEdges = new ArrayList<>();
+        outEdges = new ArrayList<>();
     }
 
-//    public ArrayList<ActionEdge> getFromEdges() {
-//        return fromEdges;
-//    }
-//
-//    public ArrayList<ActionEdge> getOutEdges() {
-//        return outEdges;
-//    }
-//
-//    public void addFromEdge(ActionEdge edge){
-//        fromEdges.add(edge);
-//    }
-//
-//    public void addToEdge(ActionEdge edge){
-//        outEdges.add(edge);
-//    }
+    public Map<Action, Double> getActions(){
+        return actions;
+    }
 
+    public ArrayList<ActionEdge> getFromEdges() {
+        return fromEdges;
+    }
 
+    public ArrayList<ActionEdge> getOutEdges() {
+        return outEdges;
+    }
+
+    public void addFromEdge(ActionEdge edge){
+        fromEdges.add(edge);
+    }
+
+    public void addToEdge(ActionEdge edge){
+        outEdges.add(edge);
+    }
 
 
     private int getAvailableActionCount(){
@@ -83,7 +89,7 @@ public class State {
         visit++;
     }
 
-    public List<Widget> getWidgetSet(){
+    public List<Widget> getWidgets(){
         return widgetList;
     }
 
