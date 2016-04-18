@@ -15,46 +15,35 @@ public class State {
     private String appPackage = null;
     private String activity = null;
     private List<Widget> widgetList = null;
-    Map<Action, Double> actions  = null;
+    protected List<Action> actions;
+    private Map<Action, Double> actionTable  = null;
 
     // the times that enter int this state
     private int visit;
     private final double FirstReward = 2.0;
 
-    private ArrayList<ActionEdge> fromEdges;
-    private ArrayList<ActionEdge> outEdges;
-
-    public State(String appPackage,String activity,List<Widget> widgetList, Map<Action, Double> actions) {
+    public State(String appPackage,String activity,List<Widget> widgetList, List<Action> actions) {
         this.appPackage = appPackage;
         this.activity = activity;
         this.widgetList = widgetList;
         this.actions = actions;
         this.visit = 1;
-
-        fromEdges = new ArrayList<>();
-        outEdges = new ArrayList<>();
     }
 
-    public Map<Action, Double> getActions(){
+    public Map<Action, Double> getActionTable(){
+        if(actionTable == null){
+            actionTable = new HashMap<>();
+            for (Action action: actions
+                    ) {
+                actionTable.put(action,action.getReward()) ;
+            }
+        }
+        return actionTable;
+    }
+
+    public List<Action> getActions(){
         return actions;
     }
-
-    public ArrayList<ActionEdge> getFromEdges() {
-        return fromEdges;
-    }
-
-    public ArrayList<ActionEdge> getOutEdges() {
-        return outEdges;
-    }
-
-    public void addFromEdge(ActionEdge edge){
-        fromEdges.add(edge);
-    }
-
-    public void addToEdge(ActionEdge edge){
-        outEdges.add(edge);
-    }
-
 
     private int getAvailableActionCount(){
         int cnt = 0;

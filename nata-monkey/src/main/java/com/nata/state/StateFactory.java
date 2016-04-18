@@ -32,9 +32,19 @@ public class StateFactory {
         String curActivity = device.getCurrentActivity();
         String appPackage = device.getCurrentPackageName();
         List<Widget> widgets = GrabCurrentUi();
-        Map<Action, Double> actions = actionFactory.getActionsFromWidgets(widgets);
+        List<Action> actions = actionFactory.getActionsFromWidgets(widgets);
         State state = new State(appPackage, curActivity,widgets,actions);
         return state;
+
+    }
+
+    public DFSState createDFSState(){
+        String curActivity = device.getCurrentActivity();
+        String appPackage = device.getCurrentPackageName();
+        List<Widget> widgets = GrabCurrentUi();
+        List<Action> actions = actionFactory.getDFSActionsFromWidgets(widgets);
+        DFSState dfsState= new DFSState(appPackage, curActivity,widgets,actions);
+        return dfsState;
     }
 
     private List<Widget> GrabCurrentUi() {

@@ -24,8 +24,9 @@ public class RandomMonkey extends AbstractMonkey {
     }
 
 
+
     private Action chooseActionFromState(State curState) {
-        Map<Action, Double> actionTable = curState.getActions();
+        Map<Action, Double> actionTable = curState.getActionTable();
         if (actionTable == null || actionTable.size() == 0) {
             System.out.println("Error cannot get actionTable or no action can be choosed");
             return getBackAction();

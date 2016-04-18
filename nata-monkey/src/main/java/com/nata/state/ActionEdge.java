@@ -2,39 +2,43 @@ package com.nata.state;
 
 import com.nata.action.Action;
 
+import java.util.ArrayList;
+
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-04-13 15:35
  */
 public class ActionEdge {
-    private State fromState;
-    private State toState;
-    private Action fireAction;
+    private DFSState fromState;
+    private DFSState toState;
+    private ArrayList<Action> actions;
 
-    public ActionEdge(State fromState, State toState, Action action) {
+    public ActionEdge(DFSState fromState, DFSState toState, ArrayList<Action> actions) {
         this.fromState = fromState;
         this.toState = toState;
-        this.fireAction = action;
+        this.actions = actions;
 
         fromState.addToEdge(this);
-        toState.addFromEdge(this);
+        toState.setFromEdge(this);
     }
 
-    public State getFromState() {
+    public DFSState getFromState() {
         return fromState;
     }
 
-    public State getToState() {
+    public DFSState getToState() {
         return toState;
     }
 
-    public Action getFireAction() {
-        return fireAction;
+    public ArrayList<Action> getFireActions() {
+        return actions;
     }
 
     public void fire(){
-        fireAction.fire();
+        for (Action action: actions) {
+            action.fire();
+        }
     }
 
     @Override
@@ -42,7 +46,7 @@ public class ActionEdge {
         return "ActionEdge{" +
                 "fromState=" + fromState +
                 ", toState=" + toState +
-                ", fireAction=" + fireAction +
+                ", actions=" + actions +
                 '}';
     }
 }

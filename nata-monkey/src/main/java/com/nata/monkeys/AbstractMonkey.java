@@ -7,6 +7,7 @@ import com.nata.element.DumpService;
 import com.nata.element.Widget;
 import com.nata.rules.RuleParser;
 import com.nata.rules.Rules;
+import com.nata.state.DFSState;
 import com.nata.state.State;
 import com.nata.state.StateFactory;
 import com.nata.utils.LogUtil;
@@ -55,10 +56,17 @@ public abstract class AbstractMonkey {
         testResult = new TestResult(name,actionCount);
     }
 
+    public String getName(){
+        return name;
+    }
     public Action getBackAction() {
         return backAction;
     }
 
+
+    public Action getRestartAction(){
+        return restartAction;
+    }
     protected ActionFactory getActionFactory() {
         return actionFactory;
     }
@@ -71,6 +79,10 @@ public abstract class AbstractMonkey {
     public void clearAppData() {
         device.clearAppData(pkg);
         device.sleep(5000);
+    }
+
+    public Set<State> getStateSet(){
+        return testResult.getStateSet();
     }
 
     public void startApp() {
@@ -92,9 +104,7 @@ public abstract class AbstractMonkey {
         lastAction = action;
     }
 
-    public State getCurrentState() {
-        State state = stateFactory.createState();
-
+    private void checkState(State state){
         // add state
         if(!testResult.containState(state)){
             testResult.addState(state);
@@ -113,16 +123,28 @@ public abstract class AbstractMonkey {
 
         //add new widget
         List<Widget>  widgets = state.getWidgets();
-        String widgetsInfo = "CurrentUi: ";
+//        String widgetsInfo = "CurrentUi: ";
         for (Widget widget: widgets) {
-            widgetsInfo += widget;
+//            widgetsInfo += widget;
             // only add the widgets in the app
             if(widget.getPackageName().equals(pkg)){
                 testResult.addWidget(widget);
             }
         }
-        LogUtil.debug(widgetsInfo);
+//        LogUtil.debug(widgetsInfo);
+    }
+
+    public State getCurrentState() {
+        State state = stateFactory.createState();
+        checkState(state);
         return state;
+    }
+
+
+    public DFSState getCurrentDFSState(){
+        DFSState dfsState = stateFactory.createDFSState();
+        checkState(dfsState);
+        return dfsState;
     }
 
 

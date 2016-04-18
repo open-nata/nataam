@@ -41,17 +41,17 @@ public class StateGraph {
         }
     }
 
-    public void addEdge(State toState, Action action ){
-        ActionEdge edge = new ActionEdge(curState,toState,action);
-//        edges.add(edge);
-        states.add(toState);
-    }
+//    public void addEdge(State toState, Action action ){
+//        ActionEdge edge = new ActionEdge(curState,toState,action);
+////        edges.add(edge);
+//        states.add(toState);
+//    }
 
-    public void printActionEdge(){
-        for (ActionEdge edge: edges) {
-          LogUtil.debug(edge.getFromState().hashCode() +" ----" + edge.getFireAction() + "-------->"+ edge.getToState().hashCode());
-        }
-    }
+//    public void printActionEdge(){
+//        for (ActionEdge edge: edges) {
+//          LogUtil.debug(edge.getFromState().hashCode() +" ----" + edge.getFireAction() + "-------->"+ edge.getToState().hashCode());
+//        }
+//    }
 
 //    public void makeGraph(){
 //        for (ActionEdge edge: edges) {

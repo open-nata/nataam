@@ -23,6 +23,8 @@ public class TestResult {
     private List<Action> actionList;
     private List<String> summaryList;
 
+    private boolean upload = false;
+
     public TestResult(String name,int actionCount){
         this.name = name;
         this.actionCount = actionCount;
@@ -44,7 +46,7 @@ public class TestResult {
     }
 
     public void addActivity(String activity){
-        if(activitySet.add(activity)){
+        if(activitySet.add(activity) && upload){
             try {
                 HttpUtil.postActivity(activity);
             } catch (IOException e) {
@@ -58,7 +60,7 @@ public class TestResult {
     }
 
     public void addState(State state){
-        if(stateSet.add(state)){
+        if(stateSet.add(state) && upload){
             try {
                 HttpUtil.postState(state.toString());
             } catch (IOException e) {
@@ -74,10 +76,12 @@ public class TestResult {
 
     public void addAction(Action action){
         actionList.add(action);
-        try {
-            HttpUtil.postAction(action.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(upload){
+            try {
+                HttpUtil.postAction(action.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -125,12 +129,13 @@ public class TestResult {
         summary.put("activity",activitySet.size()+"");
         summary.put("widget",widgetSet.size()+"");
         summary.put("state",stateSet.size()+"");
-        try {
-            HttpUtil.postSummary(summary);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if(upload){
+            try {
+                HttpUtil.postSummary(summary);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
-
 }

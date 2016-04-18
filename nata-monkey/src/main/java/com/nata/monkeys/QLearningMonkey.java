@@ -23,13 +23,11 @@ public class QLearningMonkey extends AbstractMonkey {
     private final double PUNISH_OUT_PACKAGE = -2.0;
 
     private List<Action> chosenActions ;
-    private StateGraph sg;
 
     public QLearningMonkey(int actionCount,String pkg, String act, AdbDevice device) {
         super("QLearningMonkey",actionCount,pkg, act, device);
         QMap = new HashMap<>();
         chosenActions = new ArrayList<>();
-        sg = new StateGraph();
     }
 
     public QLearningMonkey(String pkg, String act, AdbDevice device){
@@ -106,7 +104,7 @@ public class QLearningMonkey extends AbstractMonkey {
         State state  = super.getCurrentState();
 
         if (QMap.get(state) == null) {
-            Map<Action, Double> table =  state.getActions();
+            Map<Action, Double> table =  state.getActionTable();
             LogUtil.debug("ActionTable : " + table.toString());
             QMap.put(state, table);
 //          getDevice().screenShot(state.hashCode() + "");
@@ -148,15 +146,5 @@ public class QLearningMonkey extends AbstractMonkey {
                 summary();
             }
         }
-    }
-
-    @Override
-    public void report() {
-        super.report();
-
-
-
-//        LogUtil.debug("--------------------[Graph report]--------------------");
-//        sg.makeGraph();
     }
 }

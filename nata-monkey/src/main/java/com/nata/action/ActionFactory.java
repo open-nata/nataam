@@ -4,10 +4,7 @@ import com.nata.cmd.AdbDevice;
 import com.nata.element.Widget;
 import com.nata.state.State;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Author: Calvin Meng
@@ -54,13 +51,41 @@ public class ActionFactory {
     }
 
 
-    public Map<Action,Double> getActionsFromWidgets(List<Widget> widgets ){
-        Map<Action,Double> actionTable = new HashMap<>();
+    public List<Action> getDFSActionsFromWidgets(List<Widget> widgets ) {
+        List<Action>actions= new ArrayList<>();
+
+        for (Widget widget : widgets) {
+            //if not enabled, discard
+            if (widget.getEnabled().equals("false")) {
+                continue;
+            }
+
+            //clickable
+            if ((widget.getClassName().equals("android.widget.TextView")
+                    || widget.getClassName().equals("android.widget.Button")
+                    || widget.getClassName().equals("android.widget.ImageView")
+                    || widget.getClassName().equals("android.widget.RelativeLayout")
+                    || widget.getClassName().equals("android.widget.LinearLayout")
+                    || widget.getClassName().equals("android.widget.CheckedTextView")
+                    || widget.getClassName().equals("android.widget.CheckBox")
+            )
+                    && widget.getClickable().equals("true")) {
+                Action tapAction = CreateTapAction(widget);
+                actions.add(tapAction);
+            }
+        }
+        return actions;
+    }
+
+
+
+    public List<Action> getActionsFromWidgets(List<Widget> widgets ){
+        List<Action>actions= new ArrayList<>();
         Action backAction= createBackAction();
-        actionTable.put(backAction,backAction.getReward());
+        actions.add(backAction);
 
         Action menuAction= createMenuAction();
-        actionTable.put(menuAction,menuAction.getReward());
+        actions.add(menuAction);
 
         for(Widget widget: widgets){
             //if not enabled, discard
@@ -73,16 +98,16 @@ public class ActionFactory {
             if(widget.getScrollable().equals("true")){
                 if(widget.getClassName().equals("android.widget.ListView")){
                     Action swipeAction = CreateSwipeAction(widget,SwipeDirection.DOWN);
-                    actionTable.put(swipeAction,swipeAction.getReward());
+                    actions.add(swipeAction);
 
                     swipeAction = CreateSwipeAction(widget,SwipeDirection.UP);
-                    actionTable.put(swipeAction,swipeAction.getReward());
+                    actions.add(swipeAction);
                 }else if(widget.getClassName().equals("android.support.v4.view.ViewPager")){
                     Action swipeAction = CreateSwipeAction(widget,SwipeDirection.RIGHT);
-                    actionTable.put(swipeAction,swipeAction.getReward());
+                    actions.add(swipeAction);
 
                     swipeAction = CreateSwipeAction(widget,SwipeDirection.LEFT);
-                    actionTable.put(swipeAction,swipeAction.getReward());
+                    actions.add(swipeAction);
                 }
             }
 
@@ -99,23 +124,23 @@ public class ActionFactory {
             )
                     && widget.getClickable().equals("true") ){
                 Action tapAction  = CreateTapAction(widget);
-                actionTable.put(tapAction,tapAction.getReward());
+                actions.add(tapAction);
             }
 
             //long click actions
             if(widget.getLong_clickable().equals("true")){
                 Action longClickAction = CreateLongClickAction(widget);
-                actionTable.put(longClickAction,longClickAction.getReward());
+                actions.add(longClickAction);
             }
 
             //text input actions
             //TODO: can't get password from the text attribute
             if(widget.getClassName().equals("android.widget.EditText") && widget.getClickable().equals("true")){
                     Action textInputAction = CreateTextInputAction(widget);
-                    actionTable.put(textInputAction,textInputAction.getReward());
+                actions.add(textInputAction);
             }
 
         }
-        return actionTable;
+        return actions;
     }
 }
