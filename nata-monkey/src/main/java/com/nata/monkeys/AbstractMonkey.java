@@ -38,6 +38,8 @@ public abstract class AbstractMonkey {
     private ActionFactory actionFactory = null;
     private StateFactory stateFactory = null;
 
+    protected int cnt = 0;
+
 
     public AbstractMonkey(String name,int actionCount,String pkg, String act, AdbDevice device) {
         this.name = name;
@@ -102,6 +104,22 @@ public abstract class AbstractMonkey {
         action.fire();
         testResult.addAction(action);
         lastAction = action;
+        cnt++;
+        if(cnt % Frequency == 0 ){
+            summary();
+        }
+    }
+
+    public void executeActions(List<Action> actions){
+        for (Action action: actions) {
+            action.fire();
+            testResult.addAction(action);
+            lastAction = action;
+            cnt++;
+            if(cnt % Frequency == 0 ){
+                summary();
+            }
+        }
     }
 
     private void checkState(State state){

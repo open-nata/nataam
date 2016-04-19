@@ -4,9 +4,7 @@ import com.nata.action.Action;
 import com.nata.cmd.AdbDevice;
 import com.nata.state.*;
 import com.nata.utils.LogUtil;
-import com.oracle.tools.packager.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -21,13 +19,16 @@ public class DfsMonkey extends AbstractMonkey{
     private DFSState rootState;
     private boolean flag = true;
     private ArrayList<Action> currentActions;
-
     private ArrayList<State> nodes = null;
 
     public DfsMonkey(int actionCount,String pkg, String act, AdbDevice device) {
         super("DfsMonkey",actionCount,pkg, act, device);
         currentActions = new ArrayList<>();
         nodes = new ArrayList<>();
+    }
+
+    public DfsMonkey(String pkg, String act, AdbDevice device) {
+        this(1000,pkg, act, device);
     }
 
     private int classifyNode(DFSState state) {
@@ -59,9 +60,7 @@ public class DfsMonkey extends AbstractMonkey{
         nodes.add(node);
     }
 
-    public DfsMonkey(String pkg, String act, AdbDevice device) {
-        this(1000,pkg, act, device);
-    }
+
 
 
     private boolean goBack() {
@@ -74,7 +73,7 @@ public class DfsMonkey extends AbstractMonkey{
                 curState= curState.getFromEdge().getFromState();
             }
 
-            Stack<State> nodesStack = new Stack<>();
+            Stack<DFSState> nodesStack = new Stack<>();
             Stack<ActionEdge> edgesStack = new Stack<>();
 
             DFSState tempState = curState;
@@ -95,7 +94,7 @@ public class DfsMonkey extends AbstractMonkey{
                 return true;
 
 
-            // replay
+
             if (tempState != null && nodesStack.contains(tempState)) {
                 // this node is ancestor of current node
                 while (!nodesStack.isEmpty()
@@ -104,12 +103,12 @@ public class DfsMonkey extends AbstractMonkey{
                     edgesStack.pop();
                 }
             } else {
-                getBackToApp();
+               restartApp();
             }
 
             while (!edgesStack.isEmpty()) {
                 ActionEdge pe = edgesStack.pop();
-                pe.fire();
+                executeActions(pe.getFireActions());
                 // System.out.println("replay: " + pe.toString());
             }
 
@@ -122,6 +121,32 @@ public class DfsMonkey extends AbstractMonkey{
             }
         }
         return true;
+    }
+
+    private void restartApp() {
+        startApp();
+        String rootPa = rootState.getAppPackage();
+        String rootAct = rootState.getActivity();
+        int count = 0;
+        while (true) {
+            wait(1000);
+            if (rootPa.equals(getDevice().getCurrentPackageName()) && rootAct.equals(getDevice().getCurrentActivity()))
+                break;
+            count++;
+            if (count > 10) {
+                System.err.println("Error: cannot start app!");
+                return;
+            }
+        }
+    }
+
+    public static void wait(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            System.err.println("Cannot sleep...");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -137,39 +162,37 @@ public class DfsMonkey extends AbstractMonkey{
         rootState = getCurrentDFSState();
         curState = rootState;
         addNode(rootState);
+        LogUtil.debug("rootState created");
 
-        int cnt = 0;
-        while(flag && !(  curState.getFromEdge() == null && !curState.isNotOver())){
-            if((++cnt) >= ACTION_COUNTS){
+        while(flag && !(curState.getFromEdge() == null && !curState.isNotOver())){
+            if(cnt >= ACTION_COUNTS){
                 LogUtil.info(" get to ACTION_COUNTS limit");
                 break;
             }
 
             Action action = curState.getAction();
-            LogUtil.debug(action.toString());
+
 
             if(action == null){
+                LogUtil.debug("action == null");
                 flag = goBack();
                 continue;
             }
+            LogUtil.debug(action.toString());
 
-            action.fire();
+            executeAction(action);
 
             DFSState tempNode = getCurrentDFSState();
 
             int kind = classifyNode(tempNode);
 
             switch (kind) {
-                case DFSState.OLD: LogUtil.debug("old state");
+                case DFSState.OLD:
+                case DFSState.OUT:
+                    LogUtil.debug("special state");
+                    currentActions.add(action);
                     addNode(tempNode);
                     curState= tempNode;
-                    currentActions.add(action);
-                    flag = goBack();
-                    break;
-                case DFSState.OUT: LogUtil.debug("out state");
-                    addNode(tempNode);
-                    curState= tempNode;
-                    currentActions.add(action);
                     flag = goBack();
                     break;
                 case DFSState.SAME:
@@ -179,9 +202,9 @@ public class DfsMonkey extends AbstractMonkey{
                     currentActions.add(action);
                     addNode(tempNode);
                     curState = tempNode;
+                    LogUtil.debug("new state");
                     break;
             }
-
         }
 
     }

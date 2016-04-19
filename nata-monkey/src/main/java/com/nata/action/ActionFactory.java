@@ -61,15 +61,16 @@ public class ActionFactory {
             }
 
             //clickable
-            if ((widget.getClassName().equals("android.widget.TextView")
-                    || widget.getClassName().equals("android.widget.Button")
-                    || widget.getClassName().equals("android.widget.ImageView")
-                    || widget.getClassName().equals("android.widget.RelativeLayout")
-                    || widget.getClassName().equals("android.widget.LinearLayout")
-                    || widget.getClassName().equals("android.widget.CheckedTextView")
-                    || widget.getClassName().equals("android.widget.CheckBox")
-            )
-                    && widget.getClickable().equals("true")) {
+//           (widget.getClassName().equals("android.widget.TextView")
+//                    || widget.getClassName().equals("android.widget.Button")
+//                    || widget.getClassName().equals("android.widget.ImageView")
+//                    || widget.getClassName().equals("android.widget.RelativeLayout")
+//                    || widget.getClassName().equals("android.widget.LinearLayout")
+//                    || widget.getClassName().equals("android.widget.CheckedTextView")
+//                    || widget.getClassName().equals("android.widget.CheckBox")
+//            )
+
+            if (widget.getClickable().equals("true")) {
                 Action tapAction = CreateTapAction(widget);
                 actions.add(tapAction);
             }

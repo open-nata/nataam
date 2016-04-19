@@ -48,8 +48,7 @@ public class RandomMonkey extends AbstractMonkey {
             activitySet.add(curState.getActivity());
         }
 
-        int cnt = 0;
-        while ((++cnt) <= ACTION_COUNTS) {
+        while (cnt <= ACTION_COUNTS) {
             // if not in pkg, get it back
             if (!isInCurrentPkg()) {
                 getBackToApp();
@@ -62,10 +61,6 @@ public class RandomMonkey extends AbstractMonkey {
             action.fire();
 
             curState = getCurrentState();
-
-            if(cnt % Frequency== 0){
-                summary();
-            }
         }
     }
 

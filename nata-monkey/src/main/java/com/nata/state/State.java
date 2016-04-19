@@ -14,7 +14,7 @@ import java.util.*;
 public class State {
     private String appPackage = null;
     private String activity = null;
-    private List<Widget> widgetList = null;
+    protected List<Widget> widgetList = null;
     protected List<Action> actions;
     private Map<Action, Double> actionTable  = null;
 

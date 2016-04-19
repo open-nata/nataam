@@ -86,21 +86,22 @@ public class DFSState extends State{
 
 
         DFSState oState = (DFSState) o;
-        if (getAppPackage().equals(oState.getAppPackage())
-                && actions.size() == oState.actions.size()) {
+        if (getAppPackage().equals(oState.getAppPackage()) && getActivity().equals(oState.getActivity())
+                && widgetList.size() == oState.widgetList.size()) {
             int count=0;
-            Iterator<Action> it = oState.actions.iterator();
+            Iterator<Widget> it = oState.widgetList.iterator();
             while (it.hasNext()) {
-                if (!actions.contains(it.next()))
+                if (!widgetList.contains(it.next()))
                     count++;
             }
-            float rate=((float)count)/((float)actions.size());
-            if(rate> 0.5)
+            float rate=((float)count)/((float)widgetList.size());
+            if(rate < 0.5)
                 return true;
             else {
-                System.out.println(this.toString());
-                System.out.println("=== vs ===");
-                System.out.println(o.toString());
+                System.out.println("rate : " + rate);
+//                System.out.println(this.toString());
+//                System.out.println("=== vs ===");
+//                System.out.println(o.toString());
             }
         }
 
@@ -110,9 +111,9 @@ public class DFSState extends State{
     @Override
     public int hashCode() {
         int result = 0;
-        Iterator<Action> it = actions.iterator();
+        Iterator<Widget> it = widgetList.iterator();
         while (it.hasNext()) {
-            Action ba = it.next();
+            Widget ba = it.next();
             result += ba.hashCode();
         }
         return result;

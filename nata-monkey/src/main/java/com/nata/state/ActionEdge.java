@@ -17,7 +17,7 @@ public class ActionEdge {
     public ActionEdge(DFSState fromState, DFSState toState, ArrayList<Action> actions) {
         this.fromState = fromState;
         this.toState = toState;
-        this.actions = actions;
+        this.actions = new ArrayList<Action>(actions);
 
         fromState.addToEdge(this);
         toState.setFromEdge(this);

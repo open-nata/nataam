@@ -118,3 +118,6 @@
 - Add DFSState to manage actions of DFS monkey
 - Add StateFactory to manage the creation of states
 - Make DFS Monkey run
+
+### (2016/4/19)
+- Adjust DFS Monkey to run better

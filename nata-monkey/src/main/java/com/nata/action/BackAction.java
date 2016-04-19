@@ -31,5 +31,6 @@ public class BackAction extends Action{
     public void fire() {
         device.sendKeyEvent(AndroidKeyCode.BACK);
         count++;
+        device.sleep(1000);
     }
 }

@@ -86,8 +86,7 @@ public class PureRandomMonkey extends AbstractMonkey{
     @Override
     public void play() {
         startApp();
-        int cnt = 0;
-        while((++cnt) <= ACTION_COUNTS){
+        while(cnt <= ACTION_COUNTS){
             if (!isInCurrentPkg()) {
                 getBackToApp();
             }
@@ -105,9 +104,6 @@ public class PureRandomMonkey extends AbstractMonkey{
             }
             LogUtil.debug("LastAction : " + lastAction);
             getCurrentState();
-            if(cnt % Frequency== 0){
-                summary();
-            }
         }
     }
 }

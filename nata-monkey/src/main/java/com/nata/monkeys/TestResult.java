@@ -23,7 +23,7 @@ public class TestResult {
     private List<Action> actionList;
     private List<String> summaryList;
 
-    private boolean upload = false;
+    private boolean upload = true;
 
     public TestResult(String name,int actionCount){
         this.name = name;
@@ -36,7 +36,7 @@ public class TestResult {
     }
 
     public void addWidget(Widget widget){
-        if(widgetSet.add(widget)){
+        if(widgetSet.add(widget) && upload){
             try {
                 HttpUtil.postWidget(widget.toString());
             } catch (IOException e) {
@@ -83,6 +83,10 @@ public class TestResult {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int actionSize(){
+        return actionList.size();
     }
 
     public void report(){

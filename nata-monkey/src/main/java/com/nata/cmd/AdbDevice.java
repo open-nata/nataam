@@ -78,7 +78,8 @@ public class AdbDevice {
      * @param component packageName/Activity
      */
     public void startActivity(String component) {
-        ShellKit.adbShell("am start -n " + component);
+        //-S: Force stop the target app before starting the activity.
+        ShellKit.adbShell("am start -S -n " + component);
     }
 
     /**

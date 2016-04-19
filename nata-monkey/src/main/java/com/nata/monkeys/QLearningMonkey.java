@@ -75,7 +75,6 @@ public class QLearningMonkey extends AbstractMonkey {
         return reward;
     }
 
-
     private double getMaxValueOfState(State nextState) {
         Map<Action, Double> actionTable = QMap.get(nextState);
         double maxValue = 0.0;
@@ -119,8 +118,7 @@ public class QLearningMonkey extends AbstractMonkey {
         State curState = getCurrentState();
 
         // repeat select -> execute -> update
-        int cnt = 0;
-        while ((++cnt) <= ACTION_COUNTS) {
+        while (cnt <= ACTION_COUNTS) {
             if (!isInCurrentPkg()) {
                 getBackToApp();
                 curState =  getCurrentState();
@@ -141,10 +139,6 @@ public class QLearningMonkey extends AbstractMonkey {
 //            sg.addEdge(curState,nextState,chosenAction);
 
             curState = nextState;
-
-            if(cnt % Frequency== 0){
-                summary();
-            }
         }
     }
 }
