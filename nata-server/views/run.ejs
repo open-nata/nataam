@@ -1,0 +1,136 @@
+<% include partials/header %>
+
+<div id="activity-chart">
+    <div class="container">
+        <div class="row">
+            <h1 class="centered"> Activity - Actions</h1>
+            <br>
+            <div class="panel-body" id="echarts-activity" style="width: 100%; height:400px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-chart">
+    <div class="container">
+        <div class="row">
+            <h1 class="centered"> Widgets - Actions</h1>
+            <br>
+                <div id="echarts-widget" style="width: 100%; height:400px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Activities
+                </div>
+                <div class="table-wrapper" id="activity-table-wrapper">
+                    <table class="table table-striped" id="activity-table">
+                        <thead>
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                内容
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="activities">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Widgets
+                </div>
+                <div class="table-wrapper" id="widget-table-wrapper">
+                    <table class="table table-striped" id="widget-table">
+                        <thead>
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                内容
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="widgets">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Actions
+                </div>
+                <div class="table-wrapper" id="action-table-wrapper">
+                    <table class="table table-striped" id="action-table">
+                        <thead>
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                内容
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="actions">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    States
+                </div>
+                <div class="table-wrapper" id="state-table-wrapper">
+                    <table class="table table-striped" id="state-table">
+                        <thead>
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                内容
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="states">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/echarts.min.js"></script>
+<script src="/javascripts/chart.js"></script>
+
+<% include partials/footer.ejs %>

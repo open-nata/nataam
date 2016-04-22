@@ -10,7 +10,19 @@ module.exports = function(io){
 
     /* GET home page. */
     router.get('/', function(req, res, next) {
-        res.render('index', { title: '实验记录' });
+        res.render('index', { title: '首页' });
+    });
+
+    router.get('/run',function(req,res,next){
+        res.render('run',{ title : '运行实验'});
+    });
+
+    router.get('/contact',function(req,res,next){
+        res.render('contact',{ title : '联系我们'});
+    });
+
+    router.get('/records',function(req,res,next){
+        res.render('records',{ title : '实验记录'});
     });
 
     router.post("/summary",function(req,res,next){

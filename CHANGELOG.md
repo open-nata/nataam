@@ -121,3 +121,6 @@
 
 ### (2016/4/19)
 - Adjust DFS Monkey to run better
+
+### (2016/4/22)
+- Construct nata-server UI Design, add introduction,run,records and contact functions
