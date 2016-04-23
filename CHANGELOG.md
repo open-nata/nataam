@@ -112,7 +112,7 @@
 
 ### (2016/4/16)
 - Add action ,state ,widget ,activity states show
-- Using Echarts to show the widgets and activity increases with actions 
+- Using ECharts to show the widgets and activity increases with actions 
 
 ### (2016/4/18)
 - Add DFSState to manage actions of DFS monkey
@@ -124,3 +124,6 @@
 
 ### (2016/4/22)
 - Construct nata-server UI Design, add introduction,run,records and contact functions
+- Add java end server blade to provide service
+- Get device information from java server
+- 

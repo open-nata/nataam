@@ -1,9 +1,8 @@
 package com.nata.runners;
 
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.monkeys.AbstractMonkey;
 import com.nata.monkeys.QLearningMonkey;
-import com.nata.monkeys.RandomMonkey;
 
 /**
  * Author: Calvin Meng
@@ -13,7 +12,7 @@ import com.nata.monkeys.RandomMonkey;
 public class QLMRunner {
     public static void main(String[] args) {
 //      String pkg = "com.zhihu.android";
-//      String act = ".app.ui.activity.MainActivity";
+//      String act = ".App.ui.activity.MainActivity";
         String pkg = "com.cvicse.zhnt";
         String act = ".LoadingActivity";
 

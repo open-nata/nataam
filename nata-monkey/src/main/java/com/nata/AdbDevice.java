@@ -1,12 +1,9 @@
-package com.nata.cmd;
+package com.nata;
 
-import com.nata.AndroidKeyCode;
-import com.nata.ShellKit;
 import com.nata.utils.ReUtil;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -25,7 +22,7 @@ public class AdbDevice {
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
 
-//        device.startActivity("com.zhihu.android/.app.ui.activity.MainActivity");
+//        device.startActivity("com.zhihu.android/.App.ui.activity.MainActivity");
 //      System.out.println(Arrays.toString(device.getScreenResolution()));
 //        System.out.println(device.getFocusedPackageAndActivity());
 //        device.screenShot("temp");
@@ -73,12 +70,12 @@ public class AdbDevice {
 
 
     /**
-     * Start a Activity ,can be used to start an app
+     * Start a Activity ,can be used to start an App
      *
      * @param component packageName/Activity
      */
     public void startActivity(String component) {
-        //-S: Force stop the target app before starting the activity.
+        //-S: Force stop the target App before starting the activity.
         ShellKit.adbShell("am start -S -n " + component);
     }
 
@@ -413,6 +410,52 @@ public class AdbDevice {
             return true;
         }
         return false;
+    }
+
+
+    /**
+     * 获取设备的id号
+     *
+     * @return 返回设备id号
+     */
+    public String getDeviceId() {
+        return ShellKit.adbShell("getprop ro.boot.serialno");
+    }
+
+    /**
+     * 获取设备中Android的版本号，如4.4.2
+     *
+     * @return 返回Android版本号
+     */
+    public String getAndroidVersion() {
+        return ShellKit.adbShell("getprop ro.build.version.release");
+    }
+
+    /**
+     * 获取设备模型，如HM NOTE 1LTE
+     *
+     * @return 返回设备名称
+     */
+    public String getModel() {
+        return ShellKit.adbShell("getprop ro.product.model");
+    }
+
+    /**
+     * 获取CPU类型，如armeabi-v7a
+     *
+     * @return 返回CPU类型
+     */
+    public String getCpuABI() {
+        return ShellKit.adbShell("getprop ro.product.cpu.abi");
+    }
+
+    /**
+     * 获取厂商,如Sumsung
+     *
+     * @return 返回厂商名
+     */
+    public String getManufacturer() {
+        return ShellKit.adbShell("getprop ro.product.manufacturer");
     }
 
 }

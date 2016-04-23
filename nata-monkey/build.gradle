@@ -7,6 +7,8 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'org.apache.httpcomponents:httpclient:4.5.2'
     compile 'org.apache.httpcomponents:fluent-hc:4.5.2'
+    compile 'com.bladejava:blade-core:1.6.2'
+    compile 'com.bladejava:blade-startup:1.0.1'
     testCompile 'junit:junit:4.12'
 }
 

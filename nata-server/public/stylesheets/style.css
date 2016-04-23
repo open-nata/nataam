@@ -94,15 +94,6 @@ hr {
     border-top: #bdc3c7 solid 5px;
 }
 
-#features {
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-#features .ac a{
-    font-size: 20px;
-}
-
 /* Showcase Wrap */
 
 #showcase {
@@ -116,38 +107,7 @@ hr {
     color: white;
 }
 
-#records {
-    display: block;
-    background-color: #44ba92;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
 
-#records h1 {
-    color: white;
-}
-
-/* Widget chart Wrap */
-
-#widget-chart{
-    display: block;
-    background-color: #34495e;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-
-
-#widget-chart h1 {
-    color: white;
-}
-
-#activity-chart {
-    display: block;
-    background-color: white;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
 
 #footerwrap {
     background-color: #2f2f2f;
@@ -179,3 +139,43 @@ hr {
     color: white
 }
 
+
+#device, #run, #records {
+    display: block;
+    background-color: #44ba92;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#device {
+    background-color: #74ccdc;
+    color: white;
+}
+
+#run {
+    color: white;
+}
+
+#device h1, #records h1, #run h1{
+    color: white;
+}
+
+/* Widget chart Wrap */
+
+#widget-chart{
+    display: block;
+    background-color: #34495e;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#widget-chart h1 {
+    color: white;
+}
+
+#activity-chart {
+    display: block;
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

@@ -1,10 +1,106 @@
 <% include partials/header %>
 
+<div id="device">
+    <div class="container">
+        <h1 class="centered">设备信息</h1>
+        <br>
+
+        <div class="row">
+            <dl class="dl-horizontal">
+                <dt>状态：</dt>
+                <dd><span class="label label-primary" id="status">未获取</span>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>设备名称：</dt>
+                    <dd id="device-name"></dd>
+                    <dt>设备ID：</dt>
+                    <dd id="device-id"></dd>
+                    <dt>安卓版本：</dt>
+                    <dd id="android-version"></dd>
+                    <dt>SDK版本：</dt>
+                    <dd id="sdk-version"></dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>分辨率：</dt>
+                    <dd id="resolution"></dd>
+                    <dt>CPU制式：</dt>
+                    <dd id="cpu-abi"></dd>
+                    <dt>厂家：</dt>
+                    <dd id="manufacturer"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="center-block" style="width: 600px;">
+                <button type="button" class="btn btn-info btn-lg btn-block" id="btn-device">获取设备信息</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="run">
+    <div class="container">
+        <h1 class="centered"> 实验配置</h1>
+        <br>
+        <div class="row">
+            <form method="get" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Package Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="com.cvicse.zhnt">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activity Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value=".LoadingActivity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Action数量上限</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" value="1000">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">测试算法</label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control m-b" name="account">
+                            <option value="dfs">DFS(Depth First)</option>
+                            <option value="prm">PRM(Pure Random Monkey)</option>
+                            <option value="rm">RM(Random Monkey)</option>
+                            <option value="qlm">QLM(QLearning Monkey)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="center-block" style="width: 600px;">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-device">运行实验 </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div id="activity-chart">
     <div class="container">
         <div class="row">
             <h1 class="centered"> Activity - Actions</h1>
             <br>
+
             <div class="panel-body" id="echarts-activity" style="width: 100%; height:400px;"></div>
         </div>
     </div>
@@ -15,122 +111,121 @@
         <div class="row">
             <h1 class="centered"> Widgets - Actions</h1>
             <br>
-                <div id="echarts-widget" style="width: 100%; height:400px;"></div>
+
+            <div id="echarts-widget" style="width: 100%; height:400px;"></div>
         </div>
     </div>
 </div>
 
 
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Activities
-                </div>
-                <div class="table-wrapper" id="activity-table-wrapper">
-                    <table class="table table-striped" id="activity-table">
-                        <thead>
-                        <tr>
-                            <th>
-                                序号
-                            </th>
-                            <th>
-                                内容
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="activities">
-
-                        </tbody>
-                    </table>
-                </div>
-
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Activities
             </div>
+            <div class="table-wrapper" id="activity-table-wrapper">
+                <table class="table table-striped" id="activity-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            内容
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="activities">
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
+    </div>
 
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Widgets
-                </div>
-                <div class="table-wrapper" id="widget-table-wrapper">
-                    <table class="table table-striped" id="widget-table">
-                        <thead>
-                        <tr>
-                            <th>
-                                序号
-                            </th>
-                            <th>
-                                内容
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="widgets">
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Widgets
+            </div>
+            <div class="table-wrapper" id="widget-table-wrapper">
+                <table class="table table-striped" id="widget-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            内容
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="widgets">
 
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Actions
-                </div>
-                <div class="table-wrapper" id="action-table-wrapper">
-                    <table class="table table-striped" id="action-table">
-                        <thead>
-                        <tr>
-                            <th>
-                                序号
-                            </th>
-                            <th>
-                                内容
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="actions">
-
-                        </tbody>
-                    </table>
-                </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Actions
             </div>
-        </div>
+            <div class="table-wrapper" id="action-table-wrapper">
+                <table class="table table-striped" id="action-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            内容
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="actions">
 
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    States
-                </div>
-                <div class="table-wrapper" id="state-table-wrapper">
-                    <table class="table table-striped" id="state-table">
-                        <thead>
-                        <tr>
-                            <th>
-                                序号
-                            </th>
-                            <th>
-                                内容
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody id="states">
-
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                States
+            </div>
+            <div class="table-wrapper" id="state-table-wrapper">
+                <table class="table table-striped" id="state-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            内容
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="states">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script src="/javascripts/jquery.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/echarts.min.js"></script>
-<script src="/javascripts/chart.js"></script>
+<script src="/javascripts/run.js"></script>
 
 <% include partials/footer.ejs %>

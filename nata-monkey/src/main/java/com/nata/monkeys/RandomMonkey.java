@@ -1,8 +1,7 @@
 package com.nata.monkeys;
 
 import com.nata.action.*;
-import com.nata.cmd.AdbDevice;
-import com.nata.element.Widget;
+import com.nata.AdbDevice;
 import com.nata.state.State;
 
 import java.util.*;
@@ -72,7 +71,7 @@ public class RandomMonkey extends AbstractMonkey {
 
     public static void main(String[] args) {
         String pkg = "com.zhihu.android";
-        String act = ".app.ui.activity.MainActivity";
+        String act = ".App.ui.activity.MainActivity";
 
         AdbDevice device = new AdbDevice();
         RandomMonkey randomMonkey = new RandomMonkey(pkg, act, device);

@@ -1,10 +1,8 @@
 package com.nata.monkeys;
 
 import com.nata.action.*;
-import com.nata.cmd.AdbDevice;
-import com.nata.element.Widget;
+import com.nata.AdbDevice;
 import com.nata.state.State;
-import com.nata.state.StateGraph;
 import com.nata.utils.LogUtil;
 
 import java.util.*;

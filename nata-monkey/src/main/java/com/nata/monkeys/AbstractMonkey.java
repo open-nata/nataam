@@ -1,20 +1,13 @@
 package com.nata.monkeys;
 
 import com.nata.action.*;
-import com.nata.cmd.AdbDevice;
-import com.nata.dictionary.TextValueDictionary;
-import com.nata.element.DumpService;
+import com.nata.AdbDevice;
 import com.nata.element.Widget;
-import com.nata.rules.RuleParser;
-import com.nata.rules.Rules;
 import com.nata.state.DFSState;
 import com.nata.state.State;
 import com.nata.state.StateFactory;
 import com.nata.utils.LogUtil;
-import org.dom4j.DocumentException;
-import org.xml.sax.SAXException;
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -93,7 +86,7 @@ public abstract class AbstractMonkey {
         LogUtil.info("App data cleaned!");
         restartAction.fire();
         testResult.addAction(restartAction);
-        LogUtil.info("Starting app success!");
+        LogUtil.info("Starting App success!");
     }
 
     /**
@@ -144,7 +137,7 @@ public abstract class AbstractMonkey {
 //        String widgetsInfo = "CurrentUi: ";
         for (Widget widget: widgets) {
 //            widgetsInfo += widget;
-            // only add the widgets in the app
+            // only add the widgets in the App
             if(widget.getPackageName().equals(pkg)){
                 testResult.addWidget(widget);
             }
@@ -207,7 +200,7 @@ public abstract class AbstractMonkey {
     }
 
     /**
-     * help the monkey to get back to app
+     * help the monkey to get back to App
      *
      * @return the current state
      */

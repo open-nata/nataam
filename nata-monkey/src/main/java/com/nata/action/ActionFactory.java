@@ -1,8 +1,7 @@
 package com.nata.action;
 
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.element.Widget;
-import com.nata.state.State;
 
 import java.util.*;
 

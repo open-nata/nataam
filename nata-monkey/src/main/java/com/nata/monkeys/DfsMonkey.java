@@ -1,7 +1,7 @@
 package com.nata.monkeys;
 
 import com.nata.action.Action;
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.state.*;
 import com.nata.utils.LogUtil;
 
@@ -34,7 +34,7 @@ public class DfsMonkey extends AbstractMonkey{
     private int classifyNode(DFSState state) {
         int k = DFSState.NORMAL;
 
-        // out of this app
+        // out of this App
         if (!isInCurrentPkg()) {
             state.setKind(DFSState.OUT);
             k = DFSState.OUT;
@@ -134,7 +134,7 @@ public class DfsMonkey extends AbstractMonkey{
                 break;
             count++;
             if (count > 10) {
-                System.err.println("Error: cannot start app!");
+                System.err.println("Error: cannot start App!");
                 return;
             }
         }
@@ -153,7 +153,7 @@ public class DfsMonkey extends AbstractMonkey{
     public void startApp() {
         LogUtil.info(getName() + " start playing...");
         executeAction(getRestartAction());
-        LogUtil.info("Starting app success!");
+        LogUtil.info("Starting App success!");
     }
 
     @Override

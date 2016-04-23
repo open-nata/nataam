@@ -1,6 +1,6 @@
 package com.nata.runners;
 
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.monkeys.QLearningMonkey;
 import com.nata.monkeys.RandomMonkey;
 

@@ -1,7 +1,7 @@
 package com.nata.monkeys;
 
 import com.nata.AndroidKeyCode;
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.dictionary.TextValueDictionary;
 import com.nata.utils.LogUtil;
 import java.util.Random;

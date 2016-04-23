@@ -7,7 +7,7 @@ package com.nata.action;
  */
 
 import com.nata.AndroidKeyCode;
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 
 /**
  * Author: Calvin Meng

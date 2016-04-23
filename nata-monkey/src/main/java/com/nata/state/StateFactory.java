@@ -2,7 +2,7 @@ package com.nata.state;
 
 import com.nata.action.Action;
 import com.nata.action.ActionFactory;
-import com.nata.cmd.AdbDevice;
+import com.nata.AdbDevice;
 import com.nata.element.DumpService;
 import com.nata.element.Widget;
 import org.dom4j.DocumentException;
@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Author: Calvin Meng
