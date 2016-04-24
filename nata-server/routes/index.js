@@ -35,9 +35,23 @@ module.exports = function(io) {
     });
 
     /**
+     * 获取任务详情
+     */
+    router.get('/records/:id', function(req, res, next) {
+        var record_id= req.params.id;
+        RecordModel.findOne({_id: record_id}, function(err, record) {
+            if (err || !record) {
+                return res.status(500).json();
+            }
+            res.render('run', { title: '任务详情', record: record });
+        });
+    });
+
+    /**
      * 获取任务列表
      */
     router.get('/records', function(req, res, next) {
+        var id = 
         RecordModel.find({}, function(err, records) {
             if (err || !records) {
                 return res.status(500).json();

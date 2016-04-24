@@ -39,6 +39,10 @@ $('#btn-device').click(function(){
 $('#btn-create').click(function(){
     var config = $('#config').serialize();
     var device_id = $('#device-id').text().trim();
+    if(!device_id){
+        alert("请先获取设备信息");
+        return false;
+    }
     config +="&device_id="+device_id;
     console.log(config);
     $.ajax({
@@ -54,9 +58,12 @@ $('#btn-create').click(function(){
                 type: 'POST',
                 success : function(record){
                     console.log(record);
+                    window.location.href="records/"+record._id;
+                    return false;
                 },
                 error : function(request){
                     // console.log("创建设备失败");
+                    return false;
                 }
              });
         },
@@ -67,6 +74,7 @@ $('#btn-create').click(function(){
             else{
                 alert("创建测试任务失败");
             }
+            return false;
         }
     });
 });
