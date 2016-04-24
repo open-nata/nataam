@@ -147,7 +147,7 @@ hr {
     padding-bottom: 50px;
 }
 
-#devices {
+#devices, #records {
     background-color: white;
 }
 
@@ -156,13 +156,15 @@ hr {
     color: white;
 }
 
-#run, #records {
+#records 
+
+#run {
     color: white;
 }
 
 
 
-#device h1, #records h1, #run h1{
+#device h1, #run h1{
     color: white;
 }
 

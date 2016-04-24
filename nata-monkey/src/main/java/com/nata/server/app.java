@@ -22,6 +22,18 @@ public class App {
             response.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         });
 
+        blade.get("/device/online",(request, response) -> {
+            String device_id = request.query("device_id").trim();
+            AdbDevice adbDevice = new AdbDevice();
+            String deviceId = adbDevice.getDeviceId().trim();
+
+            if(device_id.equals(deviceId)){
+                response.status(200).text("online");
+            }else{
+                response.status(404).text("not online");
+            }
+        });
+
 
         blade.get("/device", (request, response) -> {
             AdbDevice adbDevice = new AdbDevice();
@@ -52,9 +64,7 @@ public class App {
          */
         blade.post("/start", (request, response) -> {
            if(!runnerFactory.isValid()){
-               JSONObject data = new JSONObject();
-               data.put("message","有任务正在运行!");
-               response.status(406).json(data.toString());
+               response.status(406).text("error");
            }
 
             Config config = new Config();
@@ -65,9 +75,9 @@ public class App {
             config.setAlgorithm(request.query("algorithm"));
             config.setDevice_id(request.query("device_id"));
 
+
             runnerFactory.createRunnerAndRun(config);
-            JSONObject data = new JSONObject();
-            response.status(200).json(data.toString());
+            response.status(200).text("success");
         });
 
 

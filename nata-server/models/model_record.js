@@ -1,5 +1,11 @@
 var mongoose = require('mongoose');
 
+var summarySchema = new mongoose.Schema({ 
+    action: Number,
+    widget: Number,
+    state: Number,
+    activity: Number,
+});
 
 var RecordSchema = new mongoose.Schema({
     device_id: String,
@@ -13,8 +19,9 @@ var RecordSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['running', 'success', 'failure']
+        enum: ['ready','running', 'success', 'failure']
     },
+    summaries: [summarySchema],
     create_at: { type: Date, default: Date.now },
     end_at: { type: Date, default: Date.now }
 });

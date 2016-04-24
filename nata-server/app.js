@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var apiRouterV1 = require('./api_router_v1');
+
 
 
 var socket_io = require('socket.io');
@@ -16,9 +16,14 @@ var app = express();
 var io           = socket_io();
 app.io           = io;
 
+io.on("connection", function(socket) {
+    console.log("A user connected");
+});
 
-var routes = require('./routes/index')(io);
 
+
+var routes = require('./web_router')();
+var apiRouterV1 = require('./api_router_v1')(io);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

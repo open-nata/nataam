@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <h1 class="centered">任务列表</h1>
                 <br>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>
@@ -19,12 +19,6 @@
                             待测应用
                         </th>
                         <th>
-                            Package名
-                        </th>
-                        <th>
-                            Activity名
-                        </th>
-                        <th>
                             Action数量
                         </th>
                         <th>
@@ -33,11 +27,14 @@
                         <th>
                             状态
                         </th>
-                        <th>
+   <!--                      <th>
                             创建时间
                         </th>
                         <th>
                             结束时间
+                        </th> -->
+                        <th>
+                            操作
                         </th>
                     </tr>
                     </thead>
@@ -53,12 +50,7 @@
                             <td>
                                 <%= record.app_name %>
                             </td>
-                            <td>
-                                <%= record.package_name %>
-                            </td>
-                            <td>
-                                <%= record.activity_name %>
-                            </td>
+
                             <td>
                                 <%= record.action_count %>
                             </td>
@@ -68,12 +60,33 @@
                             <td>
                                 <%= record.status %>
                             </td>
+                             <!-- 
                             <td>
                                 <%= record.create_at %>
                             </td>
                             <td>
                                 <%= record.end_at %>
                             </td>
+                             -->
+
+                             <td>
+                                <% if(record.status === "ready"){ %>
+                                    <a href="#" id="btn-start" class="btn btn-primary mini" role="button" 
+                                        data-id="<%= record.id %>" 
+                                        data-device="<%= record.device_id %>" 
+                                        data-action="<%= record.action_count %>"
+                                        data-package="<%= record.package_name %>"
+                                        data-activity="<%= record.activity_name %>"
+                                        data-algorithm="<%= record.algorithm %>"
+                                        data-name="<%= record.app_name%>"
+                                        >开始</a>
+                                <% }else{ %>
+                                    <a href="/records/<%=record.id%>" class="btn btn-info mini" role="button">详细报告</a>
+                                <% } %>
+
+                                <a href="#" class="btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                             </td>
+
                         </tr>
                         <% }); %>
                     </tbody>
@@ -82,5 +95,7 @@
         </div>
     </div>
 </div>
+
+<script src="/javascripts/records.js"></script>
 
 <% include partials/footer.ejs %>

@@ -1,7 +1,6 @@
 package com.nata.server;
 
 import com.nata.Config;
-import com.nata.runners.Runner;
 
 /**
  * Author: Calvin Meng

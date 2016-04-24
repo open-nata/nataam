@@ -1,4 +1,4 @@
-package com.nata.runners;
+package com.nata.server;
 
 import com.nata.AdbDevice;
 import com.nata.Config;
