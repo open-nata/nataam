@@ -125,5 +125,10 @@
 ### (2016/4/22)
 - Construct nata-server UI Design, add introduction,run,records and contact functions
 - Add java end server blade to provide service
+
+### (2016/4/23)
 - Get device information from java server
-- 
+- Create device model to store 
+
+### (2016/4/24)
+- Create device objects and show them in devices table

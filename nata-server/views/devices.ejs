@@ -1,0 +1,74 @@
+<% include partials/header %>
+
+<div id="devices">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="centered">设备列表</h1>
+                <br>
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            设备ID
+                        </th>
+                        <th>
+                            设备名称
+                        </th>
+                        <th>
+                            安卓版本
+                        </th>
+                        <th>
+                            SDK版本
+                        </th>
+                        <th>
+                            分辨率
+                        </th>
+                        <th>
+                            CPU制式
+                        </th>
+                        <th>
+                            生产厂商
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     <% devices.forEach(function(device, index){ %>
+                        <tr>
+                            <td>
+                                <%= index %>
+                            </td>
+                            <td>
+                                <%= device.id%>
+                            </td>
+                            <td>
+                                <%= device.name %>
+                            </td>
+                            <td>
+                                <%= device.android_version %>
+                            </td>
+                            <td>
+                                <%= device.sdk_version %>
+                            </td>
+                            <td>
+                                <%= device.resolution %>
+                            </td>
+                            <td>
+                                <%= device.cpu_abi %>
+                            </td>
+                            <td>
+                                <%= device.manufacturer %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer.ejs %>

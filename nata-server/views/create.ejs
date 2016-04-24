@@ -1,0 +1,106 @@
+<% include partials/header %>
+
+<div id="device">
+    <div class="container">
+        <h1 class="centered">设备信息</h1>
+        <br>
+
+        <div class="row">
+            <dl class="dl-horizontal">
+                <dt>状态：</dt>
+                <dd><span class="label label-primary" id="status">未获取</span>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>设备名称：</dt>
+                    <dd id="device-name"></dd>
+                    <dt>设备ID：</dt>
+                    <dd id="device-id"></dd>
+                    <dt>安卓版本：</dt>
+                    <dd id="android-version"></dd>
+                    <dt>SDK版本：</dt>
+                    <dd id="sdk-version"></dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <dl class="dl-horizontal">
+                    <dt>分辨率：</dt>
+                    <dd id="resolution"></dd>
+                    <dt>CPU制式：</dt>
+                    <dd id="cpu-abi"></dd>
+                    <dt>厂家：</dt>
+                    <dd id="manufacturer"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="center-block" style="max-width: 600px;">
+                <button type="button" class="btn btn-info btn-lg btn-block" id="btn-device">获取设备信息</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="run">
+    <div class="container">
+        <h1 class="centered"> 实验配置</h1>
+        <br>
+        <div class="row">
+            <form method="get" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">待测应用名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="凤城卫士">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Package Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="com.cvicse.zhnt">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Activity Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value=".LoadingActivity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Action数量上限</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" value="1000">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">测试算法</label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control m-b" name="account">
+                            <option value="dfs">DFS(Depth First)</option>
+                            <option value="prm">PRM(Pure Random Monkey)</option>
+                            <option value="rm">RM(Random Monkey)</option>
+                            <option value="qlm">QLM(QLearning Monkey)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="center-block" style="max-width: 600px;">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-create">创建测试任务</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/create.js"></script>
+
+<% include partials/footer.ejs %>

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var apiRouterV1 = require('./api_router_v1');
 
 
 var socket_io = require('socket.io');
@@ -17,7 +18,6 @@ app.io           = io;
 
 
 var routes = require('./routes/index')(io);
-var users = require('./routes/users');
 
 
 // view engine setup
@@ -35,8 +35,8 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api/v1', apiRouterV1);
 app.use('/', routes);
-app.use('/users', users);
 
 
 // catch 404 and forward to error handler

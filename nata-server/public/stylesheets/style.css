@@ -140,11 +140,15 @@ hr {
 }
 
 
-#device, #run, #records {
+#device, #run, #records, #devices {
     display: block;
     background-color: #44ba92;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+
+#devices {
+    background-color: white;
 }
 
 #device {
@@ -179,3 +183,4 @@ hr {
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
