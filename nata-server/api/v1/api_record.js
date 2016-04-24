@@ -1,20 +1,21 @@
 var RecordModel = require('../../models/model_record.js');
 
 module.exports.create = function(req, res, next) {
-    var device = new RecordModel();
-    device.device = req.body.id;
-    device.name = req.body.name;
-    device.android_version = req.body.version;
-    device.sdk_version = req.body.sdk;
-    device.resolution = req.body.resolution;
-    device.cpu_abi = req.body.cpu;
-    device.manufacturer = req.body.manufacturer;
+    
+    var record = new RecordModel();
+    record.device_id = req.body.device_id;
+    record.app_name = req.body.app_name;
+    record.package_name = req.body.package_name;
+    record.activity_name = req.body.activity_name;
+    record.action_count = req.body.action_count;
+    record.algorithm = req.body.algorithm;
+    record.status = "running";
 
-    device.save(function(err, device) {
+    record.save(function(err, record) {
         if (err) {
             return next(err);
         } else {
-            res.status(200).json(device);
+            res.status(200).json(record);
         }
     });
 };

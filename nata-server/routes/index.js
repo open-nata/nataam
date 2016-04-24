@@ -2,6 +2,7 @@ module.exports = function(io) {
     var express = require('express');
     var router = express.Router();
     var DeviceModel = require('../models/model_device.js');
+    var RecordModel= require('../models/model_record.js');
 
     // socket.io events
     io.on("connection", function(socket) {
@@ -30,6 +31,18 @@ module.exports = function(io) {
                 return res.status(500).json();
             }
             res.render('devices', { title: '设备列表', devices: devices });
+        });
+    });
+
+    /**
+     * 获取任务列表
+     */
+    router.get('/records', function(req, res, next) {
+        RecordModel.find({}, function(err, records) {
+            if (err || !records) {
+                return res.status(500).json();
+            }
+            res.render('records', { title: '任务列表', records: records });
         });
     });
 

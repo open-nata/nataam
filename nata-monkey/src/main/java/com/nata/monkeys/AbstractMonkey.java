@@ -51,6 +51,8 @@ public abstract class AbstractMonkey {
         testResult = new TestResult(name,actionCount);
     }
 
+
+
     public String getName(){
         return name;
     }

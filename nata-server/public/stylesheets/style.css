@@ -156,9 +156,11 @@ hr {
     color: white;
 }
 
-#run {
+#run, #records {
     color: white;
 }
+
+
 
 #device h1, #records h1, #run h1{
     color: white;

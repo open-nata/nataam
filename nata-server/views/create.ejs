@@ -51,38 +51,38 @@
         <h1 class="centered"> 实验配置</h1>
         <br>
         <div class="row">
-            <form method="get" class="form-horizontal">
+            <form method="post" class="form-horizontal" id = "config">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">待测应用名称</label>
+                    <label class="col-sm-2 control-label" for="app_name">待测应用名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="凤城卫士">
+                        <input type="text" class="form-control" name="app_name" id="app_name" value="凤城卫士">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Package Name</label>
+                    <label class="col-sm-2 control-label" for="package_name">Package Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="com.cvicse.zhnt">
+                        <input type="text" class="form-control" value="com.cvicse.zhnt" name="package_name" id="package_name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Activity Name</label>
+                    <label class="col-sm-2 control-label" for="activity_name">Activity Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value=".LoadingActivity">
+                        <input type="text" class="form-control" name="activity_name" id="activity_name" value=".LoadingActivity">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Action数量上限</label>
+                    <label class="col-sm-2 control-label" for="action_count">Action数量上限</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" value="1000">
+                        <input type="number" class="form-control" name="action_count"  id="action_count" value="1000">
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">测试算法</label>
+                    <label class="col-sm-2 control-label" for="algorithm">测试算法</label>
 
                     <div class="col-sm-10">
-                        <select class="form-control m-b" name="account">
+                        <select class="form-control m-b" name="algorithm" id="algorithm">
                             <option value="dfs">DFS(Depth First)</option>
                             <option value="prm">PRM(Pure Random Monkey)</option>
                             <option value="rm">RM(Random Monkey)</option>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group">
                     <div class="center-block" style="max-width: 600px;">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-create">创建测试任务</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-create">创建测试任务</button>
                     </div>
                 </div>
             </form>

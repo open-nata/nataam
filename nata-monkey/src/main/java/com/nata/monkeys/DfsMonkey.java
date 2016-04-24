@@ -31,6 +31,7 @@ public class DfsMonkey extends AbstractMonkey{
         this(1000,pkg, act, device);
     }
 
+
     private int classifyNode(DFSState state) {
         int k = DFSState.NORMAL;
 
@@ -124,7 +125,7 @@ public class DfsMonkey extends AbstractMonkey{
     }
 
     private void restartApp() {
-        startApp();
+        executeAction(getRestartAction());
         String rootPa = rootState.getAppPackage();
         String rootAct = rootState.getActivity();
         int count = 0;

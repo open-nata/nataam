@@ -9,7 +9,7 @@ import com.nata.monkeys.DfsMonkey;
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-04-17 23:32
  */
-public class DFSRunner {
+public class DFSRunner{
 
     public static void main(String[] args) {
         String pkg = "com.cvicse.zhnt";

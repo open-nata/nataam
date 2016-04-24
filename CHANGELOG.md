@@ -132,3 +132,6 @@
 
 ### (2016/4/24)
 - Create device objects and show them in devices table
+- Add Config class to store running config
+- Add RunnerFactory to manage runner thread
+- Display the test records in the website

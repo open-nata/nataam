@@ -14,7 +14,7 @@ $('#btn-device').click(function(){
                     console.log("创建设备成功");
                 },
                 error : function(request){
-                    console.log("创建设备失败");
+                    // console.log("创建设备失败");
                 }
              });
 
@@ -37,13 +37,36 @@ $('#btn-device').click(function(){
 });
 
 $('#btn-create').click(function(){
+    var config = $('#config').serialize();
+    var device_id = $('#device-id').text().trim();
+    config +="&device_id="+device_id;
+    console.log(config);
     $.ajax({
-        url: '/test',
+        url: baseUrl + '/start',
         type: 'POST',
-        success: function (task) {
+        data: config,
+        success: function () {
+            console.log("success");
 
+            $.ajax({
+                url: "api/v1/records",
+                data: config,
+                type: 'POST',
+                success : function(record){
+                    console.log(record);
+                },
+                error : function(request){
+                    // console.log("创建设备失败");
+                }
+             });
         },
         error: function (request) {
+            console.log("error");
+            if(request.status === 406)
+                alert("有测试任务正在运行");
+            else{
+                alert("创建测试任务失败");
+            }
         }
     });
 });
