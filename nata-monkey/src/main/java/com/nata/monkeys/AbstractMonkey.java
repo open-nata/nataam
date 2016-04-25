@@ -1,5 +1,6 @@
 package com.nata.monkeys;
 
+import com.nata.Config;
 import com.nata.action.*;
 import com.nata.AdbDevice;
 import com.nata.element.Widget;
@@ -34,13 +35,13 @@ public abstract class AbstractMonkey {
     protected int cnt = 0;
 
 
-    public AbstractMonkey(String name,int actionCount,String pkg, String act, AdbDevice device) {
-        this.name = name;
-        this.pkg = pkg;
-        this.act = act;
-        this.device = device;
-        this.ACTION_COUNTS = actionCount;
+    public AbstractMonkey(Config config) {
+        this.name = config.getAlgorithm();
+        this.pkg = config.getPackage_name();
+        this.act = config.getActivity_name();
+        this.ACTION_COUNTS = config.getAction_count();
 
+        this.device  = new AdbDevice();
         actionFactory = new ActionFactory(device);
         stateFactory = new StateFactory(device,actionFactory);
 
@@ -48,7 +49,7 @@ public abstract class AbstractMonkey {
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
 
-        testResult = new TestResult(name,actionCount);
+        testResult = new TestResult(config.getRecord_id(),config.isRemote());
     }
 
 

@@ -1,7 +1,9 @@
 package com.nata.runners;
 
 import com.nata.AdbDevice;
+import com.nata.Config;
 import com.nata.monkeys.AbstractMonkey;
+import com.nata.monkeys.MonkeyType;
 import com.nata.monkeys.QLearningMonkey;
 
 /**
@@ -11,13 +13,10 @@ import com.nata.monkeys.QLearningMonkey;
  */
 public class QLMRunner {
     public static void main(String[] args) {
-//      String pkg = "com.zhihu.android";
-//      String act = ".App.ui.activity.MainActivity";
-        String pkg = "com.cvicse.zhnt";
-        String act = ".LoadingActivity";
+        Config config = new Config();
+        config.setAlgorithm(MonkeyType.QLM);
 
-        AdbDevice device = new AdbDevice();
-        AbstractMonkey qLearningMonkey = new QLearningMonkey(1000,pkg, act, device);
+        AbstractMonkey qLearningMonkey = new QLearningMonkey(config);
         //      qLearningMonkey.learn("rules/zhihu.json");
         qLearningMonkey.play();
         qLearningMonkey.report();

@@ -2,6 +2,7 @@ package com.nata.monkeys;
 
 import com.nata.AndroidKeyCode;
 import com.nata.AdbDevice;
+import com.nata.Config;
 import com.nata.dictionary.TextValueDictionary;
 import com.nata.utils.LogUtil;
 import java.util.Random;
@@ -20,15 +21,11 @@ public class PureRandomMonkey extends AbstractMonkey{
     private int screenY;
     private String lastAction;
 
-    public PureRandomMonkey(int actionCount,String pkg, String act, AdbDevice device) {
-        super("PureRandomMonkey",actionCount,pkg, act, device);
-        int []resolutions = device.getScreenResolution();
+    public PureRandomMonkey(Config config) {
+        super(config);
+        int []resolutions = getDevice().getScreenResolution();
         screenX = resolutions[0];
         screenY = resolutions[1];
-    }
-
-    public PureRandomMonkey(String pkg, String act, AdbDevice device){
-        this(1000,pkg,act,device);
     }
 
     public void tap(){

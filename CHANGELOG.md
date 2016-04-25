@@ -136,3 +136,7 @@
 - Add RunnerFactory to manage runner thread
 - Display the test records in the website
 - Show detailed running results
+
+### (2016/4/25)
+- Use Config class as monkey running parameter
+- Successfully send running results to remote url

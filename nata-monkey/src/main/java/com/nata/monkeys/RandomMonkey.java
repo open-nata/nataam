@@ -1,5 +1,6 @@
 package com.nata.monkeys;
 
+import com.nata.Config;
 import com.nata.action.*;
 import com.nata.AdbDevice;
 import com.nata.state.State;
@@ -14,15 +15,9 @@ import java.util.*;
 public class RandomMonkey extends AbstractMonkey {
     private Set<String> activitySet = new HashSet<>();
 
-    public RandomMonkey(int actionCount,String pkg, String act, AdbDevice device) {
-        super("randomMonkey",actionCount, pkg, act, device);
+    public RandomMonkey(Config config) {
+        super(config);
     }
-
-    public RandomMonkey(String pkg, String act, AdbDevice device) {
-        this(1000,pkg,act,device);
-    }
-
-
 
     private Action chooseActionFromState(State curState) {
         Map<Action, Double> actionTable = curState.getActionTable();
@@ -66,17 +61,6 @@ public class RandomMonkey extends AbstractMonkey {
 
     @Override
     public void stop() {
-
-    }
-
-    public static void main(String[] args) {
-        String pkg = "com.zhihu.android";
-        String act = ".App.ui.activity.MainActivity";
-
-        AdbDevice device = new AdbDevice();
-        RandomMonkey randomMonkey = new RandomMonkey(pkg, act, device);
-        randomMonkey.play();
-        randomMonkey.report();
 
     }
 }

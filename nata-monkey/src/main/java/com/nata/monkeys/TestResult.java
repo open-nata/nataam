@@ -15,19 +15,22 @@ import java.util.*;
  * Update: 2016-04-15 11:15
  */
 public class TestResult {
-    private String name;
-    private int actionCount;
+    private String recordId;
+    private boolean isRemote = true;
+
     private Set<Widget> widgetSet;
     private Set<String> activitySet;
     private Set<State> stateSet;
     private List<Action> actionList;
     private List<String> summaryList;
 
-    private boolean upload = true;
 
-    public TestResult(String name,int actionCount){
-        this.name = name;
-        this.actionCount = actionCount;
+
+    public TestResult(String recordId,boolean isRemote){
+
+        this.recordId = recordId;
+        this.isRemote = isRemote;
+
         widgetSet = new HashSet<>();
         activitySet = new HashSet<>();
         stateSet = new HashSet<>();
@@ -36,9 +39,9 @@ public class TestResult {
     }
 
     public void addWidget(Widget widget){
-        if(widgetSet.add(widget) && upload){
+        if(widgetSet.add(widget) && isRemote){
             try {
-                HttpUtil.postWidget(widget.toString());
+                HttpUtil.postWidget(recordId, widget.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -46,9 +49,9 @@ public class TestResult {
     }
 
     public void addActivity(String activity){
-        if(activitySet.add(activity) && upload){
+        if(activitySet.add(activity) && isRemote){
             try {
-                HttpUtil.postActivity(activity);
+                HttpUtil.postActivity(recordId,activity);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -60,9 +63,9 @@ public class TestResult {
     }
 
     public void addState(State state){
-        if(stateSet.add(state) && upload){
+        if(stateSet.add(state) && isRemote){
             try {
-                HttpUtil.postState(state.toString());
+                HttpUtil.postState(recordId,state.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -76,9 +79,9 @@ public class TestResult {
 
     public void addAction(Action action){
         actionList.add(action);
-        if(upload){
+        if(isRemote){
             try {
-                HttpUtil.postAction(action.toString());
+                HttpUtil.postAction(recordId,action.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -134,9 +137,9 @@ public class TestResult {
         summary.put("widget",widgetSet.size()+"");
         summary.put("state",stateSet.size()+"");
 
-        if(upload){
+        if(isRemote){
             try {
-                HttpUtil.postSummary(summary);
+                HttpUtil.postSummary(recordId,summary);
             } catch (IOException e) {
                 e.printStackTrace();
             }

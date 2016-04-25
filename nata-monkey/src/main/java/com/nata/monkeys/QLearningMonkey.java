@@ -1,5 +1,6 @@
 package com.nata.monkeys;
 
+import com.nata.Config;
 import com.nata.action.*;
 import com.nata.AdbDevice;
 import com.nata.state.State;
@@ -22,14 +23,10 @@ public class QLearningMonkey extends AbstractMonkey {
 
     private List<Action> chosenActions ;
 
-    public QLearningMonkey(int actionCount,String pkg, String act, AdbDevice device) {
-        super("QLearningMonkey",actionCount,pkg, act, device);
+    public QLearningMonkey(Config config) {
+        super(config);
         QMap = new HashMap<>();
         chosenActions = new ArrayList<>();
-    }
-
-    public QLearningMonkey(String pkg, String act, AdbDevice device){
-        this(1000,pkg,act,device);
     }
 
     private Action chooseActionFromState(State curState) {

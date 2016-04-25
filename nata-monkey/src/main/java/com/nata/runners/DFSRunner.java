@@ -1,8 +1,9 @@
 package com.nata.runners;
 
-import com.nata.AdbDevice;
+import com.nata.Config;
 import com.nata.monkeys.AbstractMonkey;
 import com.nata.monkeys.DfsMonkey;
+import com.nata.monkeys.MonkeyType;
 
 /**
  * Author: Calvin Meng
@@ -12,11 +13,10 @@ import com.nata.monkeys.DfsMonkey;
 public class DFSRunner{
 
     public static void main(String[] args) {
-        String pkg = "com.cvicse.zhnt";
-        String act = ".LoadingActivity";
+        Config config = new Config();
+        config.setAlgorithm(MonkeyType.DFS);
 
-        AdbDevice device = new AdbDevice();
-        AbstractMonkey dfsMonkey= new DfsMonkey(pkg, act, device);
+        AbstractMonkey dfsMonkey= new DfsMonkey(config);
         dfsMonkey.play();
         dfsMonkey.report();
 

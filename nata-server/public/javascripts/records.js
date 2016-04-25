@@ -1,16 +1,17 @@
 $(function() {
     var baseUrl = "http://localhost:9001";
 
-    $('#btn-start').on('click', function(e) {
+    $('.btn-start').on('click', function(e) {
         e.preventDefault();
-        var record_id = $(this).data('id');
         var config = {};
+        config.record_id = $(this).data('id');
         config.device_id = $(this).data('device');
         config.action_count = $(this).data('action');
         config.package_name = $(this).data('package');
         config.activity_name = $(this).data('activity');
         config.algorithm = $(this).data('algorithm');
         config.app_name = $(this).data('name');
+
 
         $.ajax({
             url: baseUrl + "/device/online",
@@ -25,7 +26,7 @@ $(function() {
                     data: config,
                     success: function() {
                         console.log("success");
-                        window.location.href = "/records/" + record_id;
+                        window.location.href = "/records/" + config.record_id;
                         return false;
                     },
                     error: function(request) {

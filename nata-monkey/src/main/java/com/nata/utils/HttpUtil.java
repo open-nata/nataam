@@ -23,6 +23,8 @@ import java.util.Map;
  */
 public class HttpUtil {
 
+    public static final String remoteUrl = "http://localhost:3000/api/v1/records/";
+
     public static void post(String url,HashMap<String,String> props) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
@@ -39,33 +41,37 @@ public class HttpUtil {
         client.close();
     }
 
-    public static void postSummary(HashMap<String,String> props) throws IOException {
-        String summaryUrl = "http://localhost:3000/summary";
-        post(summaryUrl,props);
+    public static void postSummary(String recordId, HashMap<String,String> props) throws IOException {
+        String url = remoteUrl+recordId+"/summary";
+        post(url,props);
     }
 
-    public static void postAction(String message) throws IOException {
+    public static void postAction(String recordId,String message) throws IOException {
         HashMap<String,String > messages = new HashMap<>();
         messages.put("message",message);
-        post("http://localhost:3000/action",messages);
+        String url = remoteUrl+recordId+"/action";
+        post(url, messages);
     }
 
-    public static void postState(String message) throws IOException {
+    public static void postState(String recordId,String message) throws IOException {
         HashMap<String,String > messages = new HashMap<>();
         messages.put("message",message);
-        post("http://localhost:3000/state",messages);
+        String url = remoteUrl+recordId+"/state";
+        post(url, messages);
     }
 
-    public static void postActivity(String message) throws IOException {
+    public static void postActivity(String recordId,String message) throws IOException {
         HashMap<String,String > messages = new HashMap<>();
         messages.put("message",message);
-        post("http://localhost:3000/activity",messages);
+        String url = remoteUrl+recordId+"/activity";
+        post(url ,messages);
     }
 
-    public static void postWidget(String message) throws IOException {
+    public static void postWidget(String recordId,String message) throws IOException {
         HashMap<String,String > messages = new HashMap<>();
         messages.put("message",message);
-        post("http://localhost:3000/widget",messages);
+        String url = remoteUrl+recordId+"/widget";
+        post(url, messages);
     }
 
 

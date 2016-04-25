@@ -1,7 +1,9 @@
 package com.nata.runners;
 
 import com.nata.AdbDevice;
+import com.nata.Config;
 import com.nata.monkeys.AbstractMonkey;
+import com.nata.monkeys.MonkeyType;
 import com.nata.monkeys.PureRandomMonkey;
 
 /**
@@ -11,11 +13,10 @@ import com.nata.monkeys.PureRandomMonkey;
  */
 public class PRMRunner {
     public static void main(String[] args) {
-        String pkg = "com.cvicse.zhnt";
-        String act = ".LoadingActivity";
+        Config config = new Config();
+        config.setAlgorithm(MonkeyType.PRM);
 
-        AdbDevice device = new AdbDevice();
-        AbstractMonkey pureRandomMonkey= new PureRandomMonkey(pkg, act, device);
+        AbstractMonkey pureRandomMonkey= new PureRandomMonkey(config);
         pureRandomMonkey.play();
         pureRandomMonkey.report();
     }

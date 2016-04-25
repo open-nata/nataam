@@ -1,6 +1,8 @@
 package com.nata.runners;
 
 import com.nata.AdbDevice;
+import com.nata.Config;
+import com.nata.monkeys.MonkeyType;
 import com.nata.monkeys.RandomMonkey;
 
 /**
@@ -10,13 +12,10 @@ import com.nata.monkeys.RandomMonkey;
  */
 public class RMRunner {
     public static void main(String[] args) {
-//      String pkg = "com.zhihu.android";
-//      String act = ".App.ui.activity.MainActivity";
+        Config config = new Config();
+        config.setAlgorithm(MonkeyType.RM);
 
-        String pkg = "com.cvicse.zhnt";
-        String act = ".LoadingActivity";
-        AdbDevice device = new AdbDevice();
-        RandomMonkey randomMonkey = new RandomMonkey(pkg, act, device);
+        RandomMonkey randomMonkey = new RandomMonkey(config);
         randomMonkey.play();
         randomMonkey.report();
     }

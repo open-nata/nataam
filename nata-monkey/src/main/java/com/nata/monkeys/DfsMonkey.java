@@ -1,5 +1,6 @@
 package com.nata.monkeys;
 
+import com.nata.Config;
 import com.nata.action.Action;
 import com.nata.AdbDevice;
 import com.nata.state.*;
@@ -21,16 +22,11 @@ public class DfsMonkey extends AbstractMonkey{
     private ArrayList<Action> currentActions;
     private ArrayList<State> nodes = null;
 
-    public DfsMonkey(int actionCount,String pkg, String act, AdbDevice device) {
-        super("DfsMonkey",actionCount,pkg, act, device);
+    public DfsMonkey(Config config) {
+        super(config);
         currentActions = new ArrayList<>();
         nodes = new ArrayList<>();
     }
-
-    public DfsMonkey(String pkg, String act, AdbDevice device) {
-        this(1000,pkg, act, device);
-    }
-
 
     private int classifyNode(DFSState state) {
         int k = DFSState.NORMAL;

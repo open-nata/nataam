@@ -68,6 +68,8 @@ public class App {
            }
 
             Config config = new Config();
+            config.setRemote(true);
+            config.setRecord_id(request.query("record_id"));
             config.setApp_name(request.query("app_name"));
             config.setPackage_name(request.query("package_name"));
             config.setActivity_name(request.query("activity_name"));

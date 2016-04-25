@@ -1,11 +1,19 @@
 package com.nata;
 
+import com.nata.monkeys.MonkeyType;
+
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-04-24 10:19
  */
 public class Config {
+    private String record_id;
+    /**
+     * Whether to upload to remote server
+     */
+    private boolean isRemote;
+
     private String device_id;
     private String app_name;
     private String package_name;
@@ -14,7 +22,28 @@ public class Config {
     private String algorithm;
 
     public Config(){
+        this.app_name = "凤城卫士";
+        this.package_name = "com.cvicse.zhnt";
+        this.activity_name = ".LoadingActivity";
+        this.action_count = 1000;
+        this.algorithm = MonkeyType.DFS;
+        this.isRemote = false;
+    }
 
+    public boolean isRemote() {
+        return isRemote;
+    }
+
+    public void setRemote(boolean remote) {
+        isRemote = remote;
+    }
+
+    public String getRecord_id() {
+        return record_id;
+    }
+
+    public void setRecord_id(String record_id) {
+        this.record_id = record_id;
     }
 
     public String getDevice_id() {
