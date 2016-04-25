@@ -11,6 +11,8 @@ import com.nata.element.Widget;
 public class LongClickAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
+    private int X;
+    private int Y;
 
     private final double LONG_CLICK_REWARD = BASE - 1.0;
 
@@ -18,11 +20,20 @@ public class LongClickAction extends Action{
         super(ActionType.LONG_CLICK);
         this.device = device;
         this.widget = widget;
+        this.X = widget.getX();
+        this.Y = widget.getY();
+    }
+
+    public LongClickAction(AdbDevice device,int X, int Y){
+        super(ActionType.LONG_CLICK);
+        this.device = device;
+        this.X = X;
+        this.Y = Y;
     }
 
     @Override
     public void fire() {
-        device.longPress(widget.getX(), widget.getY());
+        device.longPress(X, Y);
         count++;
     }
 
@@ -80,6 +91,6 @@ public class LongClickAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.LONG_CLICK + " " + widget.getX() + " " + widget.getY();
+        return ActionType.LONG_CLICK + " " + X + " " + Y;
     }
 }

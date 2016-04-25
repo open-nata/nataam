@@ -33,6 +33,10 @@ public class ActionFactory {
         return new StartAppAction(device,pkgAct);
     }
 
+    public Action CreateCleanDataAction(String pkgAct){
+        return new CleanDataAction(device,pkgAct);
+    }
+
     public Action CreateSwipeAction(Widget widget,SwipeDirection direction){
         return new SwipeAction(device,widget,direction);
     }

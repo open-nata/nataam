@@ -28,6 +28,8 @@ public abstract class AbstractMonkey {
     private Action backAction = null;
     private Action homeAction = null;
     private Action restartAction = null;
+    private Action cleanDataAction = null;
+
     private Action lastAction = null;
     private ActionFactory actionFactory = null;
     private StateFactory stateFactory = null;
@@ -48,6 +50,7 @@ public abstract class AbstractMonkey {
         backAction = actionFactory.createBackAction();
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
+        cleanDataAction = getActionFactory().CreateCleanDataAction(getPkgAct());
 
         testResult = new TestResult(config.getRecord_id(),config.isRemote());
     }
@@ -74,10 +77,10 @@ public abstract class AbstractMonkey {
         return pkgAct;
     }
 
-    public void clearAppData() {
-        device.clearAppData(pkg);
-        device.sleep(5000);
-    }
+//    public void clearAppData() {
+//        device.clearAppData(pkg);
+//        device.sleep(5000);
+//    }
 
     public Set<State> getStateSet(){
         return testResult.getStateSet();
@@ -85,10 +88,8 @@ public abstract class AbstractMonkey {
 
     public void startApp() {
         LogUtil.info(name+ " start playing...");
-        clearAppData();
-        LogUtil.info("App data cleaned!");
-        restartAction.fire();
-        testResult.addAction(restartAction);
+        executeAction(cleanDataAction);
+        executeAction(restartAction);
         LogUtil.info("Starting App success!");
     }
 
@@ -212,7 +213,7 @@ public abstract class AbstractMonkey {
         while (!isInCurrentPkg()) {
             // if even the restart action cannot restart it ;
             if(forceQuit){
-                clearAppData();
+                executeAction(cleanDataAction);
                 executeAction(restartAction);
             }
             else if(lastAction instanceof StartAppAction){

@@ -22,6 +22,13 @@ public class TapAction extends Action{
         this.centerY = widget.getCenterY();
     }
 
+    public TapAction(AdbDevice device,int centerX , int centerY){
+        super(ActionType.TAP);
+        this.device = device;
+        this.centerX = centerX;
+        this.centerY = centerY;
+    }
+
     @Override
     public void fire() {
         device.tap(centerX,centerY);

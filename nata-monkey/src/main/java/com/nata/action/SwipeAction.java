@@ -30,6 +30,17 @@ public class SwipeAction extends Action {
         endY = widget.getEndY();
     }
 
+    public SwipeAction(AdbDevice device,SwipeDirection direction ,int startX, int startY, int endX, int endY) {
+        super(ActionType.SWIPE);
+        this.device = device;
+        this.direction = direction;
+
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
+    }
+
     @Override
     public void fire() {
         switch (direction){

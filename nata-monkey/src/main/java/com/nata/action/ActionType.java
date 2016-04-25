@@ -16,4 +16,5 @@ public class ActionType {
     public static final String MENU= "MenuAction";
     public static final String HOME= "HomeAction";
     public static final String START_APP= "StartAppAction";
+    public static final String CLEAN_DATA= "CleanDataAction";
 }

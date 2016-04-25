@@ -30,6 +30,13 @@ public class TextInputAction extends Action{
         return widget;
     }
 
+    public TextInputAction(AdbDevice device,int X,int Y ,String text){
+        super(ActionType.INPUT);
+        this.device = device;
+        this.text = text;
+        this.X = X;
+        this.Y = Y;
+    }
 
     @Override
     public void fire() {
@@ -98,6 +105,6 @@ public class TextInputAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.INPUT+ " " + X + " " + Y + " [" + text + "]";
+        return ActionType.INPUT+ " " + X + " " + Y + " " + text;
     }
 }

@@ -142,3 +142,5 @@
 - Successfully send running results to remote url
 - Add MonkeyType to restore algorithm types
 - Add toCommand method to output human-friendly action string
+- Add CleanDataAction
+- Add ActionParser to parse Actions
