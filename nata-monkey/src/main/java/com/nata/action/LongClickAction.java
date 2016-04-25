@@ -75,4 +75,11 @@ public class LongClickAction extends Action{
 //
 //        return true;
 //    }
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.LONG_CLICK + " " + widget.getX() + " " + widget.getY();
+    }
 }

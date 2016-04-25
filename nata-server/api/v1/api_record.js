@@ -34,9 +34,24 @@ module.exports = function(io) {
             "widget : " + widget +
             "state  : " + state +
             "activity : " + activity);
-        
-        var data = { "widget": widget, "action": action, "activity": activity };
+
+        var data = { widget: widget, action: action, activity: activity, state: state };
+
         io.sockets.emit("summary", data);
+
+        RecordModel.findOne({ _id: record_id }, function(err, record) {
+            if (err || !record) {
+                return res.status(500).json();
+            }
+            
+            record.summaries.push(data);
+
+            record.save(function(err) {
+                if (err) return next(err);
+                console.log('Success!');
+            });
+        });
+
 
         res.send({});
     }

@@ -12,6 +12,10 @@ public class SwipeAction extends Action {
     private AdbDevice device;
     private SwipeDirection direction;
     private Widget widget;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
     private final double SWIPE_REWARD = BASE + 0.6;
 
     public SwipeAction(AdbDevice device, Widget widget,SwipeDirection direction) {
@@ -19,14 +23,15 @@ public class SwipeAction extends Action {
         this.device = device;
         this.widget = widget;
         this.direction = direction;
+
+        startX = widget.getStartX();
+        startY = widget.getStartY();
+        endX = widget.getEndX();
+        endY = widget.getEndY();
     }
 
     @Override
     public void fire() {
-        int startX = widget.getStartX();
-        int startY = widget.getStartY();
-        int endX = widget.getEndX();
-        int endY = widget.getEndY();
         switch (direction){
             case DOWN: device.swipeToDown(startX,startY,endX,endY);break;
             case UP: device.swipeToUp(startX,startY,endX,endY);break;
@@ -91,4 +96,11 @@ public class SwipeAction extends Action {
     }
 
 
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.SWIPE+ " " + direction + " "+ startX + " " + startY + " " + endX + " " + endY;
+    }
 }

@@ -36,4 +36,12 @@ public class HomeAction extends Action{
     public String toString() {
         return super.toString()+"HomeAction";
     }
+
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.HOME;
+    }
 }

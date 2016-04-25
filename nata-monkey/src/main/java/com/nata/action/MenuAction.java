@@ -36,4 +36,12 @@ public class MenuAction extends Action{
     public String toString() {
         return super.toString()+"MenuAction";
     }
+
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.MENU;
+    }
 }

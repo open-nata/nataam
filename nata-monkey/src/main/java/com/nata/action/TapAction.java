@@ -11,16 +11,20 @@ import com.nata.element.Widget;
 public class TapAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
+    private int centerX ;
+    private int centerY;
     private final double TAP_REWARD = BASE + 0.8;
     public TapAction(AdbDevice device,Widget widget){
         super(ActionType.TAP);
         this.device = device;
         this.widget = widget;
+        this.centerX = widget.getCenterX();
+        this.centerY = widget.getCenterY();
     }
 
     @Override
     public void fire() {
-        device.tap(widget.getCenterX(), widget.getCenterY());
+        device.tap(centerX,centerY);
         count++;
     }
 
@@ -73,4 +77,11 @@ public class TapAction extends Action{
 //
 //        return true;
 //    }
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.TAP + " " + centerX + " " + centerY;
+    }
 }

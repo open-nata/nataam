@@ -140,3 +140,5 @@
 ### (2016/4/25)
 - Use Config class as monkey running parameter
 - Successfully send running results to remote url
+- Add MonkeyType to restore algorithm types
+- Add toCommand method to output human-friendly action string

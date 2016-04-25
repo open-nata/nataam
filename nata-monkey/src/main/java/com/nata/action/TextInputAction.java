@@ -13,12 +13,17 @@ public class TextInputAction extends Action{
     private AdbDevice device = null;
     private Widget widget = null;
     private String text = null;
+    private int X;
+    private int Y;
     private final double TEXT_INPUT_REWARD = BASE + 1.0;
 
     public TextInputAction(AdbDevice device,Widget widget){
         super(ActionType.INPUT);
         this.device = device;
         this.widget = widget;
+        this.text = TextValueDictionary.getInstance().getInput(widget);
+        this.X = widget.getX();
+        this.Y = widget.getY();
     }
 
     public Widget getWidget(){
@@ -28,8 +33,7 @@ public class TextInputAction extends Action{
 
     @Override
     public void fire() {
-        this.text = TextValueDictionary.getInstance().getInput(widget);
-        device.longPress(widget.getX(), widget.getY());
+        device.longPress(X, Y);
         device.sendText(text);
         device.hideSoftKeyBoard();
         count++;
@@ -89,5 +93,11 @@ public class TextInputAction extends Action{
 //
 //        return true;
 //    }
-
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.INPUT+ " " + X + " " + Y + " [" + text + "]";
+    }
 }

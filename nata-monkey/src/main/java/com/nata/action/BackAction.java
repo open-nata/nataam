@@ -33,4 +33,12 @@ public class BackAction extends Action{
         count++;
         device.sleep(1000);
     }
+
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.BACK;
+    }
 }

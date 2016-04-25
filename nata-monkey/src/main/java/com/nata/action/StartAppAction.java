@@ -65,4 +65,12 @@ public class StartAppAction extends Action{
 //
 //        return true;
 //    }
+
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return ActionType.START_APP + " " + pkgAct;
+    }
 }
