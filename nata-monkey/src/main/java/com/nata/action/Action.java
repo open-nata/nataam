@@ -53,4 +53,12 @@ public abstract class Action {
     public String toString() {
         return "[Action]("+type+","+count +")";
     }
+
+    /**
+     * Get Command String that can be parsed by parser to rerun
+     * @return
+     */
+    public String toCommand(){
+        return "action";
+    }
 }

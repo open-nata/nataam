@@ -1,0 +1,445 @@
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 622 787
+Tap 622 459
+Tap 622 624
+Tap 540 811
+Tap 82 165
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 622 952
+Back
+Tap 540 1139
+Tap 180 1342
+Tap 82 165
+Back
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 180 1342
+Tap 540 538
+Tap 270 718
+Tap 600 725
+Tap 240 913
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 82 165
+Back
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 686 465
+Tap 82 165
+Back
+Tap 938 165
+Tap 840 1342
+Tap 686 465
+Tap 686 465
+Tap 686 615
+Tap 686 765
+Back
+Tap 686 615
+Back
+Tap 686 765
+Back
+Tap 681 1035
+Tap 82 165
+Back
+Tap 938 165
+Tap 840 1342
+Tap 681 1035
+Tap 686 369
+Tap 686 519
+Tap 686 669
+Tap 681 939
+Tap 82 165
+Back
+Tap 938 165
+Tap 840 1342
+Tap 681 1035
+Tap 681 939
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 681 1185
+Tap 82 165
+Back
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 681 1185
+Tap 686 219
+Tap 686 369
+Tap 686 519
+Tap 681 789
+Tap 681 939
+Tap 82 165
+Back
+Tap 938 165
+Tap 840 1342
+Tap 681 1185
+Tap 681 939
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 558 1335
+Tap 82 165
+Back
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 558 1335
+Tap 686 219
+Tap 686 369
+Tap 681 639
+Tap 681 789
+Tap 558 939
+Tap 82 165
+Back
+Tap 938 165
+Tap 840 1342
+Tap 558 1335
+Tap 558 939
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 558 1335
+Tap 885 946
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 840 1342
+Tap 885 1342
+Tap 99 1571
+Tap 720 1570
+Tap 82 165
+Back
+Tap 840 1342
+Tap 720 1570
+Tap 540 1686
+Back
+Tap 840 1342
+Tap 240 1718
+Tap 840 1718
+Tap 543 1080
+Back
+Tap 82 165
+Tap 862 165
+Tap 938 165
+Tap 82 165
+Tap 225 465
+Tap 82 165
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 225 465
+Tap 1008 299
+Tap 82 165
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+Tap 225 465
+Tap 1008 299
+Tap 72 299
+Tap 1008 299
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 862 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 945 465
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 930 1285
+Tap 82 165
+Tap 957 912
+Tap 82 165
+Tap 1079 912
+Tap 82 165
+Tap 957 1146
+Tap 82 165
+Tap 1079 1146
+Tap 82 165
+Tap 957 1380
+Tap 82 165
+Tap 1079 1380
+Tap 82 165
+Tap 390 340
+Tap 540 925
+Tap 296 1016
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 340
+Tap 783 1016
+Tap 390 490
+Tap 82 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 490
+Tap 267 581
+Tap 816 581
+Tap 275 1194
+Tap 813 1194
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 656
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 850
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1036
+Tap 390 1194
+Tap 82 165
+Tap 390 1194
+Tap 474 1204
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1194
+Tap 452 1273
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1194
+Tap 541 1342
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1342
+Tap 82 165
+Tap 390 1342
+Tap 540 1015
+Tap 540 334
+Tap 82 165
+Back
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1342
+Tap 540 334
+Tap 540 1015
+Tap 540 334
+Back
+Tap 390 1342
+Tap 540 334
+Tap 540 479
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 540 1032
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 221 773
+Tap 534 773
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 847 773
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 221 1073
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 534 1073
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 847 1073
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 221 1373
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 534 1373
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1480
+Tap 847 1373
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 82 165
+Tap 390 1618
+Tap 390 1732
+Tap 540 925
+Tap 82 165
+Tap 390 1732
+Tap 82 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 938 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 225 465
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 745 300
+Tap 1020 300
+Tap 775 510
+Tap 540 1285
+Tap 82 165
+Tap 540 1285
+Tap 990 164
+Tap 540 1285
+Tap 540 671
+Tap 540 337
+Tap 540 504
+Tap 540 671
+Tap 540 838
+Tap 540 1005
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 177 912
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 419 912
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 661 912
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 912
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 177 1146
+Tap 82 165
+Tap 177 1146
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 419 1146
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 661 1146
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 82 165
+Tap 82 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 82 165
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 643
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1015
+Tap 82 165
+Tap 540 1015
+Tap 90 422
+Tap 750 495
+Tap 960 495
+Tap 540 656
+Tap 540 1286
+Tap 82 165
+Back
+Tap 540 1015
+Tap 540 1286
+Tap 540 1015
+Tap 540 345
+Tap 82 165
+Back
+Tap 540 1286
+Tap 540 345
+Tap 540 1083
+Tap 540 455
+Tap 540 579
+Tap 540 703
+Tap 540 827
+Tap 540 951
+Tap 540 1075
+Tap 540 1199
+Tap 540 1323
+Back
+Tap 540 525
+Tap 82 165
+Back
+Tap 540 1286
+Tap 540 525
+Tap 540 1083
+Tap 540 455
+Tap 540 579
+Tap 540 703
+Tap 540 827
+Tap 540 951
+Tap 540 1075
+Tap 540 1199
+Tap 540 1323
+Tap 540 1447
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1015
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 82 165
+Tap 540 1387
+Tap 690 495
+Tap 960 495
+Tap 540 656
+Tap 540 1286
+Tap 82 165
+Back
+Tap 903 1146
+Tap 540 1387
+Tap 540 1286
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 899
+Tap 82 165
+Back
+Tap 540 1387
+Tap 540 899
+Tap 540 1015
+Tap 540 352
+Tap 540 546
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 1105
+Tap 82 165
+Back
+Tap 540 1387
+Tap 540 1105
+Tap 540 1015
+Tap 540 352
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 1267
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 1385
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 1547
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 903 1146
+Tap 540 1387
+Tap 540 1713
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 177 1380
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 419 1380
+StartApp com.cvicse.zhnt/.LoadingActivity
+Tap 661 1380
+StartApp com.cvicse.zhnt/.LoadingActivity

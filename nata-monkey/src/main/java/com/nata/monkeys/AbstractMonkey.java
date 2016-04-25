@@ -236,4 +236,9 @@ public abstract class AbstractMonkey {
     public void summary(){
         testResult.summary();
     }
+
+
+    public void toCommands(){
+        testResult.toCommands();
+    }
 }

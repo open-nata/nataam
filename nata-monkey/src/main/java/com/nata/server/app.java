@@ -15,21 +15,21 @@ public class App {
 
     public static void main(String[] args) {
         Blade blade = Blade.me();
-        RunnerFactory  runnerFactory = new RunnerFactory();
+        RunnerFactory runnerFactory = new RunnerFactory();
 
         blade.before("/.*", (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         });
 
-        blade.get("/device/online",(request, response) -> {
+        blade.get("/device/online", (request, response) -> {
             String device_id = request.query("device_id").trim();
             AdbDevice adbDevice = new AdbDevice();
             String deviceId = adbDevice.getDeviceId().trim();
 
-            if(device_id.equals(deviceId)){
+            if (device_id.equals(deviceId)) {
                 response.status(200).text("online");
-            }else{
+            } else {
                 response.status(404).text("not online");
             }
         });
@@ -63,9 +63,9 @@ public class App {
          create.js:49 success
          */
         blade.post("/start", (request, response) -> {
-           if(!runnerFactory.isValid()){
-               response.status(406).text("error");
-           }
+            if (!runnerFactory.isValid()) {
+                response.status(406).text("error");
+            }
 
             Config config = new Config();
             config.setRemote(true);

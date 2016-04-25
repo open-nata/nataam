@@ -81,7 +81,7 @@ public class TestResult {
         actionList.add(action);
         if(isRemote){
             try {
-                HttpUtil.postAction(recordId,action.toString());
+                HttpUtil.postAction(recordId,action.toCommand());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -145,4 +145,13 @@ public class TestResult {
             }
         }
     }
+
+
+    public void toCommands(){
+        for (Action action: actionList) {
+           System.out.println(action.toCommand()) ;
+        }
+    }
+
+
 }

@@ -6,15 +6,15 @@ package com.nata.action;
  * Update: 2016-01-13 20:58
  */
 public class ActionType {
-    public static final String UNKNOWN= "UnknownAction";
-    public static final String TAP = "TapAction";
-    public static final String LONG_CLICK= "LongClickAction";
+    public static final String UNKNOWN= "Unknown";
+    public static final String TAP = "Tap";
+    public static final String LONG_CLICK= "LongClick";
 
-    public static final String SWIPE= "SwipeAction";
-    public static final String INPUT= "TextInputAction";
-    public static final String BACK= "BackAction";
-    public static final String MENU= "MenuAction";
-    public static final String HOME= "HomeAction";
-    public static final String START_APP= "StartAppAction";
-    public static final String CLEAN_DATA= "CleanDataAction";
+    public static final String SWIPE= "Swipe";
+    public static final String INPUT= "TextInput";
+    public static final String BACK= "Back";
+    public static final String MENU= "Menu";
+    public static final String HOME= "Home";
+    public static final String START_APP= "StartApp";
+    public static final String CLEAN_DATA= "CleanData";
 }
