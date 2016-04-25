@@ -18,7 +18,6 @@ public class PRMRunner {
 
         AbstractMonkey pureRandomMonkey= new PureRandomMonkey(config);
         pureRandomMonkey.play();
-        pureRandomMonkey.report();
     }
 
 }

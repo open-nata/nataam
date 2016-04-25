@@ -17,6 +17,5 @@ public class RMRunner {
 
         RandomMonkey randomMonkey = new RandomMonkey(config);
         randomMonkey.play();
-        randomMonkey.report();
     }
 }

@@ -82,6 +82,11 @@ public class App {
             response.status(200).text("success");
         });
 
+        blade.post("/stop", (request, response) -> {
+            runnerFactory.stopTask();
+            response.status(200).text("success");
+        });
+
 
         blade.listen(9001).start();
     }

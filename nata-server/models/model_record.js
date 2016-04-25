@@ -22,6 +22,10 @@ var RecordSchema = new mongoose.Schema({
         enum: ['ready','running', 'success', 'failure']
     },
     summaries: [summarySchema],
+    activities: [String],
+    widgets: [String],
+    actions: [String],
+    states : [String],
     create_at: { type: Date, default: Date.now },
     end_at: { type: Date, default: Date.now }
 });

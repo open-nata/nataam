@@ -29,15 +29,39 @@ module.exports = function() {
     });
 
     /**
-     * 获取任务详情
+     * 获取实时任务详情
      */
-    router.get('/records/:id', function(req, res, next) {
+    router.get('/records/:id/run', function(req, res, next) {
         var record_id= req.params.id;
         RecordModel.findOne({_id: record_id}, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
             res.render('run', { title: '任务详情', record: record });
+        });
+    });
+
+    /**
+     * 获取详细报告
+     */
+    router.get('/records/:id/report', function(req, res, next) {
+        var record_id= req.params.id;
+        RecordModel.findOne({_id: record_id}, function(err, record) {
+            if (err || !record) {
+                return res.status(500).json();
+            }
+            var summaries = record.summaries;
+
+            var xData = [];
+            var yDataWidget = [];
+            var yDataActivity = [];
+            for (var i = 0; i < summaries.length; i++) {
+                xData.push(summaries[i].action);
+                yDataActivity.push(summaries[i].activity);
+                yDataWidget.push(summaries[i].widget);
+            }
+            console.log(xData);
+            res.render('report', { title: '详细报告', xData: xData, yDataWidget: yDataWidget,yDataActivity:yDataActivity});
         });
     });
 

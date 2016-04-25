@@ -4,6 +4,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -41,6 +42,22 @@ public class HttpUtil {
         client.close();
     }
 
+    public static void put(String url,HashMap<String,String> props) throws IOException {
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpPut httpPut= new HttpPut(url);
+//        httpPost.addHeader("charset", HTTP.UTF_8);
+
+        List<NameValuePair> params = new ArrayList<>();
+        for (Map.Entry<String,String> entry: props.entrySet()) {
+            params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+        }
+
+        httpPut.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
+
+        CloseableHttpResponse response = client.execute(httpPut);
+        client.close();
+    }
+
     public static void postSummary(String recordId, HashMap<String,String> props) throws IOException {
         String url = remoteUrl+recordId+"/summary";
         post(url,props);
@@ -72,6 +89,13 @@ public class HttpUtil {
         messages.put("message",message);
         String url = remoteUrl+recordId+"/widget";
         post(url, messages);
+    }
+
+    public static void postFinish(String recordId) throws IOException {
+        HashMap<String,String > messages = new HashMap<>();
+        messages.put("message","finish");
+        String url = remoteUrl+recordId+"/finish";
+        put(url, messages);
     }
 
 

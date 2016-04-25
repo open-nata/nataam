@@ -102,5 +102,7 @@ public class PureRandomMonkey extends AbstractMonkey{
             LogUtil.debug("LastAction : " + lastAction);
             getCurrentState();
         }
+        // do report
+        report();
     }
 }

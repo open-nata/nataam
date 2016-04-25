@@ -93,6 +93,8 @@ public class TestResult {
     }
 
     public void report(){
+
+
         LogUtil.debug("--------------------[Activities report]--------------------");
         int activityCount = activitySet.size();
         LogUtil.debug("Activity count: " + activityCount);
@@ -119,6 +121,14 @@ public class TestResult {
         LogUtil.debug("State count: " + stateCount);
         for (State state : stateSet) {
             LogUtil.debug(state.toString());
+        }
+
+        if(isRemote){
+            try {
+                HttpUtil.postFinish(recordId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

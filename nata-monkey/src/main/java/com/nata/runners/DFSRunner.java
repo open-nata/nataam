@@ -18,7 +18,6 @@ public class DFSRunner{
 
         AbstractMonkey dfsMonkey= new DfsMonkey(config);
         dfsMonkey.play();
-        dfsMonkey.report();
         dfsMonkey.toCommands();
     }
 }

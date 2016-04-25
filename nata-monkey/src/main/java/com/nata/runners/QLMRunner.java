@@ -19,6 +19,5 @@ public class QLMRunner {
         AbstractMonkey qLearningMonkey = new QLearningMonkey(config);
         //      qLearningMonkey.learn("rules/zhihu.json");
         qLearningMonkey.play();
-        qLearningMonkey.report();
     }
 }

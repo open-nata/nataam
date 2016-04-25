@@ -203,7 +203,8 @@ public class DfsMonkey extends AbstractMonkey{
                     break;
             }
         }
-
+        // do report
+        report();
     }
 
 }

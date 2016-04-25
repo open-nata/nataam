@@ -17,6 +17,12 @@ public class RunnerFactory {
         return true;
     }
 
+    public void stopTask(){
+        if(runner != null && runner.isAlive()){
+            runner.interrupt();
+        }
+    }
+
     public boolean createRunnerAndRun(Config config){
         if(!isValid()){
             return false;

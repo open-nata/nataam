@@ -144,3 +144,5 @@
 - Add toCommand method to output human-friendly action string
 - Add CleanDataAction
 - Add ActionParser to parse Actions
+- Add scripts dir to hold action scripts and now you can parse a action script to replay
+- Manage the statuses of a running task including ready, running,success,failure

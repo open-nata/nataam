@@ -135,5 +135,8 @@ public class QLearningMonkey extends AbstractMonkey {
 
             curState = nextState;
         }
+
+        // do report
+        report();
     }
 }

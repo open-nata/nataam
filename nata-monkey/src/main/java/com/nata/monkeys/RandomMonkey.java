@@ -56,6 +56,8 @@ public class RandomMonkey extends AbstractMonkey {
 
             curState = getCurrentState();
         }
+        // do report
+        report();
     }
 
 

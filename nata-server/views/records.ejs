@@ -80,11 +80,20 @@
                                         data-algorithm="<%= record.algorithm %>"
                                         data-name="<%= record.app_name%>"
                                         >开始</a>
-                                <% }else{ %>
-                                    <a href="/records/<%=record.id%>" class="btn btn-info mini" role="button">详细报告</a>
-                                <% } %>
+                                        <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                <% }else if(record.status === "success"){ %>
+                                    <a href="/records/<%= record.id %>/report" class="btn btn-info mini" role="button">详细报告</a>
 
-                                <a href="#" class="btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                    <a href="/records/<%=record.id%>/replay" class="btn btn-info mini" role="button">回放</a>
+
+                                    <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                <% }else if(record.status === "running"){ %>
+                                    <a href="/records/<%=record.id%>/run" class="btn btn-info mini" role="button">查看详情</a>
+
+                                    <a href="#" class="btn-cancel btn btn-danger mini" role="button" data-id="<%= record.id %>">取消</a>
+                                <% }else { %>
+                                    <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                <% } %>
                              </td>
 
                         </tr>

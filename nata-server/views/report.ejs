@@ -1,0 +1,169 @@
+<% include partials/header %>
+
+<div id="activity-chart">
+    <div class="container">
+        <div class="row">
+            <h1 class="centered"> Activity - Actions</h1>
+            <br>
+
+            <div id="echarts-activity" style="width: 100%; height:400px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-chart">
+    <div class="container">
+        <div class="row">
+            <h1 class="centered"> Widgets - Actions</h1>
+            <br>
+
+            <div id="echarts-widget" style="width: 100%; height:400px;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/echarts.min.js"></script>
+<script type="text/javascript">
+    // var xData = <%= xData %>;
+    var xData = <%- JSON.stringify(xData) %>;
+    var yDataWidget =  <%- JSON.stringify(yDataWidget) %>;
+    var yDataActivity = <%- JSON.stringify(yDataActivity) %>;
+
+// 基于准备好的dom，初始化echarts实例
+    var myWidgetChart = echarts.init(document.getElementById('echarts-widget'));
+
+// 指定图表的配置项和数据
+    var optionWidget = {
+        title: {
+            left: 'center',
+            text: 'Widget 变迁图',
+            textStyle: {
+                color: '#fff'
+            },
+            subtextStyle: {
+                color: '#fff'
+            }
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        //toolbox: {
+        //    show: true,
+        //    feature: {
+        //        dataView: {show: true, readOnly: false},
+        //        magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+        //        restore: {show: true},
+        //        saveAsImage: {show: true}
+        //    }
+        //},
+        legend: {
+            top: 'bottom',
+            data: ['Widget数量'],
+            textStyle: {
+                color: '#fff'
+            },
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: xData
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%']
+        },
+        series: [{
+            name: 'Widget数量',
+            type: 'line',
+            smooth: true,
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: 'rgb(255, 70, 131)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 158, 68)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 70, 131)'
+                    }])
+                }
+            },
+
+            data: yDataWidget
+        }]
+    };
+
+// 使用刚指定的配置项和数据显示图表。
+    myWidgetChart.setOption(optionWidget);
+
+
+// 基于准备好的dom，初始化echarts实例
+    var myActivityChart = echarts.init(document.getElementById('echarts-activity'));
+
+// 指定图表的配置项和数据
+    var optionActivity = {
+        title: {
+            left: 'center',
+            text: 'Activity 变迁图'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        //toolbox: {
+        //    show: true,
+        //    feature: {
+        //        dataView: {show: true, readOnly: false},
+        //        magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+        //        restore: {show: true},
+        //        saveAsImage: {show: true}
+        //    }
+        //},
+        legend: {
+            top: 'bottom',
+            data: ['Activity数量']
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: xData
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%']
+        },
+        series: [{
+            name: 'Activity数量',
+            type: 'line',
+            smooth: true,
+            sampling: 'average',
+            itemStyle: {
+                normal: {
+                    color: 'rgb(255, 70, 131)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 158, 68)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 70, 131)'
+                    }])
+                }
+            },
+
+            data: yDataActivity
+        }]
+    };
+
+// 使用刚指定的配置项和数据显示图表。
+    myActivityChart.setOption(optionActivity);
+</script>
+
+<% include partials/footer.ejs %>

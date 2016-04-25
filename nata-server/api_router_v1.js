@@ -13,5 +13,10 @@ module.exports = function(io) {
     router.post('/records/:id/action', recordApi.action);
     router.post('/records/:id/state', recordApi.state);
 
+    router.put('/records/:id/start',recordApi.start);
+    router.put('/records/:id/cancel',recordApi.cancel);
+    router.put('/records/:id/finish',recordApi.finish);
+    router.delete('/records/:id',recordApi.remove);
+
     return router;
 };

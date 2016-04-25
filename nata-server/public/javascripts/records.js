@@ -19,35 +19,82 @@ $(function() {
             type: 'GET',
             success: function(message) {
                 console.log("设备在线");
-                // 设置 record的状态为running
                 $.ajax({
-                    url: baseUrl + '/start',
-                    type: 'POST',
-                    data: config,
-                    success: function() {
-                        console.log("success");
-                        window.location.href = "/records/" + config.record_id;
-                        return false;
+                    url: '/api/v1/records/' + config.record_id + '/start',
+                    type: 'PUT',
+                    success: function(message) {
+                        console.log("进入running状态");
+                        $.ajax({
+                            url: baseUrl + '/start',
+                            type: 'POST',
+                            data: config,
+                            success: function() {
+                                window.location.href = "/records/" + config.record_id + "/run";
+                                return false;
+                            },
+                            error: function(request) {
+                                if (request.status === 406)
+                                    alert("有测试任务正在运行");
+                                else {
+                                    alert("启动测试任务失败");
+                                }
+                                return false;
+                            }
+                        });
                     },
-                    error: function(request) {
-                        // alert(request.status);
-                        console.log("error");
-                        if (request.status === 406)
-                            alert("有测试任务正在运行");
-                        else {
-                            alert("创建测试任务失败");
-                        }
+                    error: function(message) {
+                        console.log(message);
+                        alert("设置测试任务状态失败");
                         return false;
                     }
                 });
-               
-
             },
             error: function(request) {
-                alert("设备不在线");
+                alert("出错,服务器未启动或设备不在线");
                 return false;
-                // console.log("创建设备失败");
             }
         });
     });
+
+    $('.btn-remove').on('click', function(e) {
+        e.preventDefault();
+        var record_id = $(this).data('id');
+        $.ajax({
+            url: '/api/v1/records/' + record_id,
+            type: 'DELETE',
+            success: function(message) {
+                location.reload();
+            },
+            error: function(message) {
+                alert("删除失败");
+            }
+        });
+
+    });
+
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        var record_id = $(this).data('id');
+        $.ajax({
+            url: '/api/v1/records/' + record_id + "/cancel",
+            type: 'PUT',
+            success: function(message) {
+                $.ajax({
+                    url: baseUrl + '/stop',
+                    type: 'POST',
+                    success: function() {
+                        location.reload();
+                    },
+                    error: function(request) {
+                        alert("取消任务失败");
+                    }
+                });
+            },
+            error: function(message) {
+                alert("设置任务状态失败");
+            }
+        });
+
+    });
+
 });
