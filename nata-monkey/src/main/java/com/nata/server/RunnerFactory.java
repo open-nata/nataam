@@ -19,7 +19,7 @@ public class RunnerFactory {
 
     public void stopTask(){
         if(runner != null && runner.isAlive()){
-            runner.interrupt();
+            runner.stop();
         }
     }
 

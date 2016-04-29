@@ -188,3 +188,7 @@ hr {
     padding-bottom: 50px;
 }
 
+#canvas-device {
+    border: thin solid black;
+}
+

@@ -1,4 +1,4 @@
-module.exports = function(io) {
+module.exports = function() {
 
     var RecordModel = require('../../models/model_record.js');
 
@@ -23,7 +23,9 @@ module.exports = function(io) {
 
     var remove = function(req, res, next) {
         var record_id = req.params.id;
-        RecordModel.findOneAndRemove({ _id: record_id }, function(err, record) {
+        RecordModel.findOneAndRemove({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -31,9 +33,11 @@ module.exports = function(io) {
         });
     };
 
-    var start = function(req,res,next){
+    var start = function(req, res, next) {
         var record_id = req.params.id;
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -46,9 +50,11 @@ module.exports = function(io) {
         });
     };
 
-    var cancel = function(req,res,next){
+    var cancel = function(req, res, next) {
         var record_id = req.params.id;
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -61,9 +67,11 @@ module.exports = function(io) {
         });
     };
 
-    var finish = function(req,res,next){
+    var finish = function(req, res, next) {
         var record_id = req.params.id;
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -82,11 +90,18 @@ module.exports = function(io) {
         var widget = parseInt(req.body.widget, 10);
         var state = parseInt(req.body.state, 10);
         var activity = parseInt(req.body.activity, 10);
-        var data = { widget: widget, action: action, activity: activity, state: state };
+        var data = {
+            widget: widget,
+            action: action,
+            activity: activity,
+            state: state
+        };
 
-        io.sockets.emit("summary", data);
+        // io.sockets.emit("summary", data);
 
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -103,9 +118,11 @@ module.exports = function(io) {
         var record_id = req.params.id;
         var activity = req.body.message;
 
-        io.sockets.emit("activity", activity);
+        // io.sockets.emit("activity", activity);
 
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -122,9 +139,11 @@ module.exports = function(io) {
         var record_id = req.params.id;
         var widget = req.body.message;
 
-        io.sockets.emit("widget", widget);
+        // io.sockets.emit("widget", widget);
 
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -140,9 +159,11 @@ module.exports = function(io) {
     var action = function(req, res, next) {
         var record_id = req.params.id;
         var action = req.body.message;
-        io.sockets.emit("action", action);
+        // io.sockets.emit("action", action);
 
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -159,9 +180,11 @@ module.exports = function(io) {
         var record_id = req.params.id;
         var state = req.body.message;
 
-        io.sockets.emit("state", state);
+        // io.sockets.emit("state", state);
 
-        RecordModel.findOne({ _id: record_id }, function(err, record) {
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }

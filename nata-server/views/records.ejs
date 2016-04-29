@@ -1,66 +1,98 @@
 <% include partials/header %>
-
-<div id="records">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="centered">任务列表</h1>
-                <br>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            设备ID
-                        </th>
-                        <th>
-                            待测应用
-                        </th>
-                        <th>
-                            Action数量
-                        </th>
-                        <th>
-                            算法
-                        </th>
-                        <th>
-                            状态
-                        </th>
-   <!--                      <th>
+    <div id="records">
+        <div class="container">
+            <div class="row">
+               <!--  <div class="col-sm-4">
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>状态：</dt>
+                            <dd><span class="label label-primary" id="status">未获取</span>
+                            </dd>
+                        </dl>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt>设备名称：</dt>
+                                <dd id="device-name"></dd>
+                                <dt>设备ID：</dt>
+                                <dd id="device-id"></dd>
+                                <dt>安卓版本：</dt>
+                                <dd id="android-version"></dd>
+                                <dt>SDK版本：</dt>
+                                <dd id="sdk-version"></dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt>分辨率：</dt>
+                                <dd id="resolution"></dd>
+                                <dt>CPU制式：</dt>
+                                <dd id="cpu-abi"></dd>
+                                <dt>厂家：</dt>
+                                <dd id="manufacturer"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="center-block" style="max-width: 200px;">
+                            <button type="button" class="btn btn-info btn-lg btn-block" id="btn-device">获取设备信息</button>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    序号
+                                </th>
+                                <th>
+                                    设备ID
+                                </th>
+                                <th>
+                                    待测应用
+                                </th>
+                                <th>
+                                    Action数量
+                                </th>
+                                <th>
+                                    算法
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <!--                      <th>
                             创建时间
                         </th>
                         <th>
                             结束时间
                         </th> -->
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <% records.forEach(function(record, index) { %>
-                        <tr>
-                            <td>
-                                <%= index %>
-                            </td>
-                            <td>
-                                <%= record.device_id%>
-                            </td>
-                            <td>
-                                <%= record.app_name %>
-                            </td>
-
-                            <td>
-                                <%= record.action_count %>
-                            </td>
-                            <td>
-                                <%= record.algorithm %>
-                            </td>
-                            <td>
-                                <%= record.status %>
-                            </td>
-                             <!-- 
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% records.forEach(function(record, index) { %>
+                                <tr>
+                                    <td>
+                                        <%= index %>
+                                    </td>
+                                    <td>
+                                        <%= record.device_id%>
+                                    </td>
+                                    <td>
+                                        <%= record.app_name %>
+                                    </td>
+                                    <td>
+                                        <%= record.action_count %>
+                                    </td>
+                                    <td>
+                                        <%= record.algorithm %>
+                                    </td>
+                                    <td>
+                                        <%= record.status %>
+                                    </td>
+                                    <!-- 
                             <td>
                                 <%= record.create_at %>
                             </td>
@@ -68,43 +100,28 @@
                                 <%= record.end_at %>
                             </td>
                              -->
-
-                             <td>
-                                <% if(record.status === "ready"){ %>
-                                    <a href="#" class="btn-start btn btn-primary mini" role="button" 
-                                        data-id="<%= record.id %>" 
-                                        data-device="<%= record.device_id %>" 
-                                        data-action="<%= record.action_count %>"
-                                        data-package="<%= record.package_name %>"
-                                        data-activity="<%= record.activity_name %>"
-                                        data-algorithm="<%= record.algorithm %>"
-                                        data-name="<%= record.app_name%>"
-                                        >开始</a>
-                                        <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
-                                <% }else if(record.status === "success"){ %>
-                                    <a href="/records/<%= record.id %>/report" class="btn btn-info mini" role="button">详细报告</a>
-
-                                    <a href="/records/<%=record.id%>/replay" class="btn btn-info mini" role="button">回放</a>
-
-                                    <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
-                                <% }else if(record.status === "running"){ %>
-                                    <a href="/records/<%=record.id%>/run" class="btn btn-info mini" role="button">查看详情</a>
-
-                                    <a href="#" class="btn-cancel btn btn-danger mini" role="button" data-id="<%= record.id %>">取消</a>
-                                <% }else { %>
-                                    <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
-                                <% } %>
-                             </td>
-
-                        </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+                                    <td>
+                                        <% if(record.status === "ready"){ %>
+                                            <a href="#" class="btn-start btn btn-primary mini" role="button" data-id="<%= record.id %>" data-device="<%= record.device_id %>" data-action="<%= record.action_count %>" data-package="<%= record.package_name %>" data-activity="<%= record.activity_name %>" data-algorithm="<%= record.algorithm %>" data-name="<%= record.app_name%>">开始</a>
+                                            <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                            <% }else if(record.status === "success"){ %>
+                                                <a href="/records/<%= record.id %>/report" class="btn btn-info mini" role="button">详细报告</a>
+                                                <a href="/records/<%=record.id%>/replay" class="btn btn-info mini" role="button">回放</a>
+                                                <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                                <% }else if(record.status === "running"){ %>
+                                                    <a href="/records/<%=record.id%>/run" class="btn btn-info mini" role="button">查看详情</a>
+                                                    <a href="#" class="btn-cancel btn btn-danger mini" role="button" data-id="<%= record.id %>">取消</a>
+                                                    <% }else { %>
+                                                        <a href="#" class="btn-remove btn btn-danger mini" role="button" data-id="<%= record.id %>">删除</a>
+                                                        <% } %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<script src="/javascripts/records.js"></script>
-
-<% include partials/footer.ejs %>
+    <script src="/javascripts/records.js"></script>
+    <% include partials/footer.ejs %>

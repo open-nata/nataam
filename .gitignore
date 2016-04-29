@@ -38,6 +38,6 @@ screenshots/
 logs/
 
 #dump file
-dumps/
+dumps/dumpfile.xml
 
 node_modules/

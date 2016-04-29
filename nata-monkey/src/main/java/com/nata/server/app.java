@@ -82,6 +82,8 @@ public class App {
             response.status(200).text("success");
         });
 
+
+        // not thread safe
         blade.post("/stop", (request, response) -> {
             runnerFactory.stopTask();
             response.status(200).text("success");

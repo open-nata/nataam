@@ -1,135 +1,77 @@
 <% include partials/header %>
-
-<div id="activity-chart">
-    <div class="container">
-        <div class="row">
-            <h1 class="centered"> Activity - Actions</h1>
-            <br>
-
-            <div id="echarts-activity" style="width: 100%; height:400px;"></div>
-        </div>
-    </div>
-</div>
-
-<div id="widget-chart">
-    <div class="container">
-        <div class="row">
-            <h1 class="centered"> Widgets - Actions</h1>
-            <br>
-
-            <div id="echarts-widget" style="width: 100%; height:400px;"></div>
-        </div>
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                Activities
-            </div>
-            <div class="table-wrapper" id="activity-table-wrapper">
-                <table class="table table-striped" id="activity-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            内容
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="activities">
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                Actions
-            </div>
-            <div class="table-wrapper" id="action-table-wrapper">
-                <table class="table table-striped" id="action-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            内容
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="actions">
-
-                    </tbody>
-                </table>
+    <div id="run-process">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <canvas id="canvas-device" width="270" height="480"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="table-wrapper" id="action-table-wrapper">
+                            <table class="table table-striped" id="action-table">
+                                <tbody id="actions">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="activity-chart">
+                        <div id="echarts-activity" style="width: 100%; height:200px;"></div>
+                    </div>
+                    <div id="widget-chart">
+                        <div id="echarts-widget" style="width: 100%; height:200px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
- 
-</div>
-<!-- <div class="row">
-   <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                Widgets
-            </div>
-            <div class="table-wrapper" id="widget-table-wrapper">
-                <table class="table table-striped" id="widget-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            内容
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="widgets">
+    <!-- // <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/javascripts/echarts.min.js"></script>
+    <script src="/javascripts/run.js"></script>
+    <script>
+/*jshint browser:true*/
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    
+var BLANK_IMG =
+  'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
-    <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                States
-            </div>
-            <div class="table-wrapper" id="state-table-wrapper">
-                <table class="table table-striped" id="state-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            内容
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="states">
+var canvas = document.getElementById('canvas-device')
+  , g = canvas.getContext('2d')
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div> -->
+var ws = new WebSocket('ws://localhost:3000', 'minicap')
+ws.binaryType = 'blob'
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="/javascripts/echarts.min.js"></script>
-<script src="/javascripts/run.js"></script>
+ws.onclose = function() {
+  console.log('onclose', arguments)
+}
 
-<% include partials/footer.ejs %>
+ws.onerror = function() {
+  console.log('onerror', arguments)
+}
+
+ws.onmessage = function(message) {
+  var blob = new Blob([message.data], {type: 'image/jpeg'})
+  var URL = window.URL || window.webkitURL
+  var img = new Image()
+  img.onload = function() {
+    console.log(img.width, img.height)
+    canvas.width = img.width
+    canvas.height = img.height
+    g.drawImage(img, 0, 0)
+    img.onload = null
+    img.src = BLANK_IMG
+    img = null
+    u = null
+    blob = null
+  }
+  var u = URL.createObjectURL(blob)
+  img.src = u
+}
+
+ws.onopen = function() {
+  console.log('onopen', arguments)
+  ws.send('480x270/0')
+}
+
+</script>
+    <% include partials/footer.ejs %>

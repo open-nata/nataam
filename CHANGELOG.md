@@ -145,4 +145,7 @@
 - Add CleanDataAction
 - Add ActionParser to parse Actions
 - Add scripts dir to hold action scripts and now you can parse a action script to replay
-- Manage the statuses of a running task including ready, running,success,failure
+- Manage the statuses of a running task including ready, running, success, failure
+
+### (2016/4/28)
+- Assemble stf minicap module with which you can view the device run live in the website

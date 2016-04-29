@@ -1,47 +1,47 @@
-    var socket = io();
+    // var socket = io();
     var activityCount = 0;
     var widgetCount = 0;
     var actionCount = 0;
     var stateCount = 0;
 
-    socket.on('activity', function (message) {
-        activityCount++;
-        var content = "<tr><td>" + activityCount + "</td><td>" + message + "</td>";
-        $('#activities').append(content);
-        var scrollBottom = $('#activity-table').height();
-        $('#activity-table-wrapper').scrollTop(scrollBottom);
-    });
+    // socket.on('activity', function (message) {
+    //     activityCount++;
+    //     var content = "<tr><td>" + activityCount + "</td><td>" + message + "</td>";
+    //     $('#activities').append(content);
+    //     var scrollBottom = $('#activity-table').height();
+    //     $('#activity-table-wrapper').scrollTop(scrollBottom);
+    // });
 
-    socket.on('widget', function (message) {
-        widgetCount++;
-        var content = "<tr><td>" + widgetCount + "</td><td>" + message + "</td>";
-        $('#widgets').append(content);
-        var scrollBottom = $('#widget-table').height();
-        $('#widget-table-wrapper').scrollTop(scrollBottom);
-    });
+    // socket.on('widget', function (message) {
+    //     widgetCount++;
+    //     var content = "<tr><td>" + widgetCount + "</td><td>" + message + "</td>";
+    //     $('#widgets').append(content);
+    //     var scrollBottom = $('#widget-table').height();
+    //     $('#widget-table-wrapper').scrollTop(scrollBottom);
+    // });
 
-    socket.on('action', function (message) {
-        actionCount++;
-        var content = "<tr><td>" + actionCount + "</td><td>" + message + "</td>";
-        $('#actions').append(content);
-        var scrollBottom = $('#action-table').height();
-        $('#action-table-wrapper').scrollTop(scrollBottom);
-    });
+    // socket.on('action', function(message) {
+    //     actionCount++;
+    //     var content = "<tr><td>" + message + "</td>";
+    //     $('#actions').append(content);
+    //     var scrollBottom = $('#action-table').height();
+    //     $('#action-table-wrapper').scrollTop(scrollBottom);
+    // });
 
-    socket.on('state', function (message) {
-        stateCount++;
-        var content = "<tr><td>" + stateCount + "</td><td>" + message + "</td>";
-        $('#states').append(content);
-        var scrollBottom = $('#state-table').height();
-        $('#state-table-wrapper').scrollTop(scrollBottom);
-    });
+    // socket.on('state', function (message) {
+    //     stateCount++;
+    //     var content = "<tr><td>" + stateCount + "</td><td>" + message + "</td>";
+    //     $('#states').append(content);
+    //     var scrollBottom = $('#state-table').height();
+    //     $('#state-table-wrapper').scrollTop(scrollBottom);
+    // });
 
 
-// 基于准备好的dom，初始化echarts实例
+    // 基于准备好的dom，初始化echarts实例
     var myWidgetChart = echarts.init(document.getElementById('echarts-widget'));
 
     var yDataWidget = [];
-// 指定图表的配置项和数据
+    // 指定图表的配置项和数据
     var optionWidget = {
         title: {
             left: 'center',
@@ -107,16 +107,16 @@
         }]
     };
 
-// 使用刚指定的配置项和数据显示图表。
+    // 使用刚指定的配置项和数据显示图表。
     myWidgetChart.setOption(optionWidget);
 
 
-// 基于准备好的dom，初始化echarts实例
+    // 基于准备好的dom，初始化echarts实例
     var myActivityChart = echarts.init(document.getElementById('echarts-activity'));
 
     var xData = [];
     var yDataActivity = [];
-// 指定图表的配置项和数据
+    // 指定图表的配置项和数据
     var optionActivity = {
         title: {
             left: 'center',
@@ -173,32 +173,32 @@
         }]
     };
 
-// 使用刚指定的配置项和数据显示图表。
+    // 使用刚指定的配置项和数据显示图表。
     myActivityChart.setOption(optionActivity);
 
-    socket.on('summary', function (data) {
-        xData.push(data.action);
-        yDataWidget.push(data.widget);
-        yDataActivity.push(data.activity);
-        myWidgetChart.setOption({
-            xAxis: {
-                data: xData
-            },
-            series: [{
-                // 根据名字对应到相应的系列
-                name: 'Widget数量',
-                data: yDataWidget
-            }]
-        });
+    // socket.on('summary', function(data) {
+    //     xData.push(data.action);
+    //     yDataWidget.push(data.widget);
+    //     yDataActivity.push(data.activity);
+    //     myWidgetChart.setOption({
+    //         xAxis: {
+    //             data: xData
+    //         },
+    //         series: [{
+    //             // 根据名字对应到相应的系列
+    //             name: 'Widget数量',
+    //             data: yDataWidget
+    //         }]
+    //     });
 
-        myActivityChart.setOption({
-            xAxis: {
-                data: xData
-            },
-            series: [{
-                // 根据名字对应到相应的系列
-                name: 'Activity数量',
-                data: yDataActivity
-            }]
-        });
-    });
+    //     myActivityChart.setOption({
+    //         xAxis: {
+    //             data: xData
+    //         },
+    //         series: [{
+    //             // 根据名字对应到相应的系列
+    //             name: 'Activity数量',
+    //             data: yDataActivity
+    //         }]
+    //     });
+    // });

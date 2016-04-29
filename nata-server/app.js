@@ -8,22 +8,18 @@ var bodyParser = require('body-parser');
 
 
 
-var socket_io = require('socket.io');
+// var socket_io = require('socket.io');
 
 var app = express();
 
 // Socket.io
-var io           = socket_io();
-app.io           = io;
-
-io.on("connection", function(socket) {
-    console.log("A user connected");
-});
+// var io = socket_io();
+// app.io = io;
 
 
 
 var routes = require('./web_router')();
-var apiRouterV1 = require('./api_router_v1')(io);
+var apiRouterV1 = require('./api_router_v1')();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +29,9 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(cors());
 
