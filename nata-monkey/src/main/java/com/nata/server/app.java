@@ -5,6 +5,7 @@ import blade.kit.json.JSONObject;
 import com.blade.Blade;
 import com.nata.AdbDevice;
 import com.nata.Config;
+import com.nata.action.Action;
 
 /**
  * Author: Calvin Meng
@@ -68,7 +69,7 @@ public class App {
             }
 
             Config config = new Config();
-            config.setRemote(true);
+            config.setRemote(false);
             config.setRecord_id(request.query("record_id"));
             config.setApp_name(request.query("app_name"));
             config.setPackage_name(request.query("package_name"));
@@ -88,6 +89,12 @@ public class App {
             runnerFactory.stopTask();
             response.status(200).text("success");
         });
+
+        blade.post("/replay",((request, response) -> {
+            String action = request.query("action").trim();
+            Replayer.playAction(action);
+            response.status(200).text("success");
+        }));
 
 
         blade.listen(9001).start();

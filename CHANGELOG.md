@@ -149,3 +149,6 @@
 
 ### (2016/4/28)
 - Assemble stf minicap module with which you can view the device run live in the website
+
+### (2016/5/3)
+- Add Replay function on the website

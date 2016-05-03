@@ -10,3 +10,9 @@ NataAM is built for automating the process of UI Testing .
 
 # 测试流程
 ![](images/procedure.png)
+
+# 运行步骤
+- ./minicap/run.sh -P 1080x1920@270x480/0 
+- adb forward tcp:1313 localabstract:minicap
+- sudo mongod 
+- pm2 start ./bin/www

@@ -2,18 +2,22 @@ module.exports = function() {
     var express = require('express');
     var router = express.Router();
     var DeviceModel = require('./models/model_device.js');
-    var RecordModel= require('./models/model_record.js');
+    var RecordModel = require('./models/model_record.js');
 
     /* GET home page. */
     router.get('/', function(req, res, next) {
-        res.render('index', { title: '首页' });
+        res.render('index', {
+            title: '首页'
+        });
     });
 
     /**
      * 获取创建测试任务页面
      */
     router.get('/create', function(req, res, next) {
-        res.render('create', { title: '创建测试任务' });
+        res.render('create', {
+            title: '创建测试任务'
+        });
     });
 
     /**
@@ -24,7 +28,10 @@ module.exports = function() {
             if (err || !devices) {
                 return res.status(500).json();
             }
-            res.render('devices', { title: '设备列表', devices: devices });
+            res.render('devices', {
+                title: '设备列表',
+                devices: devices
+            });
         });
     });
 
@@ -32,12 +39,35 @@ module.exports = function() {
      * 获取实时任务详情
      */
     router.get('/records/:id/run', function(req, res, next) {
-        var record_id= req.params.id;
-        RecordModel.findOne({_id: record_id}, function(err, record) {
+        var record_id = req.params.id;
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
-            res.render('run', { title: '任务详情', record: record });
+            res.render('run', {
+                title: '任务详情',
+                record: record
+            });
+        });
+    });
+
+    /**
+     * 重新运行
+     */
+    router.get('/records/:id/replay', function(req, res, next) {
+        var record_id = req.params.id;
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
+            if (err || !record) {
+                return res.status(500).json();
+            }
+            res.render('replay', {
+                title: '回放',
+                actions: record.actions
+            });
         });
     });
 
@@ -45,8 +75,10 @@ module.exports = function() {
      * 获取详细报告
      */
     router.get('/records/:id/report', function(req, res, next) {
-        var record_id= req.params.id;
-        RecordModel.findOne({_id: record_id}, function(err, record) {
+        var record_id = req.params.id;
+        RecordModel.findOne({
+            _id: record_id
+        }, function(err, record) {
             if (err || !record) {
                 return res.status(500).json();
             }
@@ -61,7 +93,12 @@ module.exports = function() {
                 yDataWidget.push(summaries[i].widget);
             }
             console.log(xData);
-            res.render('report', { title: '详细报告', xData: xData, yDataWidget: yDataWidget,yDataActivity:yDataActivity});
+            res.render('report', {
+                title: '详细报告',
+                xData: xData,
+                yDataWidget: yDataWidget,
+                yDataActivity: yDataActivity
+            });
         });
     });
 
@@ -69,13 +106,18 @@ module.exports = function() {
      * 获取任务列表
      */
     router.get('/records', function(req, res, next) {
-        var id = 
-        RecordModel.find({}).sort({create_at: -1}).exec(function(err, records) {
-            if (err || !records) {
-                return res.status(500).json();
-            }
-            res.render('records', { title: '任务列表', records: records });
-        });
+        var id =
+            RecordModel.find({}).sort({
+                create_at: -1
+            }).exec(function(err, records) {
+                if (err || !records) {
+                    return res.status(500).json();
+                }
+                res.render('records', {
+                    title: '任务列表',
+                    records: records
+                });
+            });
     });
 
 

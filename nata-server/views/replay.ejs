@@ -1,0 +1,82 @@
+<% include partials/header %>
+    <div id="run-process">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <canvas id="canvas-device" width="270" height="480"></canvas>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="table-wrapper" id="action-table-wrapper">
+                            <table class="table table-striped" id="action-table">
+                                <tbody id="actions">
+                                    <% actions.forEach(function(action, index){ %>
+                                        <tr>
+                                            <td>
+                                                <%= action %>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <button type="button" class="btn btn-info btn-lg btn-block" id="btn-replay">执行命令</button>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- // <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/javascripts/echarts.min.js"></script>
+    <script src="/javascripts/replay.js"></script>
+    <script>
+    /*jshint browser:true*/
+
+    var BLANK_IMG =
+        'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+
+    var canvas = document.getElementById('canvas-device'),
+        g = canvas.getContext('2d')
+
+    var ws = new WebSocket('ws://localhost:3000', 'minicap')
+    ws.binaryType = 'blob'
+
+    ws.onclose = function() {
+        console.log('onclose', arguments)
+    }
+
+    ws.onerror = function() {
+        console.log('onerror', arguments)
+    }
+
+    ws.onmessage = function(message) {
+        var blob = new Blob([message.data], {
+            type: 'image/jpeg'
+        })
+        var URL = window.URL || window.webkitURL
+        var img = new Image()
+        img.onload = function() {
+            console.log(img.width, img.height)
+            canvas.width = img.width
+            canvas.height = img.height
+            // g.scale(0.5,0.5);
+            g.drawImage(img, 0, 0)
+            img.onload = null
+            img.src = BLANK_IMG
+            img = null
+            u = null
+            blob = null
+        }
+        var u = URL.createObjectURL(blob)
+        img.src = u
+    }
+
+    ws.onopen = function() {
+        // console.log('onopen', arguments)
+        ws.send('480x270/0')
+    }
+    </script>
+    <% include partials/footer.ejs %>
