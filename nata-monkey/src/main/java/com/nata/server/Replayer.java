@@ -12,8 +12,13 @@ public class Replayer {
 
     public static  boolean playAction(String actionString){
         Action action = ActionParser.parse(actionString);
-        action.fire();
-        return true;
+        if(action != null){
+            action.fire();
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 }

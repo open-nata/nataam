@@ -89,6 +89,9 @@ public class TapAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.TAP + " " + centerX + " " + centerY;
+        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
+                +"x" + widget.getEndX() +"," + widget.getEndY();
+
+        return ActionType.TAP + " "+ at + " " + centerX + " " + centerY;
     }
 }

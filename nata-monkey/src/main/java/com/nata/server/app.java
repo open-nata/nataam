@@ -6,6 +6,11 @@ import com.blade.Blade;
 import com.nata.AdbDevice;
 import com.nata.Config;
 import com.nata.action.Action;
+import com.nata.element.DumpService;
+import com.nata.element.Widget;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Author: Calvin Meng
@@ -69,7 +74,7 @@ public class App {
             }
 
             Config config = new Config();
-            config.setRemote(false);
+            config.setRemote(true);
             config.setRecord_id(request.query("record_id"));
             config.setApp_name(request.query("app_name"));
             config.setPackage_name(request.query("package_name"));
@@ -92,9 +97,20 @@ public class App {
 
         blade.post("/replay",((request, response) -> {
             String action = request.query("action").trim();
-            Replayer.playAction(action);
-            response.status(200).text("success");
+            if(Replayer.playAction(action)){
+                response.status(200).text("success");
+            }else{
+                response.status(406).text("error");
+            }
+
         }));
+
+
+        blade.get("/actions",(request, response) -> {
+            System.out.println("get actions");
+            String actionString =  ActionMaker.getActions();
+            response.status(200).text(actionString);
+        });
 
 
         blade.listen(9001).start();

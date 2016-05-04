@@ -112,6 +112,9 @@ public class SwipeAction extends Action {
      * @return
      */
     public String toCommand(){
-        return ActionType.SWIPE+ " " + direction + " "+ startX + " " + startY + " " + endX + " " + endY;
+        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
+                +"x" + widget.getEndX() +"," + widget.getEndY();
+
+        return ActionType.SWIPE+ " " + at + " " + direction;
     }
 }

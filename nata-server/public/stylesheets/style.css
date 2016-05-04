@@ -133,6 +133,7 @@ hr {
     background: #222222;
     padding-top: 15px;
     text-align: center;
+    clear:both;
 }
 
 #c p {
@@ -192,3 +193,21 @@ hr {
     border: thin solid black;
 }
 
+#container {
+    position: relative;
+    height:640px;
+    width: 480px;
+}
+
+#canvas-device {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+}
+
+#canvas-wrapper {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}

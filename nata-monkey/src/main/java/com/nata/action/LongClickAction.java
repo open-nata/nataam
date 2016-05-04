@@ -91,6 +91,9 @@ public class LongClickAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.LONG_CLICK + " " + X + " " + Y;
+        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
+                +"x" + widget.getEndX() +"," + widget.getEndY();
+
+        return ActionType.LONG_CLICK + " " + at + " " + X + " " + Y;
     }
 }

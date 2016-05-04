@@ -81,16 +81,8 @@ public class ActionFactory {
         return actions;
     }
 
-
-
-    public List<Action> getActionsFromWidgets(List<Widget> widgets ){
+    public List<Action> getUIActionsFromWidgets(List<Widget> widgets ){
         List<Action>actions= new ArrayList<>();
-        Action backAction= createBackAction();
-        actions.add(backAction);
-
-        Action menuAction= createMenuAction();
-        actions.add(menuAction);
-
         for(Widget widget: widgets){
             //if not enabled, discard
             if(widget.getEnabled().equals("false")){
@@ -140,11 +132,23 @@ public class ActionFactory {
             //text input actions
             //TODO: can't get password from the text attribute
             if(widget.getClassName().equals("android.widget.EditText") && widget.getClickable().equals("true")){
-                    Action textInputAction = CreateTextInputAction(widget);
+                Action textInputAction = CreateTextInputAction(widget);
                 actions.add(textInputAction);
             }
 
         }
+        return actions;
+    }
+
+
+    public List<Action> getActionsFromWidgets(List<Widget> widgets ){
+        List<Action>actions=  getUIActionsFromWidgets(widgets);
+        Action backAction= createBackAction();
+        actions.add(backAction);
+
+        Action menuAction= createMenuAction();
+        actions.add(menuAction);
+
         return actions;
     }
 }

@@ -105,6 +105,11 @@ public class TextInputAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.INPUT+ " " + X + " " + Y + " " + text;
+        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
+                +"x" + widget.getEndX() +"," + widget.getEndY();
+
+        return ActionType.INPUT+ " " + at +" " + X + " " + Y + " "+ text;
+
+
     }
 }

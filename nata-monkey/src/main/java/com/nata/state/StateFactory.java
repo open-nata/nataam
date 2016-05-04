@@ -46,7 +46,7 @@ public class StateFactory {
         return dfsState;
     }
 
-    private List<Widget> GrabCurrentUi() {
+    public List<Widget> GrabCurrentUi() {
         File dumpFile = device.dumpUI();
         try {
             List<Widget> list = DumpService.getNodes(dumpFile);

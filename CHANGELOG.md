@@ -152,3 +152,7 @@
 
 ### (2016/5/3)
 - Add Replay function on the website
+
+### (2016/5/4)
+- Add Record user case function to the website
+

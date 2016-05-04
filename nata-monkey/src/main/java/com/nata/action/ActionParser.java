@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,33 +39,35 @@ public class ActionParser {
             }
             case ActionType.LONG_CLICK : {
                 String []xy = splits[1].split(" ");
-                int X = Integer.parseInt(xy[0]);
-                int Y = Integer.parseInt(xy[1]);
+                int X = Integer.parseInt(xy[1]);
+                int Y = Integer.parseInt(xy[2]);
                 action = new LongClickAction(device,X,Y);
                 break;
             }
             case ActionType.TAP : {
                 String []xy = splits[1].split(" ");
-                int X = Integer.parseInt(xy[0]);
-                int Y = Integer.parseInt(xy[1]);
+                int X = Integer.parseInt(xy[1]);
+                int Y = Integer.parseInt(xy[2]);
                 action = new TapAction(device,X,Y);
                 break;
             }
             case ActionType.SWIPE : {
                 String []params = splits[1].split(" ");
-                SwipeDirection direction = SwipeDirection.valueOf(params[0]);
-                int startX = Integer.parseInt(params[1]);
-                int startY = Integer.parseInt(params[2]);
-                int endX = Integer.parseInt(params[3]);
-                int endY = Integer.parseInt(params[4]);
+                SwipeDirection direction = SwipeDirection.valueOf(params[1]);
+                String atString = params[0].substring(1);
+                String [] coordinates = atString.split("[,x]");
+                int startX = Integer.parseInt(coordinates[0]);
+                int startY = Integer.parseInt(coordinates[1]);
+                int endX = Integer.parseInt(coordinates[2]);
+                int endY = Integer.parseInt(coordinates[3]);
                 action = new SwipeAction(device,direction,startX,startY,endX,endY);
                 break;
             }
             case ActionType.INPUT : {
-                String []params = splits[1].split(" ",3);
-                int X = Integer.parseInt(params[0]);
-                int Y = Integer.parseInt(params[1]);
-                String text = params[2];
+                String []params = splits[1].split(" ",4);
+                int X = Integer.parseInt(params[1]);
+                int Y = Integer.parseInt(params[2]);
+                String text = params[3];
                 action = new TextInputAction(device,X,Y,text);
                 break;
             }
@@ -104,11 +107,15 @@ public class ActionParser {
 //        actions.add("Tap 788 1111");
 //        actions.add("StartApp com.cvicse.zhnt/.LoadingActivity");
 
-        File actionFile = new File("scripts/fcws_dfs.txt");
-
-        List<Action> actionList= ActionParser.parse(actionFile);
-        for (Action action: actionList) {
-            action.fire();
-        }
+//        File actionFile = new File("scripts/fcws_dfs.txt");
+//
+//        List<Action> actionList= ActionParser.parse(actionFile);
+//        for (Action action: actionList) {
+//            action.fire();
+//        }
+        String  at= "172,234x279,1931" ;
+        System.out.println(at.substring(1,at.length()-1));
+//        String [] cordinates = at.split("[,x]");
+//        System.out.println(Arrays.toString(cordinates));
     }
 }

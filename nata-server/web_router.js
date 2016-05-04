@@ -106,19 +106,30 @@ module.exports = function() {
      * 获取任务列表
      */
     router.get('/records', function(req, res, next) {
-        var id =
-            RecordModel.find({}).sort({
-                create_at: -1
-            }).exec(function(err, records) {
-                if (err || !records) {
-                    return res.status(500).json();
-                }
-                res.render('records', {
-                    title: '任务列表',
-                    records: records
-                });
-            });
+          RecordModel.find({}).sort({
+              create_at: -1
+          }).exec(function(err, records) {
+              if (err || !records) {
+                  return res.status(500).json();
+              }
+              res.render('records', {
+                  title: '任务列表',
+                  records: records
+              });
+          });
     });
+
+
+  /**
+   * 获取任务列表
+   */
+  router.get('/recordtestcase', function(req, res, next)
+  {
+    res.render('recordtestcase', {
+      title: '录制测试脚本',
+    });
+
+  });
 
 
     // /**
