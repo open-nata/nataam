@@ -162,3 +162,6 @@
 - Add Apk logon process
 - Rewrite auto test task creation process
 - Write record testcase task process
+
+### (2015/5/6)
+- Optimize record testcase

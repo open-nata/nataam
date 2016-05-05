@@ -63,6 +63,61 @@ $(function () {
     });
   });
 
+  $('#btn-restart').click(function(e){
+    var action  =ActionType.START_APP + " " + apk.package_name+"/" + apk.activity_name;
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+  });
+
+  $('#btn-cleandata').click(function(e){
+    var action  =ActionType.CLEAN_DATA+ " " + apk.package_name;
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+  });
+
+  $('#btn-finish').click(function(e){
+    var btnFinish = $(e.target);
+    var testcase_id = btnFinish.data("id");
+    var actions = [];
+    $("#testcase li").each(function() { actions.push($(this).text()) });
+    if(actions.length === 0){
+      alert("没有动作");
+      return;
+    }
+
+    $.ajax({
+      url: "/api/v1/testcases/"+ testcase_id+"/finish",
+      type: 'PUT',
+      data: {"actions": actions},
+      success: function (message) {
+        window.location.href = '/testcases';
+      },
+      error: function () {
+
+      }
+    });
+  });
+
   $('#btn-getactions').click(function (e) {
     e.preventDefault();
 

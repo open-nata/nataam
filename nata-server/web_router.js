@@ -194,6 +194,27 @@ module.exports = function () {
     ApkModel.find({}).sort({create_at: -1}).exec(ep.done("apks"));
   });
 
+  router.get('/testcases/:id/record', function (req, res, next) {
+    var testcase_id = req.params.id;
+    console.log(testcase_id);
+    var ep = new eventproxy();
+    ep.fail(next);
+
+    TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
+
+    ep.on('testcase',function(testcase){
+      ApkModel.findOne({_id:testcase.apk_id}).exec(ep.done('apk'));
+    });
+
+    ep.all('testcase','apk',function(testcase,apk){
+      res.render('recordtestcase', {
+        title: '录制任务',
+        apk : apk,
+        testcase: testcase,
+      });
+    });
+  });
+
 
   // /**
   //  * 创建测试任务

@@ -10,10 +10,11 @@ import com.nata.AndroidKeyCode;
  */
 public class CleanDataAction extends Action{
     private AdbDevice device = null;
-    private String pkgAct;
-    public CleanDataAction(AdbDevice device, String pkgAct){
+    private String pkg;
+    public CleanDataAction(AdbDevice device, String pkg){
         super(ActionType.CLEAN_DATA);
         this.device = device;
+        this.pkg = pkg;
     }
 
     // set backAction's reward to be less than normal actions;
@@ -25,7 +26,7 @@ public class CleanDataAction extends Action{
 
     @Override
     public void fire() {
-        device.clearAppData(pkgAct);
+        device.clearAppData(pkg);
         count++;
         device.sleep(5000);
     }
@@ -35,6 +36,6 @@ public class CleanDataAction extends Action{
      * @return
      */
     public String toCommand(){
-        return ActionType.CLEAN_DATA + " " + pkgAct;
+        return ActionType.CLEAN_DATA + " " + pkg;
     }
 }

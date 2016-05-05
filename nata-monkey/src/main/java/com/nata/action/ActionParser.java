@@ -28,8 +28,8 @@ public class ActionParser {
             case ActionType.HOME : action = new HomeAction(device);break;
             case ActionType.MENU : action = new MenuAction(device);break;
             case ActionType.CLEAN_DATA : {
-                String pkgAct = splits[1];
-                action = new CleanDataAction(device,pkgAct);
+                String pkg = splits[1];
+                action = new CleanDataAction(device,pkg);
                 break;
             }
             case ActionType.START_APP : {

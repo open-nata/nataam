@@ -3,6 +3,7 @@ var _ = require('lodash');
 
 module.exports.create = function(req, res, next) {
   var testcase = new TestcaseModel();
+  testcase.name = req.body.name;
   testcase.device_id = req.body.device_id;
   testcase.apk_id= req.body.apk_id;
 
@@ -29,6 +30,7 @@ module.exports.remove = function(req, res, next) {
 
 module.exports.finish = function(req, res, next) {
   var testcase_id = req.params.id;
+  console.log(testcase_id);
   var actions = req.body.actions;
 
 
@@ -38,10 +40,11 @@ module.exports.finish = function(req, res, next) {
     if (err) {
       next(err);
     }
-    var splits = actions.trim().split("\n");
-    _(splits).forEach(function(action){
-       testcase.actions.push(action);
-    });
+    //var splits = actions.trim().split("\n");
+    testcase.actions = actions;
+    //_(splits).forEach(function(action){
+    //   testcase.actions.push(action);
+    //});
 
     testcase.isFinish= true;
 

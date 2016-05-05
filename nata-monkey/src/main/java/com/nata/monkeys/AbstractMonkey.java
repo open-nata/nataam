@@ -50,7 +50,7 @@ public abstract class AbstractMonkey {
         backAction = actionFactory.createBackAction();
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
-        cleanDataAction = getActionFactory().CreateCleanDataAction(getPkgAct());
+        cleanDataAction = getActionFactory().CreateCleanDataAction(getPkg());
 
         testResult = new TestResult(config.getRecord_id(),config.isRemote());
     }

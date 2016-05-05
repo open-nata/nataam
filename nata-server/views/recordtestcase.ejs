@@ -29,6 +29,12 @@
                         <div class="btn-group" role="group">
                             <button id="btn-menu" type="button" class="btn btn-primary" style="border-radius : 0">Menu</button>
                         </div>
+                        <div class="btn-group" role="group">
+                            <button id="btn-restart" type="button" class="btn btn-primary" style="border-radius : 0">Restart</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button id="btn-cleandata" type="button" class="btn btn-primary" style="border-radius : 0">CleanData</button>
+                        </div>
                     </div>
                     <button id="btn-getactions" type="button" class="btn btn-info btn-block" style="border-radius : 0">
                         获取界面动作
@@ -51,7 +57,7 @@
                 <ul class="list-group" id="testcase">
 
                 </ul>
-
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-finish" style="border-radius : 0" data-id="<%= testcase._id %>">完成录制</button>
             </div>
         </div>
 
@@ -73,8 +79,10 @@
     </div>
 </div>
 </div>
-<!-- // <script src="/socket.io/socket.io.js"></script> -->
-<!--<script src="/javascripts/echarts.min.js"></script>-->
+<script type="text/javascript">
+    var apk = <%- JSON.stringify(apk) %>;
+</script>
+
 <script src="/javascripts/recordtestcase.js"></script>
 <script>
     /*jshint browser:true*/
