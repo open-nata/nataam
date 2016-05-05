@@ -156,3 +156,5 @@
 ### (2016/5/4)
 - Add Record user case function to the website
 
+### (2015/5/5)
+- Increase the user experience of Recording

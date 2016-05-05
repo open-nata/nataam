@@ -95,7 +95,7 @@ public class App {
             response.status(200).text("success");
         });
 
-        blade.post("/replay",((request, response) -> {
+        blade.post("/action",((request, response) -> {
             String action = request.query("action").trim();
             if(Replayer.playAction(action)){
                 response.status(200).text("success");
@@ -107,7 +107,6 @@ public class App {
 
 
         blade.get("/actions",(request, response) -> {
-            System.out.println("get actions");
             String actionString =  ActionMaker.getActions();
             response.status(200).text(actionString);
         });

@@ -140,7 +140,6 @@ public class ActionFactory {
         return actions;
     }
 
-
     public List<Action> getActionsFromWidgets(List<Widget> widgets ){
         List<Action>actions=  getUIActionsFromWidgets(widgets);
         Action backAction= createBackAction();

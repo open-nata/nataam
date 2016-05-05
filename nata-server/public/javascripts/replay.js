@@ -8,7 +8,7 @@ replayBtn.on('click', function(e) {
     var action = td.text();
     replayBtn.prop("disabled", true);
     $.ajax({
-        url: baseUrl + "/replay",
+        url: baseUrl + "/action",
         data: {
             "action": action
         },

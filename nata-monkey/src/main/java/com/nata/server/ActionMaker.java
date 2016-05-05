@@ -28,7 +28,6 @@ public class ActionMaker {
             ActionFactory factory = new ActionFactory(device);
             List<Action> actions = factory.getUIActionsFromWidgets(list);
 
-            List<String> actionList = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
             for (Action action : actions) {
                 sb.append(action.toCommand() +"\n");

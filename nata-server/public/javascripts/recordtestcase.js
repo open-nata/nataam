@@ -13,6 +13,55 @@ $(function () {
     START_APP: "StartApp",
     CLEAN_DATA: "CleanData"
   }
+  var listString = '<li class="list-group-item">';
+
+  $('#btn-back').click(function(e){
+    var action  =ActionType.BACK;
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+  });
+
+  $('#btn-home').click(function(e){
+    var action  =ActionType.HOME;
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+  });
+
+  $('#btn-menu').click(function(e){
+    var action  =ActionType.MENU;
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+  });
 
   $('#btn-getactions').click(function (e) {
     e.preventDefault();
@@ -29,12 +78,19 @@ $(function () {
           var params = actions[i-1].split(" ", 5);
           var actionType = params[0];
           var at = params[1];
-
+          var x = params[2];
+          var y = params[3];
+          var direction = params[2];
+          var action = actionType;
+          if(actionType === ActionType.SWIPE) action+=direction;
           toAppend+='<div class="btn-group" role="group"><button type="button" class="btn btn-primary" style="border-radius : 0"' +
             ' data-action='+actionType +
             ' data-at=' + at +
-            ' data-x='
-            +'>'+actionType+'</button></div>';
+            ' data-x=' +x +
+            ' data-y=' +y +
+            ' data-direction=' + direction +
+            '>'+action+'</button></div>';
+
           if(i%5 == 0 && i !== actions.length){
             toAppend +='</div>' + btnGroupString;
           }
@@ -80,8 +136,8 @@ $(function () {
 
   });
 
-  $('#list-actions').delegate('tr td:nth-child(2)', 'mouseover', function (e) {
-    var at= e.target.innerHTML;
+  $('#action-panel').delegate('button', 'mouseover', function (e) {
+    var at= $(e.target).data("at");
     var canvas = document.getElementById('canvas-device');
     var canvasWrapper = document.getElementById('canvas-wrapper');
     canvasWrapper.width = canvas.width;
@@ -103,6 +159,39 @@ $(function () {
     else {
       g.clearRect(0, 0, canvasWrapper.width, canvasWrapper.height);
     }
+  });
+
+  $('#action-panel').delegate('button', 'click', function (e) {
+    var ele = $(e.target);
+    var actionType  = ele.data("action");
+    var at = ele.data("at");
+    var x = ele.data("x");
+    var y = ele.data("y");
+    var direction = ele.data("direction");
+    var action = actionType + " " + at;
+    switch (actionType){
+      case ActionType.TAP:
+      case ActionType.LONG_CLICK:
+      case ActionType.INPUT:
+        action += " " +x + " " +y;
+        break;
+      case ActionType.SWIPE:
+        action += " " +direction;
+        break;
+    }
+
+    $.ajax({
+      url: baseUrl + "/action",
+      type: 'POST',
+      data: {"action": action},
+      success: function (message) {
+        $('#testcase').append(listString+action+"</li>");
+      },
+      error: function () {
+
+      }
+    });
+     //console.log(action);
   });
 
 });
