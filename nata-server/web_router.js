@@ -6,6 +6,8 @@ module.exports = function () {
   var DeviceModel = require('./models/model_device.js');
   var RecordModel = require('./models/model_record.js');
   var ApkModel = require('./models/model_apk.js');
+  var TestcaseModel = require('./models/model_testcase.js');
+
 
   /* GET home page. */
   router.get('/', function (req, res, next) {
@@ -158,13 +160,38 @@ module.exports = function () {
 
 
   /**
-   * 获取任务列表
+   * 获取录制任务列表
    */
-  router.get('/recordtestcase', function (req, res, next) {
-    res.render('recordtestcase', {
-      title: '录制测试脚本',
+  router.get('/testcases', function (req, res, next) {
+
+    var ep = new eventproxy();
+    ep.fail(next);
+
+    ep.all('testcases','devices','apks',function(testcases,devices,apks){
+
+      testcases.forEach(function (testcase) {
+        console.log(testcase.apk_id);
+        ApkModel.findOne({_id: testcase.apk_id}).exec(ep.done(function (apk) {
+          testcase.apk_name = apk.name;
+          testcase.package_name = apk.package_name;
+          testcase.activity_name = apk.activity_name;
+          ep.emit('apk');
+        }));
+      });
+
+      ep.after('apk', testcases.length, function () {
+        res.render('testcases', {
+          title: '录制任务',
+          testcases: testcases,
+          devices: devices,
+          apks: apks
+        });
+      })
     });
 
+    TestcaseModel.find({}).sort({create_at: -1}).exec(ep.done("testcases"));
+    DeviceModel.find({}).sort({create_at: -1}).exec(ep.done("devices"));
+    ApkModel.find({}).sort({create_at: -1}).exec(ep.done("apks"));
   });
 
 

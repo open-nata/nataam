@@ -161,3 +161,4 @@
 - Rewrite device login process
 - Add Apk logon process
 - Rewrite auto test task creation process
+- Write record testcase task process
