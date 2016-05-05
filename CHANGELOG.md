@@ -159,3 +159,5 @@
 ### (2015/5/5)
 - Increase the user experience of Recording
 - Rewrite device login process
+- Add Apk logon process
+- Rewrite auto test task creation process

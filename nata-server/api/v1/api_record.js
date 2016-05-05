@@ -3,11 +3,10 @@ module.exports = function() {
     var RecordModel = require('../../models/model_record.js');
 
     var create = function(req, res, next) {
+      console.log("create");
         var record = new RecordModel();
         record.device_id = req.body.device_id;
-        record.app_name = req.body.app_name;
-        record.package_name = req.body.package_name;
-        record.activity_name = req.body.activity_name;
+        record.apk_id= req.body.apk_id;
         record.action_count = req.body.action_count;
         record.algorithm = req.body.algorithm;
         record.status = "ready";

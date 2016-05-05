@@ -1,11 +1,11 @@
 <% include partials/header %>
-<div id="records">
+<div id="testcases">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">自动遍历任务</h3>
+                        <h3 class="panel-title">录制用例任务</h3>
                     </div>
                     <div class="panel-body">
                         <form id="record-form" class="form-horizontal">
@@ -31,25 +31,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="action_count">Actions</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" name="action_count"  id="action_count" value="1000">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="algorithm">遍历算法</label>
-
-                                <div class="col-sm-8">
-                                    <select class="form-control m-b" name="algorithm" id="algorithm">
-                                        <option value="dfs">DFS(Depth First)</option>
-                                        <option value="prm">PRM(Pure Random Monkey)</option>
-                                        <option value="rm">RM(Random Monkey)</option>
-                                        <option value="qlm">QLM(QLearning Monkey)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="col-sm-offset-4 col-sm-8">
                                     <button id="btn-create" type="submit" class="btn btn-primary" >
                                         创建任务
@@ -69,33 +50,24 @@
                         <thead>
                         <tr>
                             <th>
+                                用例名称
+                            </th>
+                            <th>
                                 设备ID
                             </th>
                             <th>
                                 待测应用
                             </th>
                             <th>
-                                Action数量
-                            </th>
-                            <th>
-                                算法
-                            </th>
-                            <th>
                                 状态
                             </th>
-                            <!--                      <th>
-                        创建时间
-                    </th>
-                    <th>
-                        结束时间
-                    </th> -->
                             <th>
                                 操作
                             </th>
                         </tr>
                         </thead>
                         <tbody id="record-table">
-                        <% records.forEach(function(record, index) { %>
+                        <% testcases.forEach(function(testcase) { %>
                         <tr>
                             <td>
                                 <%= record.device_id %>
@@ -112,7 +84,7 @@
                             <td>
                                 <%= record.status %>
                             </td>
-                           <td>
+                            <td>
                                 <% if(record.status === "ready"){ %>
                                 <a href="#" class="btn-start btn btn-primary btn-xs" role="button"
                                    data-id="<%= record.id %>" data-device="<%= record.device_id %>"
@@ -137,8 +109,8 @@
                                    data-id="<%= record.id %>">删除</a>
                                 <% } %>
                             </td>
-                        </trj>
-                        <% }); %>
+                            </trj>
+                            <% }); %>
                         </tbody>
                     </table>
                 </div>
@@ -146,5 +118,5 @@
         </div>
     </div>
 </div>
-<script src="/javascripts/records.js"></script>
+<script src="/javascripts/testcase.js"></script>
 <% include partials/footer.ejs %>

@@ -9,9 +9,7 @@ var summarySchema = new mongoose.Schema({
 
 var RecordSchema = new mongoose.Schema({
     device_id: String,
-    app_name: String,
-    package_name: String,
-    activity_name: String,
+    apk_id: String,
     action_count: Number,
     algorithm: {
         type: String,
