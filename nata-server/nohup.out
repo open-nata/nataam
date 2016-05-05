@@ -221,3 +221,32 @@
 2016-05-05T00:52:10.850+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
 2016-05-05T00:52:10.851+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
 2016-05-05T00:52:10.851+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
+2016-05-05T10:03:51.430+0800 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+2016-05-05T10:03:51.431+0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2016-05-05T10:03:51.448+0800 I JOURNAL  [durability] Durability thread started
+2016-05-05T10:03:51.448+0800 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] MongoDB starting : pid=1553 port=27017 dbpath=/data/db 64-bit host=114-212-87-8.nju.edu.cn
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] 
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] db version v3.0.3
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] git version: nogitversion
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] build info: Darwin yosemitevm.local 14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] allocator: system
+2016-05-05T10:03:51.448+0800 I CONTROL  [initandlisten] options: {}
+2016-05-05T10:03:52.101+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-05-05T10:03:55.969+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49960 #1 (1 connection now open)
+2016-05-05T10:04:00.615+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-05T10:04:00.615+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-05T10:04:00.615+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-05T10:04:00.618+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-05T10:04:00.618+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-05T10:10:56.460+0800 I NETWORK  [conn1] end connection 127.0.0.1:49960 (0 connections now open)
+2016-05-05T10:10:57.743+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50444 #2 (1 connection now open)
+2016-05-05T10:11:24.871+0800 I NETWORK  [conn2] end connection 127.0.0.1:50444 (0 connections now open)
+2016-05-05T10:11:26.174+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50557 #3 (1 connection now open)
+2016-05-05T10:16:45.661+0800 I NETWORK  [conn3] end connection 127.0.0.1:50557 (0 connections now open)
+2016-05-05T10:16:46.915+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50785 #4 (1 connection now open)
+2016-05-05T11:21:30.244+0800 I NETWORK  [conn4] end connection 127.0.0.1:50785 (0 connections now open)
+2016-05-05T11:21:31.607+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54151 #5 (1 connection now open)
+2016-05-05T11:32:58.566+0800 I NETWORK  [conn5] end connection 127.0.0.1:54151 (0 connections now open)
+2016-05-05T11:32:59.844+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54866 #6 (1 connection now open)

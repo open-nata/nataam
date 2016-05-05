@@ -158,3 +158,4 @@
 
 ### (2015/5/5)
 - Increase the user experience of Recording
+- Rewrite device login process

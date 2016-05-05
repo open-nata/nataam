@@ -1,48 +1,91 @@
 <% include partials/header %>
 
 <div id="devices">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="centered">设备列表</h1>
-                <br>
-                <table class="table table-hover ">
-                    <thead>
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            设备ID
-                        </th>
-                        <th>
-                            设备名称
-                        </th>
-                        <th>
-                            安卓版本
-                        </th>
-                        <th>
-                            SDK版本
-                        </th>
-                        <th>
-                            分辨率
-                        </th>
-                        <th>
-                            CPU制式
-                        </th>
-                        <th>
-                            生产厂商
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <% devices.forEach(function(device, index){ %>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">登记设备</h3>
+                    </div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>状态：</dt>
+                            <dd><span class="label label-primary" id="status">未获取</span>
+                            </dd>
+                            <dt>设备名称：</dt>
+                            <dd id="device-name"></dd>
+                            <dt>设备ID：</dt>
+                            <dd id="device-id"></dd>
+                            <dt>安卓版本：</dt>
+                            <dd id="android-version"></dd>
+                            <dt>SDK版本：</dt>
+                            <dd id="sdk-version"></dd>
+                            <dt>分辨率：</dt>
+                            <dd id="resolution"></dd>
+                            <dt>CPU制式：</dt>
+                            <dd id="cpu-abi"></dd>
+                            <dt>厂家：</dt>
+                            <dd id="manufacturer"></dd>
+                        </dl>
+                    </div>
+                    <div class="panel-footer" style="padding: 0;">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <button id="btn-getdevice" type="button" class="btn btn-info" style="border-radius : 0">
+                                    获取设备信息
+                                </button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button id="btn-logdevice" type="button" class="btn btn-primary"
+                                        style="border-radius : 0">
+                                    登录设备
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">已登记设备列表</h3>
+                    </div>
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                名称
+                            </th>
+                            <th>
+                                Android版本
+                            </th>
+                            <th>
+                                SDK
+                            </th>
+                            <th>
+                                分辨率
+                            </th>
+                            <th>
+                                CPU
+                            </th>
+                            <th>
+                                厂商
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="device_table">
+                        <% devices.forEach(function(device){ %>
                         <tr>
                             <td>
-                                <%= index %>
-                            </td>
-                            <td>
-                                <%= device.id%>
+                                <%= device.id %>
                             </td>
                             <td>
                                 <%= device.name %>
@@ -62,13 +105,19 @@
                             <td>
                                 <%= device.manufacturer %>
                             </td>
+                            <td>
+                                <a href="#" class="btn-remove btn btn-danger btn-xs" role="button" data-id="<%= device.id %>">删除</a>
+                            </td>
                         </tr>
                         <% }); %>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
+<script src="/javascripts/devices.js"></script>
 <% include partials/footer.ejs %>

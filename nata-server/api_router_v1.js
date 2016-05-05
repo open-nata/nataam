@@ -6,6 +6,8 @@ module.exports = function() {
     var recordApi = require('./api/v1/api_record.js')();
 
     router.post('/devices', deviceApi.create);
+    router.delete('/devices/:id', deviceApi.remove);
+
     router.post('/records', recordApi.create);
     router.post("/records/:id/summary", recordApi.summary);
     router.post('/records/:id/activity', recordApi.activity);
