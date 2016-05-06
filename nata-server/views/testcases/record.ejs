@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 <div id="recordtestcase">
-    <div style="margin-top: 10px; margin-left: 10px">
+    <div style="padding-top: 10px;padding-left: 10px">
         <div style="width: 364px; float: left;">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -60,24 +60,7 @@
                 <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-finish" style="border-radius : 0" data-id="<%= testcase._id %>">开始录制</button>
             </div>
         </div>
-
-
-        <!--</div>-->
-        <!--<div class="col-md-4">-->
-        <!--<div class="panel panel-info">-->
-        <!--<div class="table-wrapper" id="action-table-wrapper">-->
-        <!--<table class="table table-striped" id="action-table">-->
-        <!--<tbody id="actions">-->
-        <!--</tbody>-->
-        <!--</table>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--<button type="button" class="btn btn-info btn-lg btn-block" id="btn-replay">存储测试用例</button>-->
-        <!--</div>-->
-
     </div>
-</div>
 </div>
 <script type="text/javascript">
     var apk = <%- JSON.stringify(apk) %>;

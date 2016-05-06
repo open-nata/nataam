@@ -141,14 +141,14 @@ hr {
 }
 
 
-#run, #records, #devices, #apks, #testcases ,#recordtestcase ,#testcase-edit{
+#run, #records, #devices, #apks, #testcases ,#testcase-edit{
     display: block;
     background-color: #44ba92;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#devices, #records,#apks, #testcases, #recordtestcase,#testcase-edit {
+#devices, #records,#apks, #testcases, #testcase-edit {
     background-color: white;
 }
 

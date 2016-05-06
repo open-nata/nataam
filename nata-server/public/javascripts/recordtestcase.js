@@ -17,6 +17,8 @@ $(function () {
   var listString = '<li class="list-group-item">';
 
   $('#btn-back').click(function(e){
+    var ele = $(this);
+    ele.prop("disabled", true);
     var action  =ActionType.BACK;
 
     $.ajax({
@@ -25,17 +27,19 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod)$('#testcase').append(listString+action+"</li>");
-
+        ele.prop("disabled", false);
 
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
   });
 
   $('#btn-home').click(function(e){
     var action  =ActionType.HOME;
+    var ele = $(this);
+    ele.prop("disabled", true);
 
     $.ajax({
       url: baseUrl + "/action",
@@ -43,15 +47,18 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
   });
 
   $('#btn-menu').click(function(e){
     var action  =ActionType.MENU;
+    var ele = $(this);
+    ele.prop("disabled", true);
 
     $.ajax({
       url: baseUrl + "/action",
@@ -59,14 +66,17 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
   });
 
   $('#btn-restart').click(function(e){
+    var ele = $(this);
+    ele.prop("disabled", true);
     var action  =ActionType.START_APP + " " + apk.package_name+"/" + apk.activity_name;
 
     $.ajax({
@@ -75,14 +85,17 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
   });
 
   $('#btn-cleandata').click(function(e){
+    var ele = $(this);
+    ele.prop("disabled", true);
     var action  =ActionType.CLEAN_DATA+ " " + apk.package_name;
 
     $.ajax({
@@ -91,9 +104,10 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
   });
@@ -130,7 +144,8 @@ $(function () {
 
   $('#btn-getactions').click(function (e) {
     e.preventDefault();
-
+    var ele = $(this);
+    ele.prop("disabled", true);
     $.ajax({
       url: baseUrl + "/actions",
       type: 'GET',
@@ -193,9 +208,10 @@ $(function () {
         toAppend += "</div>";
         console.log(toAppend);
         $("#action-panel").empty().append(toAppend);
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
 
@@ -228,6 +244,7 @@ $(function () {
 
   $('#action-panel').delegate('button', 'click', function (e) {
     var ele = $(e.target);
+    ele.prop("disabled", true);
     var actionType  = ele.data("action");
     var at = ele.data("at");
     var x = ele.data("x");
@@ -251,9 +268,10 @@ $(function () {
       data: {"action": action},
       success: function (message) {
         if(startRecrod)  $('#testcase').append(listString+action+"</li>");
+        ele.prop("disabled", false);
       },
       error: function () {
-
+        ele.prop("disabled", false);
       }
     });
      //console.log(action);

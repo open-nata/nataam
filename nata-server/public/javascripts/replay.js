@@ -22,7 +22,7 @@ replayBtn.on('click', function(e) {
             replayBtn.prop("disabled", false);
         },
         error: function(error) {
-
+            replayBtn.prop("disabled", false);
         }
     });
 });
