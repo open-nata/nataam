@@ -167,3 +167,4 @@
 - Optimize record testcase
 - Add testcase edit function
 - Start recording after click "start" button ,so that you can do things before recording
+- Record text input action

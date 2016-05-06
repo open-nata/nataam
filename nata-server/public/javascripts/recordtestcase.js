@@ -254,8 +254,16 @@ $(function () {
     switch (actionType){
       case ActionType.TAP:
       case ActionType.LONG_CLICK:
-      case ActionType.INPUT:
         action += " " +x + " " +y;
+        break;
+      case ActionType.INPUT:
+        var textinput = $('#textinput').val();
+        if(!textinput){
+          alert("请填写输入内容");
+          return;
+        }
+        action += " " +x + " " +y +" " +textinput;
+        //$('#textinput').val("");
         break;
       case ActionType.SWIPE:
         action += " " +direction;
