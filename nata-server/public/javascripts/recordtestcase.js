@@ -1,5 +1,6 @@
 $(function () {
   var baseUrl = "http://localhost:9001";
+  var startRecrod = false;
 
   var ActionType = {
     UNKNOWN: "Unknown",
@@ -23,7 +24,9 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod)$('#testcase').append(listString+action+"</li>");
+
+
       },
       error: function () {
 
@@ -39,7 +42,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod) $('#testcase').append(listString+action+"</li>");
       },
       error: function () {
 
@@ -55,7 +58,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod) $('#testcase').append(listString+action+"</li>");
       },
       error: function () {
 
@@ -71,7 +74,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod) $('#testcase').append(listString+action+"</li>");
       },
       error: function () {
 
@@ -87,7 +90,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod) $('#testcase').append(listString+action+"</li>");
       },
       error: function () {
 
@@ -96,7 +99,12 @@ $(function () {
   });
 
   $('#btn-finish').click(function(e){
-
+    e.preventDefault();
+    if(!startRecrod){
+      $(this).text("完成录制").removeClass("btn-primary").addClass("btn-info");
+      startRecrod = true;
+      return;
+    }
     var testcase_id = $(this).data("id");
     var actions = [];
     $("#testcase li").each(function() { actions.push($(this).text()) });
@@ -242,7 +250,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        $('#testcase').append(listString+action+"</li>");
+        if(startRecrod)  $('#testcase').append(listString+action+"</li>");
       },
       error: function () {
 
