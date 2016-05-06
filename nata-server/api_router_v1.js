@@ -16,6 +16,7 @@ module.exports = function () {
   router.post('/testcases', testcaseApi.create);
   router.delete('/testcases/:id', testcaseApi.remove);
   router.put('/testcases/:id/finish', testcaseApi.finish);
+  router.put('/testcases/:id/save', testcaseApi.save);
 
   router.post('/records', recordApi.create);
   router.post("/records/:id/summary", recordApi.summary);

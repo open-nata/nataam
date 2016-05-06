@@ -141,14 +141,14 @@ hr {
 }
 
 
-#run, #records, #devices, #apks, #testcases {
+#run, #records, #devices, #apks, #testcases ,#recordtestcase ,#testcase-edit{
     display: block;
     background-color: #44ba92;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#devices, #records,#apks, #testcases{
+#devices, #records,#apks, #testcases, #recordtestcase,#testcase-edit {
     background-color: white;
 }
 
@@ -164,22 +164,22 @@ hr {
 
 /* Widget chart Wrap */
 
-#widget-chart{
-    display: block;
-    background-color: #34495e;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
+/*#widget-chart{*/
+    /*display: block;*/
+    /*background-color: #34495e;*/
+    /*padding-top: 50px;*/
+    /*padding-bottom: 50px;*/
+/*}*/
 
-#widget-chart h1 {
-    color: white;
-}
+/*#widget-chart h1 {*/
+    /*color: white;*/
+/*}*/
 
-#activity-chart {
+#activity-chart, #widget-chart{
     display: block;
     background-color: white;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    /*padding-top: 50px;*/
+    /*padding-bottom: 50px;*/
 }
 
 #canvas-device {

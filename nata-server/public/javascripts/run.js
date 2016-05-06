@@ -46,9 +46,6 @@
         title: {
             left: 'center',
             text: 'Widget 变迁图',
-            textStyle: {
-                color: '#fff'
-            },
             subtextStyle: {
                 color: '#fff'
             }
@@ -68,9 +65,6 @@
         legend: {
             top: 'bottom',
             data: ['Widget数量'],
-            textStyle: {
-                color: '#fff'
-            },
         },
         xAxis: {
             type: 'category',

@@ -1,6 +1,7 @@
 module.exports = function () {
   var express = require('express');
   var eventproxy= require('eventproxy');
+  var _ = require('lodash');
 
   var router = express.Router();
   var DeviceModel = require('./models/model_device.js');
@@ -67,7 +68,7 @@ module.exports = function () {
       if (err || !record) {
         return res.status(500).json();
       }
-      res.render('run', {
+      res.render('records/run', {
         title: '任务详情',
         record: record
       });
@@ -85,7 +86,7 @@ module.exports = function () {
       if (err || !record) {
         return res.status(500).json();
       }
-      res.render('replay', {
+      res.render('records/replay', {
         title: '回放',
         actions: record.actions
       });
@@ -114,7 +115,7 @@ module.exports = function () {
         yDataWidget.push(summaries[i].widget);
       }
       console.log(xData);
-      res.render('report', {
+      res.render('records/report', {
         title: '详细报告',
         xData: xData,
         yDataWidget: yDataWidget,
@@ -143,7 +144,7 @@ module.exports = function () {
       });
 
       ep.after('apk', records.length, function () {
-        res.render('records', {
+        res.render('records/records', {
           title: '自动遍历任务',
           records: records,
           devices: devices,
@@ -180,7 +181,7 @@ module.exports = function () {
       });
 
       ep.after('apk', testcases.length, function () {
-        res.render('testcases', {
+        res.render('testcases/index', {
           title: '录制任务',
           testcases: testcases,
           devices: devices,
@@ -196,7 +197,6 @@ module.exports = function () {
 
   router.get('/testcases/:id/record', function (req, res, next) {
     var testcase_id = req.params.id;
-    console.log(testcase_id);
     var ep = new eventproxy();
     ep.fail(next);
 
@@ -207,7 +207,7 @@ module.exports = function () {
     });
 
     ep.all('testcase','apk',function(testcase,apk){
-      res.render('recordtestcase', {
+      res.render('testcases/record', {
         title: '录制任务',
         apk : apk,
         testcase: testcase,
@@ -215,25 +215,27 @@ module.exports = function () {
     });
   });
 
+  router.get('/testcases/:id/edit', function (req, res, next) {
+    var testcase_id = req.params.id;
+    var ep = new eventproxy();
+    ep.fail(next);
 
-  // /**
-  //  * 创建测试任务
-  //  */
-  // router.post('/test', function(req, res, next) {
+    TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
 
-  // });
+    ep.on('testcase',function(testcase){
+      var actions = "";
+      _(testcase.actions).forEach(function(action){
+        actions += action +"\n";
+      });
+      console.log(actions);
 
-  //router.get('/run',function(req,res,next){
-  //    res.render('run',{ title : '实时测试'});
-  //});
-
-  //router.get('/contact',function(req,res,next){
-  //    res.render('contact',{ title : '联系我们'});
-  //});
-
-  // router.get('/records', function(req, res, next) {
-  //     res.render('records', { title: '测试记录' });
-  // });
+      res.render('testcases/edit', {
+        title: '录制任务',
+        testcase: testcase,
+        actions: actions.trim()
+      });
+    });
+  });
 
   return router;
 };

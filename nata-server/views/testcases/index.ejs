@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 <div id="testcases">
     <div class="container-fluid">
         <div class="row">
@@ -91,12 +91,17 @@
                             </td>
                             <td>
                                 <% if(testcase.isFinish === false ){ %>
-                                <a href="/testcases/<%= testcase._id %>/record" class="btn-start btn btn-primary btn-xs" role="button" >开始录制</a>
+                                <a href="/testcases/<%= testcase._id %>/record" class="btn-start btn btn-primary btn-xs"
+                                   role="button">开始录制</a>
                                 <% }else if(testcase.isFinish === true ){ %>
-                                <a href="/testcases/<%= testcase._id %>/record" class="btn-restart btn btn-primary btn-xs" role="button" >重新录制</a>
+                                <a href="/testcases/<%= testcase._id %>/record"
+                                   class="btn-restart btn btn-primary btn-xs" role="button">重新录制</a>
+                                <a href="/testcases/<%= testcase._id %>/edit" class="btn-edit btn btn-info btn-xs"
+                                   role="button">编辑</a>
 
                                 <% } %>
-                                <a href="#" class="btn-remove btn btn-danger btn-xs" role="button" data-id="<%= testcase._id %>">删除</a>
+                                <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"
+                                   data-id="<%= testcase._id %>">删除</a>
                             </td>
                         </tr>
                         <% }); %>
@@ -108,4 +113,4 @@
     </div>
 </div>
 <script src="/javascripts/testcase.js"></script>
-<% include partials/footer.ejs %>
+<% include ../partials/footer.ejs %>

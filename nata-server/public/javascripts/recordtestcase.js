@@ -96,19 +96,21 @@ $(function () {
   });
 
   $('#btn-finish').click(function(e){
-    var btnFinish = $(e.target);
-    var testcase_id = btnFinish.data("id");
+
+    var testcase_id = $(this).data("id");
     var actions = [];
     $("#testcase li").each(function() { actions.push($(this).text()) });
     if(actions.length === 0){
       alert("没有动作");
       return;
     }
+    console.log(actions);
 
     $.ajax({
       url: "/api/v1/testcases/"+ testcase_id+"/finish",
       type: 'PUT',
       data: {"actions": actions},
+      traditional:true,
       success: function (message) {
         window.location.href = '/testcases';
       },
