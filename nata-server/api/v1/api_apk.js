@@ -1,4 +1,7 @@
 var ApkModel = require('../../models/model_apk');
+var RecordModel = require('../../models/model_record');
+var TestcaseModel = require('../../models/model_testcase');
+var eventproxy= require('eventproxy');
 
 module.exports.create = function(req, res, next) {
   var apk= new ApkModel();
@@ -16,13 +19,17 @@ module.exports.create = function(req, res, next) {
 };
 
 module.exports.remove = function(req, res, next) {
+  var ep = new eventproxy();
+  ep.fail(next);
   var apk_id= req.params.id;
-  ApkModel.findOneAndRemove({
-    _id:apk_id
-  }, function(err, apk) {
-    if (err) {
-      next(err);
-    }
+  console.log("apk_id");
+
+  ep.all('records','testcases','apk',function(records,testcase,apk){
     res.status(200).json(apk);
   });
+
+  TestcaseModel.find({apk_id: apk_id}).remove(ep.done('testcases'));
+  RecordModel.find({apk_id: apk_id}).remove(ep.done('records'));
+  ApkModel.findOneAndRemove({_id:apk_id}).exec(ep.done('apk'));
+
 };

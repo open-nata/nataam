@@ -1,4 +1,4 @@
-package com.nata.monkeys;
+package com.nata.results;
 
 import com.nata.action.Action;
 import com.nata.element.Widget;

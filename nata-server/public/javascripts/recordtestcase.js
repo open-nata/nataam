@@ -16,17 +16,17 @@ $(function () {
   }
   var listString = '<li class="list-group-item">';
 
-  $('#btn-back').click(function(e){
+  $('#btn-back').click(function (e) {
     var ele = $(this);
     ele.prop("disabled", true);
-    var action  =ActionType.BACK;
+    var action = ActionType.BACK;
 
     $.ajax({
       url: baseUrl + "/action",
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod)$('#testcase').append(listString+action+"</li>");
+        if (startRecrod)$('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
 
       },
@@ -36,8 +36,8 @@ $(function () {
     });
   });
 
-  $('#btn-home').click(function(e){
-    var action  =ActionType.HOME;
+  $('#btn-home').click(function (e) {
+    var action = ActionType.HOME;
     var ele = $(this);
     ele.prop("disabled", true);
 
@@ -46,7 +46,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        if (startRecrod) $('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
       },
       error: function () {
@@ -55,8 +55,8 @@ $(function () {
     });
   });
 
-  $('#btn-menu').click(function(e){
-    var action  =ActionType.MENU;
+  $('#btn-menu').click(function (e) {
+    var action = ActionType.MENU;
     var ele = $(this);
     ele.prop("disabled", true);
 
@@ -65,7 +65,7 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        if (startRecrod) $('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
       },
       error: function () {
@@ -74,17 +74,17 @@ $(function () {
     });
   });
 
-  $('#btn-restart').click(function(e){
+  $('#btn-restart').click(function (e) {
     var ele = $(this);
     ele.prop("disabled", true);
-    var action  =ActionType.START_APP + " " + apk.package_name+"/" + apk.activity_name;
+    var action = ActionType.START_APP + " " + apk.package_name + "/" + apk.activity_name;
 
     $.ajax({
       url: baseUrl + "/action",
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        if (startRecrod) $('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
       },
       error: function () {
@@ -93,17 +93,17 @@ $(function () {
     });
   });
 
-  $('#btn-cleandata').click(function(e){
+  $('#btn-cleandata').click(function (e) {
     var ele = $(this);
     ele.prop("disabled", true);
-    var action  =ActionType.CLEAN_DATA+ " " + apk.package_name;
+    var action = ActionType.CLEAN_DATA + " " + apk.package_name;
 
     $.ajax({
       url: baseUrl + "/action",
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod) $('#testcase').append(listString+action+"</li>");
+        if (startRecrod) $('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
       },
       error: function () {
@@ -112,27 +112,29 @@ $(function () {
     });
   });
 
-  $('#btn-finish').click(function(e){
+  $('#btn-finish').click(function (e) {
     e.preventDefault();
-    if(!startRecrod){
+    if (!startRecrod) {
       $(this).text("完成录制").removeClass("btn-primary").addClass("btn-info");
       startRecrod = true;
       return;
     }
     var testcase_id = $(this).data("id");
     var actions = [];
-    $("#testcase li").each(function() { actions.push($(this).text()) });
-    if(actions.length === 0){
+    $("#testcase li").each(function () {
+      actions.push($(this).text())
+    });
+    if (actions.length === 0) {
       alert("没有动作");
       return;
     }
     console.log(actions);
 
     $.ajax({
-      url: "/api/v1/testcases/"+ testcase_id+"/finish",
+      url: "/api/v1/testcases/" + testcase_id + "/finish",
       type: 'PUT',
       data: {"actions": actions},
-      traditional:true,
+      traditional: true,
       success: function (message) {
         window.location.href = '/testcases';
       },
@@ -155,55 +157,55 @@ $(function () {
         var toAppend = btnGroupString;
 
         for (var i = 1; i <= actions.length; i++) {
-          var params = actions[i-1].split(" ", 5);
+          var params = actions[i - 1].split(" ", 5);
           var actionType = params[0];
           var at = params[1];
           var x = params[2];
           var y = params[3];
           var direction = params[2];
           var action = actionType;
-          if(actionType === ActionType.SWIPE) action+=direction;
-          toAppend+='<div class="btn-group" role="group"><button type="button" class="btn btn-primary" style="border-radius : 0"' +
-            ' data-action='+actionType +
+          if (actionType === ActionType.SWIPE) action += direction;
+          toAppend += '<div class="btn-group" role="group"><button type="button" class="btn btn-primary" style="border-radius : 0"' +
+            ' data-action=' + actionType +
             ' data-at=' + at +
-            ' data-x=' +x +
-            ' data-y=' +y +
+            ' data-x=' + x +
+            ' data-y=' + y +
             ' data-direction=' + direction +
-            '>'+action+'</button></div>';
+            '>' + action + '</button></div>';
 
-          if(i%5 == 0 && i !== actions.length){
-            toAppend +='</div>' + btnGroupString;
+          if (i % 5 == 0 && i !== actions.length) {
+            toAppend += '</div>' + btnGroupString;
           }
 
 
-        //  toAppend += "<td>" + actionType + "</td>";
-        //  switch (actionType) {
-        //    case ActionType.BACK :
-        //    case ActionType.HOME :
-        //    case ActionType.MENU :
-        //      toAppend +="<td></td><td></td>";
-        //      break;
-        //    case ActionType.CLEAN_DATA :
-        //      //var pkgAct = params[1];
-        //      //toAppend +="<td></td><td>"+pkgAct + "</td>";
-        //      //break;
-        //    case ActionType.START_APP :
-        //      var pkgAct = params[1];
-        //      toAppend +="<td></td><td>"+pkgAct + "</td>";
-        //      break;
-        //    case ActionType.LONG_CLICK :
-        //      //var xy = params[1].split(" ",2);
-        //      //toAppend +="<td>"+ xy[0] + "</td><td>"+ xy[1]+ "</td>";
-        //      //break;
-        //    case ActionType.TAP:
-        //    case ActionType.SWIPE:
-        //      toAppend +="<td>"+ params[1] + "</td><td>"+ params[2]+ "</td>";
-        //      break;
-        //    case ActionType.INPUT:
-        //      var xy = params[1].split(" ",2);
-        //      toAppend +="<td>"+ params[1] + "</td><td>"+ params[2]+params[3]+ "</td>";
-        //  }
-        //  toAppend += "<td>"+"执行"+"</td></tr>";
+          //  toAppend += "<td>" + actionType + "</td>";
+          //  switch (actionType) {
+          //    case ActionType.BACK :
+          //    case ActionType.HOME :
+          //    case ActionType.MENU :
+          //      toAppend +="<td></td><td></td>";
+          //      break;
+          //    case ActionType.CLEAN_DATA :
+          //      //var pkgAct = params[1];
+          //      //toAppend +="<td></td><td>"+pkgAct + "</td>";
+          //      //break;
+          //    case ActionType.START_APP :
+          //      var pkgAct = params[1];
+          //      toAppend +="<td></td><td>"+pkgAct + "</td>";
+          //      break;
+          //    case ActionType.LONG_CLICK :
+          //      //var xy = params[1].split(" ",2);
+          //      //toAppend +="<td>"+ xy[0] + "</td><td>"+ xy[1]+ "</td>";
+          //      //break;
+          //    case ActionType.TAP:
+          //    case ActionType.SWIPE:
+          //      toAppend +="<td>"+ params[1] + "</td><td>"+ params[2]+ "</td>";
+          //      break;
+          //    case ActionType.INPUT:
+          //      var xy = params[1].split(" ",2);
+          //      toAppend +="<td>"+ params[1] + "</td><td>"+ params[2]+params[3]+ "</td>";
+          //  }
+          //  toAppend += "<td>"+"执行"+"</td></tr>";
         }
         toAppend += "</div>";
         console.log(toAppend);
@@ -218,7 +220,7 @@ $(function () {
   });
 
   $('#action-panel').delegate('button', 'mouseover', function (e) {
-    var at= $(e.target).data("at");
+    var at = $(e.target).data("at");
     var canvas = document.getElementById('canvas-device');
     var canvasWrapper = document.getElementById('canvas-wrapper');
     canvasWrapper.width = canvas.width;
@@ -245,28 +247,28 @@ $(function () {
   $('#action-panel').delegate('button', 'click', function (e) {
     var ele = $(e.target);
     ele.prop("disabled", true);
-    var actionType  = ele.data("action");
+    var actionType = ele.data("action");
     var at = ele.data("at");
     var x = ele.data("x");
     var y = ele.data("y");
     var direction = ele.data("direction");
     var action = actionType + " " + at;
-    switch (actionType){
+    switch (actionType) {
       case ActionType.TAP:
       case ActionType.LONG_CLICK:
-        action += " " +x + " " +y;
+        action += " " + x + " " + y;
         break;
       case ActionType.INPUT:
         var textinput = $('#textinput').val();
-        if(!textinput){
+        if (!textinput) {
           alert("请填写输入内容");
           return;
         }
-        action += " " +x + " " +y +" " +textinput;
+        action += " " + x + " " + y + " " + textinput;
         //$('#textinput').val("");
         break;
       case ActionType.SWIPE:
-        action += " " +direction;
+        action += " " + direction;
         break;
     }
 
@@ -275,14 +277,14 @@ $(function () {
       type: 'POST',
       data: {"action": action},
       success: function (message) {
-        if(startRecrod)  $('#testcase').append(listString+action+"</li>");
+        if (startRecrod)  $('#testcase').append(listString + action + "</li>");
         ele.prop("disabled", false);
       },
       error: function () {
         ele.prop("disabled", false);
       }
     });
-     //console.log(action);
+    //console.log(action);
   });
 
 });

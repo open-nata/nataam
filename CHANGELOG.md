@@ -168,3 +168,6 @@
 - Add testcase edit function
 - Start recording after click "start" button ,so that you can do things before recording
 - Record text input action
+
+### (2015/5/8)
+- Add setInterval ajax event to get summary instead of socket.io

@@ -4,6 +4,7 @@ import com.nata.Config;
 import com.nata.action.*;
 import com.nata.AdbDevice;
 import com.nata.element.Widget;
+import com.nata.results.TestResult;
 import com.nata.state.DFSState;
 import com.nata.state.State;
 import com.nata.state.StateFactory;

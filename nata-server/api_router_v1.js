@@ -20,6 +20,8 @@ module.exports = function () {
 
   router.post('/records', recordApi.create);
   router.post("/records/:id/summary", recordApi.summary);
+  router.get("/records/:id/summary", recordApi.getSummary);
+
   router.post('/records/:id/activity', recordApi.activity);
   router.post('/records/:id/widget', recordApi.widget);
   router.post('/records/:id/action', recordApi.action);
