@@ -15,9 +15,11 @@ public class DFSRunner{
     public static void main(String[] args) {
         Config config = new Config();
         config.setAlgorithm(MonkeyType.DFS);
+        config.setAction_count(50);
 
-        AbstractMonkey dfsMonkey= new DfsMonkey(config);
+        DfsMonkey dfsMonkey= new DfsMonkey(config);
         dfsMonkey.play();
         dfsMonkey.toCommands();
+        dfsMonkey.printActLunch();
     }
 }

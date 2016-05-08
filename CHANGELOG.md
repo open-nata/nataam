@@ -171,3 +171,4 @@
 
 ### (2015/5/8)
 - Add setInterval ajax event to get summary instead of socket.io
+- Add TreeWeb to generate shortest paths to go to activities

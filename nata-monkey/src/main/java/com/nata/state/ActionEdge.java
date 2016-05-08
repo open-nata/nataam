@@ -49,4 +49,12 @@ public class ActionEdge {
                 ", actions=" + actions +
                 '}';
     }
+
+    public String toCommand(){
+        String s="";
+        for(Action a:actions){
+            s+=a.toCommand()+"\n";
+        }
+        return s;
+    }
 }

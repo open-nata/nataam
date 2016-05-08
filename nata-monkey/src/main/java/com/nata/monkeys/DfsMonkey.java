@@ -3,10 +3,12 @@ package com.nata.monkeys;
 import com.nata.Config;
 import com.nata.action.Action;
 import com.nata.AdbDevice;
+import com.nata.results.TreeWeb;
 import com.nata.state.*;
 import com.nata.utils.LogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -20,7 +22,7 @@ public class DfsMonkey extends AbstractMonkey{
     private DFSState rootState;
     private boolean flag = true;
     private ArrayList<Action> currentActions;
-    private ArrayList<State> nodes = null;
+    private ArrayList<DFSState> nodes = null;
 
     public DfsMonkey(Config config) {
         super(config);
@@ -205,6 +207,19 @@ public class DfsMonkey extends AbstractMonkey{
         }
         // do report
         report();
+
+    }
+
+    public void printActLunch(){
+        List<Action> setupActions = new ArrayList<>();
+        setupActions.add(getRestartAction());
+
+        List<String> cases = TreeWeb.getActLunchTestcases(nodes,setupActions );
+        for (String case1: cases) {
+            System.out.println("==========case start==========");
+            System.out.println(case1);
+            System.out.println("==========case end==========");
+        }
     }
 
 }
