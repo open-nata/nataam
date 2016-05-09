@@ -9,7 +9,7 @@ var ApkSchema = new mongoose.Schema({
     unique: true,
     trim: true
   },
-  actPaths: [ActPathSchema],
+  actpaths: [ActPathSchema],
   activity_name: String,
   create_at: {type: Date, default: Date.now},
 });

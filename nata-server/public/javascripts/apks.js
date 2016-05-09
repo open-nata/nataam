@@ -23,19 +23,19 @@ $(function() {
   });
 
 
-  $('#apk_table').delegate('a','click', function(e) {
-    e.preventDefault();
-    var apk_id = $(this).data('id');
-    $.ajax({
-      url: '/api/v1/apks/' + apk_id,
-      type: 'DELETE',
-      success: function () {
-        $(e.target).parent().parent().remove();
-      },
-      error: function (message) {
-        alert("删除失败");
-      }
-    });
-  });
+  //$('#apk_table').delegate('a','click', function(e) {
+  //  e.preventDefault();
+  //  var apk_id = $(this).data('id');
+  //  $.ajax({
+  //    url: '/api/v1/apks/' + apk_id,
+  //    type: 'DELETE',
+  //    success: function () {
+  //      $(e.target).parent().parent().remove();
+  //    },
+  //    error: function (message) {
+  //      alert("删除失败");
+  //    }
+  //  });
+  //});
 });
 

@@ -1,4 +1,5 @@
 <% include partials/header %>
+<% include modals/modal_del_apk.ejs %>
 
 <div id="apks">
     <div class="container-fluid">
@@ -87,8 +88,12 @@
                                 <%= apk.activity_name %>
                             </td>
                             <td>
-                                <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"
-                                   data-id="<%= apk.id %>">删除</a>
+                                <a href="/apks/<%= apk._id %>/detail" class="btn btn-primary btn-xs" role="button"x>查看详细</a>
+
+                                <a href="#" class="confirm-delete-apk btn btn-danger btn-xs" role="button"
+                                   data-id="<%= apk._id %>"
+                                   data-name="<%= apk.name %>">删除</a>
+
                             </td>
                         </tr>
                         <% }); %>

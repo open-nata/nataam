@@ -1,0 +1,54 @@
+<div id="modal_del_apk" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h3 id="myModalLabel">删除应用</h3>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                <button data-dismiss="modal" class="btn btn-danger" id="btnYes_apk">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<script>
+    $(function () {
+        $('#modal_del_apk').on('show.bs.modal', function (event) {
+            var name = $(this).data('name');
+
+            $('#modal_del_apk .modal-dialog .modal-content .modal-body p').html("确定删除应用 " + '<b>' + name + '</b>' + ' 吗?相关测试内容将一并删除!');
+        })
+
+        $('.confirm-delete-apk').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            $('#modal_del_apk').data('id', id).data('name',name).modal('show');
+        });
+
+        $('#btnYes_apk').click(function () {
+            var apk_id= $('#modal_del_apk').data('id');
+            $.ajax({
+                url: '/api/v1/apks/' + apk_id,
+                type: 'DELETE',
+                success: function () {
+//                    $(e.target).parent().parent().remove();
+                    location.reload();
+                },
+                error: function (message) {
+                    alert("删除失败");
+                }
+            });
+
+            $('#modal_del_apk').modal('hide');
+        });
+    });
+
+</script>

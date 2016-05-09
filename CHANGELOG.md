@@ -175,3 +175,4 @@
 
 ### (2015/5/9)
 - Send paths to nata-server
+- Show act paths in the apk view and can replay act paths

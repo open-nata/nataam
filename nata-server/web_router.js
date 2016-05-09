@@ -9,6 +9,8 @@ module.exports = function () {
   var ApkModel = require('./models/model_apk.js');
   var TestcaseModel = require('./models/model_testcase.js');
 
+  var ApkController = require('./controllers/controller_apk.js');
+
 
   /* GET home page. */
   router.get('/', function (req, res, next) {
@@ -16,15 +18,6 @@ module.exports = function () {
       title: '首页'
     });
   });
-
-  ///**
-  // * 获取创建测试任务页面
-  // */
-  //router.get('/create', function (req, res, next) {
-  //  res.render('create', {
-  //    title: '创建测试任务'
-  //  });
-  //});
 
   /**
    * 获取设备列表
@@ -41,21 +34,9 @@ module.exports = function () {
     });
   });
 
-  /**
-   * 获取应用列表
-   */
-  router.get('/apks', function (req, res, next) {
-    console.log("get here");
-    ApkModel.find({}, function (err, apks) {
-      if (err) {
-        return res.status(500).json();
-      }
-      res.render('apks', {
-        title: '应用列表',
-        apks: apks
-      });
-    });
-  });
+  router.get('/apks',ApkController.show);
+  router.get('/apks/:id/detail', ApkController.detail);
+  router.get('/apks/:id/replay/:act_name', ApkController.replay);
 
   /**
    * 获取实时任务详情
