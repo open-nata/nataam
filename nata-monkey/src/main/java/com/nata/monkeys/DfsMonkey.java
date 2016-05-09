@@ -5,29 +5,31 @@ import com.nata.action.Action;
 import com.nata.AdbDevice;
 import com.nata.results.TreeWeb;
 import com.nata.state.*;
+import com.nata.utils.HttpUtil;
 import com.nata.utils.LogUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
  * Update: 2016-04-13 14:24
  */
-public class DfsMonkey extends AbstractMonkey{
+public class DfsMonkey extends AbstractMonkey {
     private int nodeCount = 0;
     private DFSState curState;
     private DFSState rootState;
     private boolean flag = true;
     private ArrayList<Action> currentActions;
     private ArrayList<DFSState> nodes = null;
+    private boolean isRemote = false;
 
     public DfsMonkey(Config config) {
         super(config);
         currentActions = new ArrayList<>();
         nodes = new ArrayList<>();
+        isRemote = config.isRemote();
     }
 
     private int classifyNode(DFSState state) {
@@ -60,8 +62,6 @@ public class DfsMonkey extends AbstractMonkey{
     }
 
 
-
-
     private boolean goBack() {
         ActionEdge ee = curState.getFromEdge();
         if (ee != null) {
@@ -69,7 +69,7 @@ public class DfsMonkey extends AbstractMonkey{
 
             while (!curState.isNotOver()
                     && curState.getFromEdge() != null) {
-                curState= curState.getFromEdge().getFromState();
+                curState = curState.getFromEdge().getFromState();
             }
 
             Stack<DFSState> nodesStack = new Stack<>();
@@ -84,14 +84,13 @@ public class DfsMonkey extends AbstractMonkey{
 
             // attempt to one step back
             if (edgesStack.size() > 2) {
-               executeAction(getBackAction());
+                executeAction(getBackAction());
             }
 
             tempState = getCurrentDFSState();
 
             if (curState.equals(tempState))
                 return true;
-
 
 
             if (tempState != null && nodesStack.contains(tempState)) {
@@ -102,7 +101,7 @@ public class DfsMonkey extends AbstractMonkey{
                     edgesStack.pop();
                 }
             } else {
-               restartApp();
+                restartApp();
             }
 
             while (!edgesStack.isEmpty()) {
@@ -163,8 +162,8 @@ public class DfsMonkey extends AbstractMonkey{
         addNode(rootState);
         LogUtil.debug("rootState created");
 
-        while(flag && !(curState.getFromEdge() == null && !curState.isNotOver())){
-            if(cnt >= ACTION_COUNTS){
+        while (flag && !(curState.getFromEdge() == null && !curState.isNotOver())) {
+            if (cnt >= ACTION_COUNTS) {
                 LogUtil.info(" get to ACTION_COUNTS limit");
                 break;
             }
@@ -172,7 +171,7 @@ public class DfsMonkey extends AbstractMonkey{
             Action action = curState.getAction();
 
 
-            if(action == null){
+            if (action == null) {
                 LogUtil.debug("action == null");
                 flag = goBack();
                 continue;
@@ -191,7 +190,7 @@ public class DfsMonkey extends AbstractMonkey{
                     LogUtil.debug("special state");
                     currentActions.add(action);
                     addNode(tempNode);
-                    curState= tempNode;
+                    curState = tempNode;
                     flag = goBack();
                     break;
                 case DFSState.SAME:
@@ -208,18 +207,28 @@ public class DfsMonkey extends AbstractMonkey{
         // do report
         report();
 
-    }
 
-    public void printActLunch(){
-        List<Action> setupActions = new ArrayList<>();
-        setupActions.add(getRestartAction());
-
-        List<String> cases = TreeWeb.getActLunchTestcases(nodes,setupActions );
-        for (String case1: cases) {
-            System.out.println("==========case start==========");
-            System.out.println(case1);
-            System.out.println("==========case end==========");
+        if(isRemote) {
+            updateActPath();
         }
     }
 
+    public void updateActPath() {
+        List<Action> setupActions = new ArrayList<>();
+        setupActions.add(getRestartAction());
+
+        HashMap<String,String> actPaths = TreeWeb.getActLunchTestcases(nodes, setupActions);
+        HashMap<String,String > messages = new HashMap<>();
+        for (Map.Entry<String,String> entry: actPaths.entrySet()) {
+            try {
+                messages.clear();
+                messages.put("activity_name", entry.getKey());
+                messages.put("actions",entry.getValue());
+
+                HttpUtil.postActPath(getPkg(),messages);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

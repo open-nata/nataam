@@ -25,6 +25,7 @@ import java.util.Map;
 public class HttpUtil {
 
     public static final String remoteUrl = "http://localhost:3000/api/v1/records/";
+    public static final String actPathUrl= "http://localhost:3000/api/v1/apks/";
 
     public static void post(String url,HashMap<String,String> props) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
@@ -62,6 +63,12 @@ public class HttpUtil {
         String url = remoteUrl+recordId+"/summary";
         post(url,props);
     }
+
+    public static void postActPath(String package_name,HashMap<String,String> props) throws IOException {
+        String url = actPathUrl+package_name+"/actpath";
+        post(url,props);
+    }
+
 
     public static void postAction(String recordId,String message) throws IOException {
         HashMap<String,String > messages = new HashMap<>();

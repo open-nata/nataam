@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ActPathSchema = require('./schema_actpath');
 
 var ApkSchema = new mongoose.Schema({
   name: String,
@@ -8,6 +9,7 @@ var ApkSchema = new mongoose.Schema({
     unique: true,
     trim: true
   },
+  actPaths: [ActPathSchema],
   activity_name: String,
   create_at: {type: Date, default: Date.now},
 });

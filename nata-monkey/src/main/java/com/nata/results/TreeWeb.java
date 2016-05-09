@@ -14,10 +14,10 @@ import java.util.*;
  */
 public class TreeWeb {
 
-    public static List<String> getActLunchTestcases(ArrayList<DFSState> nodes,List<Action> setupActions){
+    public static HashMap<String,String> getActLunchTestcases(ArrayList<DFSState> nodes,List<Action> setupActions){
 
         Map<String, DFSState> map=new HashMap<>();
-        List<String> actLunch = new ArrayList<>();
+        HashMap<String,String> actLunch = new HashMap<>();
 
         //search shorter path to start this activity
         for (DFSState node : nodes) {
@@ -38,7 +38,6 @@ public class TreeWeb {
         for(String key:map.keySet()) {
             String s = "";
             DFSState node = map.get(key);
-            s += "Goto " + key + " : \n";
 
             //add setup actions
             for (Action action: setupActions) {
@@ -55,7 +54,7 @@ public class TreeWeb {
             while (!stack.empty()) {
                s += stack.pop().toCommand();
             }
-            actLunch.add(s);
+            actLunch.put(key,s);
         }
         return actLunch;
     }

@@ -20,6 +20,5 @@ public class DFSRunner{
         DfsMonkey dfsMonkey= new DfsMonkey(config);
         dfsMonkey.play();
         dfsMonkey.toCommands();
-        dfsMonkey.printActLunch();
     }
 }
