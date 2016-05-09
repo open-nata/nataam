@@ -1,0 +1,116 @@
+<% include ../partials/header %>
+<div id="testcases">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">录制用例任务</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="testcase-form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="name">用例名称</label>
+
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="name" name="name" value="测试用例1">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="apk">待测应用</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="apk_id" id="apk">
+                                        <% apks.forEach(function(apk){ %>
+                                        <option value="<%= apk._id %>"><%= apk.name %></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="device">设备</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="device_id" id="device">
+                                        <% devices.forEach(function(device){ %>
+                                        <option value="<%= device.id %>"><%= device.name %></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button id="btn-create" type="submit" class="btn btn-primary">
+                                        创建任务
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">任务列表</h3>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                用例名称
+                            </th>
+                            <th>
+                                设备ID
+                            </th>
+                            <th>
+                                待测应用
+                            </th>
+                            <th>
+                                是否完成
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="record-table">
+                        <% testcases.forEach(function(testcase) { %>
+                        <tr>
+                            <td>
+                                <%= testcase.name %>
+                            </td>
+                            <td>
+                                <%= testcase.device_id %>
+                            </td>
+                            <td>
+                                <%= testcase.apk_name %>
+                            </td>
+                            <td>
+                                <%= testcase.isFinish %>
+                            </td>
+                            <td>
+                                <% if(testcase.isFinish === false ){ %>
+                                <a href="/testcases/<%= testcase._id %>/record" class="btn-start btn btn-primary btn-xs"
+                                   role="button">开始录制</a>
+                                <% }else if(testcase.isFinish === true ){ %>
+                                <a href="/testcases/<%= testcase._id %>/record"
+                                   class="btn-restart btn btn-primary btn-xs" role="button">重新录制</a>
+                                <a href="/testcases/<%= testcase._id %>/edit" class="btn-edit btn btn-info btn-xs"
+                                   role="button">编辑</a>
+
+                                <% } %>
+                                <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"
+                                   data-id="<%= testcase._id %>">删除</a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/testcase.js"></script>
+<% include ../partials/footer.ejs %>

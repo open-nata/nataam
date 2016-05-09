@@ -9,6 +9,7 @@ module.exports = function () {
 
   router.post('/apks', apkApi.create);
   router.delete('/apks/:id', apkApi.remove);
+  router.delete('/apks/:id/:actpath', apkApi.removeActpath);
   router.post('/apks/:package/actpath', apkApi.actpath);
 
 

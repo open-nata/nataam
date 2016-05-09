@@ -5,6 +5,7 @@ module.exports = function () {
   var DeviceController = require('./controllers/controller_device.js');
   var RecordController = require('./controllers/controller_record.js');
   var TestcaseController = require('./controllers/controller_testcase.js');
+  var GroupController = require('./controllers/controller_group.js');
 
 
   /* GET home page. */
@@ -26,6 +27,7 @@ module.exports = function () {
   router.get('/apks/:id/detail', ApkController.detail);
   router.get('/apks/:id/replay/:act_name', ApkController.replay);
 
+
   /**
    * records operations
    */
@@ -40,5 +42,14 @@ module.exports = function () {
   router.get('/testcases',TestcaseController.show);
   router.get('/testcases/:id/record',TestcaseController.record);
   router.get('/testcases/:id/edit',TestcaseController.edit);
+
+  /**
+   * group cases operations
+   */
+  //router.get('/group',GroupController.show);
+  //router.get('/group/:id/record',GroupController.record);
+  //router.get('/group/:id/edit',GroupController.edit);
+
+
   return router;
 };

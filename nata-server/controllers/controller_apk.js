@@ -9,7 +9,7 @@ module.exports.show = function (req, res, next) {
     if (err) {
       return res.status(500).json();
     }
-    res.render('apks', {
+    res.render('apk/apks', {
       title: '应用列表',
       apks: apks
     });
@@ -26,7 +26,7 @@ module.exports.detail = function (req, res, next) {
     if (err) {
       return res.status(500).json();
     }
-    res.render('apk_detail', {
+    res.render('apk/apk_detail', {
       title: '应用详细情况',
       apk: apk,
     });

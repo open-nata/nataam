@@ -35,33 +35,56 @@ module.exports.remove = function(req, res, next) {
 
 };
 
+module.exports.removeActpath = function(req, res, next) {
+  var apk_id= req.params.id;
+  var act_name = req.params.actpath.trim();
+  console.log(apk_id);
+  console.log(act_name);
+
+  ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
+    _.remove(apk.actpaths,function(actPath) {
+      return actPath.activity_name === act_name
+    });
+
+    apk.save(function (err) {
+      if (err) return next(err);
+      res.status(200).send("save success");
+    });
+  });
+};
+
+
 module.exports.actpath= function(req, res, next) {
   var package_name = req.params.package;
   var activity_name = req.body.activity_name;
-  console.log(activity_name);
   var actions = req.body.actions;
   if(!activity_name || ! actions){
     return res.status(422).send("error");
   }
+
   actions = actions.trim().split("\n");
-  //console.log(actions.length);
-  //console.log(actions[0]);
 
   ApkModel.findOne({package_name:package_name}).exec(function(err,apk){
-    var actPaths = apk.actPaths;
+    var actPaths = apk.actpaths;
     var actPath = _.find(actPaths, {'activity_name': activity_name});
-    if(!actPath || actPath.actions.length > actions.length){
+    if(!actPath){
       var newActPath = {
         "activity_name" : activity_name,
         "actions" : actions
       }
-      apk.actPaths.push(newActPath);
+      apk.actpaths.push(newActPath);
       apk.save(function (err) {
         if (err) return next(err);
-        res.status(200).send("success");
+        res.status(200).send("insert success");
       });
-    }else{
-      res.status(200).send("success");
+    }else if(actPath.actions.length > actions.length){
+      actPath.actions = actions;
+      apk.save(function (err) {
+        if (err) return next(err);
+        res.status(200).send("update shorter");
+      });
+    }else {
+      res.status(200).send("not change");
     }
 
   });

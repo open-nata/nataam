@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div id="apks">
     <div class="container-fluid">
@@ -49,7 +49,7 @@
                             <td>
                                 <a href="/apks/<%= apk.id %>/replay/<%= actpath.activity_name %>" class="btn btn-primary btn-xs" role="button">回放</a>
 
-                                <a href="#" class="confirm-delete-actpath btn btn-danger btn-xs" role="button" data-id="<%= actpath.activity_name %>">删除</a>
+                                <a href="#" class="btn-del-actpath btn btn-danger btn-xs" role="button" data-id="<%= apk.id %>" data-act="<%= actpath.activity_name %>">删除</a>
                             </td>
                         </tr>
                         <% }); %>
@@ -61,4 +61,5 @@
     </div>
 </div>
 
-<% include partials/footer.ejs %>
+<script src="/javascripts/apk_detail.js"></script>
+<% include ../partials/footer.ejs %>
