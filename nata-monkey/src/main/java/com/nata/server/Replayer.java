@@ -3,6 +3,9 @@ package com.nata.server;
 import com.nata.action.Action;
 import com.nata.action.ActionParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
@@ -18,7 +21,15 @@ public class Replayer {
         }else {
             return false;
         }
+    }
 
+    public static  boolean playActions(String actionsString){
+        String []actions = actionsString.split("\n");
+        for (String action: actions) {
+            if(!playAction(action))
+                return false;
+        }
+        return true;
     }
 
 }

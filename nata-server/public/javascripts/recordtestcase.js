@@ -16,6 +16,16 @@ $(function () {
   }
   var listString = '<li class="list-group-item">';
 
+  $('#btn-clear').click(function (e) {
+    e.preventDefault();
+    $('#testcase').empty();
+  });
+
+  $('#btn-clear-last').click(function (e) {
+    e.preventDefault();
+    $('#testcase li:last-child').remove();
+  });
+
   $('#btn-actpath').click(function(e){
     e.preventDefault();
     var act_name = $('#actpath-select').val();
@@ -26,14 +36,60 @@ $(function () {
       url: "/api/v1/apks/" + apk_id + "/" + act_name,
       type: 'GET',
       success: function (data) {
-        var toAppend = "";
-        var actions = data.trim().split("\n");
-        for(var i = 0 ; i< actions.length;i++){
-          toAppend += listString + actions[i] + "</li>"
-        }
-        if (startRecrod)$('#testcase').append(toAppend);
-        ele.prop("disabled", false);
 
+        $.ajax({
+          url: baseUrl + "/actions",
+          type: 'POST',
+          data: {"actions": data},
+          success: function () {
+            var toAppend = "";
+            var actions = data.trim().split("\n");
+            for(var i = 0 ; i< actions.length;i++){
+              toAppend += listString + actions[i] + "</li>"
+            }
+            if (startRecrod)$('#testcase').append(toAppend);
+            ele.prop("disabled", false);
+
+          },
+          error: function () {
+            ele.prop("disabled", false);
+          }
+        });
+      },
+      error: function () {
+        ele.prop("disabled", false);
+      }
+    });
+
+  });
+
+  $('#btn-testcase').click(function(e){
+    e.preventDefault();
+    var testcase_id= $('#testcase-select').val();
+    var ele = $(this);
+
+    $.ajax({
+      url: "/api/v1/testcases/" + testcase_id,
+      type: 'GET',
+      success: function (data) {
+        $.ajax({
+          url: baseUrl + "/actions",
+          type: 'POST',
+          data: {"actions": data},
+          success: function () {
+            var toAppend = "";
+            var actions = data.trim().split("\n");
+            for(var i = 0 ; i< actions.length;i++){
+              toAppend += listString + actions[i] + "</li>"
+            }
+            if (startRecrod)$('#testcase').append(toAppend);
+            ele.prop("disabled", false);
+
+          },
+          error: function () {
+            ele.prop("disabled", false);
+          }
+        });
       },
       error: function () {
         ele.prop("disabled", false);
@@ -142,11 +198,13 @@ $(function () {
   $('#btn-stop').click(function(e){
     e.preventDefault();
     if (!startRecrod) {
-      $(this).text("暂停录制").removeClass("btn-primary").addClass("btn-info");
+      $(this).text("暂停录制");
+    //.removeClass("btn-primary").addClass("btn-info");
       startRecrod = true;
       return;
     }else{
-      $(this).text("开始录制").removeClass("btn-info").addClass("btn-primary");
+      $(this).text("开始录制");
+        //.removeClass("btn-info").addClass("btn-primary");
       startRecrod = false;
       return;
     }

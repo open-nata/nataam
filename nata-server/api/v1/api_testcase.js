@@ -16,6 +16,20 @@ module.exports.create = function (req, res, next) {
   });
 };
 
+module.exports.getactions = function (req, res, next) {
+  var testcase_id = req.params.id;
+  TestcaseModel.findOne({
+    _id: testcase_id
+  }, function (err, testcase) {
+    if (err) {
+      return next(err);
+    }
+    var actions = testcase.actions.join("\n");
+    res.status(200).json(actions);
+  });
+};
+
+
 module.exports.remove = function (req, res, next) {
   var testcase_id = req.params.id;
   TestcaseModel.findOneAndRemove({

@@ -10,6 +10,7 @@ import com.nata.element.DumpService;
 import com.nata.element.Widget;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,6 +99,16 @@ public class App {
         blade.post("/action",((request, response) -> {
             String action = request.query("action").trim();
             if(Replayer.playAction(action)){
+                response.status(200).text("success");
+            }else{
+                response.status(406).text("error");
+            }
+
+        }));
+
+        blade.post("/actions",((request, response) -> {
+            String actions = request.query("actions").trim();
+            if(Replayer.playActions(actions)){
                 response.status(200).text("success");
             }else{
                 response.status(406).text("error");

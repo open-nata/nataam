@@ -46,16 +46,20 @@ module.exports.record = function (req, res, next) {
   ep.fail(next);
 
   TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
+  TestcaseModel.find({isFinish: true}).exec(ep.done('testcases'));
+
 
   ep.on('testcase',function(testcase){
     ApkModel.findOne({_id:testcase.apk_id}).exec(ep.done('apk'));
   });
 
-  ep.all('testcase','apk',function(testcase,apk){
+
+  ep.all('testcase','apk','testcases',function(testcase,apk,testcases){
     res.render('testcases/record', {
       title: '录制任务',
       apk : apk,
       testcase: testcase,
+      testcases: testcases
     });
   });
 };

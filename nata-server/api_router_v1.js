@@ -19,6 +19,7 @@ module.exports = function () {
 
   router.post('/testcases', testcaseApi.create);
   router.delete('/testcases/:id', testcaseApi.remove);
+  router.get('/testcases/:id', testcaseApi.getactions);
   router.put('/testcases/:id/finish', testcaseApi.finish);
   router.put('/testcases/:id/save', testcaseApi.save);
 
