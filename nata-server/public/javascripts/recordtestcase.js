@@ -1,6 +1,6 @@
 $(function () {
   var baseUrl = "http://localhost:9001";
-  var startRecrod = false;
+  var startRecrod = true;
 
   var ActionType = {
     UNKNOWN: "Unknown",
@@ -15,6 +15,33 @@ $(function () {
     CLEAN_DATA: "CleanData"
   }
   var listString = '<li class="list-group-item">';
+
+  $('#btn-actpath').click(function(e){
+    e.preventDefault();
+    var act_name = $('#actpath-select').val();
+    var apk_id = $('#actpath-select').data("id");
+    var ele = $(this);
+
+    $.ajax({
+      url: "/api/v1/apks/" + apk_id + "/" + act_name,
+      type: 'GET',
+      success: function (data) {
+        var toAppend = "";
+        var actions = data.trim().split("\n");
+        for(var i = 0 ; i< actions.length;i++){
+          toAppend += listString + actions[i] + "</li>"
+        }
+        if (startRecrod)$('#testcase').append(toAppend);
+        ele.prop("disabled", false);
+
+      },
+      error: function () {
+        ele.prop("disabled", false);
+      }
+    });
+
+  });
+
 
   $('#btn-back').click(function (e) {
     var ele = $(this);
@@ -112,13 +139,23 @@ $(function () {
     });
   });
 
-  $('#btn-finish').click(function (e) {
+  $('#btn-stop').click(function(e){
     e.preventDefault();
     if (!startRecrod) {
-      $(this).text("完成录制").removeClass("btn-primary").addClass("btn-info");
+      $(this).text("暂停录制").removeClass("btn-primary").addClass("btn-info");
       startRecrod = true;
       return;
+    }else{
+      $(this).text("开始录制").removeClass("btn-info").addClass("btn-primary");
+      startRecrod = false;
+      return;
     }
+
+  });
+
+  $('#btn-finish').click(function (e) {
+    e.preventDefault();
+
     var testcase_id = $(this).data("id");
     var actions = [];
     $("#testcase li").each(function () {
