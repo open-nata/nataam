@@ -1,15 +1,10 @@
 module.exports = function () {
   var express = require('express');
-  var eventproxy= require('eventproxy');
-  var _ = require('lodash');
-
   var router = express.Router();
-  var DeviceModel = require('./models/model_device.js');
-  var RecordModel = require('./models/model_record.js');
-  var ApkModel = require('./models/model_apk.js');
-  var TestcaseModel = require('./models/model_testcase.js');
-
   var ApkController = require('./controllers/controller_apk.js');
+  var DeviceController = require('./controllers/controller_device.js');
+  var RecordController = require('./controllers/controller_record.js');
+  var TestcaseController = require('./controllers/controller_testcase.js');
 
 
   /* GET home page. */
@@ -20,203 +15,30 @@ module.exports = function () {
   });
 
   /**
-   * 获取设备列表
+   * devices operations
    */
-  router.get('/devices', function (req, res, next) {
-    DeviceModel.find({}, function (err, devices) {
-      if (err) {
-        return res.status(500).json();
-      }
-      res.render('devices', {
-        title: '设备列表',
-        devices: devices
-      });
-    });
-  });
+  router.get('/devices',DeviceController.show);
 
+  /**
+   * apks operations
+   */
   router.get('/apks',ApkController.show);
   router.get('/apks/:id/detail', ApkController.detail);
   router.get('/apks/:id/replay/:act_name', ApkController.replay);
 
   /**
-   * 获取实时任务详情
+   * records operations
    */
-  router.get('/records/:id/run', function (req, res, next) {
-    var record_id = req.params.id;
-    RecordModel.findOne({
-      _id: record_id
-    }, function (err, record) {
-      if (err || !record) {
-        return res.status(500).json();
-      }
-      res.render('records/run', {
-        title: '任务详情',
-        record: record
-      });
-    });
-  });
+  router.get('/records',RecordController.show);
+  router.get('/records/:id/run', RecordController.run);
+  router.get('/records/:id/replay',RecordController.replay);
+  router.get('/records/:id/report',RecordController.report);
 
   /**
-   * 重新运行
+   * testcase operations
    */
-  router.get('/records/:id/replay', function (req, res, next) {
-    var record_id = req.params.id;
-    RecordModel.findOne({
-      _id: record_id
-    }, function (err, record) {
-      if (err || !record) {
-        return res.status(500).json();
-      }
-      res.render('records/replay', {
-        title: '回放',
-        actions: record.actions
-      });
-    });
-  });
-
-  /**
-   * 获取详细报告
-   */
-  router.get('/records/:id/report', function (req, res, next) {
-    var record_id = req.params.id;
-    RecordModel.findOne({
-      _id: record_id
-    }, function (err, record) {
-      if (err || !record) {
-        return res.status(500).json();
-      }
-      var summaries = record.summaries;
-
-      var xData = [];
-      var yDataWidget = [];
-      var yDataActivity = [];
-      for (var i = 0; i < summaries.length; i++) {
-        xData.push(summaries[i].action);
-        yDataActivity.push(summaries[i].activity);
-        yDataWidget.push(summaries[i].widget);
-      }
-      console.log(xData);
-      res.render('records/report', {
-        title: '详细报告',
-        xData: xData,
-        yDataWidget: yDataWidget,
-        yDataActivity: yDataActivity
-      });
-    });
-  });
-
-  /**
-   * 获取任务列表
-   */
-  router.get('/records', function (req, res, next) {
-    var ep = new eventproxy();
-    ep.fail(next);
-
-    ep.all('records','devices','apks',function(records,devices,apks){
-
-      records.forEach(function (record) {
-        console.log(record.apk_id);
-        ApkModel.findOne({_id: record.apk_id}).exec(ep.done(function (apk) {
-          record.apk_name = apk.name;
-          record.package_name = apk.package_name;
-          record.activity_name = apk.activity_name;
-          ep.emit('apk');
-        }));
-      });
-
-      ep.after('apk', records.length, function () {
-        res.render('records/records', {
-          title: '自动遍历任务',
-          records: records,
-          devices: devices,
-          apks: apks
-        });
-      })
-    });
-
-    RecordModel.find({}).sort({create_at: -1}).exec(ep.done("records"));
-    DeviceModel.find({}).sort({create_at: -1}).exec(ep.done("devices"));
-    ApkModel.find({}).sort({create_at: -1}).exec(ep.done("apks"));
-
-  });
-
-
-  /**
-   * 获取录制任务列表
-   */
-  router.get('/testcases', function (req, res, next) {
-
-    var ep = new eventproxy();
-    ep.fail(next);
-
-    ep.all('testcases','devices','apks',function(testcases,devices,apks){
-
-      testcases.forEach(function (testcase) {
-        console.log(testcase.apk_id);
-        ApkModel.findOne({_id: testcase.apk_id}).exec(ep.done(function (apk) {
-          testcase.apk_name = apk.name;
-          testcase.package_name = apk.package_name;
-          testcase.activity_name = apk.activity_name;
-          ep.emit('apk');
-        }));
-      });
-
-      ep.after('apk', testcases.length, function () {
-        res.render('testcases/index', {
-          title: '录制任务',
-          testcases: testcases,
-          devices: devices,
-          apks: apks
-        });
-      })
-    });
-
-    TestcaseModel.find({}).sort({create_at: -1}).exec(ep.done("testcases"));
-    DeviceModel.find({}).sort({create_at: -1}).exec(ep.done("devices"));
-    ApkModel.find({}).sort({create_at: -1}).exec(ep.done("apks"));
-  });
-
-  router.get('/testcases/:id/record', function (req, res, next) {
-    var testcase_id = req.params.id;
-    var ep = new eventproxy();
-    ep.fail(next);
-
-    TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
-
-    ep.on('testcase',function(testcase){
-      ApkModel.findOne({_id:testcase.apk_id}).exec(ep.done('apk'));
-    });
-
-    ep.all('testcase','apk',function(testcase,apk){
-      res.render('testcases/record', {
-        title: '录制任务',
-        apk : apk,
-        testcase: testcase,
-      });
-    });
-  });
-
-  router.get('/testcases/:id/edit', function (req, res, next) {
-    var testcase_id = req.params.id;
-    var ep = new eventproxy();
-    ep.fail(next);
-
-    TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
-
-    ep.on('testcase',function(testcase){
-      var actions = "";
-      _(testcase.actions).forEach(function(action){
-        actions += action +"\n";
-      });
-      console.log(actions);
-
-      res.render('testcases/edit', {
-        title: '录制任务',
-        testcase: testcase,
-        actions: actions.trim()
-      });
-    });
-  });
-
+  router.get('/testcases',TestcaseController.show);
+  router.get('/testcases/:id/record',TestcaseController.record);
+  router.get('/testcases/:id/edit',TestcaseController.edit);
   return router;
 };

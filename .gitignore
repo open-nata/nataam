@@ -41,3 +41,5 @@ logs/
 dumps/dumpfile.xml
 
 node_modules/
+
+nohup.out
