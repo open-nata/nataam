@@ -183,3 +183,5 @@
 
 ### (2015/5/12)
 - Debug: can not create apk model
+- Add apk info edit
+- Debug: WebSocket Error when changing tabs

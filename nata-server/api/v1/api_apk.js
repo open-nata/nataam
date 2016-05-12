@@ -22,6 +22,26 @@ module.exports.create = function(req, res, next) {
   });
 };
 
+module.exports.update= function(req, res, next) {
+  var apk_id = req.params.id;
+  var name = req.body.name;
+  var version = req.body.version;
+  var package_name = req.body.package_name;
+  var activity_name = req.body.activity_name;
+
+  ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
+    apk.name = name;
+    apk.version = version;
+    apk.package_name = package_name;
+    apk.activity_name = activity_name;
+
+    apk.save(function (err) {
+      if (err) return next(err);
+      res.status(200).send("save success");
+    });
+  });
+};
+
 module.exports.remove = function(req, res, next) {
   var ep = new eventproxy();
   ep.fail(next);

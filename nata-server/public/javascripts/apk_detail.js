@@ -15,4 +15,23 @@ $(function() {
       },
     });
   });
+
+  $('#btn-updateapk').click(function (e) {
+    e.preventDefault();
+    var apk = $('#apk-form').serialize();
+    var apk_id = $(this).data("id");
+    console.log(apk);
+    $.ajax({
+      url: '/api/v1/apks/'+ apk_id,
+      type: 'PUT',
+      data:  apk,
+      success: function (apk) {
+        location.reload();
+      },
+      error: function (message) {
+
+      },
+    });
+  });
+
 });

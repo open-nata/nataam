@@ -22,14 +22,14 @@ public class AdbDevice {
     public static void main(String[] args) {
         AdbDevice device = new AdbDevice();
 
-//        device.startActivity("com.zhihu.android/.App.ui.activity.MainActivity");
+        device.startActivity("com.zhihu.android/.App.ui.activity.MainActivity");
 //      System.out.println(Arrays.toString(device.getScreenResolution()));
 //        System.out.println(device.getFocusedPackageAndActivity());
 //        device.screenShot("temp");
 
 //        System.out.println(device.getCurrentPackageName());
 //        device.dumpUI();
-        device.clearAppData("com.cvicse.zhnt");
+//        device.clearAppData("com.cvicse.zhnt");
     }
 
 

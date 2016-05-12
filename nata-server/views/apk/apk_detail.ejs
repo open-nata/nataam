@@ -9,17 +9,39 @@
                         <h3 class="panel-title">应用信息</h3>
                     </div>
                     <div class="panel-body">
-                        <dl class="dl-horizontal">
-                            <dt>应用名称</dt>
-                            <dd><span class="label label-primary"><%= apk.name %></span>
-                            </dd>
-                            <dt>应用版本</dt>
-                            <dd><%= apk.version %></dd>
-                            <dt>包名</dt>
-                            <dd><%= apk.package_name%></dd>
-                            <dt>启动Activity</dt>
-                            <dd><%= apk.activity_name%></dd>
-                        </dl>
+                        <form id="apk-form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="name">待测应用名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="name" id="name" value="<%= apk.name %>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="version">应用版本</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" value="<%= apk.version %>" name="version" id="version">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="package_name">包名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" value="<%= apk.package_name%>" name="package_name" id="package_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="activity_name">启动Activity</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="activity_name" id="activity_name" value="<%= apk.activity_name%>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button id="btn-updateapk" type="submit" class="btn btn-primary"  data-id="<%= apk._id %>">
+                                        更新应用信息
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
