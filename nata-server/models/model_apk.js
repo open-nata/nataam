@@ -1,5 +1,14 @@
 var mongoose = require('mongoose');
-var ActPathSchema = require('./schema_actpath');
+
+var ActPathSchema = new mongoose.Schema({
+  activity: {
+    type: String,
+    unique: true,
+    trim: true
+  },
+  actions: [String]
+},{ id: false });
+
 
 var ApkSchema = new mongoose.Schema({
   name: String,

@@ -44,12 +44,12 @@
                         <% apk.actpaths.forEach(function(actpath){ %>
                         <tr>
                             <td>
-                                <%= actpath.activity_name%>
+                                <%= actpath.activity%>
                             </td>
                             <td>
-                                <a href="/apks/<%= apk.id %>/replay/<%= actpath.activity_name %>" class="btn btn-primary btn-xs" role="button">回放</a>
+                                <a href="/apks/<%= apk.id %>/replay/<%= actpath.activity %>" class="btn btn-primary btn-xs" role="button">回放</a>
 
-                                <a href="#" class="btn-del-actpath btn btn-danger btn-xs" role="button" data-id="<%= apk.id %>" data-act="<%= actpath.activity_name %>">删除</a>
+                                <a href="#" class="btn-del-actpath btn btn-danger btn-xs" role="button" data-id="<%= apk.id %>" data-act="<%= actpath.activity %>">删除</a>
                             </td>
                         </tr>
                         <% }); %>

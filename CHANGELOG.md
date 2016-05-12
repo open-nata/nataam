@@ -179,3 +179,7 @@
 - Rewrite controllers to decouple web_router
 - Add act paths to record testcase
 - Add test cases to record testcase
+- Add replay all functions
+
+### (2015/5/12)
+- Debug: can not create apk model

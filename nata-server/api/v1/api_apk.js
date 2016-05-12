@@ -5,16 +5,19 @@ var eventproxy= require('eventproxy');
 var _  = require('lodash');
 
 module.exports.create = function(req, res, next) {
+
   var apk= new ApkModel();
   apk.name = req.body.name;
   apk.version = req.body.version;
   apk.package_name = req.body.package_name;
   apk.activity_name = req.body.activity_name;
+
   apk.save(function(err, apk) {
     if (err) {
+      console.log(err);
       return next(err);
     } else {
-      res.status(200).json(apk);
+      return res.status(200).json(apk);
     }
   });
 };
@@ -43,7 +46,7 @@ module.exports.removeActpath = function(req, res, next) {
 
   ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
     _.remove(apk.actpaths,function(actPath) {
-      return actPath.activity_name === act_name
+      return actPath.activity === act_name
     });
 
     apk.save(function (err) {
@@ -62,9 +65,13 @@ module.exports.getactions = function(req, res, next) {
   ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
     if (err) return next(err);
 
-    var actPath = _.find(apk.actpaths, {'activity_name': act_name});
-    var actions = actPath.actions.join("\n");
-    res.status(200).json(actions);
+    var actPath = _.find(apk.actpaths, {'activity': act_name});
+    if(actPath){
+      var actions = actPath.actions.join("\n") || "";
+      res.status(200).json(actions);
+    }else{
+      res.status(404).send("no action path");
+    }
   });
 };
 
@@ -80,10 +87,10 @@ module.exports.actpath= function(req, res, next) {
 
   ApkModel.findOne({package_name:package_name}).exec(function(err,apk){
     var actPaths = apk.actpaths;
-    var actPath = _.find(actPaths, {'activity_name': activity_name});
+    var actPath = _.find(actPaths, {'activity': activity_name});
     if(!actPath){
       var newActPath = {
-        "activity_name" : activity_name,
+        "activity" : activity_name,
         "actions" : actions
       }
       apk.actpaths.push(newActPath);

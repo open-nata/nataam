@@ -47,7 +47,7 @@ module.exports.replay= function (req, res, next) {
       return res.status(500).json();
     }
 
-    var actpath = _.find(apk.actpaths, { 'activity_name': act_name, });
+    var actpath = _.find(apk.actpaths, { 'activity': act_name, });
     if(actpath){
       res.render('replay', {
         title: 'Act回放',

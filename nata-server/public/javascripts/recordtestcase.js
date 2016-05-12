@@ -28,8 +28,12 @@ $(function () {
 
   $('#btn-actpath').click(function(e){
     e.preventDefault();
-    var act_name = $('#actpath-select').val();
+    var act_name = $('#actpath-select').val().trim();
+    if(!act_name){
+      return false;
+    }
     var apk_id = $('#actpath-select').data("id");
+
     var ele = $(this);
 
     $.ajax({
@@ -65,7 +69,10 @@ $(function () {
 
   $('#btn-testcase').click(function(e){
     e.preventDefault();
-    var testcase_id= $('#testcase-select').val();
+    var testcase_id= $('#testcase-select').val().trim();
+    if(!testcase_id){
+      return false;
+    }
     var ele = $(this);
 
     $.ajax({

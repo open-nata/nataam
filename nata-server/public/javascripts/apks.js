@@ -8,13 +8,14 @@ $(function() {
       type: 'POST',
       data:  apk,
       success: function (apk) {
-        var toAppend = "<tr>";
-        toAppend += "<td>" + apk.name + "</td>";
-        toAppend += "<td>" + apk.version+ "</td>";
-        toAppend += "<td>" + apk.package_name+ "</td>";
-        toAppend += "<td>" + apk.activity_name+ "</td>";
-        toAppend += '<td><a href="#" class="btn-remove btn btn-danger btn-xs" role="button" data-id=' +apk._id + '>删除' + '</a></td></tr>';
-        $('#apk_table').append(toAppend);
+        //var toAppend = "<tr>";
+        //toAppend += "<td>" + apk.name + "</td>";
+        //toAppend += "<td>" + apk.version+ "</td>";
+        //toAppend += "<td>" + apk.package_name+ "</td>";
+        //toAppend += "<td>" + apk.activity_name+ "</td>";
+        //toAppend += '<td><a href="#" class="btn-remove btn btn-danger btn-xs" role="button" data-id=' +apk._id + '>删除' + '</a></td></tr>';
+        //$('#apk_table').append(toAppend);
+        location.reload();
       },
       error: function (message) {
 

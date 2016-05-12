@@ -2799,3 +2799,368 @@
 2016-05-09T22:52:40.156+0800 I NETWORK  [conn162] end connection 127.0.0.1:56692 (2 connections now open)
 2016-05-09T22:52:43.230+0800 I NETWORK  [conn161] end connection 127.0.0.1:56684 (1 connection now open)
 2016-05-09T22:52:43.233+0800 I NETWORK  [conn160] end connection 127.0.0.1:56683 (0 connections now open)
+2016-05-09T22:55:50.294+0800 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2016-05-09T22:55:50.295+0800 I CONTROL  [signalProcessingThread] now exiting
+2016-05-09T22:55:50.295+0800 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2016-05-09T22:55:50.295+0800 I NETWORK  [signalProcessingThread] closing listening socket: 5
+2016-05-09T22:55:50.295+0800 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2016-05-09T22:55:50.296+0800 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2016-05-09T22:55:50.296+0800 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2016-05-09T22:55:50.296+0800 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2016-05-09T22:55:50.296+0800 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2016-05-09T22:55:50.296+0800 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2016-05-09T22:55:50.308+0800 I JOURNAL  [signalProcessingThread] journalCleanup...
+2016-05-09T22:55:50.308+0800 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2016-05-09T22:55:50.311+0800 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2016-05-09T22:55:50.410+0800 I JOURNAL  [journal writer] Journal writer thread stopped
+2016-05-09T22:55:50.410+0800 I JOURNAL  [durability] Durability thread stopped
+2016-05-09T22:55:50.410+0800 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2016-05-09T22:55:50.418+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2016-05-09T22:55:50.418+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2016-05-09T22:55:50.418+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
+2016-05-10T10:04:52.526+0800 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+2016-05-10T10:04:52.527+0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2016-05-10T10:04:52.541+0800 I JOURNAL  [durability] Durability thread started
+2016-05-10T10:04:52.541+0800 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] MongoDB starting : pid=996 port=27017 dbpath=/data/db 64-bit host=mcls-MBP.local
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] 
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] db version v3.0.3
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] git version: nogitversion
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] build info: Darwin yosemitevm.local 14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] allocator: system
+2016-05-10T10:04:52.541+0800 I CONTROL  [initandlisten] options: {}
+2016-05-10T10:04:53.173+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-05-10T10:05:02.617+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49531 #1 (1 connection now open)
+2016-05-10T10:05:02.638+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49532 #2 (2 connections now open)
+2016-05-10T10:06:12.236+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49713 #3 (3 connections now open)
+2016-05-10T10:06:19.179+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49743 #4 (4 connections now open)
+2016-05-10T10:36:57.265+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:51635 #5 (5 connections now open)
+2016-05-10T10:39:25.681+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-10T10:39:25.681+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-10T10:39:25.682+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-10T10:39:25.684+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-10T10:39:25.684+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-10T11:10:03.941+0800 I NETWORK  [conn4] end connection 127.0.0.1:49743 (4 connections now open)
+2016-05-10T11:10:03.941+0800 I NETWORK  [conn3] end connection 127.0.0.1:49713 (3 connections now open)
+2016-05-10T11:10:03.941+0800 I NETWORK  [conn5] end connection 127.0.0.1:51635 (2 connections now open)
+2016-05-10T11:10:03.941+0800 I NETWORK  [conn2] end connection 127.0.0.1:49532 (1 connection now open)
+2016-05-10T11:10:03.942+0800 I NETWORK  [conn1] end connection 127.0.0.1:49531 (0 connections now open)
+2016-05-10T11:10:05.328+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53550 #6 (1 connection now open)
+2016-05-10T11:10:05.345+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53551 #7 (2 connections now open)
+2016-05-10T11:10:06.324+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53555 #8 (3 connections now open)
+2016-05-10T11:10:51.912+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53620 #9 (4 connections now open)
+2016-05-10T11:11:27.866+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53685 #10 (5 connections now open)
+2016-05-10T11:12:36.401+0800 I NETWORK  [conn10] end connection 127.0.0.1:53685 (4 connections now open)
+2016-05-10T11:12:36.401+0800 I NETWORK  [conn9] end connection 127.0.0.1:53620 (3 connections now open)
+2016-05-10T11:12:36.402+0800 I NETWORK  [conn8] end connection 127.0.0.1:53555 (2 connections now open)
+2016-05-10T11:12:36.402+0800 I NETWORK  [conn7] end connection 127.0.0.1:53551 (1 connection now open)
+2016-05-10T11:12:36.402+0800 I NETWORK  [conn6] end connection 127.0.0.1:53550 (0 connections now open)
+2016-05-10T11:12:37.118+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53793 #11 (1 connection now open)
+2016-05-10T11:12:37.138+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53794 #12 (2 connections now open)
+2016-05-10T11:12:38.483+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53797 #13 (3 connections now open)
+2016-05-10T11:12:38.506+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53798 #14 (4 connections now open)
+2016-05-10T11:12:57.023+0800 I NETWORK  [conn14] end connection 127.0.0.1:53798 (3 connections now open)
+2016-05-10T11:12:57.024+0800 I NETWORK  [conn13] end connection 127.0.0.1:53797 (2 connections now open)
+2016-05-10T11:12:57.024+0800 I NETWORK  [conn12] end connection 127.0.0.1:53794 (1 connection now open)
+2016-05-10T11:12:57.024+0800 I NETWORK  [conn11] end connection 127.0.0.1:53793 (0 connections now open)
+2016-05-10T11:12:57.729+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53830 #15 (1 connection now open)
+2016-05-10T11:12:57.747+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53831 #16 (2 connections now open)
+2016-05-10T11:13:01.415+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53837 #17 (3 connections now open)
+2016-05-10T11:13:01.435+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53838 #18 (4 connections now open)
+2016-05-10T11:13:35.818+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53911 #19 (5 connections now open)
+2016-05-10T11:13:35.910+0800 I NETWORK  [conn19] end connection 127.0.0.1:53911 (4 connections now open)
+2016-05-10T11:13:35.910+0800 I NETWORK  [conn18] end connection 127.0.0.1:53838 (3 connections now open)
+2016-05-10T11:13:35.910+0800 I NETWORK  [conn17] end connection 127.0.0.1:53837 (2 connections now open)
+2016-05-10T11:13:35.910+0800 I NETWORK  [conn16] end connection 127.0.0.1:53831 (1 connection now open)
+2016-05-10T11:13:35.910+0800 I NETWORK  [conn15] end connection 127.0.0.1:53830 (0 connections now open)
+2016-05-10T11:13:36.588+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53928 #20 (1 connection now open)
+2016-05-10T11:13:36.606+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53931 #21 (2 connections now open)
+2016-05-10T11:13:37.685+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53933 #22 (3 connections now open)
+2016-05-10T11:13:37.708+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53934 #23 (4 connections now open)
+2016-05-10T11:13:53.090+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:53949 #24 (5 connections now open)
+2016-05-10T11:15:33.214+0800 I NETWORK  [conn24] end connection 127.0.0.1:53949 (4 connections now open)
+2016-05-10T11:15:33.214+0800 I NETWORK  [conn23] end connection 127.0.0.1:53934 (3 connections now open)
+2016-05-10T11:15:33.214+0800 I NETWORK  [conn22] end connection 127.0.0.1:53933 (3 connections now open)
+2016-05-10T11:15:33.215+0800 I NETWORK  [conn21] end connection 127.0.0.1:53931 (2 connections now open)
+2016-05-10T11:15:33.215+0800 I NETWORK  [conn20] end connection 127.0.0.1:53928 (2 connections now open)
+2016-05-10T11:15:33.897+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54056 #25 (1 connection now open)
+2016-05-10T11:15:33.915+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54057 #26 (2 connections now open)
+2016-05-10T11:15:35.069+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54059 #27 (3 connections now open)
+2016-05-10T11:15:35.093+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54060 #28 (4 connections now open)
+2016-05-10T11:17:07.625+0800 I NETWORK  [conn28] end connection 127.0.0.1:54060 (3 connections now open)
+2016-05-10T11:17:07.625+0800 I NETWORK  [conn27] end connection 127.0.0.1:54059 (2 connections now open)
+2016-05-10T11:17:07.625+0800 I NETWORK  [conn26] end connection 127.0.0.1:54057 (1 connection now open)
+2016-05-10T11:17:07.625+0800 I NETWORK  [conn25] end connection 127.0.0.1:54056 (0 connections now open)
+2016-05-10T11:17:08.307+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54169 #29 (1 connection now open)
+2016-05-10T11:17:08.328+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54170 #30 (2 connections now open)
+2016-05-10T11:17:09.199+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54172 #31 (3 connections now open)
+2016-05-10T11:17:11.790+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54179 #32 (4 connections now open)
+2016-05-10T11:17:41.364+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:54207 #33 (5 connections now open)
+2016-05-10T11:37:29.803+0800 I NETWORK  [conn33] end connection 127.0.0.1:54207 (4 connections now open)
+2016-05-10T11:37:29.803+0800 I NETWORK  [conn32] end connection 127.0.0.1:54179 (4 connections now open)
+2016-05-10T11:37:29.804+0800 I NETWORK  [conn31] end connection 127.0.0.1:54172 (4 connections now open)
+2016-05-10T11:37:29.804+0800 I NETWORK  [conn30] end connection 127.0.0.1:54170 (4 connections now open)
+2016-05-10T11:37:29.804+0800 I NETWORK  [conn29] end connection 127.0.0.1:54169 (4 connections now open)
+2016-05-10T11:37:31.193+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:55116 #34 (1 connection now open)
+2016-05-10T11:37:31.211+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:55117 #35 (2 connections now open)
+2016-05-10T11:37:37.476+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:55119 #36 (3 connections now open)
+2016-05-10T11:37:37.507+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:55120 #37 (4 connections now open)
+2016-05-10T11:38:26.946+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:55129 #38 (5 connections now open)
+2016-05-10T14:11:03.580+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-10T14:11:03.582+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-10T14:11:03.582+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-10T14:11:03.582+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-10T14:11:03.582+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-10T14:25:14.980+0800 I NETWORK  [conn38] end connection 127.0.0.1:55129 (4 connections now open)
+2016-05-10T14:25:14.980+0800 I NETWORK  [conn37] end connection 127.0.0.1:55120 (4 connections now open)
+2016-05-10T14:25:14.980+0800 I NETWORK  [conn36] end connection 127.0.0.1:55119 (4 connections now open)
+2016-05-10T14:25:14.980+0800 I NETWORK  [conn35] end connection 127.0.0.1:55117 (4 connections now open)
+2016-05-10T14:25:14.980+0800 I NETWORK  [conn34] end connection 127.0.0.1:55116 (4 connections now open)
+2016-05-10T14:25:16.381+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58512 #39 (1 connection now open)
+2016-05-10T14:25:16.400+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58513 #40 (2 connections now open)
+2016-05-10T14:25:17.373+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58516 #41 (3 connections now open)
+2016-05-10T14:25:17.397+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58517 #42 (4 connections now open)
+2016-05-10T14:25:46.831+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58533 #43 (5 connections now open)
+2016-05-10T14:26:38.077+0800 I NETWORK  [conn43] end connection 127.0.0.1:58533 (4 connections now open)
+2016-05-10T14:26:38.077+0800 I NETWORK  [conn42] end connection 127.0.0.1:58517 (3 connections now open)
+2016-05-10T14:26:38.077+0800 I NETWORK  [conn41] end connection 127.0.0.1:58516 (2 connections now open)
+2016-05-10T14:26:38.077+0800 I NETWORK  [conn39] end connection 127.0.0.1:58512 (1 connection now open)
+2016-05-10T14:26:38.077+0800 I NETWORK  [conn40] end connection 127.0.0.1:58513 (1 connection now open)
+2016-05-10T14:26:38.854+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58571 #44 (1 connection now open)
+2016-05-10T14:26:38.872+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58572 #45 (2 connections now open)
+2016-05-10T14:26:39.910+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58575 #46 (3 connections now open)
+2016-05-10T14:26:39.934+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58576 #47 (4 connections now open)
+2016-05-10T14:26:46.324+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58582 #48 (5 connections now open)
+2016-05-10T14:27:27.452+0800 I NETWORK  [conn48] end connection 127.0.0.1:58582 (4 connections now open)
+2016-05-10T14:27:27.454+0800 I NETWORK  [conn47] end connection 127.0.0.1:58576 (3 connections now open)
+2016-05-10T14:27:27.454+0800 I NETWORK  [conn46] end connection 127.0.0.1:58575 (2 connections now open)
+2016-05-10T14:27:27.454+0800 I NETWORK  [conn45] end connection 127.0.0.1:58572 (1 connection now open)
+2016-05-10T14:27:27.454+0800 I NETWORK  [conn44] end connection 127.0.0.1:58571 (0 connections now open)
+2016-05-10T14:27:28.250+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58650 #49 (1 connection now open)
+2016-05-10T14:27:28.269+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58651 #50 (2 connections now open)
+2016-05-10T14:27:32.375+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58660 #51 (3 connections now open)
+2016-05-10T14:27:32.396+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58661 #52 (4 connections now open)
+2016-05-10T14:29:45.160+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58740 #53 (5 connections now open)
+2016-05-10T16:28:17.174+0800 I NETWORK  [conn52] end connection 127.0.0.1:58661 (4 connections now open)
+2016-05-10T16:28:17.174+0800 I NETWORK  [conn51] end connection 127.0.0.1:58660 (4 connections now open)
+2016-05-10T16:28:17.175+0800 I NETWORK  [conn53] end connection 127.0.0.1:58740 (4 connections now open)
+2016-05-10T16:28:17.176+0800 I NETWORK  [conn50] end connection 127.0.0.1:58651 (3 connections now open)
+2016-05-10T16:28:17.176+0800 I NETWORK  [conn49] end connection 127.0.0.1:58650 (3 connections now open)
+2016-05-10T16:28:18.617+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60133 #54 (1 connection now open)
+2016-05-10T16:28:18.634+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60134 #55 (2 connections now open)
+2016-05-10T16:28:27.914+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60141 #56 (3 connections now open)
+2016-05-10T16:28:27.944+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60142 #57 (4 connections now open)
+2016-05-10T16:29:32.467+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60144 #58 (5 connections now open)
+2016-05-10T17:04:13.835+0800 I NETWORK  [conn57] end connection 127.0.0.1:60142 (4 connections now open)
+2016-05-10T17:04:13.835+0800 I NETWORK  [conn56] end connection 127.0.0.1:60141 (4 connections now open)
+2016-05-10T17:04:13.835+0800 I NETWORK  [conn58] end connection 127.0.0.1:60144 (4 connections now open)
+2016-05-10T17:04:13.835+0800 I NETWORK  [conn55] end connection 127.0.0.1:60134 (4 connections now open)
+2016-05-10T17:04:13.835+0800 I NETWORK  [conn54] end connection 127.0.0.1:60133 (4 connections now open)
+2016-05-10T17:04:15.554+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61451 #59 (1 connection now open)
+2016-05-10T17:04:15.570+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61452 #60 (2 connections now open)
+2016-05-10T17:04:18.315+0800 I NETWORK  [conn60] end connection 127.0.0.1:61452 (1 connection now open)
+2016-05-10T17:04:18.315+0800 I NETWORK  [conn59] end connection 127.0.0.1:61451 (0 connections now open)
+2016-05-10T17:04:19.291+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61497 #61 (1 connection now open)
+2016-05-10T17:04:19.313+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61498 #62 (2 connections now open)
+2016-05-10T17:04:40.007+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-10T17:04:40.008+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-10T17:04:40.012+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-10T17:04:40.014+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-10T17:04:40.014+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-10T17:05:13.782+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61956 #63 (3 connections now open)
+2016-05-10T17:08:08.956+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62905 #64 (4 connections now open)
+2016-05-10T17:10:50.256+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62987 #65 (5 connections now open)
+2016-05-10T17:17:20.015+0800 I NETWORK  [conn65] end connection 127.0.0.1:62987 (4 connections now open)
+2016-05-10T17:17:20.015+0800 I NETWORK  [conn63] end connection 127.0.0.1:61956 (4 connections now open)
+2016-05-10T17:17:20.015+0800 I NETWORK  [conn64] end connection 127.0.0.1:62905 (4 connections now open)
+2016-05-10T17:17:20.015+0800 I NETWORK  [conn62] end connection 127.0.0.1:61498 (4 connections now open)
+2016-05-10T17:17:20.015+0800 I NETWORK  [conn61] end connection 127.0.0.1:61497 (4 connections now open)
+2016-05-10T17:17:21.409+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63156 #66 (1 connection now open)
+2016-05-10T17:17:21.430+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63157 #67 (2 connections now open)
+2016-05-10T17:17:21.677+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63159 #68 (3 connections now open)
+2016-05-10T17:17:21.703+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63160 #69 (4 connections now open)
+2016-05-10T17:17:43.006+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63170 #70 (5 connections now open)
+2016-05-10T22:34:47.683+0800 I NETWORK  [conn69] end connection 127.0.0.1:63160 (4 connections now open)
+2016-05-10T22:34:47.683+0800 I NETWORK  [conn70] end connection 127.0.0.1:63170 (4 connections now open)
+2016-05-10T22:34:47.683+0800 I NETWORK  [conn68] end connection 127.0.0.1:63159 (4 connections now open)
+2016-05-10T22:34:47.683+0800 I NETWORK  [conn67] end connection 127.0.0.1:63157 (3 connections now open)
+2016-05-10T22:34:47.683+0800 I NETWORK  [conn66] end connection 127.0.0.1:63156 (3 connections now open)
+2016-05-10T22:34:51.461+0800 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2016-05-10T22:34:51.463+0800 I CONTROL  [signalProcessingThread] now exiting
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] closing listening socket: 5
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2016-05-10T22:34:51.464+0800 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2016-05-10T22:34:51.464+0800 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2016-05-10T22:34:51.464+0800 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2016-05-10T22:34:51.473+0800 I JOURNAL  [signalProcessingThread] journalCleanup...
+2016-05-10T22:34:51.473+0800 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2016-05-10T22:34:51.475+0800 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2016-05-10T22:34:51.582+0800 I JOURNAL  [journal writer] Journal writer thread stopped
+2016-05-10T22:34:51.583+0800 I JOURNAL  [durability] Durability thread stopped
+2016-05-10T22:34:51.583+0800 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2016-05-10T22:34:51.588+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2016-05-10T22:34:51.590+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2016-05-10T22:34:51.590+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
+2016-05-12T14:14:55.901+0800 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+2016-05-12T14:14:55.902+0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2016-05-12T14:14:55.945+0800 I JOURNAL  [durability] Durability thread started
+2016-05-12T14:14:55.945+0800 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-12T14:14:55.945+0800 I CONTROL  [initandlisten] MongoDB starting : pid=1693 port=27017 dbpath=/data/db 64-bit host=114-212-87-8.nju.edu.cn
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] 
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] db version v3.0.3
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] git version: nogitversion
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] build info: Darwin yosemitevm.local 14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] allocator: system
+2016-05-12T14:14:55.946+0800 I CONTROL  [initandlisten] options: {}
+2016-05-12T14:14:57.446+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-05-12T14:15:01.466+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50300 #1 (1 connection now open)
+2016-05-12T14:15:01.500+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50301 #2 (2 connections now open)
+2016-05-12T14:15:04.543+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50306 #3 (3 connections now open)
+2016-05-12T14:40:14.544+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:51639 #4 (4 connections now open)
+2016-05-12T14:48:04.021+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:51992 #5 (5 connections now open)
+2016-05-12T16:04:58.067+0800 I NETWORK  [conn4] end connection 127.0.0.1:51639 (4 connections now open)
+2016-05-12T16:04:58.067+0800 I NETWORK  [conn2] end connection 127.0.0.1:50301 (4 connections now open)
+2016-05-12T16:04:58.067+0800 I NETWORK  [conn1] end connection 127.0.0.1:50300 (4 connections now open)
+2016-05-12T16:04:58.067+0800 I NETWORK  [conn5] end connection 127.0.0.1:51992 (4 connections now open)
+2016-05-12T16:04:58.067+0800 I NETWORK  [conn3] end connection 127.0.0.1:50306 (4 connections now open)
+2016-05-12T16:04:59.527+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56097 #6 (1 connection now open)
+2016-05-12T16:04:59.550+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56098 #7 (2 connections now open)
+2016-05-12T16:05:00.143+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56103 #8 (3 connections now open)
+2016-05-12T16:05:00.173+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56104 #9 (4 connections now open)
+2016-05-12T16:05:08.284+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56110 #10 (5 connections now open)
+2016-05-12T17:23:23.888+0800 I NETWORK  [conn8] end connection 127.0.0.1:56103 (4 connections now open)
+2016-05-12T17:23:23.888+0800 I NETWORK  [conn9] end connection 127.0.0.1:56104 (4 connections now open)
+2016-05-12T17:23:23.888+0800 I NETWORK  [conn10] end connection 127.0.0.1:56110 (4 connections now open)
+2016-05-12T17:23:23.888+0800 I NETWORK  [conn7] end connection 127.0.0.1:56098 (4 connections now open)
+2016-05-12T17:23:23.888+0800 I NETWORK  [conn6] end connection 127.0.0.1:56097 (4 connections now open)
+2016-05-12T17:23:29.587+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59559 #11 (1 connection now open)
+2016-05-12T17:23:29.607+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59560 #12 (2 connections now open)
+2016-05-12T17:25:39.278+0800 I NETWORK  [conn12] end connection 127.0.0.1:59560 (1 connection now open)
+2016-05-12T17:25:39.278+0800 I NETWORK  [conn11] end connection 127.0.0.1:59559 (1 connection now open)
+2016-05-12T17:25:40.524+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59634 #13 (1 connection now open)
+2016-05-12T17:25:40.546+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59635 #14 (2 connections now open)
+2016-05-12T17:26:42.964+0800 I NETWORK  [conn14] end connection 127.0.0.1:59635 (1 connection now open)
+2016-05-12T17:26:42.964+0800 I NETWORK  [conn13] end connection 127.0.0.1:59634 (1 connection now open)
+2016-05-12T17:26:44.233+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59677 #15 (1 connection now open)
+2016-05-12T17:26:44.267+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59678 #16 (2 connections now open)
+2016-05-12T17:27:25.486+0800 I NETWORK  [conn16] end connection 127.0.0.1:59678 (1 connection now open)
+2016-05-12T17:27:25.486+0800 I NETWORK  [conn15] end connection 127.0.0.1:59677 (1 connection now open)
+2016-05-12T17:27:26.130+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59712 #17 (1 connection now open)
+2016-05-12T17:27:26.149+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59713 #18 (2 connections now open)
+2016-05-12T17:27:49.230+0800 I NETWORK  [conn18] end connection 127.0.0.1:59713 (1 connection now open)
+2016-05-12T17:27:49.230+0800 I NETWORK  [conn17] end connection 127.0.0.1:59712 (1 connection now open)
+2016-05-12T17:27:49.828+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59728 #19 (1 connection now open)
+2016-05-12T17:27:49.850+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59729 #20 (2 connections now open)
+2016-05-12T17:28:38.135+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59760 #21 (3 connections now open)
+2016-05-12T17:28:38.147+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59761 #22 (4 connections now open)
+2016-05-12T17:28:41.495+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59764 #23 (5 connections now open)
+2016-05-12T17:28:41.507+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59765 #24 (6 connections now open)
+2016-05-12T17:29:02.901+0800 I NETWORK  [conn19] end connection 127.0.0.1:59728 (5 connections now open)
+2016-05-12T17:29:02.901+0800 I NETWORK  [conn20] end connection 127.0.0.1:59729 (5 connections now open)
+2016-05-12T17:29:04.026+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59781 #25 (5 connections now open)
+2016-05-12T17:29:04.046+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59782 #26 (6 connections now open)
+2016-05-12T17:29:12.774+0800 I NETWORK  [conn26] end connection 127.0.0.1:59782 (5 connections now open)
+2016-05-12T17:29:12.774+0800 I NETWORK  [conn25] end connection 127.0.0.1:59781 (5 connections now open)
+2016-05-12T17:29:13.657+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59789 #27 (5 connections now open)
+2016-05-12T17:29:13.794+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59790 #28 (6 connections now open)
+2016-05-12T17:29:43.410+0800 I NETWORK  [conn27] end connection 127.0.0.1:59789 (5 connections now open)
+2016-05-12T17:29:43.410+0800 I NETWORK  [conn28] end connection 127.0.0.1:59790 (5 connections now open)
+2016-05-12T17:29:44.572+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59812 #29 (5 connections now open)
+2016-05-12T17:29:44.594+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59813 #30 (6 connections now open)
+2016-05-12T17:31:17.354+0800 I NETWORK  [conn30] end connection 127.0.0.1:59813 (5 connections now open)
+2016-05-12T17:31:17.354+0800 I NETWORK  [conn29] end connection 127.0.0.1:59812 (5 connections now open)
+2016-05-12T17:31:31.343+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59879 #31 (5 connections now open)
+2016-05-12T17:31:31.362+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59880 #32 (6 connections now open)
+2016-05-12T17:32:30.844+0800 I COMMAND  [conn22] CMD: dropIndexes nata.apks
+2016-05-12T17:32:34.257+0800 I COMMAND  [conn22] CMD: dropIndexes nata.apks
+2016-05-12T17:32:52.266+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59930 #33 (7 connections now open)
+2016-05-12T17:32:52.278+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59931 #34 (8 connections now open)
+2016-05-12T17:32:55.889+0800 I NETWORK  [conn24] end connection 127.0.0.1:59765 (7 connections now open)
+2016-05-12T17:32:55.891+0800 I NETWORK  [conn23] end connection 127.0.0.1:59764 (6 connections now open)
+2016-05-12T17:32:55.899+0800 I NETWORK  [conn34] end connection 127.0.0.1:59931 (5 connections now open)
+2016-05-12T17:32:55.899+0800 I NETWORK  [conn33] end connection 127.0.0.1:59930 (4 connections now open)
+2016-05-12T17:32:55.913+0800 I NETWORK  [conn22] end connection 127.0.0.1:59761 (3 connections now open)
+2016-05-12T17:32:55.914+0800 I NETWORK  [conn21] end connection 127.0.0.1:59760 (2 connections now open)
+2016-05-12T17:33:34.490+0800 I NETWORK  [conn31] end connection 127.0.0.1:59879 (1 connection now open)
+2016-05-12T17:33:34.490+0800 I NETWORK  [conn32] end connection 127.0.0.1:59880 (1 connection now open)
+2016-05-12T17:33:35.505+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59965 #35 (1 connection now open)
+2016-05-12T17:33:35.528+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59966 #36 (2 connections now open)
+2016-05-12T17:33:35.535+0800 I INDEX    [conn35] build index on: nata.apks properties: { v: 1, unique: true, key: { actpaths.activity_name: 1 }, name: "actpaths.activity_name_1", ns: "nata.apks", background: true }
+2016-05-12T17:33:35.536+0800 I INDEX    [conn35] build index done.  scanned 2 total records. 0 secs
+2016-05-12T17:34:01.991+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59991 #37 (3 connections now open)
+2016-05-12T17:34:02.002+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:59992 #38 (4 connections now open)
+2016-05-12T17:34:18.748+0800 I COMMAND  [conn38] CMD: dropIndexes nata.apks
+2016-05-12T17:37:05.524+0800 I NETWORK  [conn35] end connection 127.0.0.1:59965 (3 connections now open)
+2016-05-12T17:37:05.524+0800 I NETWORK  [conn36] end connection 127.0.0.1:59966 (3 connections now open)
+2016-05-12T17:37:06.131+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60096 #39 (3 connections now open)
+2016-05-12T17:37:06.151+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60097 #40 (4 connections now open)
+2016-05-12T17:37:06.154+0800 I INDEX    [conn39] build index on: nata.apks properties: { v: 1, unique: true, key: { actpaths.activity_name: 1 }, name: "actpaths.activity_name_1", ns: "nata.apks", background: true }
+2016-05-12T17:37:06.154+0800 I INDEX    [conn39] build index done.  scanned 2 total records. 0 secs
+2016-05-12T17:37:18.597+0800 I NETWORK  [conn39] end connection 127.0.0.1:60096 (3 connections now open)
+2016-05-12T17:37:18.597+0800 I NETWORK  [conn40] end connection 127.0.0.1:60097 (3 connections now open)
+2016-05-12T17:37:19.349+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60105 #41 (3 connections now open)
+2016-05-12T17:37:19.369+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60106 #42 (4 connections now open)
+2016-05-12T17:38:03.406+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60130 #43 (5 connections now open)
+2016-05-12T17:38:03.418+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60131 #44 (6 connections now open)
+2016-05-12T17:40:01.121+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60215 #45 (7 connections now open)
+2016-05-12T17:40:01.134+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60216 #46 (8 connections now open)
+2016-05-12T17:40:47.233+0800 I COMMAND  [conn38] CMD: dropIndexes nata.apks
+2016-05-12T17:44:29.043+0800 I NETWORK  [conn42] end connection 127.0.0.1:60106 (7 connections now open)
+2016-05-12T17:44:29.043+0800 I NETWORK  [conn41] end connection 127.0.0.1:60105 (7 connections now open)
+2016-05-12T17:44:29.587+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60371 #47 (7 connections now open)
+2016-05-12T17:44:29.607+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60372 #48 (8 connections now open)
+2016-05-12T17:44:29.609+0800 I INDEX    [conn47] build index on: nata.apks properties: { v: 1, unique: true, key: { actpaths.activity: 1 }, name: "actpaths.activity_1", ns: "nata.apks", background: true }
+2016-05-12T17:44:43.005+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60385 #49 (9 connections now open)
+2016-05-12T17:46:37.423+0800 I NETWORK  [conn49] end connection 127.0.0.1:60385 (8 connections now open)
+2016-05-12T17:46:37.423+0800 I NETWORK  [conn48] end connection 127.0.0.1:60372 (8 connections now open)
+2016-05-12T17:46:37.423+0800 I NETWORK  [conn47] end connection 127.0.0.1:60371 (8 connections now open)
+2016-05-12T17:46:38.961+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60451 #50 (7 connections now open)
+2016-05-12T17:46:38.983+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60452 #51 (8 connections now open)
+2016-05-12T17:46:38.986+0800 I INDEX    [conn50] build index on: nata.apks properties: { v: 1, unique: true, key: { actpaths.activity: 1 }, name: "actpaths.activity_1", ns: "nata.apks", background: true }
+2016-05-12T17:46:38.986+0800 I INDEX    [conn50] build index done.  scanned 1 total records. 0 secs
+2016-05-12T17:46:50.795+0800 I NETWORK  [conn50] end connection 127.0.0.1:60451 (7 connections now open)
+2016-05-12T17:46:50.795+0800 I NETWORK  [conn51] end connection 127.0.0.1:60452 (7 connections now open)
+2016-05-12T17:46:51.391+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60459 #52 (7 connections now open)
+2016-05-12T17:46:51.415+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60460 #53 (8 connections now open)
+2016-05-12T17:48:07.357+0800 I NETWORK  [conn52] end connection 127.0.0.1:60459 (7 connections now open)
+2016-05-12T17:48:07.357+0800 I NETWORK  [conn53] end connection 127.0.0.1:60460 (7 connections now open)
+2016-05-12T17:48:08.727+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60511 #54 (7 connections now open)
+2016-05-12T17:48:08.745+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60512 #55 (8 connections now open)
+2016-05-12T17:48:26.507+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60530 #56 (9 connections now open)
+2016-05-12T17:49:22.013+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60565 #57 (10 connections now open)
+2016-05-12T17:49:22.023+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:60566 #58 (11 connections now open)
+2016-05-12T18:42:14.766+0800 I NETWORK  [conn56] end connection 127.0.0.1:60530 (10 connections now open)
+2016-05-12T18:42:14.767+0800 I NETWORK  [conn55] end connection 127.0.0.1:60512 (10 connections now open)
+2016-05-12T18:42:14.767+0800 I NETWORK  [conn54] end connection 127.0.0.1:60511 (10 connections now open)
+2016-05-12T18:43:33.556+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63097 #59 (9 connections now open)
+2016-05-12T18:43:33.576+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63098 #60 (10 connections now open)
+2016-05-12T18:43:41.996+0800 I NETWORK  [conn60] end connection 127.0.0.1:63098 (9 connections now open)
+2016-05-12T18:43:41.996+0800 I NETWORK  [conn59] end connection 127.0.0.1:63097 (9 connections now open)
+2016-05-12T18:44:38.136+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63159 #61 (9 connections now open)
+2016-05-12T18:44:38.161+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63160 #62 (10 connections now open)
+2016-05-12T18:44:52.041+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63179 #63 (11 connections now open)
+2016-05-12T18:46:51.561+0800 I NETWORK  [conn63] end connection 127.0.0.1:63179 (10 connections now open)
+2016-05-12T18:46:51.561+0800 I NETWORK  [conn62] end connection 127.0.0.1:63160 (10 connections now open)
+2016-05-12T18:46:51.562+0800 I NETWORK  [conn61] end connection 127.0.0.1:63159 (10 connections now open)
+2016-05-12T18:46:53.053+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63246 #64 (9 connections now open)
+2016-05-12T18:46:53.091+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63247 #65 (10 connections now open)
+2016-05-12T18:47:02.003+0800 I NETWORK  [conn65] end connection 127.0.0.1:63247 (9 connections now open)
+2016-05-12T18:47:02.004+0800 I NETWORK  [conn64] end connection 127.0.0.1:63246 (8 connections now open)
+2016-05-12T18:47:02.890+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63262 #66 (9 connections now open)
+2016-05-12T18:47:02.911+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63263 #67 (10 connections now open)
+2016-05-12T18:47:33.864+0800 I NETWORK  [conn67] end connection 127.0.0.1:63263 (9 connections now open)
+2016-05-12T18:47:33.864+0800 I NETWORK  [conn66] end connection 127.0.0.1:63262 (8 connections now open)
+2016-05-12T18:47:34.903+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63281 #68 (9 connections now open)
+2016-05-12T18:47:34.923+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63282 #69 (10 connections now open)
+2016-05-12T18:47:44.644+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63296 #70 (11 connections now open)
+2016-05-12T18:47:55.680+0800 I NETWORK  [conn70] end connection 127.0.0.1:63296 (10 connections now open)
+2016-05-12T18:47:55.681+0800 I NETWORK  [conn69] end connection 127.0.0.1:63282 (10 connections now open)
+2016-05-12T18:47:55.681+0800 I NETWORK  [conn68] end connection 127.0.0.1:63281 (10 connections now open)
+2016-05-12T18:48:03.273+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63532 #71 (9 connections now open)
+2016-05-12T18:48:03.291+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63533 #72 (10 connections now open)
+2016-05-12T18:48:04.702+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63585 #73 (11 connections now open)
