@@ -204,14 +204,19 @@ $(function () {
 
   $('#btn-stop').click(function(e){
     e.preventDefault();
+    var pauseSpan = '<span class="icon ion-pause"> 暂停录制</span>';
+    var playSpan = '<span class="icon ion-play"> 继续录制</span>';
+
+
     if (!startRecrod) {
-      $(this).text("暂停录制");
-    //.removeClass("btn-primary").addClass("btn-info");
+      $(this).empty().append(pauseSpan);
+      $('#rec-span').show();
+
       startRecrod = true;
       return;
     }else{
-      $(this).text("开始录制");
-        //.removeClass("btn-info").addClass("btn-primary");
+      $(this).empty().append(playSpan);
+      $('#rec-span').hide();
       startRecrod = false;
       return;
     }

@@ -4,7 +4,7 @@
         <div style="width: 364px; float: left;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">设备屏幕 360 x 640 </h3>
+                    <h3 class="panel-title">设备屏幕 360 x 640 <span id="rec-span" class="text-danger icon ion-ios-circle-filled pull-right" > REC</span></h3>
                 </div>
                 <div class="panel-body" id="container">
                     <canvas id="canvas-device" width="360" height="640"></canvas>
@@ -20,13 +20,25 @@
                 <div class="panel-body" style="padding: 0;">
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group " role="group">
-                            <button type="button" class="btn btn-default" id="btn-stop"
-                                    style="border-radius : 0">暂停录制
+                            <button type="button" class="btn btn-primary" id="btn-stop"
+                                    style="border-radius : 0">
+                                <span class="icon ion-ios-pause"> 暂停录制</span>
+
                             </button>
                         </div>
+
                         <div class="btn-group " role="group">
-                            <button type="button" class="btn btn-default" id="btn-finish"
-                                    style="border-radius : 0" data-id="<%= testcase._id %>">提交用例
+                            <button type="button" class="btn btn-primary" id="btn-cancel"
+                                    style="border-radius : 0">
+                                <span class="icon ion-stop"> 取消录制</span>
+
+                            </button>
+                        </div>
+
+                        <div class="btn-group " role="group">
+                            <button type="button" class="btn btn-primary" id="btn-finish"
+                                    style="border-radius : 0" data-id="<%= testcase._id %>">
+                                <span class="icon ion-paper-airplane"> 提交用例</span>
                             </button>
                         </div>
                     </div>
@@ -34,25 +46,28 @@
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
 
                         <div class="btn-group" role="group">
-                            <button id="btn-back" type="button" class="btn btn-primary" style="border-radius : 0">Back
+                            <button id="btn-back" type="button" class="btn btn-primary" style="border-radius : 0">
+                                <span class="icon ion-ios-arrow-back"> 返回</span>
                             </button>
                         </div>
                         <div class="btn-group" role="group">
-                            <button id="btn-home" type="button" class="btn btn-primary" style="border-radius : 0">Home
+                            <button id="btn-home" type="button" class="btn btn-primary" style="border-radius : 0">
+                                <span class="icon ion-android-radio-button-off"> 主页</span>
                             </button>
                         </div>
                         <div class="btn-group" role="group">
-                            <button id="btn-menu" type="button" class="btn btn-primary" style="border-radius : 0">Menu
+                            <button id="btn-menu" type="button" class="btn btn-primary" style="border-radius : 0">
+                                <span class="icon ion-android-checkbox-outline-blank"> 选项</span>
                             </button>
                         </div>
                         <div class="btn-group" role="group">
                             <button id="btn-restart" type="button" class="btn btn-primary" style="border-radius : 0">
-                                Restart
+                                <span class="icon ion-refresh"> 重启应用</span>
+
                             </button>
                         </div>
                         <div class="btn-group" role="group">
-                            <button id="btn-cleandata" type="button" class="btn btn-primary" style="border-radius : 0">
-                                CleanData
+                            <button alt="cleanData" id="btn-cleandata" type="button" class="btn btn-primary" style="border-radius : 0"><span class="icon ion-android-warning"> 清除数据</span>
                             </button>
                         </div>
 
@@ -65,7 +80,7 @@
                     <div class="input-group">
                         <select class="form-control m-b"  id="actpath-select" data-id="<%= apk.id %>" style="border-radius : 0">
                             <% apk.actpaths.forEach(function(actpath){ %>
-                            <option value="<%= actpath.activity_name %>">前往<%= actpath.activity_name %></option>
+                            <option value="<%= actpath.activity %>">前往<%= actpath.activity %></option>
                             <% }); %>
                         </select>
                         <span class="input-group-btn">

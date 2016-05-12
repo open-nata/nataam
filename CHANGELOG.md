@@ -185,3 +185,4 @@
 - Debug: can not create apk model
 - Add apk info edit
 - Debug: WebSocket Error when changing tabs
+- Add Icons and Add REC when recording
