@@ -186,3 +186,4 @@
 - Add apk info edit
 - Debug: WebSocket Error when changing tabs
 - Add Icons and Add REC when recording
+- Add cancel record button

@@ -220,7 +220,12 @@ $(function () {
       startRecrod = false;
       return;
     }
+  });
 
+  $('#btn-cancel').click(function(e){
+    e.preventDefault();
+    parent.history.back();
+    return false;
   });
 
   $('#btn-finish').click(function (e) {
