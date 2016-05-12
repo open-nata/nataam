@@ -26,13 +26,14 @@ $(function () {
     $('#testcase li:last-child').remove();
   });
 
-  $('#btn-actpath').click(function(e){
+  $('.actpath').click(function(e){
     e.preventDefault();
-    var act_name = $('#actpath-select').val().trim();
+    var act_name = $(this).data("activity");
     if(!act_name){
       return false;
     }
-    var apk_id = $('#actpath-select').data("id");
+
+    var apk_id = $(this).data("id");
 
     var ele = $(this);
 
@@ -67,9 +68,9 @@ $(function () {
 
   });
 
-  $('#btn-testcase').click(function(e){
+  $('.testcase').click(function(e){
     e.preventDefault();
-    var testcase_id= $('#testcase-select').val().trim();
+    var testcase_id= $(this).data("id");
     if(!testcase_id){
       return false;
     }
@@ -259,6 +260,7 @@ $(function () {
   $('#btn-getactions').click(function (e) {
     e.preventDefault();
     var ele = $(this);
+    ele.text("获取中...");
     ele.prop("disabled", true);
     $.ajax({
       url: baseUrl + "/actions",
@@ -277,6 +279,7 @@ $(function () {
           var direction = params[2];
           var action = actionType;
           if (actionType === ActionType.SWIPE) action += direction;
+
           toAppend += '<div class="btn-group" role="group"><button type="button" class="btn btn-primary" style="border-radius : 0"' +
             ' data-action=' + actionType +
             ' data-at=' + at +
@@ -323,9 +326,11 @@ $(function () {
         console.log(toAppend);
         $("#action-panel").empty().append(toAppend);
         ele.prop("disabled", false);
+        ele.text("获取界面动作");
       },
       error: function () {
         ele.prop("disabled", false);
+        ele.text("获取界面动作");
       }
     });
 
@@ -371,9 +376,11 @@ $(function () {
         action += " " + x + " " + y;
         break;
       case ActionType.INPUT:
-        var textinput = $('#textinput').val();
+        var textinput =prompt("请输入文本内容","")
+
         if (!textinput) {
           alert("请填写输入内容");
+          ele.prop("disabled", false);
           return;
         }
         action += " " + x + " " + y + " " + textinput;

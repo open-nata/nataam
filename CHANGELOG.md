@@ -187,3 +187,5 @@
 - Debug: WebSocket Error when changing tabs
 - Add Icons and Add REC when recording
 - Add cancel record button
+- Remove text input widget and replace it with prompt
+- Rewrite the UI of record testcase

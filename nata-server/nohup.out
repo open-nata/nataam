@@ -3526,3 +3526,73 @@
 2016-05-12T21:26:10.343+0800 I NETWORK  [conn229] end connection 127.0.0.1:61551 (0 connections now open)
 2016-05-12T21:26:11.024+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61573 #231 (1 connection now open)
 2016-05-12T21:26:11.041+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61574 #232 (2 connections now open)
+2016-05-12T21:27:43.808+0800 I NETWORK  [conn232] end connection 127.0.0.1:61574 (1 connection now open)
+2016-05-12T21:27:43.808+0800 I NETWORK  [conn231] end connection 127.0.0.1:61573 (0 connections now open)
+2016-05-12T21:27:44.526+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61667 #233 (1 connection now open)
+2016-05-12T21:27:44.546+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61668 #234 (2 connections now open)
+2016-05-12T21:27:47.605+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61676 #235 (3 connections now open)
+2016-05-12T21:28:42.703+0800 I NETWORK  [conn235] end connection 127.0.0.1:61676 (2 connections now open)
+2016-05-12T21:28:42.704+0800 I NETWORK  [conn234] end connection 127.0.0.1:61668 (2 connections now open)
+2016-05-12T21:28:42.704+0800 I NETWORK  [conn233] end connection 127.0.0.1:61667 (1 connection now open)
+2016-05-12T21:28:44.094+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61713 #236 (1 connection now open)
+2016-05-12T21:28:44.110+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61714 #237 (2 connections now open)
+2016-05-12T21:29:06.921+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-12T21:29:06.921+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-12T21:29:06.922+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-12T21:29:06.923+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-12T21:29:06.923+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-12T21:29:15.123+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-12T21:29:15.123+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-12T21:29:15.123+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-12T21:29:15.123+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-12T21:29:15.123+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-12T21:30:03.688+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61829 #238 (3 connections now open)
+2016-05-12T21:30:14.537+0800 I NETWORK  [conn238] end connection 127.0.0.1:61829 (2 connections now open)
+2016-05-12T21:30:14.537+0800 I NETWORK  [conn237] end connection 127.0.0.1:61714 (1 connection now open)
+2016-05-12T21:30:14.537+0800 I NETWORK  [conn236] end connection 127.0.0.1:61713 (0 connections now open)
+2016-05-12T21:30:18.760+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61844 #239 (1 connection now open)
+2016-05-12T21:30:18.781+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61845 #240 (2 connections now open)
+2016-05-12T21:30:24.148+0800 I NETWORK  [conn240] end connection 127.0.0.1:61845 (1 connection now open)
+2016-05-12T21:30:24.148+0800 I NETWORK  [conn239] end connection 127.0.0.1:61844 (0 connections now open)
+2016-05-12T21:30:26.097+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-12T21:30:26.098+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-12T21:30:26.099+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-12T21:30:26.099+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-12T21:30:26.099+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-12T21:30:27.318+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61874 #241 (1 connection now open)
+2016-05-12T21:30:27.337+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61877 #242 (2 connections now open)
+2016-05-12T21:30:53.891+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-12T21:30:53.892+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-12T21:30:53.893+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-12T21:30:53.893+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-12T21:30:53.893+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-12T21:31:39.541+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61977 #243 (3 connections now open)
+2016-05-12T21:31:44.726+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61979 #244 (4 connections now open)
+2016-05-12T21:31:46.453+0800 I NETWORK  [conn244] end connection 127.0.0.1:61979 (3 connections now open)
+2016-05-12T21:31:46.453+0800 I NETWORK  [conn243] end connection 127.0.0.1:61977 (3 connections now open)
+2016-05-12T21:31:46.453+0800 I NETWORK  [conn242] end connection 127.0.0.1:61877 (1 connection now open)
+2016-05-12T21:31:46.453+0800 I NETWORK  [conn241] end connection 127.0.0.1:61874 (0 connections now open)
+2016-05-12T21:31:47.965+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61992 #245 (1 connection now open)
+2016-05-12T21:31:47.984+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:61993 #246 (2 connections now open)
+2016-05-12T21:31:52.288+0800 I NETWORK  [conn246] end connection 127.0.0.1:61993 (1 connection now open)
+2016-05-12T21:31:52.288+0800 I NETWORK  [conn245] end connection 127.0.0.1:61992 (1 connection now open)
+2016-05-12T21:31:53.589+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62040 #247 (1 connection now open)
+2016-05-12T21:31:53.611+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62041 #248 (2 connections now open)
+2016-05-12T21:32:11.936+0800 I NETWORK  [conn248] end connection 127.0.0.1:62041 (1 connection now open)
+2016-05-12T21:32:11.936+0800 I NETWORK  [conn247] end connection 127.0.0.1:62040 (1 connection now open)
+2016-05-12T21:32:13.488+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62136 #249 (1 connection now open)
+2016-05-12T21:32:13.509+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62137 #250 (2 connections now open)
+2016-05-12T21:32:22.127+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62144 #251 (3 connections now open)
+2016-05-12T21:32:36.085+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62157 #252 (4 connections now open)
+2016-05-12T21:32:56.385+0800 I NETWORK  [conn252] end connection 127.0.0.1:62157 (3 connections now open)
+2016-05-12T21:32:56.385+0800 I NETWORK  [conn251] end connection 127.0.0.1:62144 (3 connections now open)
+2016-05-12T21:32:56.385+0800 I NETWORK  [conn250] end connection 127.0.0.1:62137 (3 connections now open)
+2016-05-12T21:32:56.385+0800 I NETWORK  [conn249] end connection 127.0.0.1:62136 (3 connections now open)
+2016-05-12T21:32:57.750+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62179 #253 (1 connection now open)
+2016-05-12T21:32:57.766+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:62180 #254 (2 connections now open)
+2016-05-12T21:33:16.692+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-12T21:33:16.692+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-12T21:33:16.692+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-12T21:33:16.692+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-12T21:33:16.692+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+2016-05-12T22:03:02.118+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63828 #255 (3 connections now open)

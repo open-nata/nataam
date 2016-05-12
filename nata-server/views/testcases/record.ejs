@@ -4,7 +4,9 @@
         <div style="width: 364px; float: left;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">设备屏幕 360 x 640 <span id="rec-span" class="text-danger icon ion-ios-circle-filled pull-right" > REC</span></h3>
+                    <h3 class="panel-title">设备屏幕 360 x 640 <span id="rec-span"
+                                                                 class="text-danger icon ion-ios-circle-filled pull-right"> REC</span>
+                    </h3>
                 </div>
                 <div class="panel-body" id="container">
                     <canvas id="canvas-device" width="360" height="640"></canvas>
@@ -41,6 +43,38 @@
                                 <span class="icon ion-paper-airplane"> 提交用例</span>
                             </button>
                         </div>
+
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="border-radius : 0">
+                                <span class="icon ion-map">
+                                    ActPath <span class="caret"></span>
+                                </span>
+
+                            </button>
+                            <ul class="dropdown-menu">
+                                <% apk.actpaths.forEach(function(actpath){ %>
+                                <li><a class="actpath" data-activity="<%= actpath.activity %>" data-id="<%= apk.id %>"><%= actpath.activity %></a></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="border-radius : 0">
+
+
+                                <span class="icon ion-document">
+                                    Testcase <span class="caret"></span>
+                                </span>
+
+                            </button>
+                            <ul class="dropdown-menu">
+
+                                <% testcases.forEach(function(testcase){ %>
+                                <li><a class="testcase" data-id="<%= testcase._id %>"><%= testcase.name %></a></li>
+                                <% }); %>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -67,47 +101,21 @@
                             </button>
                         </div>
                         <div class="btn-group" role="group">
-                            <button alt="cleanData" id="btn-cleandata" type="button" class="btn btn-primary" style="border-radius : 0"><span class="icon ion-android-warning"> 清除数据</span>
+                            <button alt="cleanData" id="btn-cleandata" type="button" class="btn btn-primary"
+                                    style="border-radius : 0"><span class="icon ion-android-warning"> 清除数据</span>
                             </button>
                         </div>
 
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-addon text-primary" style="border-radius : 0;">TextInput</div>
-                        <input type="text" class="form-control" id="textinput" placeholder="在这里填写TextInput动作的输入"
-                               style="border-radius : 0">
-                    </div>
-                    <div class="input-group">
-                        <select class="form-control m-b"  id="actpath-select" data-id="<%= apk.id %>" style="border-radius : 0">
-                            <% apk.actpaths.forEach(function(actpath){ %>
-                            <option value="<%= actpath.activity %>">前往<%= actpath.activity %></option>
-                            <% }); %>
-                        </select>
-                        <span class="input-group-btn">
-                            <button id="btn-actpath"  class="btn btn-default" type="button" style="border-radius : 0">执行ActPath</button>
-                         </span>
-                    </div>
 
-                    <div class="input-group">
-                        <select class="form-control m-b"  id="testcase-select" style="border-radius : 0">
-                            <% testcases.forEach(function(testcase){ %>
-                            <option value="<%= testcase._id %>"><%= testcase.name %></option>
-                            <% }); %>
-                        </select>
-                        <span class="input-group-btn">
-                            <button id="btn-testcase"  class="btn btn-default" type="button" style="border-radius : 0">执行测试用例</button>
-                         </span>
                     </div>
-
-                    <button id="btn-getactions" type="button" class="btn btn-info btn-block" style="border-radius : 0">
-                        获取界面动作
-                    </button>
                 </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">界面动作</h3>
+                    <h3 class="panel-title">界面动作
+                        <span id="btn-getactions" class="icon ion-refresh pull-right">   获取界面动作</span>
+                    </h3>
                 </div>
                 <div class="panel-body" style="padding: 0;" id="action-panel">
                 </div>
@@ -117,7 +125,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title pull-left"> 测试用例</h3>
                     <button id="btn-clear" class="btn btn-default pull-right btn-sm">清除所有测试用例</button>
-                    <button id="btn-clear-last" class="btn btn-default pull-right btn-sm" style="margin-right: 5px">清除最近一条测试用例</button>
+                    <button id="btn-clear-last" class="btn btn-default pull-right btn-sm" style="margin-right: 5px">
+                        清除最近一条测试用例
+                    </button>
                     <div class="clearfix"></div>
                 </div>
                 <ul class="list-group" id="testcase">
