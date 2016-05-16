@@ -3596,3 +3596,107 @@
 2016-05-12T21:33:16.692+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
 2016-05-12T21:33:16.692+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
 2016-05-12T22:03:02.118+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:63828 #255 (3 connections now open)
+2016-05-12T22:41:27.522+0800 I NETWORK  [conn255] end connection 127.0.0.1:63828 (2 connections now open)
+2016-05-12T22:41:27.525+0800 I NETWORK  [conn254] end connection 127.0.0.1:62180 (1 connection now open)
+2016-05-12T22:41:27.527+0800 I NETWORK  [conn253] end connection 127.0.0.1:62179 (0 connections now open)
+2016-05-12T22:41:33.296+0800 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2016-05-12T22:41:33.299+0800 I CONTROL  [signalProcessingThread] now exiting
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] closing listening socket: 5
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2016-05-12T22:41:33.299+0800 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2016-05-12T22:41:33.299+0800 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2016-05-12T22:41:33.299+0800 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2016-05-12T22:41:33.312+0800 I JOURNAL  [signalProcessingThread] journalCleanup...
+2016-05-12T22:41:33.312+0800 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2016-05-12T22:41:33.313+0800 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2016-05-12T22:41:33.414+0800 I JOURNAL  [journal writer] Journal writer thread stopped
+2016-05-12T22:41:33.414+0800 I JOURNAL  [durability] Durability thread stopped
+2016-05-12T22:41:33.414+0800 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2016-05-12T22:41:33.421+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2016-05-12T22:41:33.421+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2016-05-12T22:41:33.421+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
+2016-05-13T12:14:36.161+0800 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+2016-05-13T12:14:36.161+0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2016-05-13T12:14:36.178+0800 I JOURNAL  [durability] Durability thread started
+2016-05-13T12:14:36.178+0800 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] MongoDB starting : pid=3190 port=27017 dbpath=/data/db 64-bit host=mcls-MBP.local
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] 
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] db version v3.0.3
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] git version: nogitversion
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] build info: Darwin yosemitevm.local 14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] allocator: system
+2016-05-13T12:14:36.178+0800 I CONTROL  [initandlisten] options: {}
+2016-05-13T12:14:37.088+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-05-13T12:14:44.406+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49965 #1 (1 connection now open)
+2016-05-13T12:14:44.429+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49966 #2 (2 connections now open)
+2016-05-13T12:14:47.217+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49973 #3 (3 connections now open)
+2016-05-13T13:55:34.373+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:58692 #4 (4 connections now open)
+2016-05-13T14:09:42.237+0800 I NETWORK  [conn4] end connection 127.0.0.1:58692 (3 connections now open)
+2016-05-13T14:09:42.237+0800 I NETWORK  [conn3] end connection 127.0.0.1:49973 (3 connections now open)
+2016-05-13T14:09:42.237+0800 I NETWORK  [conn2] end connection 127.0.0.1:49966 (3 connections now open)
+2016-05-13T14:09:42.237+0800 I NETWORK  [conn1] end connection 127.0.0.1:49965 (3 connections now open)
+2016-05-13T14:09:47.670+0800 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2016-05-13T14:09:47.671+0800 I CONTROL  [signalProcessingThread] now exiting
+2016-05-13T14:09:47.671+0800 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2016-05-13T14:09:47.671+0800 I NETWORK  [signalProcessingThread] closing listening socket: 5
+2016-05-13T14:09:47.672+0800 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2016-05-13T14:09:47.672+0800 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2016-05-13T14:09:47.672+0800 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2016-05-13T14:09:47.672+0800 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2016-05-13T14:09:47.672+0800 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2016-05-13T14:09:47.672+0800 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2016-05-13T14:09:47.681+0800 I JOURNAL  [signalProcessingThread] journalCleanup...
+2016-05-13T14:09:47.681+0800 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2016-05-13T14:09:47.683+0800 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2016-05-13T14:09:47.784+0800 I JOURNAL  [journal writer] Journal writer thread stopped
+2016-05-13T14:09:47.784+0800 I JOURNAL  [durability] Durability thread stopped
+2016-05-13T14:09:47.786+0800 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2016-05-13T14:09:47.790+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2016-05-13T14:09:47.790+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2016-05-13T14:09:47.790+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0
+2016-05-13T14:47:29.693+0800 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+2016-05-13T14:47:29.695+0800 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+2016-05-13T14:47:29.710+0800 I JOURNAL  [durability] Durability thread started
+2016-05-13T14:47:29.710+0800 I JOURNAL  [journal writer] Journal writer thread started
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] MongoDB starting : pid=1325 port=27017 dbpath=/data/db 64-bit host=114-212-87-8.nju.edu.cn
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] 
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] db version v3.0.3
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] git version: nogitversion
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] build info: Darwin yosemitevm.local 14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] allocator: system
+2016-05-13T14:47:29.710+0800 I CONTROL  [initandlisten] options: {}
+2016-05-13T14:47:30.472+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-05-13T14:47:41.610+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49677 #1 (1 connection now open)
+2016-05-13T14:47:41.634+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49678 #2 (2 connections now open)
+2016-05-13T14:47:53.305+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49685 #3 (3 connections now open)
+2016-05-13T14:47:56.653+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49688 #4 (4 connections now open)
+2016-05-13T14:48:08.166+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:49689 #5 (5 connections now open)
+2016-05-13T15:55:56.567+0800 I NETWORK  [conn5] end connection 127.0.0.1:49689 (4 connections now open)
+2016-05-13T15:55:56.567+0800 I NETWORK  [conn4] end connection 127.0.0.1:49688 (4 connections now open)
+2016-05-13T15:55:56.567+0800 I NETWORK  [conn3] end connection 127.0.0.1:49685 (4 connections now open)
+2016-05-13T15:55:56.567+0800 I NETWORK  [conn2] end connection 127.0.0.1:49678 (4 connections now open)
+2016-05-13T15:55:56.567+0800 I NETWORK  [conn1] end connection 127.0.0.1:49677 (4 connections now open)
+2016-05-13T15:56:01.376+0800 I CONTROL  [signalProcessingThread] got signal 15 (Terminated: 15), will terminate after current cmd ends
+2016-05-13T15:56:01.380+0800 I CONTROL  [signalProcessingThread] now exiting
+2016-05-13T15:56:01.380+0800 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2016-05-13T15:56:01.381+0800 I NETWORK  [signalProcessingThread] closing listening socket: 5
+2016-05-13T15:56:01.381+0800 I NETWORK  [signalProcessingThread] closing listening socket: 6
+2016-05-13T15:56:01.381+0800 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2016-05-13T15:56:01.382+0800 I NETWORK  [signalProcessingThread] shutdown: going to flush diaglog...
+2016-05-13T15:56:01.382+0800 I NETWORK  [signalProcessingThread] shutdown: going to close sockets...
+2016-05-13T15:56:01.383+0800 I STORAGE  [signalProcessingThread] shutdown: waiting for fs preallocator...
+2016-05-13T15:56:01.384+0800 I STORAGE  [signalProcessingThread] shutdown: final commit...
+2016-05-13T15:56:01.395+0800 I JOURNAL  [signalProcessingThread] journalCleanup...
+2016-05-13T15:56:01.395+0800 I JOURNAL  [signalProcessingThread] removeJournalFiles
+2016-05-13T15:56:01.399+0800 I JOURNAL  [signalProcessingThread] Terminating durability thread ...
+2016-05-13T15:56:01.498+0800 I JOURNAL  [journal writer] Journal writer thread stopped
+2016-05-13T15:56:01.498+0800 I JOURNAL  [durability] Durability thread stopped
+2016-05-13T15:56:01.500+0800 I STORAGE  [signalProcessingThread] shutdown: closing all files...
+2016-05-13T15:56:01.505+0800 I STORAGE  [signalProcessingThread] closeAllFiles() finished
+2016-05-13T15:56:01.506+0800 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2016-05-13T15:56:01.506+0800 I CONTROL  [signalProcessingThread] dbexit:  rc: 0

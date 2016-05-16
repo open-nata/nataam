@@ -189,3 +189,6 @@
 - Add cancel record button
 - Remove text input widget and replace it with prompt
 - Rewrite the UI of record testcase
+
+### (2015/5/16)
+- Ready to rewirte the java client using nodejs
