@@ -1,0 +1,28 @@
+{
+  "name": "nata-travel",
+  "version": "0.0.1",
+  "description": "Android travel for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdmclin2/nata-travel.git"
+  },
+  "keywords": [
+    "android",
+    "travel",
+    "adb"
+  ],
+  "author": "Calvin Meng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rdmclin2/nata-travel/issues"
+  },
+  "homepage": "https://github.com/rdmclin2/nata-travel#readme",
+  "dependencies": {
+    "adbkit": "^2.4.1",
+    "bluebird": "^3.3.5"
+  }
+}
