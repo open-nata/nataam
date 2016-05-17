@@ -193,3 +193,7 @@
 ### (2015/5/16)
 - Ready to rewirte the java client using nodejs
 - Add nata-travel to explore how to write dfs using nodejs
+
+### (2015/5/17)
+- Add ESlint to control code style
+- Add Babel to use es6
