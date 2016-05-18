@@ -1,0 +1,1 @@
+import TapAction from '../../src/actions/TapAction'

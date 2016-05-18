@@ -195,5 +195,5 @@
 - Add nata-travel to explore how to write dfs using nodejs
 
 ### (2015/5/17)
-- Add ESlint to control code style
+- Add ESLint to control code style
 - Add Babel to use es6
