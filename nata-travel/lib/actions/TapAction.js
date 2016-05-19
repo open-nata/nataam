@@ -29,8 +29,8 @@ var TapAction = function (_Action) {
     return _possibleConstructorReturn(this, Object.getPrototypeOf(TapAction).call(this, 'tap'));
   }
 
-  // fire(device) {
-  //   device.
+  // fire(monkey) {
+  //   monkey
   // }
 
 
@@ -45,16 +45,16 @@ var bluebird = require('bluebird');
 var client = _adbkit2.default.createClient();
 
 client.listDevices().then(function (devices) {
-  return bluebird.filter(devices, function () {
-    return client.openMonkey().then(function (monkey) {
+  return bluebird.filter(devices, function (device) {
+    return client.openMonkey(device.id).then(function (monkey) {
       return monkey.press(3 /* KEYCODE_HOME */, function () {
         console.log('Pressed home button');
-        client.end();
+        monkey.end();
       });
     });
   });
-}).then(function (supportedDevices) {
-  console.log('The following devices support NFC:', supportedDevices);
+}).then(function () {
+  console.log('The following devices support NFC');
 }).catch(function (err) {
   console.error('Something went wrong:', err.stack);
 });

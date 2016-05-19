@@ -48,7 +48,7 @@ public class AdbDevice {
         String tempDumpfile = tempDir + "/dumps/dumpfile.xml";
 //        System.out.println(tempDumpfile);
 //        "su", "-c",
-        String output = ShellKit.adbShell( "uiautomator", "dump", DUMP_FILE_LOCATION);
+        String output = ShellKit.adbShell("uiautomator", "dump", DUMP_FILE_LOCATION);
 
         if (!output.equals("")) {
             ShellKit.adb("pull", DUMP_FILE_LOCATION, tempDumpfile);

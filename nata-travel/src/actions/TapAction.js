@@ -5,8 +5,8 @@ class TapAction extends Action {
     super('tap')
   }
 
-  // fire(device) {
-  //   device.
+  // fire(monkey) {
+  //   monkey
   // }
 }
 
@@ -18,10 +18,10 @@ const client = adb.createClient()
 
 client.listDevices()
   .then((devices) => {
-    return bluebird.filter(devices, () => {
-      return client.openMonkey()
+    return bluebird.filter(devices, (device) => {
+      return client.openMonkey(device.id)
         .then((monkey) => {
-          return monkey.press(3 /* KEYCODE_HOME */ , () => {
+          return monkey.press(3 /* KEYCODE_HOME */, () => {
             console.log('Pressed home button')
             monkey.end()
           })

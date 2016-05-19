@@ -197,3 +197,6 @@
 ### (2015/5/17)
 - Add ESLint to control code style
 - Add Babel to use es6
+
+### (2015/5/19)
+- Add device.js, Monkey.js

@@ -5,8 +5,9 @@
     ],
     "rules": {
         "semi": [2, "never"],
-        "arrow-body-style": ["error", "always"],
+        "arrow-body-style": ["off", "always"],
         "no-console": 0,
-        "eol-last": "off"
-    }
+        "eol-last": "off",
+        "quotes": [2, "single", {"avoidEscape": true, "allowTemplateLiterals": true}]
+        }
 }
