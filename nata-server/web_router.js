@@ -42,6 +42,7 @@ module.exports = function () {
   router.get('/testcases',TestcaseController.show);
   router.get('/testcases/:id/record',TestcaseController.record);
   router.get('/testcases/:id/edit',TestcaseController.edit);
+  router.get('/testcases/:id/replay',TestcaseController.replay);
 
   /**
    * group cases operations

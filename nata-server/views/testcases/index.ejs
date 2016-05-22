@@ -39,6 +39,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-sm-4 control-label" for="type">用例类型</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="type" id="type">
+                                        <option value="part">部分</option>
+                                        <option value="complete">完整</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <div class="col-sm-offset-4 col-sm-8">
                                     <button id="btn-create" type="submit" class="btn btn-primary">
                                         创建任务
@@ -67,6 +77,9 @@
                                 待测应用
                             </th>
                             <th>
+                                用例类型
+                            </th>
+                            <th>
                                 是否完成
                             </th>
                             <th>
@@ -87,6 +100,15 @@
                                 <%= testcase.apk_name %>
                             </td>
                             <td>
+                                <% if(testcase.type === 'complete'){ %>
+                                    完整
+                                <% } else if(testcase.type === 'part') { %>
+                                    部分
+                                <% } else {%>
+                                    未知
+                                <% } %>
+                            </td>
+                            <td>
                                 <%= testcase.isFinish %>
                             </td>
                             <td>
@@ -98,6 +120,10 @@
                                    class="btn-restart btn btn-primary btn-xs" role="button">重新录制</a>
                                 <a href="/testcases/<%= testcase._id %>/edit" class="btn-edit btn btn-info btn-xs"
                                    role="button">编辑</a>
+                                    <% if(testcase.type === 'complete') {%>
+                                <a href="/testcases/<%= testcase._id %>/replay" class="btn-replay btn btn-success btn-xs"
+                                   role="button">回放</a>
+                                    <% }%>
 
                                 <% } %>
                                 <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"

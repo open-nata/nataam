@@ -6,6 +6,7 @@ module.exports.create = function (req, res, next) {
   testcase.name = req.body.name;
   testcase.device_id = req.body.device_id;
   testcase.apk_id = req.body.apk_id;
+  testcase.type = req.body.type;
 
   testcase.save(function (err, testcase) {
     if (err) {

@@ -85,3 +85,21 @@ module.exports.edit = function (req, res, next) {
     });
   });
 };
+
+/**
+ * 获取应用详细信息
+ */
+module.exports.replay= function (req, res, next) {
+  var testcase_id = req.params.id;
+  var ep = new eventproxy();
+  ep.fail(next);
+
+  TestcaseModel.findOne({_id:testcase_id}).exec(ep.done('testcase'));
+
+  ep.on('testcase',function(testcase) {
+    res.render('replay', {
+      title: '测试用例回放',
+      actions: testcase.actions
+    });
+  });
+};

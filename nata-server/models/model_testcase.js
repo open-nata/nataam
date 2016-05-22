@@ -4,9 +4,9 @@ var TestcaseSchema = new mongoose.Schema({
   name : String,
   device_id: String,
   apk_id: String,
-  ifPart: {
-    type: Boolean,
-    default: true
+  type: {
+    type: String,
+    enum: ['complete','part'],
   },
   isFinish: {
     type: Boolean,
