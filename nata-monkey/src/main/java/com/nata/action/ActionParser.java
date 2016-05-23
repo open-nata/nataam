@@ -38,37 +38,62 @@ public class ActionParser {
                 break;
             }
             case ActionType.LONG_CLICK : {
-                String []xy = splits[1].split(" ");
-                int X = Integer.parseInt(xy[1]);
-                int Y = Integer.parseInt(xy[2]);
-                action = new LongClickAction(device,X,Y);
-                break;
-            }
-            case ActionType.TAP : {
-                String []xy = splits[1].split(" ");
-                int X = Integer.parseInt(xy[1]);
-                int Y = Integer.parseInt(xy[2]);
-                action = new TapAction(device,X,Y);
-                break;
-            }
-            case ActionType.SWIPE : {
-                String []params = splits[1].split(" ");
-                SwipeDirection direction = SwipeDirection.valueOf(params[1]);
-                String atString = params[0].substring(1);
-                String [] coordinates = atString.split("[,x]");
+                String []params = splits[1].split(" ",3);
+                String at = params[0];
+                String []coordinates = at.substring(1).split("[,x]");
                 int startX = Integer.parseInt(coordinates[0]);
                 int startY = Integer.parseInt(coordinates[1]);
                 int endX = Integer.parseInt(coordinates[2]);
                 int endY = Integer.parseInt(coordinates[3]);
-                action = new SwipeAction(device,direction,startX,startY,endX,endY);
+
+                int X = Integer.parseInt(params[1]);
+                int Y = Integer.parseInt(params[2]);
+                action = new LongClickAction(device,startX,startY,endX,endY,X,Y);
+                break;
+            }
+            case ActionType.TAP : {
+                String []params = splits[1].split(" ",3);
+                String at = params[0];
+                String []coordinates = at.substring(1).split("[,x]");
+                int startX = Integer.parseInt(coordinates[0]);
+                int startY = Integer.parseInt(coordinates[1]);
+                int endX = Integer.parseInt(coordinates[2]);
+                int endY = Integer.parseInt(coordinates[3]);
+
+                int X = Integer.parseInt(params[1]);
+                int Y = Integer.parseInt(params[2]);
+
+                action = new TapAction(device,startX,startY,endX,endY,X,Y);
+                break;
+            }
+            case ActionType.SWIPE : {
+                String []params = splits[1].split(" ",2);
+
+                String at = params[0];
+                String []coordinates = at.substring(1).split("[,x]");
+                int startX = Integer.parseInt(coordinates[0]);
+                int startY = Integer.parseInt(coordinates[1]);
+                int endX = Integer.parseInt(coordinates[2]);
+                int endY = Integer.parseInt(coordinates[3]);
+
+                SwipeDirection direction = SwipeDirection.valueOf(params[1]);
+                action = new SwipeAction(device,startX,startY,endX,endY,direction);
                 break;
             }
             case ActionType.INPUT : {
                 String []params = splits[1].split(" ",4);
+                String at = params[0];
+                String []coordinates = at.substring(1).split("[,x]");
+                int startX = Integer.parseInt(coordinates[0]);
+                int startY = Integer.parseInt(coordinates[1]);
+                int endX = Integer.parseInt(coordinates[2]);
+                int endY = Integer.parseInt(coordinates[3]);
+
                 int X = Integer.parseInt(params[1]);
                 int Y = Integer.parseInt(params[2]);
+
                 String text = params[3];
-                action = new TextInputAction(device,X,Y,text);
+                action = new TextInputAction(device,startX,startY,endX,endY,X,Y,text);
                 break;
             }
         }
@@ -113,9 +138,13 @@ public class ActionParser {
 //        for (Action action: actionList) {
 //            action.fire();
 //        }
-        String  at= "172,234x279,1931" ;
-        System.out.println(at.substring(1,at.length()-1));
+//        String  at= "172,234x279,1931" ;
+//        System.out.println(at.substring(1,at.length()-1));
 //        String [] cordinates = at.split("[,x]");
 //        System.out.println(Arrays.toString(cordinates));
+
+        String str ="Swipe @0,75x1080,1776 LEFT";
+        Action action = ActionParser.parse(str);
+        action.fire();
     }
 }

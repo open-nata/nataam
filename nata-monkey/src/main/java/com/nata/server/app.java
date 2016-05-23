@@ -84,6 +84,7 @@ public class App {
             config.setAlgorithm(request.query("algorithm"));
             config.setDevice_id(request.query("device_id"));
             config.setSetup(request.query("setup"));
+            config.setBlacklist(request.query("blacklist"));
 
             runnerFactory.createRunnerAndRun(config);
             response.status(200).text("success");

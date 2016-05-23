@@ -24,7 +24,9 @@ public abstract class AbstractMonkey {
     private final String pkg;
     private final String act;
     private final AdbDevice device;
-    private final List<String> setup;
+    private final List<Action> setup;
+    private final List<String> blacklist;
+
     private TestResult testResult;
 
     private Action backAction = null;
@@ -44,33 +46,44 @@ public abstract class AbstractMonkey {
         this.pkg = config.getPackage_name();
         this.act = config.getActivity_name();
         this.ACTION_COUNTS = config.getAction_count();
-        this.setup = config.getSetup();
 
-        this.device  = new AdbDevice();
-        actionFactory = new ActionFactory(device);
-        stateFactory = new StateFactory(device,actionFactory);
+        // add setup
+        List<String> setups = config.getSetup();
+        this.setup = new ArrayList<>();
+        for (String str : setups) {
+            Action action = ActionParser.parse(str);
+            this.setup.add(action);
+        }
+
+
+        this.blacklist = config.getBlacklist();
+
+        this.device = new AdbDevice();
+        actionFactory = new ActionFactory(device, this.blacklist);
+        stateFactory = new StateFactory(device, actionFactory);
 
         backAction = actionFactory.createBackAction();
         homeAction = actionFactory.createHomeAction();
         restartAction = getActionFactory().CreateRestartAction(getPkgAct());
         cleanDataAction = getActionFactory().CreateCleanDataAction(getPkg());
 
-        testResult = new TestResult(config.getRecord_id(),config.isRemote());
+        testResult = new TestResult(config.getRecord_id(), config.isRemote());
     }
 
 
-
-    public String getName(){
+    public String getName() {
         return name;
     }
+
     public Action getBackAction() {
         return backAction;
     }
 
 
-    public Action getRestartAction(){
+    public Action getRestartAction() {
         return restartAction;
     }
+
     protected ActionFactory getActionFactory() {
         return actionFactory;
     }
@@ -85,12 +98,12 @@ public abstract class AbstractMonkey {
 //        device.sleep(5000);
 //    }
 
-    public Set<State> getStateSet(){
+    public Set<State> getStateSet() {
         return testResult.getStateSet();
     }
 
     public void startApp() {
-        LogUtil.info(name+ " start playing...");
+        LogUtil.info(name + " start playing...");
         executeAction(cleanDataAction);
         executeAction(restartAction);
         LogUtil.info("Starting App success!");
@@ -98,49 +111,51 @@ public abstract class AbstractMonkey {
 
 
     public void setUp() {
-        if(this.setup != null){
-            for (String str: this.setup) {
-                Action action = ActionParser.parse(str);
-                action.fire();
-            }
+        for (Action action : this.setup) {
+            action.fire();
         }
+    }
+
+    public List<Action> getSetupActions(){
+       return this.setup;
     }
 
     /**
      * Fire the action and add the action to actionList
+     *
      * @param action to be executed
      */
-    public void executeAction(Action action){
+    public void executeAction(Action action) {
         action.fire();
         testResult.addAction(action);
         lastAction = action;
         cnt++;
-        if(cnt % Frequency == 0 ){
+        if (cnt % Frequency == 0) {
             summary();
         }
     }
 
-    public void executeActions(List<Action> actions){
-        for (Action action: actions) {
+    public void executeActions(List<Action> actions) {
+        for (Action action : actions) {
             action.fire();
             testResult.addAction(action);
             lastAction = action;
             cnt++;
-            if(cnt % Frequency == 0 ){
+            if (cnt % Frequency == 0) {
                 summary();
             }
         }
     }
 
-    private void checkState(State state){
+    private void checkState(State state) {
         // add state
-        if(!testResult.containState(state)){
+        if (!testResult.containState(state)) {
             testResult.addState(state);
             //add activity
             if (isInCurrentPkg()) {
                 testResult.addActivity(state.getActivity());
             }
-        }else {
+        } else {
             for (State oldState : testResult.getStateSet()) {
                 if (oldState.equals(state)) {
                     state = oldState;
@@ -150,12 +165,12 @@ public abstract class AbstractMonkey {
         }
 
         //add new widget
-        List<Widget>  widgets = state.getWidgets();
+        List<Widget> widgets = state.getWidgets();
 //        String widgetsInfo = "CurrentUi: ";
-        for (Widget widget: widgets) {
+        for (Widget widget : widgets) {
 //            widgetsInfo += widget;
             // only add the widgets in the App
-            if(widget.getPackageName().equals(pkg)){
+            if (widget.getPackageName().equals(pkg)) {
                 testResult.addWidget(widget);
             }
         }
@@ -169,7 +184,7 @@ public abstract class AbstractMonkey {
     }
 
 
-    public DFSState getCurrentDFSState(){
+    public DFSState getCurrentDFSState() {
         DFSState dfsState = stateFactory.createDFSState();
         checkState(dfsState);
         return dfsState;
@@ -207,12 +222,13 @@ public abstract class AbstractMonkey {
     /**
      * They can stop whenever we ask them to
      */
-    public void stop(){}
+    public void stop() {
+    }
 
     /**
      * They can report the running status after they stop
      */
-    public void report(){
+    public void report() {
         testResult.report();
     }
 
@@ -225,11 +241,10 @@ public abstract class AbstractMonkey {
         boolean forceQuit = false;
         while (!isInCurrentPkg()) {
             // if even the restart action cannot restart it ;
-            if(forceQuit){
+            if (forceQuit) {
                 executeAction(cleanDataAction);
                 executeAction(restartAction);
-            }
-            else if(lastAction instanceof StartAppAction){
+            } else if (lastAction instanceof StartAppAction) {
                 executeAction(homeAction);
                 executeAction(restartAction);
                 forceQuit = true;
@@ -246,12 +261,12 @@ public abstract class AbstractMonkey {
         }
     }
 
-    public void summary(){
+    public void summary() {
         testResult.summary();
     }
 
 
-    public void toCommands(){
+    public void toCommands() {
         testResult.toCommands();
     }
 }

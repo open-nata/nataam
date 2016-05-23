@@ -207,3 +207,4 @@
 ### (2015/5/23)
 - Add setup rule for monkeys
 - Add blacklist for apk
+- fix bugs

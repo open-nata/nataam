@@ -3,6 +3,7 @@ var DeviceModel = require('../models/model_device.js');
 var ApkModel = require('../models/model_apk.js');
 var TestcaseModel = require('../models/model_testcase.js');
 var eventproxy= require('eventproxy');
+var _ = require('lodash');
 
 /**
  * 获取自动任务运行详情
@@ -81,18 +82,25 @@ module.exports.report =  function (req, res, next) {
   ep.all('records','devices','apks',function(records,devices,apks){
 
     records.forEach(function (record) {
+      // join
       if(record.setup.length !== 0 ) {
-        var actions = '';
-        for(var i = 0 ; i< record.setup.length ; i++) {
-          actions +=  record.setup[i] + '\n';
-        }
+        var actions = _.join(record.setup,'\n');
         record.setup = actions;
       }
+
+
 
       ApkModel.findOne({_id: record.apk_id}).exec(ep.done(function (apk) {
         record.apk_name = apk.name;
         record.package_name = apk.package_name;
         record.activity_name = apk.activity_name;
+
+        if(apk.blacklist.length !==0  ) {
+          var resources = _.join(apk.blacklist,'\n');
+          record.blacklist = resources;
+        }
+
+
         ep.emit('apk');
       }));
     });

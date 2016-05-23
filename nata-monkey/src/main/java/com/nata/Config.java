@@ -24,6 +24,7 @@ public class Config {
     private int action_count;
     private String algorithm;
     private List<String> setup;
+    private List<String> blacklist;
 
     public Config(){
         this.app_name = "凤城卫士";
@@ -33,6 +34,7 @@ public class Config {
         this.algorithm = MonkeyType.DFS;
         this.isRemote = false;
         this.setup = null;
+        this.blacklist = null;
     }
 
     public boolean isRemote() {
@@ -105,10 +107,24 @@ public class Config {
 
     public void setSetup(String setup) {
         if(setup.length() != 0){
-            this.setup = new ArrayList<String>();
+            this.setup = new ArrayList<>();
             String [] splits = setup.trim().split("\n");
             for (String action:splits) {
                 this.setup.add(action);
+            }
+        }
+    }
+
+    public List<String> getBlacklist() {
+        return blacklist;
+    }
+
+    public void setBlacklist(String blacklist) {
+        if(blacklist.length() != 0){
+            this.blacklist = new ArrayList<>();
+            String [] splits = blacklist.trim().split("\n");
+            for (String action:splits) {
+                this.blacklist.add(action);
             }
         }
     }

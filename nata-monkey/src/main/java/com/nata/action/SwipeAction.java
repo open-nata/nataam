@@ -30,7 +30,7 @@ public class SwipeAction extends Action {
         endY = widget.getEndY();
     }
 
-    public SwipeAction(AdbDevice device,SwipeDirection direction ,int startX, int startY, int endX, int endY) {
+    public SwipeAction(AdbDevice device,int startX, int startY, int endX, int endY,SwipeDirection direction ) {
         super(ActionType.SWIPE);
         this.device = device;
         this.direction = direction;
@@ -112,8 +112,8 @@ public class SwipeAction extends Action {
      * @return
      */
     public String toCommand(){
-        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
-                +"x" + widget.getEndX() +"," + widget.getEndY();
+        String at =   "@" + startX +"," + startY
+                +"x" + endX +"," + endY;
 
         return ActionType.SWIPE+ " " + at + " " + direction;
     }

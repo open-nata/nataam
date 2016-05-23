@@ -30,7 +30,7 @@ public class TextInputAction extends Action{
         return widget;
     }
 
-    public TextInputAction(AdbDevice device,int X,int Y ,String text){
+    public TextInputAction(AdbDevice device,int startX, int startY, int endX, int endY,int X,int Y ,String text){
         super(ActionType.INPUT);
         this.device = device;
         this.text = text;

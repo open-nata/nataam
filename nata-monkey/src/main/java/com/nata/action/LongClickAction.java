@@ -14,6 +14,12 @@ public class LongClickAction extends Action{
     private int X;
     private int Y;
 
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+
+
     private final double LONG_CLICK_REWARD = BASE - 1.0;
 
     public LongClickAction(AdbDevice device,Widget widget){
@@ -24,11 +30,16 @@ public class LongClickAction extends Action{
         this.Y = widget.getY();
     }
 
-    public LongClickAction(AdbDevice device,int X, int Y){
+    public LongClickAction(AdbDevice device,int startX, int startY, int endX, int endY,int X, int Y){
         super(ActionType.LONG_CLICK);
         this.device = device;
         this.X = X;
         this.Y = Y;
+
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
 
     @Override
@@ -91,8 +102,8 @@ public class LongClickAction extends Action{
      * @return
      */
     public String toCommand(){
-        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
-                +"x" + widget.getEndX() +"," + widget.getEndY();
+        String at =   "@" + startX +"," + startY
+                +"x" + endX +"," + endY;
 
         return ActionType.LONG_CLICK + " " + at + " " + X + " " + Y;
     }

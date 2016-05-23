@@ -73,6 +73,7 @@ $(function () {
     config.algorithm = $(this).data('algorithm');
     config.app_name = $(this).data('name');
     config.setup = $(this).data('setup');
+    config.blacklist = $(this).data('blacklist');
 
 
     $.ajax({

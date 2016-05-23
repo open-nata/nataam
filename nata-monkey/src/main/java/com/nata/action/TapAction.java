@@ -13,6 +13,12 @@ public class TapAction extends Action{
     private Widget widget = null;
     private int centerX ;
     private int centerY;
+
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+
     private final double TAP_REWARD = BASE + 0.8;
     public TapAction(AdbDevice device,Widget widget){
         super(ActionType.TAP);
@@ -22,11 +28,16 @@ public class TapAction extends Action{
         this.centerY = widget.getCenterY();
     }
 
-    public TapAction(AdbDevice device,int centerX , int centerY){
+    public TapAction(AdbDevice device,int startX, int startY, int endX, int endY,int centerX , int centerY){
         super(ActionType.TAP);
         this.device = device;
         this.centerX = centerX;
         this.centerY = centerY;
+
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
 
     @Override
@@ -89,8 +100,8 @@ public class TapAction extends Action{
      * @return
      */
     public String toCommand(){
-        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
-                +"x" + widget.getEndX() +"," + widget.getEndY();
+        String at =   "@" + startX +"," + startY
+                +"x" + endX +"," + endY;
 
         return ActionType.TAP + " "+ at + " " + centerX + " " + centerY;
     }

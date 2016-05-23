@@ -111,13 +111,13 @@ module.exports.removeBlacklist = function(req, res, next) {
 module.exports.removeActpath = function(req, res, next) {
   var apk_id= req.params.id;
   var act_name = req.params.actpath.trim();
-  console.log(apk_id);
-  console.log(act_name);
 
   ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
     _.remove(apk.actpaths,function(actPath) {
       return actPath.activity === act_name
     });
+
+    //console.log(JSON.stringify(apk.actpaths));
 
     apk.save(function (err) {
       if (err) return next(err);

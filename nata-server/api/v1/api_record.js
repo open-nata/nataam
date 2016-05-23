@@ -16,7 +16,20 @@ module.exports = function () {
     record.algorithm = req.body.algorithm;
     record.status = "ready";
     var testcase_id = req.body.setup;
-    console.log('testcase_id: '+ testcase_id);
+    console.log("testcase: " + testcase_id);
+
+    ep.on('setup', function(){
+      console.log("setup ");
+      record.save(function (err, record) {
+        if (err) {
+          return next(err);
+        } else {
+          res.status(200).json(record);
+        }
+      });
+    })
+
+
 
     if(testcase_id) {
       TestcaseModel.findOne({_id: testcase_id}).exec(ep.done(function(testcase){
@@ -29,15 +42,7 @@ module.exports = function () {
       ep.emit('setup');
     }
 
-    ep.on('setup', function(){
-      record.save(function (err, record) {
-        if (err) {
-          return next(err);
-        } else {
-          res.status(200).json(record);
-        }
-      });
-    })
+
   };
 
   var remove = function (req, res, next) {

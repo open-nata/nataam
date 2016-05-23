@@ -216,7 +216,8 @@ public class DfsMonkey extends AbstractMonkey {
     }
 
     public void updateActPath() {
-        List<Action> setupActions = new ArrayList<>();
+        List<Action> setupActions = this.getSetupActions();
+        System.out.println(setupActions);
         setupActions.add(getRestartAction());
 
         HashMap<String,String> actPaths = TreeWeb.getActLunchTestcases(nodes, setupActions);
