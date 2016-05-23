@@ -58,6 +58,56 @@ module.exports.remove = function(req, res, next) {
 
 };
 
+
+module.exports.addBlacklist = function(req, res, next) {
+  var apk_id= req.params.id;
+  var item = req.body.item.trim();
+
+  if(!apk_id || ! item){
+    return res.status(422).send("error");
+  }
+
+  ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
+    var index = apk.blacklist.indexOf(item);
+
+    if(index !== -1){
+      res.status(200).send("save success");
+    }else {
+      apk.blacklist.push(item);
+
+      apk.save(function (err) {
+        if (err) return next(err);
+        res.status(200).send("save success");
+      });
+    }
+  });
+}
+
+module.exports.removeBlacklist = function(req, res, next) {
+  var apk_id= req.params.id;
+  var item = req.body.item.trim();
+
+  if(!apk_id || ! item){
+    return res.status(422).send("error");
+  }
+
+  ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
+    var index = apk.blacklist.indexOf(item);
+    if(index === -1 ){
+      res.status(404).send("not found");
+    }else {
+      apk.blacklist.splice(index,1);
+
+      apk.save(function (err) {
+        if (err) return next(err);
+        res.status(200).send("delete success");
+      });
+    }
+  });
+}
+
+
+
 module.exports.removeActpath = function(req, res, next) {
   var apk_id= req.params.id;
   var act_name = req.params.actpath.trim();

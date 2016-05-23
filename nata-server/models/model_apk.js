@@ -20,6 +20,7 @@ var ApkSchema = new mongoose.Schema({
   },
   actpaths: [ActPathSchema],
   activity_name: String,
+  blacklist: [String],
   create_at: {type: Date, default: Date.now},
 });
 

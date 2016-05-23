@@ -4,44 +4,75 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">应用信息</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">应用信息</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form id="apk-form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="name">待测应用名称</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                   value="<%= apk.name %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="version">应用版本</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" value="<%= apk.version %>"
+                                                   name="version" id="version">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="package_name">包名</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" value="<%= apk.package_name %>"
+                                                   name="package_name" id="package_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="activity_name">启动Activity</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="activity_name"
+                                                   id="activity_name"
+                                                   value="<%= apk.activity_name %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8">
+                                            <button id="btn-updateapk" type="submit" class="btn btn-primary"
+                                                    data-id="<%= apk._id %>">
+                                                更新应用信息
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <form id="apk-form" class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="name">待测应用名称</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="name" id="name" value="<%= apk.name %>">
-                                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">黑名单</h3>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="version">应用版本</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="<%= apk.version %>" name="version" id="version">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="package_name">包名</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="<%= apk.package_name%>" name="package_name" id="package_name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="activity_name">启动Activity</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="activity_name" id="activity_name" value="<%= apk.activity_name%>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-4 col-sm-8">
-                                    <button id="btn-updateapk" type="submit" class="btn btn-primary"  data-id="<%= apk._id %>">
-                                        更新应用信息
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            <div class="input-group" >
+                                <input id="input-blacklist" type="text" class="form-control" placeholder="resouce-id" style="border-radius: 0">
+      <span class="input-group-btn">
+        <button id="btn-blacklist" class="btn btn-primary" type="button" style="border-radius: 0" data-id="<%= apk._id %>">+</button>
+      </span>
+                            </div><!-- /input-group -->
+                            <ul id="ul-blacklist" class="list-group">
+                                <% apk.blacklist.forEach(function(item){ %>
+                                <li class="list-group-item" > <%= item %><span class="remove-blacklist text-danger icon ion-minus-circled pull-right" data-id="<%=  apk._id %>"></span></li>
+                                <% }); %>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +80,9 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">最短Act路径</h3>
+                        <h3 class="panel-title">最短Act路径
+                        <span class="text-success icon ion-checkmark-round pull-right"> <%= apk.actpaths.length %></span>
+                        </h3>
                     </div>
                     <table class="table table-hover ">
                         <thead>
@@ -66,12 +99,14 @@
                         <% apk.actpaths.forEach(function(actpath){ %>
                         <tr>
                             <td>
-                                <%= actpath.activity%>
+                                <%= actpath.activity %>
                             </td>
                             <td>
-                                <a href="/apks/<%= apk.id %>/replay/<%= actpath.activity %>" class="btn btn-primary btn-xs" role="button">回放</a>
+                                <a href="/apks/<%= apk.id %>/replay/<%= actpath.activity %>"
+                                   class="btn btn-primary btn-xs" role="button">回放</a>
 
-                                <a href="#" class="btn-del-actpath btn btn-danger btn-xs" role="button" data-id="<%= apk.id %>" data-act="<%= actpath.activity %>">删除</a>
+                                <a href="#" class="btn-del-actpath btn btn-danger btn-xs" role="button"
+                                   data-id="<%= apk.id %>" data-act="<%= actpath.activity %>">删除</a>
                             </td>
                         </tr>
                         <% }); %>

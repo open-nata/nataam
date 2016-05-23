@@ -20,6 +20,7 @@ var RecordSchema = new mongoose.Schema({
     enum: ['ready', 'running', 'success', 'failure']
   },
   setup: [String],
+  blacklist: [String],
   summaries: [summarySchema],
   activities: [String],
   widgets: [String],
