@@ -156,6 +156,8 @@ public class DfsMonkey extends AbstractMonkey {
 
     @Override
     public void play() {
+        setUp();
+
         startApp();
         rootState = getCurrentDFSState();
         curState = rootState;

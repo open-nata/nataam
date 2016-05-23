@@ -35,6 +35,7 @@ public class RandomMonkey extends AbstractMonkey {
 
     @Override
     public void play() {
+        setUp();
         startApp();
 
         State curState = getCurrentState();

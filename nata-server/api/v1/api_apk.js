@@ -79,8 +79,8 @@ module.exports.removeActpath = function(req, res, next) {
 module.exports.getactions = function(req, res, next) {
   var apk_id= req.params.id;
   var act_name = req.params.actpath.trim();
-  console.log(apk_id);
-  console.log(act_name);
+  //console.log(apk_id);
+  //console.log(act_name);
 
   ApkModel.findOne({_id:apk_id}).exec(function(err,apk){
     if (err) return next(err);
@@ -94,6 +94,17 @@ module.exports.getactions = function(req, res, next) {
     }
   });
 };
+
+
+module.exports.testcases = function(req, res, next) {
+  var apk_id = req.params.id;
+
+  TestcaseModel.find({apk_id: apk_id, type: 'complete',isFinish: true}).exec(function(err,testcases){
+    if(err ) return next(err);
+
+    res.status(200).json(testcases);
+  });
+}
 
 module.exports.actpath= function(req, res, next) {
   var package_name = req.params.package;

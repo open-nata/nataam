@@ -83,7 +83,7 @@ public class App {
             config.setAction_count(request.queryAsInt("action_count"));
             config.setAlgorithm(request.query("algorithm"));
             config.setDevice_id(request.query("device_id"));
-
+            config.setSetup(request.query("setup"));
 
             runnerFactory.createRunnerAndRun(config);
             response.status(200).text("success");

@@ -50,6 +50,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-4 control-label" for="setup">前置动作</label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="setup" id="setup">
+                                        <option value="">无</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-sm-offset-4 col-sm-8">
                                     <button id="btn-create" type="submit" class="btn btn-primary" >
                                         创建任务
@@ -118,13 +127,17 @@
                                    data-id="<%= record.id %>" data-device="<%= record.device_id %>"
                                    data-action="<%= record.action_count %>" data-package="<%= record.package_name %>"
                                    data-activity="<%= record.activity_name %>" data-algorithm="<%= record.algorithm %>"
-                                   data-name="<%= record.app_name %>">开始</a>
+                                   data-setup="<%= record.setup%>" data-name="<%= record.app_name %>">开始</a>
+
+
+
+
                                 <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"
                                    data-id="<%= record.id %>">删除</a>
                                 <% }else if(record.status === "success"){ %>
                                 <a href="/records/<%= record.id %>/report" class="btn btn-info btn-xs"
                                    role="button">详细报告</a>
-                                <a href="/records/<%= record.id %>/replay" class="btn btn-info btn-xs"
+                                <a href="/records/<%= record.id %>/replay" class="btn btn-success btn-xs"
                                    role="button">回放</a>
                                 <a href="#" class="btn-remove btn btn-danger btn-xs" role="button"
                                    data-id="<%= record.id %>">删除</a>

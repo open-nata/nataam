@@ -200,3 +200,9 @@
 
 ### (2015/5/19)
 - Add device.js, Monkey.js
+
+### (2015/5/22)
+- add testcase type to rerun the finished complete testcase
+
+### (2015/5/23)
+- Add setup rule for monkeys

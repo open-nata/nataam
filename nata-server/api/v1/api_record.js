@@ -1,24 +1,43 @@
 module.exports = function () {
 
   var RecordModel = require('../../models/model_record.js');
+  var TestcaseModel = require('../../models/model_testcase.js');
+  var eventproxy = require('eventproxy');
   var _ = require('lodash');
 
   var create = function (req, res, next) {
-    console.log("create");
+    var ep = new eventproxy();
+    ep.fail(next);
+
     var record = new RecordModel();
     record.device_id = req.body.device_id;
     record.apk_id = req.body.apk_id;
     record.action_count = req.body.action_count;
     record.algorithm = req.body.algorithm;
     record.status = "ready";
+    var testcase_id = req.body.setup;
+    console.log('testcase_id: '+ testcase_id);
 
-    record.save(function (err, record) {
-      if (err) {
-        return next(err);
-      } else {
-        res.status(200).json(record);
-      }
-    });
+    if(testcase_id) {
+      TestcaseModel.findOne({_id: testcase_id}).exec(ep.done(function(testcase){
+        for(var i = 0 ; i< testcase.actions.length ; i++){
+          record.setup.push(testcase.actions[i]);
+        }
+        ep.emit('setup');
+      }));
+    }else {
+      ep.emit('setup');
+    }
+
+    ep.on('setup', function(){
+      record.save(function (err, record) {
+        if (err) {
+          return next(err);
+        } else {
+          res.status(200).json(record);
+        }
+      });
+    })
   };
 
   var remove = function (req, res, next) {

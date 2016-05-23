@@ -10,6 +10,7 @@ module.exports = function () {
   router.post('/apks', apkApi.create);
   router.delete('/apks/:id', apkApi.remove);
   router.put('/apks/:id', apkApi.update);
+  router.get('/apks/:id/testcases', apkApi.testcases);
   router.delete('/apks/:id/:actpath', apkApi.removeActpath);
   router.get('/apks/:id/:actpath', apkApi.getactions);
   router.post('/apks/:package/actpath', apkApi.actpath);

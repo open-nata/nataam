@@ -109,6 +109,7 @@ public class QLearningMonkey extends AbstractMonkey {
 
     @Override
     public void play() {
+        setUp();
         startApp();
         State curState = getCurrentState();
 

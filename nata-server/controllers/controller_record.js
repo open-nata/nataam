@@ -1,6 +1,7 @@
 var RecordModel = require('../models/model_record.js');
 var DeviceModel = require('../models/model_device.js');
 var ApkModel = require('../models/model_apk.js');
+var TestcaseModel = require('../models/model_testcase.js');
 var eventproxy= require('eventproxy');
 
 /**
@@ -80,7 +81,14 @@ module.exports.report =  function (req, res, next) {
   ep.all('records','devices','apks',function(records,devices,apks){
 
     records.forEach(function (record) {
-      console.log(record.apk_id);
+      if(record.setup.length !== 0 ) {
+        var actions = '';
+        for(var i = 0 ; i< record.setup.length ; i++) {
+          actions +=  record.setup[i] + '\n';
+        }
+        record.setup = actions;
+      }
+
       ApkModel.findOne({_id: record.apk_id}).exec(ep.done(function (apk) {
         record.apk_name = apk.name;
         record.package_name = apk.package_name;
@@ -102,5 +110,6 @@ module.exports.report =  function (req, res, next) {
   RecordModel.find({}).sort({create_at: -1}).exec(ep.done("records"));
   DeviceModel.find({}).sort({create_at: -1}).exec(ep.done("devices"));
   ApkModel.find({}).sort({create_at: -1}).exec(ep.done("apks"));
+
 
 };

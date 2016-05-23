@@ -24,6 +24,7 @@ public abstract class AbstractMonkey {
     private final String pkg;
     private final String act;
     private final AdbDevice device;
+    private final List<String> setup;
     private TestResult testResult;
 
     private Action backAction = null;
@@ -43,6 +44,7 @@ public abstract class AbstractMonkey {
         this.pkg = config.getPackage_name();
         this.act = config.getActivity_name();
         this.ACTION_COUNTS = config.getAction_count();
+        this.setup = config.getSetup();
 
         this.device  = new AdbDevice();
         actionFactory = new ActionFactory(device);
@@ -92,6 +94,16 @@ public abstract class AbstractMonkey {
         executeAction(cleanDataAction);
         executeAction(restartAction);
         LogUtil.info("Starting App success!");
+    }
+
+
+    public void setUp() {
+        if(this.setup != null){
+            for (String str: this.setup) {
+                Action action = ActionParser.parse(str);
+                action.fire();
+            }
+        }
     }
 
     /**

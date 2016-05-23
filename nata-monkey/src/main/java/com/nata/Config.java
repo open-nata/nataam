@@ -2,6 +2,9 @@ package com.nata;
 
 import com.nata.monkeys.MonkeyType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Author: Calvin Meng
  * Blog: mclspace.com  Email: rdmclin2@gamil.com
@@ -20,6 +23,7 @@ public class Config {
     private String activity_name;
     private int action_count;
     private String algorithm;
+    private List<String> setup;
 
     public Config(){
         this.app_name = "凤城卫士";
@@ -28,6 +32,7 @@ public class Config {
         this.action_count = 1000;
         this.algorithm = MonkeyType.DFS;
         this.isRemote = false;
+        this.setup = null;
     }
 
     public boolean isRemote() {
@@ -92,6 +97,20 @@ public class Config {
 
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
+    }
+
+    public List<String> getSetup() {
+        return setup;
+    }
+
+    public void setSetup(String setup) {
+        if(setup.length() != 0){
+            this.setup = new ArrayList<String>();
+            String [] splits = setup.trim().split("\n");
+            for (String action:splits) {
+                this.setup.add(action);
+            }
+        }
     }
 }
 

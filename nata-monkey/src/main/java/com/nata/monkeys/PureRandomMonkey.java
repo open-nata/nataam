@@ -82,6 +82,7 @@ public class PureRandomMonkey extends AbstractMonkey{
 
     @Override
     public void play() {
+        setUp();
         startApp();
         while(cnt <= ACTION_COUNTS){
             if (!isInCurrentPkg()) {
