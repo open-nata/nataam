@@ -41,6 +41,7 @@ public class TreeWeb {
 
             //add setup actions
             for (Action action: setupActions) {
+                System.out.println(action.toString());
                 s += action.toCommand() + "\n";
             }
 

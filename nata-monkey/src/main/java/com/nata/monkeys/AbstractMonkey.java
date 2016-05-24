@@ -113,6 +113,11 @@ public abstract class AbstractMonkey {
     public void setUp() {
         for (Action action : this.setup) {
             action.fire();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

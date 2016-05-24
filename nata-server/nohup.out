@@ -4811,3 +4811,9 @@
 2016-05-23T23:48:58.154+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56527 #129 (11 connections now open)
 2016-05-23T23:48:58.227+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56529 #130 (12 connections now open)
 2016-05-23T23:49:00.849+0800 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:56639 #131 (13 connections now open)
+2016-05-24T00:36:41.547+0800 I JOURNAL  [journal writer] old journal file will be removed: /data/db/journal/j._0
+2016-05-24T10:33:19.454+0800 E NETWORK  [initandlisten] listen(): bind() failed errno:48 Address already in use for socket: 0.0.0.0:27017
+2016-05-24T10:33:19.456+0800 E NETWORK  [initandlisten]   addr already in use
+2016-05-24T10:33:19.458+0800 W -        [initandlisten] Detected unclean shutdown - /data/db/mongod.lock is not empty.
+2016-05-24T10:33:19.458+0800 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to lock file: /data/db/mongod.lock errno:35 Resource temporarily unavailable. Is a mongod instance already running?, terminating
+2016-05-24T10:33:19.458+0800 I CONTROL  [initandlisten] dbexit:  rc: 100

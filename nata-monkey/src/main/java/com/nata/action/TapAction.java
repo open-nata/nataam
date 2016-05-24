@@ -100,8 +100,8 @@ public class TapAction extends Action{
      * @return
      */
     public String toCommand(){
-        String at =   "@" + startX +"," + startY
-                +"x" + endX +"," + endY;
+        String at =   "@" + this.startX +"," + this.startY
+                +"x" + this.endX +"," + this.endY;
 
         return ActionType.TAP + " "+ at + " " + centerX + " " + centerY;
     }

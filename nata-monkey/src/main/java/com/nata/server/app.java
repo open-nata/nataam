@@ -109,6 +109,7 @@ public class App {
 
         blade.post("/actions",((request, response) -> {
             String actions = request.query("actions").trim();
+            System.out.println(actions);
             if(Replayer.playActions(actions)){
                 response.status(200).text("success");
             }else{

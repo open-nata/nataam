@@ -17,6 +17,11 @@ public class Replayer {
         Action action = ActionParser.parse(actionString);
         if(action != null){
             action.fire();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return true;
         }else {
             return false;

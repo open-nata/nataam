@@ -143,7 +143,8 @@ public class ActionParser {
 //        String [] cordinates = at.split("[,x]");
 //        System.out.println(Arrays.toString(cordinates));
 
-        String str ="Swipe @0,75x1080,1776 LEFT";
+//        String str ="Swipe @0,75x1080,1776 LEFT";
+        String str = "TextInput @255,727x990,847 256 728 15996270647";
         Action action = ActionParser.parse(str);
         action.fire();
     }

@@ -15,6 +15,10 @@ public class TextInputAction extends Action{
     private String text = null;
     private int X;
     private int Y;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
     private final double TEXT_INPUT_REWARD = BASE + 1.0;
 
     public TextInputAction(AdbDevice device,Widget widget){
@@ -36,6 +40,11 @@ public class TextInputAction extends Action{
         this.text = text;
         this.X = X;
         this.Y = Y;
+
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
 
     @Override
@@ -105,8 +114,8 @@ public class TextInputAction extends Action{
      * @return
      */
     public String toCommand(){
-        String at =   "@" + widget.getStartX()+"," + widget.getStartY()
-                +"x" + widget.getEndX() +"," + widget.getEndY();
+        String at =   "@" + this.startX +"," + this.startY
+                +"x" + this.endX +"," + this.endY;
 
         return ActionType.INPUT+ " " + at +" " + X + " " + Y + " "+ text;
 
