@@ -28,6 +28,11 @@ public class TextInputAction extends Action{
         this.text = TextValueDictionary.getInstance().getInput(widget);
         this.X = widget.getX();
         this.Y = widget.getY();
+
+        this.startX =  widget.getStartX();
+        this.startY = widget.getStartY();
+        this.endX = widget.getEndX();
+        this.endY = widget.getEndY();
     }
 
     public Widget getWidget(){

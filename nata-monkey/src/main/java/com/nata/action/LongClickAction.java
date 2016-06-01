@@ -28,6 +28,11 @@ public class LongClickAction extends Action{
         this.widget = widget;
         this.X = widget.getX();
         this.Y = widget.getY();
+
+        this.startX =  widget.getStartX();
+        this.startY = widget.getStartY();
+        this.endX = widget.getEndX();
+        this.endY = widget.getEndY();
     }
 
     public LongClickAction(AdbDevice device,int startX, int startY, int endX, int endY,int X, int Y){

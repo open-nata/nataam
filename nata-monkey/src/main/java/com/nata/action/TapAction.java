@@ -26,6 +26,12 @@ public class TapAction extends Action{
         this.widget = widget;
         this.centerX = widget.getCenterX();
         this.centerY = widget.getCenterY();
+
+        this.startX =  widget.getStartX();
+        this.startY = widget.getStartY();
+        this.endX = widget.getEndX();
+        this.endY = widget.getEndY();
+
     }
 
     public TapAction(AdbDevice device,int startX, int startY, int endX, int endY,int centerX , int centerY){

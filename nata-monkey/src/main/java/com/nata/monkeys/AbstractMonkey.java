@@ -55,7 +55,6 @@ public abstract class AbstractMonkey {
             this.setup.add(action);
         }
 
-
         this.blacklist = config.getBlacklist();
 
         this.device = new AdbDevice();

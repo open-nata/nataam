@@ -30,16 +30,15 @@ public class Widget {
     private String password;
     private String selected;    //state
 
-    /**
-     * The properties that can be extracted from attributes already existed
-     */
-    // from bounds
     private int startX = 0 ;
     private int startY = 0 ;
     private int endX = 0;
     private int endY = 0;
 
-
+    /**
+     * The properties that can be extracted from attributes already existed
+     */
+    // from bounds
     public int getStartX() {
         return startX;
     }
@@ -65,7 +64,7 @@ public class Widget {
     }
 
     public int getCenterX(){
-       return  (endX - startX) / 2 + startX;
+        return  (endX - startX) / 2 + startX;
     }
 
     public int getCenterY(){

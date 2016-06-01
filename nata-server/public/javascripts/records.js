@@ -47,19 +47,16 @@ $(function () {
       url: '/api/v1/apks/'+apk_id + '/testcases',
       type: 'GET',
       success: function (testcases) {
-        console.log(JSON.stringify(testcases));
         var toAppend = '<option value="">无</option>';
         for(var i = 0 ; i < testcases.length ;i++){
           toAppend += '<option value="' + testcases[i]._id +'" >' + testcases[i].name +'</option>';
         }
-        console.log(toAppend);
         $('#setup').empty().append(toAppend);
       },
       error: function (message) {
         alert('获取失败')
       }
     });
-
   });
 
   $('.btn-start').on('click', function (e) {

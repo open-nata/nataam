@@ -208,3 +208,7 @@
 - Add setup rule for monkeys
 - Add blacklist for apk
 - fix bugs
+
+### (2015/5/24)
+- Make nata-travel nata-dfs and publish as a dependent module and remove from this repo
+
