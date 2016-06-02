@@ -27,6 +27,7 @@ public class ActionMaker {
             List<Widget> list = DumpService.getNodes(dumpFile);
             ActionFactory factory = new ActionFactory(device);
             List<Action> actions = factory.getUIActionsFromWidgets(list);
+            System.out.println(actions);
 
             StringBuilder sb = new StringBuilder();
             for (Action action : actions) {

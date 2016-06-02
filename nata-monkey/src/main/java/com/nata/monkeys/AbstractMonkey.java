@@ -24,9 +24,10 @@ public abstract class AbstractMonkey {
     private final String pkg;
     private final String act;
     private final AdbDevice device;
-    private final List<Action> setup;
+
     private final List<String> blacklist;
 
+    private final List<Action> setup = new ArrayList<>();
     private TestResult testResult;
 
     private Action backAction = null;
@@ -49,11 +50,13 @@ public abstract class AbstractMonkey {
 
         // add setup
         List<String> setups = config.getSetup();
-        this.setup = new ArrayList<>();
-        for (String str : setups) {
-            Action action = ActionParser.parse(str);
-            this.setup.add(action);
+        if(setups != null ){
+            for (String str : setups) {
+                Action action = ActionParser.parse(str);
+                this.setup.add(action);
+            }
         }
+
 
         this.blacklist = config.getBlacklist();
 

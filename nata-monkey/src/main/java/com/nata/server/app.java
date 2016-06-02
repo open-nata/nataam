@@ -121,6 +121,7 @@ public class App {
 
         blade.get("/actions",(request, response) -> {
             String actionString =  ActionMaker.getActions();
+            System.out.println(actionString);
             response.status(200).text(actionString);
         });
 

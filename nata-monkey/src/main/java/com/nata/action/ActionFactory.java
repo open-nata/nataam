@@ -96,6 +96,7 @@ public class ActionFactory {
         List<Action> actions = new ArrayList<>();
         for (Widget widget : widgets) {
 
+
             // if in the blacklist
             if (blacklist != null && blacklist.contains(widget.getResourceId())) {
                 continue;
@@ -105,6 +106,8 @@ public class ActionFactory {
             if (widget.getEnabled().equals("false")) {
                 continue;
             }
+
+
 
             // if scrollable
             //TODO to make the swipte actions to adapt to element bounds;
@@ -129,6 +132,7 @@ public class ActionFactory {
             if ((widget.getClassName().equals("android.widget.TextView")
                     || widget.getClassName().equals("android.widget.Button")
                     || widget.getClassName().equals("android.widget.ImageView")
+                    || widget.getClassName().equals("android.widget.ImageButton")
                     || widget.getClassName().equals("android.widget.RelativeLayout")
                     || widget.getClassName().equals("android.widget.LinearLayout")
                     || widget.getClassName().equals("android.widget.CheckedTextView")
