@@ -1,5 +1,49 @@
 description = 'nata-monkey'
 
+apply plugin: 'application'
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.nata.server.App'
+    }
+}
+mainClassName = "com.nata.server.App"
+//mainClassName = "com.nata.runners.DFSRunner"
+
+
+//task fatJar(type: Jar) {
+//    manifest {
+//        attributes 'Main-Class': 'com.nata.server.App',
+//        'Implementation-Version': version,
+//                'Implementation-Title': 'Gradle Jar File Example'
+//    }
+//    baseName = project.name + '-all'
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//    with jar
+//}
+
+////依赖编译，然后打包JAR
+//task taskJar(type:Jar, dependsOn: compileJava) {
+//    manifest {
+//        attributes 'Main-Class': 'com.nata.server.App'
+//    }
+//    from 'build/classes'
+//    destinationDir = file('build/libs')
+//}
+//
+////清除上次的编译过的文件
+//task clearPj(type:Delete){
+//   delete 'build','target'
+//}
+//
+////把JAR复制到目标目录
+//task release(type: Copy,dependsOn: [clearPj,taskJar]) {
+//    from('build/libs') {
+//        include '*.jar'
+//    }
+//    into ('target')
+//}
+
+
 dependencies {
     compile project(':nata-kit')
     compile 'log4j:log4j:1.2.16'

@@ -125,8 +125,13 @@ public class App {
             response.status(200).text(actionString);
         });
 
+        blade.listen(9001);
 
-        blade.listen(9001).start();
+        try {
+            blade.start();
+        } catch (Exception err) {
+            System.out.println(err);
+        }
     }
 }
 

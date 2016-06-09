@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="nata-travel node_modules" />
+  <library name="server node_modules">
+    <archive path="/Users/Calvin/Develop/githubs/nata/nataam/nata-server/node_modules" />
+  </library>
+</eclipse-userlibraries>
+

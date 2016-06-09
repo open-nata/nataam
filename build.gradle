@@ -15,6 +15,9 @@ allprojects {
     version = '0.0.1'
 }
 
+
+
+
 subprojects {
     /*
     **这部分描述仅对所有的子项目生效.
@@ -22,8 +25,8 @@ subprojects {
     **所以会把编译相关、资源库之类的配置放在subprojects中
     */
     apply plugin: 'java'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
